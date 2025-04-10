@@ -1,0 +1,35 @@
+workflow:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH && $CI_OPEN_MERGE_REQUESTS
+      when: never
+    - if: $CI_COMMIT_BRANCH
+    
+include:
+  - project: computing/gitlab-ci-templates
+    file: conda.yml
+
+stages:
+  - build
+
+publish:
+  image: igwn/publisher:latest
+  stage: build
+  variables:
+      GIT_SUBMODULE_STRATEGY: recursive
+  tags:
+   - cit
+   - highmem
+  before_script:
+          - echo $CI_COMMIT_SHA | cut -b1-8 > gitID.txt
+  script:
+    - make pdf
+  after_script:
+    - rm gitID.txt
+  cache:
+    key: "$CI_PROJECT_NAMESPACE_$CI_PROJECT_NAME_$CI_JOB_NAME"
+    untracked: true
+  artifacts:
+    paths:
+      - thesis.pdf
+    expire_in: 1 year
