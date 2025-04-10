@@ -22,5 +22,5 @@ gitID.txt:
 	git describe --abbrev=8 --dirty --always --tags > gitID.txt
 
 clean:
-	rm -f *.pdf *.aux *.bbl *.blg *.log *.toc *.out *.fdb* *.fls gitID.txt
+	rm -f *.aux *.bbl *.blg *.log *.toc *.out *.fdb* *.fls gitID.txt
 
