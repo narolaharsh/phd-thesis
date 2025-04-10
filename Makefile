@@ -18,8 +18,9 @@ all: $(PDF)
 $(PDF): $(TEXFILE) $(SUPPORTING_TEXFILES)
 	$(LATEXMK) $(TEXFILE)
 
-#Cleaning Target
-.PHONY: clean
+gitID.txt:
+	git describe --abbrev=8 --dirty --always --tags > gitID.txt
+
 clean:
-	latexmk -CA
+	rm -f *.pdf *.aux *.bbl *.blg *.log *.toc *.out *.fdb* *.fls gitID.txt
 
