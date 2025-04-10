@@ -1,0 +1,377 @@
+\documentclass[a4paper,11pt, twoside]{book}
+%change bto twoside for printing
+%\documentclass[a5paper,10pt]{book}
+
+
+%\usepackage[left=1.5cm,right=1.5cm, bottom=1.5cm]{geometry}
+\usepackage[utf8]{inputenc}  
+\usepackage[T1]{fontenc}
+\usepackage{fancyhdr}
+\usepackage{import}
+\usepackage{makeidx}
+\usepackage[table]{xcolor}
+\usepackage{amsmath,amssymb}
+\usepackage{mathtools, amssymb}
+\usepackage{xspace}
+\usepackage{xstring}
+%\usepackage{titlesec} 
+\usepackage{fix-cm}
+%\usepackage[T1]{fontenc}
+\usepackage{hyperref}
+\usepackage{moresize}
+\usepackage{anysize}
+\usepackage{caption}
+\usepackage[raggedright]{titlesec}
+\usepackage{multicol}
+\usepackage{makecell}
+\usepackage{rotating}
+\usepackage{pgfornament}
+\usepackage{cite}
+\usepackage[normalem]{ulem}
+\usepackage{enumitem}
+\usepackage{titling}
+\usepackage{chngcntr}
+
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+	\null
+	\thispagestyle{empty}%
+	\addtocounter{page}{-1}%
+	\newpage}
+
+\renewcommand{\baselinestretch}{1.2} 
+\captionsetup{font=small}
+
+\makeindex
+
+%\titleformat{\chapter}[hang]{\bfseries\Large}{\filright\MakeUppercase{\chaptertitlename} \Huge\thechapter}{1ex}{\vspace{1ex} \filleft}[\vspace{1ex}\titlerule]
+\definecolor{gray75}{gray}{0.7}
+\newcommand{\hsp}{\hspace{0pt}}
+\titleformat{\chapter}[display]
+{\bfseries\huge}
+%{\fontseries{b}\fontsize{100}{130}\selectfont \textcolor{gray75}\thechapter\hsp}
+{\itshape \filright \textcolor{gray}{\chaptertitlename} {\fontsize{60pt}{70pt}\selectfont\textcolor{gray75}\thechapter}}
+{2ex}
+%{\titlerule\vspace{1.5ex}\centering}
+{\hrulefill\, \protect{\pgfornament[width=0.08\textwidth]{72}} \protect{\pgfornament[width=0.08\textwidth]{73}} \,\hrulefill \vspace{1.5ex} \newline \centering}
+%{\hrulefill\quad \protect{\pgfornament[width=0.08\textwidth]{43}}\protect{\pgfornament[width=0.08\textwidth, symmetry=v]{43}} \quad\hrulefill \vspace{1.5ex} \newline \centering}
+%{\textcolor{gray}{\hrulefill\; \protect{\pgfornament[width=3cm]{85}}\; \hrulefill\nobreak} \vspace{1.5ex} \newline \centering} %87
+[\vspace{1.5ex}{\titlerule}] %{\titlerule}]
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}{\thesection}{1em}{}[{\color{gray}\titlerule[0.02pt]}]
+
+\newcommand{\comment}[1]{}
+\newcommand{\red}[1]{{\color{red}{[#1]}}}
+\newcommand{\lambdabar}{{\mkern0.75mu\mathchar '26\mkern -9.75mu\lambda}}
+\mathchardef\mhyphen="2D
+\def\bin{{\rm b}}
+\newcommand\abs[1]{\ensuremath{\lvert#1\rvert}}
+
+
+\usepackage[left=2cm,right=2cm, bottom=2.5cm, headheight=1cm]{geometry}
+
+\def\seob{\texttt{SEOBNRv4PHM}\xspace}
+\def\nrsur{\texttt{NRSur7dq4}\xspace}
+\def\tphm{\texttt{IMRPhenomTPHM}\xspace}
+\def\xphm{\texttt{IMRPhenomXPHM}\xspace}
+
+\def \qupm {\textsc{qu-pm}}
+\def \nopm {\textsc{no-pm}}
+\def \free {\textsc{free-pm}}
+\def \stwo {$\mathrm{Source2}_{\mathrm{[\textsc{qu-pm}]}}$}
+\def \sth {$\mathrm{Source3}_{\mathrm{[\textsc{qu-pm}]}}$}
+\def \sone {$\mathrm{Source1}_{\mathrm{[\textsc{qu-pm}]}}$}
+
+%% events full names
+\DeclareRobustCommand{\N}[1]{\IfEqCase{#1}{{GW150914}{GW150914\xspace}{GW190620}{GW190620\_030421\xspace}{GW191222}{GW191222\_033537\xspace}{GW190519}{GW190519\_153544\xspace}{GW190521a}{GW190521\xspace}{GW190521b}{GW190521\_074359\xspace}{GW190620}{GW190620\_030421\xspace}{GW190630}{GW190630\_185205\xspace}{GW190910}{GW190910\_112807\xspace}{GW191109}{GW191109\_010717\xspace}{GW191222}{GW191222\_033537\xspace}{GW200112}{GW200112\_155838\xspace}{GW200129}{GW200129\_065458\xspace}{GW200224}{GW200224\_222234\xspace}{GW200311}{GW200311\_115853\xspace}}}
+
+\newcommand{\subtitle}[1]{%
+	\posttitle{%
+		\par \vspace{1cm}
+\large#1
+	\vskip0.5em}%
+}
+
+
+\begin{document}
+
+\pagenumbering{roman}
+
+\newcommand{\fl}{\hrulefill\,\protect{\pgfornament[width=0.08\textwidth]{72}} \, \protect{\pgfornament[width=0.08\textwidth]{73}}\,\hrulefill}
+
+%\fl 
+
+%\title{\fl \vspace{1.5ex} \newline \sc\Huge\bfseries Fundamental physics from gravitational waves \\ \vspace{1cm} \sc\Large\bfseries Testing general relativity and studying neutron stars with current and future detectors \centering \newline \vspace{1.5ex} \hrulefill}
+%\subtitle{\sc\Large\bfseries Testing general relativity and studying neutron stars with current and future detectors \newline \vspace{1.5ex} \hrulefill}
+
+\title{\sc\Huge\bfseries Fundamental physics with gravitational waves \\ \vspace{1cm} \sc\Large\bfseries Testing general relativity and studying neutron stars with current and future detectors}
+
+\author{\large\bfseries Anna Puecher}
+\date{}
+
+%\maketitle
+
+
+
+\begin{titlepage}
+	\begin{center}
+		\vspace*{5cm}
+		\fl
+		\newline
+		\vspace{0.5cm}
+		
+		\Huge\textsc{\textbf{Fundamental physics with gravitational waves}}
+		
+		\vspace{0.5cm}
+		\Large\textsc{\textbf{Testing general relativity and studying neutron stars with current and future detectors}}
+		
+		\vspace{1cm}
+		\hrule
+		\vspace{1.5cm}
+		
+		\large\textbf{Anna Puecher}
+		
+
+		
+	\end{center}
+\end{titlepage}
+
+\thispagestyle{empty}
+\vspace*{9cm}
+
+%\vfill
+
+\noindent ISBN: 978-90-393-7605-8 \\
+\noindent \textsc{doi}: https://doi.org/10.33540/2119 \\
+\noindent Printed by: Gildeprint -- www.gildeprint.nl\\
+\noindent Copyright: \copyright \, 2023 Anna Puecher
+
+\vspace{2cm}
+
+\begin{figure}[htp]
+	
+	\centering
+	\includegraphics[width=.35\textwidth]{figures/nikhef_logo.png}\hfill
+	\includegraphics[width=.35\textwidth]{figures/UU_logo.png}\hfill
+	\includegraphics[width=.2\textwidth]{figures/NWO_logo.png}
+	
+	
+\end{figure}
+
+\vspace{1cm}
+\noindent This work originates as part of the research program of the Foundation for Fundamental
+Research on Matter (FOM), and falls as of April 1, 2017 under the responsibility of the
+Foundation for Nederlandse Wetenschappelijk Onderzoek Instituten (NWO-I), which is
+part of the Dutch Research Council (NWO).
+
+\begin{titlepage}
+	\begin{center}
+		\vspace*{1cm}
+				
+		\LARGE\textbf{Fundamental physics with gravitational waves}
+		
+		\vspace{0.5cm}
+		\Large Testing general relativity and studying neutron stars \\ with current and future detectors
+	
+		\vspace{1.5cm}
+		
+		\LARGE\textbf{Fundamentele fysica met zwaartekrachtsgolven}
+		
+		\vspace{0.5cm}
+		\Large Het testen van de algemene relativiteitstheorie en het bestuderen van neutronensterren met huidige en toekomstige detectoren \\ 
+		\vspace{0.5cm} (met een samenvatting in het Nederlands)
+		
+		\vspace{3.5cm}
+		
+		\normalsize
+		Proefschrift \\
+		ter verkrijging van de graad van doctor aan de Universiteit Utrecht op gezag van de rector
+		magnificus, prof.dr. H.R.B.M. Kummeling, ingevolge het besluit van het college voor promoties in
+		het openbaar te verdedigen op woensdag 7 februari 2024 des middags te 4.15 uur
+		
+		\vspace{1cm}
+		door \\
+		\vspace{1cm}
+		\textbf{Anna Puecher} \\
+		geboren op 28 november 1994 \\
+		te Trento, Itali\"{e}
+		
+		
+	\end{center}
+\end{titlepage}
+
+\thispagestyle{empty}
+\noindent Promotor: \\
+\indent \indent Prof. dr. C.F.F. van den Broeck \\
+
+\noindent Co-promotor: \\
+\indent \indent Dr. S.E. Caudill \\
+
+\noindent Assessment Committee: \\
+\indent \indent  Prof. dr. J.F.J. van den Brand \\
+\indent \indent Dr. N.E. Chisari \\
+\indent \indent Prof. dr. S. Hild \\
+\indent \indent Prof. dr. R.J.M. Snellings \\
+\indent \indent Prof. dr. N. Stergioulas
+
+\newpage
+
+\thispagestyle{empty}
+\vspace*{5cm}
+\begin{flushright}
+
+\textit{Lock up your libraries if you like; \\
+but there is no gate, no lock, no bolt that \\ you can set upon the
+freedom of my mind.}\\
+\vspace{1ex}
+---Virginia Woolf, A Room of One's Own.
+\end{flushright}
+
+\newpage
+
+\thispagestyle{empty}
+
+\pagestyle{fancy}
+
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+
+\tableofcontents
+\listoffigures
+\listoftables
+
+\mainmatter
+
+\pagenumbering{arabic}
+
+\chapter*{Introduction}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO,LE]{\slshape\nouppercase{Introduction}}
+
+\renewcommand\thefigure{I.{\arabic{figure}}}
+
+\addcontentsline{toc}{chapter}{Introduction}
+\import{chapters/}{introduction.tex}
+
+\chapter{Gravitational waves in general relativity: from sources to detection}	
+\label{ch:gws}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+
+\renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
+\import{chapters/}{chapter1_GRandGWs.tex}	
+	
+\chapter{Data analysis tools}
+\label{ch:data_analysis}
+\import{chapters/}{chapter2_data_analysis_tools.tex}
+
+\chapter{Testing general relativity using higher-order modes of gravitational waves from binary black holes}
+\label{ch:tgr_hom}
+\import{chapters/}{chapter3_tgrhom.tex}
+
+\chapter{Comparing gravitational waveform models for binary black hole mergers through a hypermodels approach}
+\label{ch:hypermodels}
+\import{chapters/}{chapter4_hypermodels.tex}
+
+
+\chapter{Unraveling information about supranuclear-dense matter from the complete binary neutron star coalescence process using future gravitational-wave detector networks}
+\label{ch:impm}
+\import{chapters/}{chapter5_impm.tex}
+
+\chapter{Measuring tidal effects with the Einstein Telescope: A design study}
+\label{ch:coba}
+\import{chapters/}{chapter6_coba.tex}
+
+% Create the reference section using BibTeX:
+
+\chapter{Conclusions}
+\label{ch:conclusions}
+\import{chapters/}{conclusions.tex}
+
+\backmatter
+
+\renewcommand\thefigure{S.{\arabic{figure}}}
+
+\chapter*{Public summary}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO,LE]{\slshape\nouppercase{Public summary}}
+
+
+
+
+\addcontentsline{toc}{chapter}{Public summary}
+\import{chapters/}{public_summary.tex}
+
+\chapter*{Openbare samenvatting}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO,LE]{\slshape\nouppercase{Openbare samenvatting}}
+
+\setcounter{figure}{0}
+\renewcommand\thefigure{Sn.{\arabic{figure}}}
+
+
+\addcontentsline{toc}{chapter}{Openbare samenvatting}
+\import{chapters/}{openbare_samenvatting.tex}
+
+\chapter*{Sintesi per il pubblico}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO,LE]{\slshape\nouppercase{Sintesi per il pubblico}}
+
+\setcounter{figure}{0}
+\renewcommand\thefigure{Si.{\arabic{figure}}}
+
+
+\addcontentsline{toc}{chapter}{Sintesi per il pubblico}
+\import{chapters/}{riassunto_ita.tex}
+
+
+\chapter*{Curriculum vitae}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO,LE]{\slshape\nouppercase{Curriculum vitae}}
+
+
+\addcontentsline{toc}{chapter}{Curriculum vitae}
+\import{chapters/}{cv.tex}
+
+\chapter*{Acronyms}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO,LE]{\slshape\nouppercase{Acronyms}}
+
+\addcontentsline{toc}{chapter}{List of acronyms}
+\import{chapters/}{acronyms.tex}
+
+\chapter*{Acknowledgments}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO,LE]{\slshape\nouppercase{Acknowledgments}}
+
+
+\addcontentsline{toc}{chapter}{Acknowledgments}
+\import{chapters/}{acknowledgments.tex}
+
+\clearpage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliography}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO,LE]{\slshape\nouppercase{Bibliography}}
+\bibliographystyle{unsrt}
+\bibliography{refs}
+
+\afterpage{\blankpage}
+
+          
+
+\end{document}
