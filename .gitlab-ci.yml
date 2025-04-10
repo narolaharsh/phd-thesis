@@ -31,5 +31,5 @@ publish:
     untracked: true
   artifacts:
     paths:
-      - thesis.pdf
+      - thesis_main.pdf
     expire_in: 1 year
