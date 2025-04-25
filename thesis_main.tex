@@ -234,30 +234,71 @@ part of the Dutch Research Council (NWO).
 \mainmatter
 
 \pagenumbering{arabic}
-
 \chapter*{Introduction}
 \fancyhf{}
 \fancyfoot[C]{\thepage}
 \fancyhead[RO,LE]{\slshape\nouppercase{Introduction}}
-
 \renewcommand\thefigure{I.{\arabic{figure}}}
-
 \addcontentsline{toc}{chapter}{Introduction}
 \import{chapters/}{introduction.tex}
 
+%%%%%%% New chapter %%%%%%%%%%%%%%%%%
 \chapter{Gravitational waves in general relativity: from sources to detection}	
 \label{ch:gws}
 \fancyhf{}
 \fancyfoot[C]{\thepage}
 \fancyhead[RO]{\slshape\nouppercase{\rightmark}}
 \fancyhead[LE]{\slshape\nouppercase{\leftmark}}
-
 \renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
 \import{chapters/}{chapter1_grgws.tex}	
-	
+
+%%%%%%% New chapter %%%%%%%%%%%%%%%%%
 \chapter{Measuring the parameters of the merging compact binaries from the gravitational wave signal}
 \label{ch:gwpe}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+\renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
 \import{chapters/}{chapter2_parameter_estimation.tex}
+
+%%%%%%% New chapter %%%%%%%%%%%%%%%%%
+\chapter{Null stream inspired noise transient elimination}
+\label{ch:nijntje3}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+\renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
+\import{chapters/}{chapter3_null_stream_glitch_mitigation.tex}
+
+%%%%%%% New chapter %%%%%%%%%%%%%%%%%
+\chapter{Combining deep learning with null stream inspired noise transient elimination}
+\label{ch:nijntje4}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+\renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
+\import{chapters/}{chapter4_nijntje.tex}
+
+\chapter{Towards the measuring the source parameters of GW signals with third-generation telescope}
+\label{ch:relative_binning}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+\renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
+\import{chapters/}{chapter5_relative_binning.tex}
+
+\chapter{Strong lensing to constrain modified propagation}
+\label{ch:mod_prop}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+\renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
+\import{chapters/}{chapter6_lensing_tgr.tex}
 
 \backmatter
 
