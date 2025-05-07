@@ -11,16 +11,16 @@ We formalize the problem of converting the prior probability distribution to the
 where $\pi(\vec{\theta})$ is the prior distribution on $\vec{\theta}$ which is typically assumed to be uniform. The term $p(\vec{d} | \vec{\theta})$ is the likelihood of the data given the parameters $\vec{\theta}$. The term $p(\vec{d})$ can be treated as the normalization term for the time being. This term is typically known as the evidence if we use Bayes theorem to test competing hypothesis. 
 
 \section{Likelihood function}
-While the Bayesian framework described above is conceptually easy, it is still a computationally expensive task to perform the analysis due to the dimensionality of the parameter space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal model. Before diving into optimizing the comutation of the likelihood and exploration of the large parameter space, let us define a few standard quantites used in computing the likelihood including the likelihood function itself,
+While the Bayesian framework described above is conceptually easy, it is still a computationally expensive task to perform the analysis due to the dimensionality of the parameter space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal model. Before diving into optimizing the comutation of the likelihood and exploration of the large parameter space, let us define a few standard quantites used in computing the likelihood including the likelihood function itself
 
 \begin{equation}
-    \ln{p(\vec{d} | \vec{\theta})} = -\frac{1}{2}\left<\vec{d} - \vec{h}(\vec{\theta}) | \vec{d} - \vec{h}(\vec{\theta})\right>.
+    \ln{p(\vec{d} | \vec{\theta})} = -\frac{1}{2}\left<\vec{d} - \vec{h}(\vec{\theta}) | \vec{d} - \vec{h}(\vec{\theta})\right>,
 \end{equation}
-Here, $\vec{h}$ denotes the GW signal model computed for the source paraemters $\vec{\theta}$. The brackets $\left<.|.\right>$ denote the noise weighted inner product 
+where $\vec{h}$ denotes the GW signal model computed for the source paraemters $\vec{\theta}$. The brackets $\left<.|.\right>$ denote the noise weighted inner product 
 \begin{equation}
-    \left<a|b\right> = \frac{4}{T} \sum_{f} \frac{\tilde{a}(f)\tilde{b}^{*}(f)}{S_{n}(f)}.
+    \left<\vec{a}|\vec{b}\right> = \frac{4}{T} \sum_{f} \frac{\tilde{a}(f)\tilde{b}^{*}(f)}{S_{n}(f)},
 \end{equation}
-The parameter $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $b$, and $f$ is the frequency. The term $S_n(f)$ is the power spectral density of the noise.
+where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The term $S_n(f)$ is the  spectral density of the noise.
 
 The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. For the short stretches of data $\vec{d}$ that we analyze, the Gaussian-stationary approximation works well which makes the Whittle likelihood a suitable choice. In the hidnsight, it can be verified that the noise component at each frequency $f$ follows Gaussian distribution with mean 0 and the standard deviation given by $S_n(f)$. FIXME Figure shows the distribution of detector data.
 
