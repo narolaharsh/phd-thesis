@@ -22,9 +22,9 @@ Here, $\vec{h}$ denotes the GW signal model computed for the source paraemters $
 \end{equation}
 The parameter $T$ is the duration of $\vec{d}$ segment chosen for the analysis, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $b$, and $f$ is the frequency. The term $S_n(f)$ is the power spectral density of the noise.
 
-The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. For the short stretches of data $\vec{d}$ that we analyze, the Gaussian-stationary approximation works well which makes the Whittle likelihood a suitable choice. FIXME Figure shows the distribution of detector data. Show that is Gaussian. 
+The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. For the short stretches of data $\vec{d}$ that we analyze, the Gaussian-stationary approximation works well which makes the Whittle likelihood a suitable choice. In the hidnsight, it can be verified that the noise component at each frequency $f$ follows Gaussian distribution with mean 0 and the standard deviation given by $S_n(f)$. FIXME Figure shows the distribution of detector data.
 
-The majority of the cost is acquired while evaluating the likelihood function on large parameter space. For transient GW signals, each likelihood evaluation takes $\mathcal{O}{10}$ milliseconds and exploring the full parameter space typically requires $\mathcal{O}(10^9)$ evaluations. For long duration and lound signals expected to be observable with the third generation telescopes, the cost quickly becomes intractable. 
+The majority of the cost is acquired while evaluating the likelihood function on large parameter space. For transient GW signals, each likelihood evaluation takes $\mathcal{O}{10}$ milliseconds and exploring the full parameter space typically requires $\mathcal{O}(10^9)$ evaluations. For long duration and loud signals expected to be observable by 3G detectors, the cost quickly becomes intractable.  
 
 Nested sampling. 
 
