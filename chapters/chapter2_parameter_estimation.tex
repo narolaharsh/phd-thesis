@@ -1,12 +1,12 @@
 A GW signal emmited during the merger of two compact objects can be typically modelled using 15 parameters. Eight of them are considered intrinsic parameters; two for the masses and six for three dimensional spins of the two objects. The rest of them, e.g. sky location, distance, are considered extrinsic parameters. If one of the compact object is a neutron star, an additonal intrinsic parameter is used to model its tidal deformibility. Measurement of these parameters is a key step which enables various physics related insigts from the data, e.g. testing the prediction of the general relativiy, constraining the neutron star equation of state. In this chapter, I illustrate how the parameters of merging binary black holes and/or neutron stars are measured from a GW signal. 
 
 \section{Bayesian analysis}
-Measuring the source parameters of a GW source amounts to treating each parameter as a random variable and estimating their probability distribution which is condition on the observed data. For the sake of the argument, let us assume that we are interested in measuring the total mass (sum of mass of each compact object) of the source. Before the GW signal is observed, the measurement cannot be made or all values of $M_{\mathrm{Total}}$ are equally likely or the \textit{prior} probability distribution of the random variable $M_{\mathrm{Total}}$ is uniform. After the signal is observed, we can condition the the prior distribution on the data to obtain the \textit{posterior} probability distribution which serves as the measurement of the parameter.
+Measuring the parameters of a GW source amounts to treating each parameter as a random variable and estimating their probability distribution which is condition on the observed data. For the sake of the argument, let us assume that we are interested in measuring the total mass (sum of mass of each compact object) of the source. Before the GW signal is observed, the measurement cannot be made or we can say that all values of total mass ($M_{\mathrm{Total}}$) are equally likely or the \textit{prior} probability distribution of the random variable $M_{\mathrm{Total}}$ is uniform. After the signal is observed, we can condition the the prior distribution on the data to obtain the \textit{posterior} probability distribution which serves as the measurement of the parameter.
 
-This problem can be written down mathematically using Bayes theorem, 
+The problem of converting the prior probability distribution to the posterior probability distribution by conditioning it to the observed data can be formalized using the Bayes theorem. Let us the denote the set of parameter we want to measure by $\vec{\theta}$ and the observed data by $\vec{d}$, then according to Bayes theorem
 
 \begin{equation}
-    p(\theta | d) = \frac{p(\theta) p(d | \theta)}{p(d)}
+    p(\vec{\theta} | \vec{d}) = \frac{p(\vec{\theta}) p(\vec{d} | \vec{\theta})}{p(\vec{d})}
 \end{equation}
 
 
