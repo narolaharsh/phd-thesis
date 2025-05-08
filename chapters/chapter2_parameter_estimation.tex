@@ -42,6 +42,13 @@ The expression of the likelihood function is inspired from the so-called Whittle
 When performing parameter estimation, we need to evaluate the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^15$ to $10^17$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling techniques to efficiently explore the likelihood function on large space. 
 
 \subsection{Nested sampling}
+\begin{figure}
+    \centering
+    \includegraphics[width=16cm]{../figures/nested_sampling.pdf}
+    \caption{}
+    \label{fig:nest}
+\end{figure}
+
 \subsection{Markov chain Monte Carlo}
 
 
