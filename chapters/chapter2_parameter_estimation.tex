@@ -1,20 +1,28 @@
 A GW signal emmited during the merger of two compact objects can be typically modelled using 15 parameters. Eight of them are considered intrinsic parameters; two for the masses and six for three dimensional spins of the two objects. The rest of them, e.g. sky location, distance, are considered extrinsic parameters. If one of the compact object is a neutron star, an additonal intrinsic parameter is used to model its tidal deformibility. Measurement of these parameters is a key step which enables various physics related insigts from the data, e.g. testing the prediction of the general relativiy, constraining the neutron star equation of state. In this chapter, I illustrate how the parameters of merging binary black holes and/or neutron stars are measured from a GW signal. 
 
 \section{Bayesian analysis}
-Measuring the parameters of a GW source amounts to treating each parameter as a random variable and estimating its probability distribution which is conditioned on the observed data. For the sake of the argument, let's say we are interested in measuring the total mass (sum of mass of each compact object) of the source. Before the GW signal is observed, the measurement cannot be made or we can say that all values of total mass ($M_{\mathrm{total}}$) are equally likely or the \textit{prior} probability distribution of the random variable $M_{\mathrm{total}}$ is uniform. After the data is collected i.e. a GW signal is observed, we can update the the prior distribution using the data to obtain the \textit{posterior} probability distribution. The posterior probability distribution or the \textit{measurement} of the parameter can be thought of as the probability distribution which is conditioned on the observed data. FIXME: Add a figure to show how the prior transforms to posterior.
+
+\begin{figure}
+    \label{fig:prior_post}
+    \centering
+    \includegraphics[width=8cm]{../figures/prior_posterior.pdf}
+    \caption{An illustration of probability distribution of the prior (blue), likelihood (red), and posterior (green) of the luminosity distance $(D_{\mathrm{L}})$. Measuring a source parameters amounts to transforming the prior distribution to the posterior distribution using the likelihood of the parameter at the given value. The prior on the luminosity distance is assumed to be uniform in comoving volume therefore its values increases with $(D_{\mathrm{L}})$.}
+\end{figure}
+
+Measuring the parameters of a GW source amounts to treating each parameter as a random variable and estimating its probability distribution which is conditioned on the observed data. For the sake of the argument, let's say we are interested in measuring the luminosity distance $(D_{\mathrm{L}})$ to the source. Before the GW signal is observed, the measurement cannot be made or we can say that all values of $(D_{\mathrm{L}})$ are equally likely or the \textit{prior} probability distribution of the random variable $M_{\mathrm{total}}$ is uniform. After the data is collected i.e. a GW signal is observed, we can update the the prior distribution using the data to obtain the \textit{posterior} probability distribution. The posterior probability distribution or the \textit{measurement} of the parameter can be thought of as the probability distribution which is conditioned on the observed data. 
 
 We formalize the problem of converting the prior probability distribution to the posterior probability distribution using the Bayes theorem. Our aim is to estimate the posterior distribution $p(\vec{\theta} | \vec{d})$ where $p$ denotes the probability distribution function, $\vec{\theta}$ denotes the set of GW source parameters, and $\vec{d}$ denotes the data. Using Bayes' theorem we can invert the conditional probability $p(\vec{\theta} | \vec{d})$ as
 \begin{equation}
     p(\vec{\theta} | \vec{d}) = \frac{\pi(\vec{\theta}) p(\vec{d} | \vec{\theta})}{p(\vec{d})},
 \end{equation}
-where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}$ which is typically assumed to be uniform. The term $p(\vec{d} | \vec{\theta})$ is the likelihood of observing data given the parameters $\vec{\theta}$. The term $p(\vec{d})$ can be treated as the normalization term for the time being. This term is typically known as the evidence if we use Bayes theorem to test competing hypothesis. 
+where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}$ which is typically assumed to be uniform. The term $p(\vec{d} | \vec{\theta})$ is the likelihood of observing data given the parameters $\vec{\theta}$. The term $p(\vec{d})$ can be treated as the normalization term for the time being. This term is typically known as the evidence if we use Bayes theorem to test competing hypothesis. Figure~\ref{fig:prior_post} shows an illustration of the prior probability distribution (blue) and the posterior probability distribution (red) of the parameter $(D_{\mathrm{L}})$ where the latter is obtained by updating the prior weights by the weight of likelihood (green) for the corresponding value.
 
 \section{Likelihood function}
 While the Bayesian framework described above is conceptually easy, it is a computationally challenging task to perform the analysis due to the dimensionality of the parameter space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal models. Before diving into optimizing the comutation of the likelihood and exploration of the large parameter space, let us define a few standard quantites used in computing the likelihood including the likelihood function itself
 \begin{figure}
     \centering
     \includegraphics[width=8cm]{../figures/white_noise_distribution.pdf}
-    \caption{Lorem ipsum}
+    \caption{}
 \end{figure}
 \begin{equation}
     \label{eq:likelihood}
