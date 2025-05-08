@@ -3,10 +3,10 @@ A GW signal emmited during the merger of two compact objects can be typically mo
 \section{Bayesian analysis}
 
 \begin{figure}
-    \label{fig:prior_post}
     \centering
     \includegraphics[width=8cm]{../figures/prior_posterior.pdf}
     \caption{An illustration of probability distribution of the prior (blue), likelihood (red), and posterior (green) of the luminosity distance $(D_{\mathrm{L}})$. Measuring a source parameters amounts to transforming the prior distribution to the posterior distribution using the likelihood of the parameter at the given value. The prior on the luminosity distance is assumed to be uniform in comoving volume therefore its values increases with $(D_{\mathrm{L}})$.}
+    \label{fig:prior_post}
 \end{figure}
 
 Measuring the parameters of a GW source amounts to treating each parameter as a random variable and estimating its probability distribution which is conditioned on the observed data. For the sake of the argument, let's say we are interested in measuring the luminosity distance $(D_{\mathrm{L}})$ to the source. Before the GW signal is observed, the measurement cannot be made or we can say that all values of $(D_{\mathrm{L}})$ are equally likely or the \textit{prior} probability distribution of the random variable $M_{\mathrm{total}}$ is uniform. After the data is collected i.e. a GW signal is observed, we can update the the prior distribution using the data to obtain the \textit{posterior} probability distribution. The posterior probability distribution or the \textit{measurement} of the parameter can be thought of as the probability distribution which is conditioned on the observed data. 
@@ -20,10 +20,11 @@ where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}
 \section{Likelihood function}
 While the Bayesian framework described above is conceptually easy, it is a computationally challenging task to perform the analysis due to the dimensionality of the parameter space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal models. Before diving into optimizing the comutation of the likelihood and exploration of the large parameter space, let us define a few standard quantites used in computing the likelihood including the likelihood function itself
 \begin{figure}
-    \label{fig:white_data}
     \centering
     \includegraphics[width=8cm]{../figures/white_noise_distribution.pdf}
-    \caption{To test the Gaussian-stationary nature of the data, we compare the distribution of whitened data (blue) with the normal distribution (red). We used 16 seconds of data segment from LIGO-Livingstone detector and the PSD is generated using 2048 seconds of data near the segment.}
+    \caption{To test the Gaussian-stationary nature, we compare the distribution of whitened data (blue) with the normal distribution (red). We used 16 seconds of data segment from LIGO-Livingstone detector and the PSD is generated using 2048 seconds of data near the segment.}
+    \label{fig:white_data}
+
 \end{figure}
 \begin{equation}
     \label{eq:likelihood}
@@ -35,7 +36,7 @@ where $\vec{h}$ denotes the GW signal model computed as a function of the source
 \end{equation}
 where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The term $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD).
 
-The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationry at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq.~(\ref{eq:likelihood}) is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and $S_n(f)$ variance for all frequencies. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $(\tilde{d}/S_n)$ follows the normal distribution. The data segment used to make this plot lies near the GW150914 signal but does not contain the signal. 
+The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationry at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq.~(\ref{eq:likelihood}) is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and $S_n(f)$ variance for all frequencies. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $(\tilde{d}/\sqrt{S_n})$ follows the normal distribution. The data segment used to make this plot lies near the GW150914 signal but does not contain the signal. 
 
 
 \section{Sampling}
