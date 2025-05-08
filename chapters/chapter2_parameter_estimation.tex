@@ -11,7 +11,11 @@ where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}
 
 \section{Likelihood function}
 While the Bayesian framework described above is conceptually easy, it is a computationally challenging task to perform the analysis due to the dimensionality of the parameter space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal models. Before diving into optimizing the comutation of the likelihood and exploration of the large parameter space, let us define a few standard quantites used in computing the likelihood including the likelihood function itself
-
+\begin{figure}
+    \centering
+    \includegraphics[width=8cm]{../figures/white_noise_distribution.pdf}
+    \caption{Lorem ipsum}
+\end{figure}
 \begin{equation}
     \label{eq:likelihood}
     \ln{p(\vec{d} | \vec{\theta})} = -\frac{1}{2}\left<\vec{d} - \vec{h}(\vec{\theta}) | \vec{d} - \vec{h}(\vec{\theta})\right>,
@@ -25,7 +29,7 @@ where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*
 The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationry at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq.~(\ref{eq:likelihood}) is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and $S_n(f)$ variance for all frequencies. FIXME: Plot to show the distribution is Gaussian and stationary.
 
 \section{Sampling}
-When performing parameter estimation, we need to evaluate the likelihood function on large parameter space. For the sake of the argument, if we assume that we choose 10 points along each dimension of the parameter space, we need to perform $10^15$ to $10^17$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. It must also be noted that 10 points may be too sparse to cover each dimensions. Therefore, we rely on various sampling techniques to explore the likelihood function on large parameter space. 
+When performing parameter estimation, we need to evaluate the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^15$ to $10^17$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling techniques to explore the likelihood function on large space. 
 
 
 
