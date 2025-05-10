@@ -13,7 +13,8 @@ Measuring the parameters of a GW source amounts to treating each parameter as a 
 
 We formalize the problem of converting the prior probability distribution to the posterior probability distribution using the Bayes theorem. Our aim is to estimate the posterior distribution $p(\vec{\theta} | \vec{d})$ where $p$ denotes the probability distribution function, $\vec{\theta}$ denotes the set of GW source parameters, and $\vec{d}$ denotes the data. Using Bayes' theorem we can invert the conditional probability $p(\vec{\theta} | \vec{d})$ as
 \begin{equation}
-    p(\vec{\theta} | \vec{d}) = \frac{\pi(\vec{\theta}) p(\vec{d} | \vec{\theta})}{p(\vec{d})},
+    \label{eq:bayes}
+    p(\vec{\theta} | \vec{d}) = \frac{\pi(\vec{\theta})~p(\vec{d} | \vec{\theta})}{p(\vec{d})},
 \end{equation}
 where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}$ which is typically assumed to be uniform. The term $p(\vec{d} | \vec{\theta})$ is the likelihood of observing data given the parameters $\vec{\theta}$. The term $p(\vec{d})$ can be treated as the normalization term for the time being. This term is typically known as the evidence if we use Bayes theorem to test competing hypothesis. Figure~\ref{fig:prior_post} shows an illustration of the prior probability distribution (blue) and the posterior probability distribution (red) of the parameter $(D_{\mathrm{L}})$ where the latter is obtained by updating the prior weights by the weight of likelihood (green) for the corresponding value.
 
@@ -26,29 +27,64 @@ While the Bayesian framework described above is conceptually easy, it is a compu
     \label{fig:white_data}
 
 \end{figure}
+
 \begin{equation}
     \label{eq:likelihood}
     \ln{p(\vec{d} | \vec{\theta})} = -\frac{1}{2}\left<\vec{d} - \vec{h}(\vec{\theta}) | \vec{d} - \vec{h}(\vec{\theta})\right>,
 \end{equation}
 where $\vec{h}$ denotes the GW signal model computed as a function of the source paraemters $\vec{\theta}$. The brackets $\left<.|.\right>$ denote the noise weighted inner product 
 \begin{equation}
-    <\vec{a}|\vec{b}> = \frac{4}{T} \sum_{f} \frac{\tilde{a}(f)\tilde{b}^{*}(f)}{S_{n}(f)},
+    <\vec{a}|\vec{b}> = \frac{4}{T}~\sum_{f}~\frac{\tilde{a}(f)~\tilde{b}^{*}(f)}{S_{n}(f)},
 \end{equation}
 where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The term $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD).
 
 The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationry at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq.~(\ref{eq:likelihood}) is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and $S_n(f)$ variance for all frequencies. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal but does not contain the signal. 
 
 \section{Sampling}
-When performing parameter estimation, we need to evaluate the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^15$ to $10^17$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling techniques to efficiently explore the likelihood function on large space. 
-
+When performing parameter estimation, we need to evaluate the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^15$ to $10^17$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling techniques to efficiently explore the likelihood function on large space. I give a brief introduction of the two sampling methodsk used to obtain the results of the later chapters.  
+FIXME: Drive the contrast...
 \subsection{Nested sampling}
 \begin{figure}
     \centering
     \includegraphics[width=16cm]{../figures/nested_sampling.pdf}
     \caption{}
-    \label{fig:nest}
+    \label{fig:nests}
 \end{figure}
+Nested sampling algorithm was introduced in 2004 by Skilling. The names derives from the fact that the algorithm uses \textit{nested} contours of likelihood (Figure~\ref{fig:nests} (left)) and not the likelihood values. The aim of the algorithm is to compute the evidence~$Z$, 
+\begin{align}
+\label{eq:evidence}
+  Z = \int~\mathrm{d}\vec{\theta}~\pi(\vec{\theta})~p(\vec{d} | \vec{\theta})
+\end{align}
+%    %&= \int~\mathrm{d}\vec{\theta}~p(\vec{d}| \vec{\theta})~\pi(\vec{\theta})
+where the integrand on the right hand side is simply the product of the likelihood and the prior defined in Eq.~(\ref{eq:bayes}), i.e., $Z$ is the normalization constant from that equation.
+The posterior distribution on the model parameters, $p(\vec{\theta} | \vec{d})$, is obtained as a byproduct. In this sense, Nested sampling is an algorithm to perform multidimensional integral.  
 
+If we were to perform typical Riemann-style integration, we would divide the parameter space into small cubes of $\Delta\vec{\theta}$. However, instead of dividing the space into cubes, we divide them into contours created by constant likelihood surfaces (Figure~\ref{fig:nests}). For simplicity let us denote the likelihood term $p(\vec{d} | \vec{\theta})$ by $\mathcal{L}(\vec{\theta})$. %The left plots illustrates three surfaces of constant likelihoods, $\mathcal{L}_1 < \mathcal{L}_2 < \mathcal{L}_3$. 
+Let us define $X(\lambda)$ as,
+$$
+X(\lambda) = \int_{\vec{\theta}: \{\mathcal{L}(\vec{\theta}) \ge \lambda}\}~\pi(\vec{\theta})~\mathrm{d}\vec{\theta},
+$$
+which is the prior mass obtained by integrating $\pi(\vec{\theta})$ over the region of parameter space where $\mathcal{L}(\vec{\theta}) > \lambda$. 
+
+
+$\mathcal{L}_0$ means the lowest value (or a large negative number in practice) of the likelihood. Since $\mathcal{L}(\vec{\theta})$ always is greater then or equal to $\mathcal{L}_0$, the corresponding value of $X_0$ is 1, i.e., just summing the normalized prior volume. As $i$ increases, $X_i$ will tend to 0 since the space over which the prior is integrated grows smaller therefore, $$0 < ... \le X_{i+1} \le X_{i} \le ... \le X_1 \le X_0 \le 1$$.   
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+by $\mathcal{L}(\vec{\theta})$ and perform following change of variables,
+\begin{equation}
+\mathrm{d} X = \pi(\vec{\theta})~\mathrm{d}\vec{\theta}
+\end{equation}
+where $\int \mathrm{d} X = 1$ since the prior is normalized to 1. Substituting it in Eq~\ref{eq:evidence}, we get
+$$
+Z = \int_0^{1} \mathrm{d} X L(X)
+$$
+
+p theta dtheta = dx
+
+
+
+ 
 \subsection{Markov chain Monte Carlo}
 
 
