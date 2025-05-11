@@ -7,6 +7,9 @@
 \usepackage[utf8]{inputenc}  
 \usepackage[T1]{fontenc}
 \usepackage{fancyhdr}
+%\usepackage{algorithm}
+\usepackage{algorithm2e}
+\usepackage{algpseudocode}
 \usepackage{import}
 \usepackage{makeidx}
 \usepackage[table]{xcolor}
@@ -322,7 +325,6 @@ part of the Dutch Research Council (NWO).
 \setcounter{figure}{0}
 \renewcommand\thefigure{Sn.{\arabic{figure}}}
 
-
 \addcontentsline{toc}{chapter}{Openbare samenvatting}
 \import{chapters/}{openbare_samenvatting.tex}
 
@@ -373,9 +375,7 @@ part of the Dutch Research Council (NWO).
 \fancyhead[RO,LE]{\slshape\nouppercase{Bibliography}}
 \bibliographystyle{unsrt}
 \bibliography{references}
-
 \afterpage{\blankpage}
 
-          
 
 \end{document}
