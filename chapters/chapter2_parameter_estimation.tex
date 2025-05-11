@@ -38,7 +38,7 @@ where $\vec{h}$ denotes the GW signal model computed as a function of the source
 \end{equation}
 where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The term $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD).
 
-The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationry at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq.~(\ref{eq:likelihood}) is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and $S_n(f)$ variance for all frequencies. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal but does not contain the signal. 
+The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationry at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq. \eqref{eq:likelihood} is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and $S_n(f)$ variance for all frequencies. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal but does not contain the signal. 
 
 \section{Sampling}
 When performing parameter estimation, we need to evaluate the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^15$ to $10^17$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling techniques to efficiently explore the likelihood function on large space. I give a brief introduction of the two sampling methodsk used to obtain the results of the later chapters.  
@@ -51,37 +51,34 @@ FIXME: Drive the contrast...
     \label{fig:nests}
 \end{figure}
 Nested sampling algorithm was introduced in 2004 by Skilling. The names derives from the fact that the algorithm uses \textit{nested} contours of likelihood (Figure~\ref{fig:nests} (left)) and not the likelihood values. The aim of the algorithm is to compute the evidence~$Z$, 
-\begin{align}
+\begin{equation}
 \label{eq:evidence}
   Z = \int~\mathrm{d}\vec{\theta}~\pi(\vec{\theta})~p(\vec{d} | \vec{\theta})
-\end{align}
+\end{equation}
 %    %&= \int~\mathrm{d}\vec{\theta}~p(\vec{d}| \vec{\theta})~\pi(\vec{\theta})
-where the integrand on the right hand side is simply the product of the likelihood and the prior defined in Eq.~(\ref{eq:bayes}), i.e., $Z$ is the normalization constant from that equation.
+where the integrand on the right hand side is simply the product of the likelihood and the prior defined in Eq. \eqref{eq:bayes}, i.e., $Z$ is the normalization constant from that equation.
 The posterior distribution on the model parameters, $p(\vec{\theta} | \vec{d})$, is obtained as a byproduct. In this sense, Nested sampling is an algorithm to perform multidimensional integral.  
 
 If we were to perform typical Riemann-style integration, we would divide the parameter space into small cubes of $\Delta\vec{\theta}$. However, instead of dividing the space into cubes, we divide them into contours created by constant likelihood surfaces (Figure~\ref{fig:nests}). For simplicity let us denote the likelihood term $p(\vec{d} | \vec{\theta})$ by $\mathcal{L}(\vec{\theta})$. %The left plots illustrates three surfaces of constant likelihoods, $\mathcal{L}_1 < \mathcal{L}_2 < \mathcal{L}_3$. 
 Let us define $X(\lambda)$ as,
+\begin{equation}
+    \label{eq:prior_mass}
+X(\lambda) = \int_{\mathcal{L}(\vec{\theta}) > \lambda}~\pi(\vec{\theta})~\mathrm{d}\vec{\theta},
+\end{equation}
+which is the prior mass obtained by integrating $\pi(\vec{\theta})$ over the region of parameter space where $\mathcal{L}(\vec{\theta}) > \lambda$. Since the prior is normalized probability distribution, its integration over the entire space spanned by $\vec{\theta}$ is 1, therefore maximum value of $X$ is also 1. As $\lambda$ increases, $X$ tends to zero as the volume over which prior needs to be integrated grows smaller (Figure~\ref{fig:nests}) and smaller. Using Eq. \eqref{eq:prior_mass}, we can convert the multidimensional integral of Eq. \eqref{eq:evidence} into one dimensional integration, 
+\begin{equation}
+    Z = \int_0^{1} \mathrm{d} X~\hat{\mathcal{L}}(X),
+\end{equation}
+where $\hat{\mathcal{L}}$ is the inverse of $X(\lambda)$,
 $$
-X(\lambda) = \int_{\vec{\theta}: \{\mathcal{L}(\vec{\theta}) \ge \lambda}\}~\pi(\vec{\theta})~\mathrm{d}\vec{\theta},
+\hat{\mathcal{L}} (X (\lambda)) \equiv \lambda.
 $$
-which is the prior mass obtained by integrating $\pi(\vec{\theta})$ over the region of parameter space where $\mathcal{L}(\vec{\theta}) > \lambda$. 
 
 
-$\mathcal{L}_0$ means the lowest value (or a large negative number in practice) of the likelihood. Since $\mathcal{L}(\vec{\theta})$ always is greater then or equal to $\mathcal{L}_0$, the corresponding value of $X_0$ is 1, i.e., just summing the normalized prior volume. As $i$ increases, $X_i$ will tend to 0 since the space over which the prior is integrated grows smaller therefore, $$0 < ... \le X_{i+1} \le X_{i} \le ... \le X_1 \le X_0 \le 1$$.   
+%$\mathcal{L}_0$ means the lowest value (or a large negative number in practice) of the likelihood. Since $\mathcal{L}(\vec{\theta})$ always is greater then or equal to $\mathcal{L}_0$, the corresponding value of $X_0$ is 1, i.e., just summing the normalized prior volume. As $i$ increases, $X_i$ will tend to 0 since the space over which the prior is integrated grows smaller therefore, $$0 < ... \le X_{i+1} \le X_{i} \le ... \le X_1 \le X_0 \le 1$$.   
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-by $\mathcal{L}(\vec{\theta})$ and perform following change of variables,
-\begin{equation}
-\mathrm{d} X = \pi(\vec{\theta})~\mathrm{d}\vec{\theta}
-\end{equation}
-where $\int \mathrm{d} X = 1$ since the prior is normalized to 1. Substituting it in Eq~\ref{eq:evidence}, we get
-$$
-Z = \int_0^{1} \mathrm{d} X L(X)
-$$
-
-p theta dtheta = dx
-
 
 
  
