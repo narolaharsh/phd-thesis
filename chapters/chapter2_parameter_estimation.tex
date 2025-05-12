@@ -18,7 +18,7 @@ We formalize the problem of converting the prior probability distribution to the
 \end{equation}
 where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}$ which is typically assumed to be uniform. The term $p(\vec{d} | \vec{\theta})$ is the likelihood of observing data given the parameters $\vec{\theta}$. The term $p(\vec{d})$ can be treated as the normalization term for the time being. This term is typically known as the evidence if we use Bayes theorem to test competing hypothesis. Figure~\ref{fig:prior_post} shows an illustration of the prior probability distribution (blue) and the posterior probability distribution (red) of the parameter $(D_{\mathrm{L}})$ where the latter is obtained by updating the prior weights by the weight of likelihood (green) for the corresponding value.
 
-\section{Likelihood function}
+\section{Gravitational wave likelihood}
 While the Bayesian framework described above is conceptually easy, it is a computationally challenging task to do parameter estimation due to the dimensionality of the space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal models. Before diving into how the we tackle these issues, let us define a few standard quantites used during the computation, starting with the likelihood function $p(\vec{d} | \vec{\theta})$ itself
 \begin{figure}
     \centering
@@ -145,8 +145,6 @@ where $\mathcal{L}_{\mathrm{max}}$ is the maximum value of likelihood encountere
 \subsubsection{Limitations of nested sampling}
 I will come to this if time permits. Perhaps it is better to do a table of differences at the end of chapter.
 
-\subsubsection{Toy model for nested sampling}
-I will write it if time permits
 \subsection{Markov chain Monte Carlo}
 Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling to address the problem. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
 
@@ -171,26 +169,27 @@ If the proposal is accepted, it will become $\vec{\theta}_t$ and the step is rep
 \subsubsection{Computing the evidence}
 The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce $T$ which is usually known as temperature
 \begin{equation}
-    p_T(\vec{\theta} | \vec{d}) = p(\vec{d} | \vec{\theta})^{1/T} \pi(\vec{\theta}).
+    p_T(\vec{\theta} | \vec{d}) \propto p(\vec{d} | \vec{\theta})^{1/T} \pi(\vec{\theta}).
 \end{equation}
-When $T=1$, we obtain the posterior and when $T=\infty$, we obtain the prior. Defining the evidence as a function of $\beta \equiv 1/T$,
+When $T=1$, the right hand side yields posterior weights and when $T=\infty$, it represents the prior. Samples from all chains with $T>1$ are eventually discarded. Writing the evidence as a function of $\beta \equiv 1/T$ to get,
 \begin{equation}
-    Z(\beta) = p(\vec{d} | \beta) = \int \mathrm{d} \vec{\theta}~p(\vec{d} | \vec{\theta})^{\beta}~\pi(\vec{\theta}),
+    Z(\beta) = p_{\beta}(\vec{d}) = \int \mathrm{d} \vec{\theta}~p(\vec{d} | \vec{\theta})^{\beta}~\pi(\vec{\theta}).
 \end{equation}
-where $\beta=1$ is the evidence and $\beta=0$ gives the normalized prior volume.
+Let us operate with log and then take derivative w.r.t. $\beta$ on both sides,
+\begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d}\beta} \ln{p_{\beta}(\vec{d})} = \left< \ln{p(\vec{d} | \vec{\theta})}\right>_{\beta}
+\end{equation}
+where $\left<.\right>_{\beta}$ stands for the expectation value with respect to the posterior distribution at temprature $T = 1/\beta$. The log evidence is then computed as
 \begin{align}
-    \ln{p(\vec{d})} &= \ln{p(d | \beta = 1)} \\
-    &= \int_0^{1} \frac{d}{d\beta}\ln{p(\vec{d} | \beta)} + \ln{p(\vec{d} | \beta = 0)}
+    \ln{p(\vec{d})} &= \ln{p_{\beta=1}(\vec{d})} \\
+    &= \int_0^{1} \frac{d}{d\beta}\ln{p_{\beta}(\vec{d})} + \ln{p_{\beta=0}(\vec{d})} \\
+    &= \int_0^{1} \frac{d}{d\beta} \left<\ln{p(\vec{d} | \vec{\theta})}\right>_{\beta} + \ln \int \mathrm{d} \vec{\theta} \pi(\vec{\theta}) \\
+    &= \int_0^{1} \frac{d}{d\beta} \left<\ln{p(\vec{d} | \vec{\theta})}\right>_{\beta} \\
+    &\approx \sum_{\beta = 1/T_{\mathrm{max}}}^{1} \Delta \beta \left<\ln{p(\vec{d} | \vec{\theta})}\right>_{\beta}
 \end{align}
+Hence, the expectation value of the log-likelihood with respect to the posterior distribution integrated over the temprature range leads to the evidence.
 
-Taking the derivative w.r.t. $\beta$ after operating operating with log on both sides,
-\begin{equation}
-    \frac{\mathrm{d}}{\mathrm{d}\beta} p(\vec{d} | \beta) = \left< \ln{p(\vec{d} | \vec{\theta})}\right>_{\beta}
-\end{equation}
-where $\left<.\right>_{\beta}$ is the expectation value of the quantity at $\beta$.
+\subsubsection{Limitations of Metropolis-Hastings algorithm}
+Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning. 
 
-The Metropolis-Hastings algorithm Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point in the parameter space and it requires certain number of iterations, also known as \textit{burn-in} iterations. before the dependence on the starting point is lost. we Figure~\ref{fig:mcmc} shows an e
-
-\subsubsection{Reversible Jump}
-
-\subsection{Comparison between MCMC and Nested Sampling}
+\subsubsection{Reversible Jump Markov chain Monte Carlo}
