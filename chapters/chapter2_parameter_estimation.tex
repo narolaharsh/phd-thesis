@@ -169,11 +169,29 @@ Metropolis-Hastings algorithm makes use of a proposal density function $Q$ to de
 If the proposal is accepted, it will become $\vec{\theta}_t$ and the step is repeated. The quantity $Q$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
 
 \subsubsection{Computing the evidence}
+The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce $T$ which is usually known as temperature
+\begin{equation}
+    p_T(\vec{\theta} | \vec{d}) = p(\vec{d} | \vec{\theta})^{1/T} \pi(\vec{\theta}).
+\end{equation}
+When $T=1$, we obtain the posterior and when $T=\infinity$, we obtain the prior. Defining the evidence as a function of $\beta \equiv 1/T$,
+\begin{equation}
+    Z(\beta) = p(\vec{d} | \beta) = \int \mathrm{d} \vec{\theta}~p(\vec{d} | \vec{\theta})^{\beta}~\pi(\vec{\theta}),
+\end{equation}
+where $\beta=1$ is the evidence and $\beta=0$ gives the normalized prior volume.
+\begin{align}
+    \ln{p(\vec{d})} &= \ln{p(d | \beta = 1)} \\
+    &= \int_0^{1} \frac{d}{d\beta}\ln{p(\vec{d} | \beta)} + \ln{p(\vec{d} | \beta = 0)} \\
+    & = 
+\end{align}
 
-The Metropolis-Hastings algorith Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point in the parameter space and it requires certain number of iterations, also known as \textit{burn-in} iterations. before the dependence on the starting point is lost. we Figure~\ref{fig:mcmc} shows an e
+Taking the derivative w.r.t. $\beta$ after operating operating with log on both sides,
+\begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d}\beta} p(\vec{d} | \beta) = \left< \ln{p(\vec{d} | \vec{\theta})}\right>_{\beta}
+\end{equation}
+where $\left<.\right>_{\beta}$ is the expectation value of the quantity at $\beta$.
 
+The Metropolis-Hastings algorithm Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point in the parameter space and it requires certain number of iterations, also known as \textit{burn-in} iterations. before the dependence on the starting point is lost. we Figure~\ref{fig:mcmc} shows an e
 
-\subsubsection{How are the posteriors samples and evidence estimated}
 \subsubsection{Reversible Jump}
 
 \subsection{Comparison between MCMC and Nested Sampling}
