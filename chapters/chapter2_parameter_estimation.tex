@@ -97,7 +97,7 @@ where we assume that the samples are independent of each other. The probability 
 \begin{equation}
     p(\chi) = \frac{d}{d\chi} P(\chi > \{X_i\}) = K \chi^{K-1}.
 \end{equation}
-The above equality suggests that random variable $\chi$ indeed follows Beta distrubtion with
+The above equality suggests that random variable $\chi$ indeed follows the Beta distrubtion with
 \begin{equation}
 \chi \sim B(K, 1).
 \end{equation}
@@ -148,8 +148,12 @@ I will come to this if time permits. Perhaps it is better to do a table of diffe
 \subsubsection{Toy model for nested sampling}
 I will write it if time permits
 \subsection{Markov chain Monte Carlo}
-Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling to address the problem. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
 
+\begin{equation}
+p_t(\vec{\theta}) = \int \mathrm{d}\vec{\theta}'~T(\vec{\theta}, \vec{\theta}')~\vec{\theta}'
+\end{equation}
+where $\vec{\theta}$ is the proposed point and $\vec{\theta}'$ point from previous iteration and $T$ is the transition probability. 
 
 \subsubsection{How are the posteriors samples and evidence estimated}
 \subsubsection{Reversible Jump}
