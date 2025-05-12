@@ -173,15 +173,14 @@ The evidence when using Metropolis-Hastings algorithm is computed in post-proces
 \begin{equation}
     p_T(\vec{\theta} | \vec{d}) = p(\vec{d} | \vec{\theta})^{1/T} \pi(\vec{\theta}).
 \end{equation}
-When $T=1$, we obtain the posterior and when $T=\infinity$, we obtain the prior. Defining the evidence as a function of $\beta \equiv 1/T$,
+When $T=1$, we obtain the posterior and when $T=\infty$, we obtain the prior. Defining the evidence as a function of $\beta \equiv 1/T$,
 \begin{equation}
     Z(\beta) = p(\vec{d} | \beta) = \int \mathrm{d} \vec{\theta}~p(\vec{d} | \vec{\theta})^{\beta}~\pi(\vec{\theta}),
 \end{equation}
 where $\beta=1$ is the evidence and $\beta=0$ gives the normalized prior volume.
 \begin{align}
     \ln{p(\vec{d})} &= \ln{p(d | \beta = 1)} \\
-    &= \int_0^{1} \frac{d}{d\beta}\ln{p(\vec{d} | \beta)} + \ln{p(\vec{d} | \beta = 0)} \\
-    & = 
+    &= \int_0^{1} \frac{d}{d\beta}\ln{p(\vec{d} | \beta)} + \ln{p(\vec{d} | \beta = 0)}
 \end{align}
 
 Taking the derivative w.r.t. $\beta$ after operating operating with log on both sides,
