@@ -50,7 +50,7 @@ FIXME: Drive the contrast...
     \caption{\textit{Left}: Constant likelihood surfaces for a two dimensional parameter space $\vec{\theta} = \{\theta_1, \theta_2\}$, illustrating the nested contours. \textit{Right}: Evolution of the prior mass ($X$) enclosed by the constant likelihood surfaces shown in the left plot.}
     \label{fig:nests}
 \end{figure}
-Nested sampling algorithm was introduced in 2004 by Skilling. The names derives from the fact that the algorithm uses \textit{nested} contours of likelihood (Figure~\ref{fig:nests} (left)) and not the likelihood values. The aim of the algorithm is to compute the evidence~$Z$, 
+Nested sampling algorithm was introduced in 2004 by Skilling. The names derives from derives from the fact that the progression of the algorithm relies on \textit{nested} contours of likelihood (Figure~\ref{fig:nests} (left)) and not the individual likelihood values. The aim of the algorithm is to compute the evidence~$Z$, 
 \begin{equation}
 \label{eq:evidence}
   Z = \int~\mathrm{d}\vec{\theta}~\pi(\vec{\theta})~p(\vec{d} | \vec{\theta})
@@ -87,7 +87,7 @@ as mentioned near the beignning of this sub-section.
 Although, we have defined prior mass X, we have so far not specified how it is calculated once the sampling starts. The quantity X is non-increasing in nature and its value ranges from 1 to 0. Treating it as a random variable, its probability distribution can be approximated with the uniform distribution,  
 \begin{equation}X \sim U(0, 1)\end{equation} and the corresponding cumulative distribution function is,
 \begin{equation}
-    F(X) = \int_{0}^{X} \mathrm{d} X' = X
+    F(X) = \int_{0}^{X} \mathrm{d} X' = X.
 \end{equation}
 The probability that a random variable $\chi$ is greater than the prior masses from the full set of prior masses $\{X_i\}$ is
 \begin{equation}
@@ -101,12 +101,11 @@ The above equality suggests that random variable $\chi$ indeed follows Beta dist
 \begin{equation}
 \chi \sim B(K, 1).
 \end{equation}
-We have assumed that $X$ and $\chi$ range from 0 and 1. However, as the algorithm progresses, the prior mass $X$ and, in turn, $chi$ shrinks. Let's say they have an upper bounded of $X^{*}$, then we can define a shrinkage ratio $t\equiv \chi / X^{*}$ where
+We have assumed that $X$ and $\chi$ range from 0 and 1. However, as the algorithm progresses, the prior mass $X$ and, in turn, $\chi$ shrinks. Let's say they have an upper bounded of $X^{*}$, then we can define a shrinkage ratio $t\equiv \chi / X^{*}$ where
 \begin{equation}
-    t ~ B(K, 1).
+    t \sim B(K, 1).
 \end{equation}
-The derivation above completes the Nested sampling algorithm.
-
+We provide the pseudocdoe how the nested sampling progress in Algorithm block~\ref{alg:nes_sam}. The pseudocdoe is generalized for K number of live points. For a typical parameter estimation run, one uses $\mathcal{O}(10^3)$ live points. 
 \RestyleAlgo{ruled}
 \begin{algorithm}
     \SetKwComment{Comment}{//~}{}
@@ -126,7 +125,7 @@ The derivation above completes the Nested sampling algorithm.
         \eIf{$i==0$}
             {Draw $X_i$ from $\mathcal{B}(K, 1)$\;} 
             {{Draw $t$ from $\mathcal{B}(K, 1)$\; $X_i = tX_{i-1}$\;}}
-            
+
         Discard the $\vec{\theta}_i$ as a \textit{dead} point, collect the tuple ($\mathcal{L}_i$, $X_i$) corresponding to $\vec{\theta}_i$;
         Increase Z by adding $\Delta Z =  \frac{1}{2}\left(\mathcal{L}_i + \mathcal{L}_{i-1}\right) \left(X_i - X_{i-1}\right)$\;
         Evaluate termination criterion\;
@@ -136,9 +135,23 @@ The derivation above completes the Nested sampling algorithm.
         
     }
 \end{algorithm}
+\subsubsection{Terminating criterion}
+Since the aim of the Nested sampling algorithm is to compute the evidence Z in small increament of $\Delta Z$, we may choose to terminate when the increament is smaller then a  desired number $\epsilon$,
+\begin{equation}
+    \ln{\left(Z_i + X_i \mathcal{L}_{\mathrm{max}}\right)} - \ln{(Z_i)} < \epsilon,
+\end{equation}
+where $\mathcal{L}_{\mathrm{max}}$ is the maximum values of likelihood encountered during sampling. 
 
+\subsubsection{Limitations of nested sampling}
+I will come to this if time permits. Perhaps it is better to do a table of differences at the end of chapter.
 
+\subsubsection{Toy model for nested sampling}
+I will write it if time permits
 \subsection{Markov chain Monte Carlo}
 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 
+\subsubsection{How are the posteriors samples and evidence estimated}
+\subsubsection{Reversible Jump}
+
+\subsection{Comparison between MCMC and Nested Sampling}
