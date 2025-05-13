@@ -4,7 +4,19 @@
     \item BayesWave: Morlet Gabour wavelet. Q-scan and bayeswave reconstruction
 \end{itemize}
 
-Paragraph 1: What is generic excess power? What can cause it (glitches mainly)? 
+\begin{figure}
+    \centering
+    \includegraphics[width=12cm]{../figures/morlet_gabour.pdf}
+    \caption{GW signal}
+    \label{fig:gw-qscan}
+\end{figure}
+A GW signals causes an excess of power in an otherwise Gaussian and stationry noise. However, a GW signal is certainly not the only causes such an excess of power. GW detectors often encounter noise artefacts that causes non-Gaussian and non-stationary that show up as an excess of power. Any excess power caused by GW signal has a distinct banana shape in the time-frequency space and such excess of power is typically coherent across detector network. In contrast, glitches exhibit wide range of shapes time-frequency space [figure] and they cannot be expected to be coherent across the detector network. 
+
+Glitches can masquarade as GW signal, e.g. blip glitches have similar time-frequency evolutions as a GW signal from a high mass binary black hole merger. They can increase false alarm of GW searches. In addition, when overlapping with a GW signal, they can corrupt the measurement of the source parameters or can be mistaken for signs of new physics. 
+
+When reconstruction various GW signal to measure source parameters, we rely on a theoretical model. However, there are cases where such theoretical models do not exist, e.g. wide varities of glitches, GW signal from echoes, or are expensive to generate, e.g. core-collapse supernovae. For such scenarios, it become important to devise tools that can perform unmodelled reconstruction of any excess power above the Gaussian noise background. 
+
+Paragraph 1: What is generic excess power? What can cause it (glitches mainly)?
 Paragraph 2: Why it is important to be able to reconstruct generic excess power? Removing glitches, glitches overlapping signal, searches for echoes, supernovae, test of GR, estimating Power Spectral Density
 
 \section{Transdimensional Sampling Algorithms}
