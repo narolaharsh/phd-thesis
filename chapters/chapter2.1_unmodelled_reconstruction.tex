@@ -1,29 +1,19 @@
-\begin{itemize}
-    \item What is meant by generic excess power? What can cause it? unmodelled signals, glitches, signals overlapping glitches
-    \item Transdimensional sampling and RJMCMC
-    \item BayesWave: Morlet Gabour wavelet. Q-scan and bayeswave reconstruction
-\end{itemize}
+When reconstructing GW signals to measure source parameters, we typically use a modelled approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases when such models either do not exist or are expensive to simulate or are not mature enough. For such instance, it becomes important to be able to perform \textit{unmodelled} reconstruction of the source. In this chapter, we review the instance when such unmodelled reconstruction is necessary and how it is done. 
 
-\begin{figure}
-    \centering
-    \includegraphics[width=12cm]{../figures/morlet_gabour.pdf}
-    \caption{GW signal}
-    \label{fig:gw-qscan}
-\end{figure}
-When reconstructing GW signals to measure source parameters, we typically use a modelled approach, i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases when such models either do not exist or are expensive to simulate or are not mature enough. For such instance, it becomes important to be able to perform \textit{unmodelled} reconstruction of the source. In this chapter, we review the instance when such unmodelled reconstruction is necessary and how it is done. 
+\section{Causes of generic excess power}
+A case where theoretical models do not exist can be made for instrumental \textit{glitches}. While the noise in the GW detectors is assumed to be Gaussian and stationary, they often encounter noise transient, also known as glitches, that violates this assumption. Glitches could be caused by instrumental (control systems, scattered light) or environmental (earthquakes, wind, anthropogenic) factors, though their origins often remain unknown in many cases [16]. Thefore, it is not possible to devise a theoretical model for glitches in most cases. 
 
+Instrumental glitches are problematic in two ways. 
+1. Glitches in the noise alone. Increases search false alarms
+2. Glitches overlapping with the signal. 
 
+\iffalse
+A case where theoretical model is expensive to simulate can be made for GW signals from the core collapse of a supernova. A case where theoretical models are not mature enough can be made for the echoes of GW signal. Why do we still do on-source PSD estimation? 
+\fi
 
-
-Glitches can masquarade as GW signal, e.g. blip glitches have similar time-frequency evolutions as a GW signal from a high mass binary black hole merger. They can increase false alarm of GW searches. In addition, when overlapping with a GW signal, they can corrupt the measurement of the source parameters or can be mistaken for signs of new physics. 
-
-When reconstruction various GW signal to measure source parameters, we rely on a theoretical model. However, there are cases where such theoretical models do not exist, e.g. wide varities of glitches, GW signal from echoes, or are expensive to generate, e.g. core-collapse supernovae. For such scenarios, it become important to devise tools that can perform unmodelled reconstruction of any excess power above the Gaussian noise background. 
-
-Paragraph 1: What is generic excess power? What can cause it (glitches mainly)?
-Paragraph 2: Why it is important to be able to reconstruct generic excess power? Removing glitches, glitches overlapping signal, searches for echoes, supernovae, test of GR, estimating Power Spectral Density
+Glitches can masquarade as GW signal, e.g. blip glitches have similar time-frequency evolutions as a GW signal from a high mass binary black hole merger. They can increase false alarm of GW searches. In addition, when overlapping with a GW signal, they can corrupt the measurement of the source parameters or can be mistaken for signs of new physics.  
 
 \section{Transdimensional Sampling Algorithms}
-\section{BayesWave}
 
 \begin{figure}
     \centering
@@ -31,3 +21,5 @@ Paragraph 2: Why it is important to be able to reconstruct generic excess power?
     \caption{Morlet-Gabour wavelet in time (left) and frequency (right) domain}
     \label{fig:mg_wav}
 \end{figure}
+
+\section{Problem of glitches overlapping with the signals in the Einstein Telescope era}
