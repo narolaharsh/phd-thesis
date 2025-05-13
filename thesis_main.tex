@@ -4,6 +4,9 @@
 
 
 
+
+
+
 %\usepackage[left=1.5cm,right=1.5cm, bottom=1.5cm]{geometry}
 \usepackage[utf8]{inputenc}  
 \usepackage[T1]{fontenc}
@@ -257,7 +260,7 @@ part of the Dutch Research Council (NWO).
 \import{chapters/}{chapter1_grgws.tex}	
 
 %%%%%%% New chapter %%%%%%%%%%%%%%%%%
-\chapter{Measuring the parameters of the merging compact binaries from the gravitational wave signal}
+\chapter{Reconstructing a gravitational wave signals from data and measuring the source properties}
 \label{ch:gwpe}
 \fancyhf{}
 \fancyfoot[C]{\thepage}
@@ -266,6 +269,14 @@ part of the Dutch Research Council (NWO).
 \renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
 \import{chapters/}{chapter2_parameter_estimation.tex}
 
+\chapter{Reconstructing generic excess power from the data}
+\label{ch:gwpe}
+\fancyhf{}
+\fancyfoot[C]{\thepage}
+\fancyhead[RO]{\slshape\nouppercase{\rightmark}}
+\fancyhead[LE]{\slshape\nouppercase{\leftmark}}
+\renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
+\import{chapters/}{chapter2.1_unmodelled_reconstruction.tex}
 
 %%%%%%% New chapter %%%%%%%%%%%%%%%%%
 \chapter{Null stream inspired noise transient elimination}
@@ -288,7 +299,7 @@ part of the Dutch Research Council (NWO).
 \import{chapters/}{chapter4_nijntje.tex}
 
 
-\chapter{Measuring the source parameters of GW signals with third-generation telescope}
+\chapter{Measuring the parameters of GW source with third-generation telescope}
 \label{ch:relative_binning}
 \fancyhf{}
 \fancyfoot[C]{\thepage}

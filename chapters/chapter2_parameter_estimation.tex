@@ -40,9 +40,9 @@ where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*
 
 The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationry at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq. \eqref{eq:likelihood} is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and variance equal to $S_n(f)$ for each frequency. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal but does not contain the signal. 
 
-\section{Sampling}
-When performing parameter estimation, we need to evaluate the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^15$ to $10^17$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling techniques to efficiently explore the likelihood function on large space. I give a brief introduction of the two sampling methodsk used to obtain the results of the later chapters.  
-FIXME: Drive the contrast...
+\section{Sampling algorithms}
+When performing parameter estimation, we need to explore the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^15$ to $10^17$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling techniques to efficiently explore the likelihood function on large space. I give a brief introduction of the two sampling methods used to obtain the results of the later chapters.  
+
 \subsection{Nested sampling}
 \begin{figure}
     \centering
@@ -143,7 +143,7 @@ Since the aim of the Nested sampling algorithm is to accumulate the evidence Z i
 where $\mathcal{L}_{\mathrm{max}}$ is the maximum value of likelihood encountered during sampling. 
 
 \subsubsection{Limitations of nested sampling}
-I will come to this if time permits. Perhaps it is better to do a table of differences at the end of chapter.
+Stopping criteria are somewhat arbitrary[greg paper]. Scales poorly with dimensions [paper]. Not massively parllelizable [reference]. Fewer tuning parameters. 
 
 \subsection{Markov chain Monte Carlo}
 Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling to address the problem. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
@@ -190,6 +190,4 @@ where $\left<.\right>_{\beta}$ stands for the expectation value with respect to 
 Hence, the expectation value of the log-likelihood with respect to the posterior distribution integrated over the temprature range leads to the evidence.
 
 \subsubsection{Limitations of Metropolis-Hastings algorithm}
-Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning. 
-
-\subsubsection{Reversible Jump Markov chain Monte Carlo}
+Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
