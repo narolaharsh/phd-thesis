@@ -14,6 +14,18 @@ A case where theoretical model is expensive to simulate can be made for GW signa
 
 \section{Transdimensional Sampling Algorithms}
 
+\begin{figure}
+    \centering
+    \includegraphics[width=12cm]{../figures/morlet_gabour.pdf}
+    \caption{Morlet-Gabour wavelet in time (left) and frequency (right) domain}
+    \label{fig:mg_wav}
+\end{figure}
+
+\section{Problem of glitches overlapping with the signals in the Einstein Telescope era}
+
+
+
+
 \subsection{Markov chain Monte Carlo}
 Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling to address the problem. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
 
@@ -62,15 +74,4 @@ Hence, the expectation value of the log-likelihood with respect to the posterior
 Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
 
 \subsection{Jumping between dimensions}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=12cm]{../figures/morlet_gabour.pdf}
-    \caption{Morlet-Gabour wavelet in time (left) and frequency (right) domain}
-    \label{fig:mg_wav}
-\end{figure}
-
-\section{Problem of glitches overlapping with the signals in the Einstein Telescope era}
-
-
 
