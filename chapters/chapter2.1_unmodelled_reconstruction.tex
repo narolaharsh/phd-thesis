@@ -1,18 +1,19 @@
 When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist, or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where theoretical models do not exist. 
 
 \section{Artefacts in the Gaussian noise}
-A case where theoretical models do not exist can be made for instrumental \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, they often encounter noise transients, also known as glitches, that violate the assumption. Depending on the time of occurance, glitches can be problematc in two ways 
+A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences assume that noise in the detector is Gaussian-stationry, a violation of it could corrupt the physics inferences. Depending on the time of occurance, glitches can be problematc in two ways,
 \begin{itemize}
-\item Glitches occuring near a GW signal could corrupt physics inferences made from the data. In order to make measurements, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we make physics inferences.
-\item Isolated glitches, the ones not overlapping with a GW signal, increase the false alarm rate of GW detections as some glitches look similar to a GW signal. For example, the blip glitches have similar time-frequency evolution as GW signals from high-mass BBH mergers. It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
+\item Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. [GW170817 figure]
+\item Isolated glitches, the ones not overlapping with a GW signal, increase the false alarm rate of GW detections since some glitches look similar to a GW signal. For example, the blip glitches have similar time-frequency evolution as GW signals from high-mass BBH mergers [Figure]. It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
 \end{itemize} 
-Glitches could be caused by instrumental (control systems, scattered light) or environmental (earthquakes, wind, anthropogenic) factors, though their origins often remain unknown in many cases [16]. Thefore, it is not possible to devise a theoretical model for glitches in most cases and we need to rely on the unmodelled approach to reconstruct and subtract glitches. 
+Glitches could be caused by instrumental (control systems, scattered light) or environmental (earthquakes, wind, anthropogenic) factors, though their origins often remain unknown in many cases [Figure Figure Figure]. Thefore, it is not possible to devise a theoretical model for glitches in most cases and we need to rely on the unmodelled approach to reconstruct and subtract glitches. 
 
 \iffalse
 A case where theoretical model is expensive to simulate can be made for GW signals from the core collapse of a supernova. A case where theoretical models are not mature enough can be made for the echoes of GW signal. Why do we still do on-source PSD estimation? 
 \fi
 
 \section{Transdimensional Sampling Algorithms}
+
 
 \begin{figure}
     \centering
