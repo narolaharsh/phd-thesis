@@ -1,19 +1,68 @@
-When reconstructing GW signals to measure source parameters, we typically use a modelled approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases when such models either do not exist or are expensive to simulate or are not mature enough. For such instance, it becomes important to be able to perform \textit{unmodelled} reconstruction of the source. In this chapter, we review the instance when such unmodelled reconstruction is necessary and how it is done. 
+When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases when theoretical models either do not exist or are expensive to simulate. For such instance, it becomes important to be able to perform \textit{unmodelled} reconstruction of the source. In this chapter, we review such cases and explain how it is done. 
 
-\section{Causes of generic excess power}
-A case where theoretical models do not exist can be made for instrumental \textit{glitches}. While the noise in the GW detectors is assumed to be Gaussian and stationary, they often encounter noise transient, also known as glitches, that violates this assumption. Glitches could be caused by instrumental (control systems, scattered light) or environmental (earthquakes, wind, anthropogenic) factors, though their origins often remain unknown in many cases [16]. Thefore, it is not possible to devise a theoretical model for glitches in most cases. 
+\section{Artefacts in the Gaussian noise}
+A case where theoretical models do not exist can be made for instrumental \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, they often encounter noise transient, also known as glitches, that violates this assumption. Depending on the time of occurance, glitches can be problematc in two ways 
+\begin{itemize}
+\item Glitches occuring near a GW signal could corrupt the physical inferences made from the data. In order to make measurements, it becomes necessary to carefully subtract the glitch without the perturbing the signal, \textit{before} the data is analyzed.
+\item Isolated glitches, the ones not overlapping with a GW signal, increase the false alarm rate of GW detections as some glitches look similar to a GW signal. For example, the blip glitches have similar time-frequency evolution as GW signals from high-mass BBH mergers. 
+\end{itemize} 
 
-Instrumental glitches are problematic in two ways. 
-1. Glitches in the noise alone. Increases search false alarms
-2. Glitches overlapping with the signal. 
+Glitches could be caused by instrumental (control systems, scattered light) or environmental (earthquakes, wind, anthropogenic) factors, though their origins often remain unknown in many cases [16]. Thefore, it is not possible to devise a theoretical model for glitches in most cases and we need to rely on the unmodelled approach to reconstruct and subtract glitches. 
 
 \iffalse
 A case where theoretical model is expensive to simulate can be made for GW signals from the core collapse of a supernova. A case where theoretical models are not mature enough can be made for the echoes of GW signal. Why do we still do on-source PSD estimation? 
 \fi
 
-Glitches can masquarade as GW signal, e.g. blip glitches have similar time-frequency evolutions as a GW signal from a high mass binary black hole merger. They can increase false alarm of GW searches. In addition, when overlapping with a GW signal, they can corrupt the measurement of the source parameters or can be mistaken for signs of new physics.  
-
 \section{Transdimensional Sampling Algorithms}
+
+\subsection{Markov chain Monte Carlo}
+Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling to address the problem. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
+
+\begin{equation}
+p_t(\vec{\theta}') = \int \mathrm{d}\vec{\theta}_{t-1}~T(\vec{\theta}', \vec{\theta}_{t-1})~\vec{\theta}_{t-1}
+\end{equation}
+where $\vec{\theta}'$ is the proposed point and $\vec{\theta}_{t-1}$ is the point from previous iteration and $T$ is the transition probability. Standard MCMC algorithms aim to obtain the samples from posterior probability distribution which is in contrast to the Nested sampling algorithm where the aim is to compute the evidence and posterior distributions are the byproduct. Obtaining the evidence after an MCMC algorithm is terminated requires additional computations. Nevertheless, here we outline one such MCMC algorithm called the Metropolis–Hastings algorithm.
+
+\subsubsection{Metropolis-Hastings algorithm}
+\begin{figure}
+    \centering
+    \includegraphics[width=8cm]{../figures/markov_chain.pdf}
+    \caption{\textit{Bottom:} Progresion of a Markov chain in the parameter space of $\vec{\theta}$. Each arrow represents an iteration, filled dots represent accepted proposal and empty dots represents rejected proposals. \textit{Top:} Probability distribution function constructed from the accepted samples of the Markov chain from the bottom plot.}
+    \label{fig:mcmc}
+\end{figure}
+Metropolis-Hastings algorithm makes use of a proposal density function $Q$ to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is given by $\alpha$
+\begin{equation}
+\alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{Q(\vec{\theta}_{t-1} | \vec{\theta}')}{Q(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
+\end{equation}
+If the proposal is accepted, it will become $\vec{\theta}_t$ and the step is repeated. The quantity $Q$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
+
+\subsubsection{Computing the evidence}
+The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce $T$ which is usually known as temperature
+\begin{equation}
+    p_T(\vec{\theta} | \vec{d}) \propto p(\vec{d} | \vec{\theta})^{1/T} \pi(\vec{\theta}).
+\end{equation}
+When $T=1$, the right hand side yields posterior weights and when $T=\infty$, it represents the prior. Samples from all chains with $T>1$ are eventually discarded. Writing the evidence as a function of $\beta \equiv 1/T$ to get,
+\begin{equation}
+    Z(\beta) = p_{\beta}(\vec{d}) = \int \mathrm{d} \vec{\theta}~p(\vec{d} | \vec{\theta})^{\beta}~\pi(\vec{\theta}).
+\end{equation}
+Let us operate with log and then take derivative w.r.t. $\beta$ on both sides,
+\begin{equation}
+    \frac{\mathrm{d}}{\mathrm{d}\beta} \ln{p_{\beta}(\vec{d})} = \left< \ln{p(\vec{d} | \vec{\theta})}\right>_{\beta}
+\end{equation}
+where $\left<.\right>_{\beta}$ stands for the expectation value with respect to the posterior distribution at temprature $T = 1/\beta$. The log evidence is then computed as
+\begin{align}
+    \ln{p(\vec{d})} &= \ln{p_{\beta=1}(\vec{d})} \\
+    &= \int_0^{1} \frac{d}{d\beta}\ln{p_{\beta}(\vec{d})} + \ln{p_{\beta=0}(\vec{d})} \\
+    &= \int_0^{1} \frac{d}{d\beta} \left<\ln{p(\vec{d} | \vec{\theta})}\right>_{\beta} + \ln \int \mathrm{d} \vec{\theta} \pi(\vec{\theta}) \\
+    &= \int_0^{1} \frac{d}{d\beta} \left<\ln{p(\vec{d} | \vec{\theta})}\right>_{\beta} \\
+    &\approx \sum_{\beta = 1/T_{\mathrm{max}}}^{1} \Delta \beta \left<\ln{p(\vec{d} | \vec{\theta})}\right>_{\beta}
+\end{align}
+Hence, the expectation value of the log-likelihood with respect to the posterior distribution integrated over the temprature range leads to the evidence.
+
+\subsubsection{Limitations of Metropolis-Hastings algorithm}
+Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
+
+\subsection{Jumping between dimensions}
 
 \begin{figure}
     \centering
@@ -23,3 +72,6 @@ Glitches can masquarade as GW signal, e.g. blip glitches have similar time-frequ
 \end{figure}
 
 \section{Problem of glitches overlapping with the signals in the Einstein Telescope era}
+
+
+
