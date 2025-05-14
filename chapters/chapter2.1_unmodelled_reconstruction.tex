@@ -1,9 +1,9 @@
-When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases when theoretical models either do not exist or are expensive to simulate. For such instance, it becomes important to be able to perform \textit{unmodelled} reconstruction of the source. In this chapter, we review such cases and explain how it is done. 
+When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist, or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where theoretical models do not exist. 
 
 \section{Artefacts in the Gaussian noise}
-A case where theoretical models do not exist can be made for instrumental \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, they often encounter noise transient, also known as glitches, that violates this assumption. Depending on the time of occurance, glitches can be problematc in two ways 
+A case where theoretical models do not exist can be made for instrumental \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, they often encounter noise transient, also known as glitches, that violates the assumption. Depending on the time of occurance, glitches can be problematc in two ways 
 \begin{itemize}
-\item Glitches occuring near a GW signal could corrupt the physical inferences made from the data. In order to make measurements, it becomes necessary to carefully subtract the glitch without the perturbing the signal, \textit{before} the data is analyzed.
+\item Glitches occuring near a GW signal could corrupt the physics inferences made from the data. In order to make measurements, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we make physics inferences.
 \item Isolated glitches, the ones not overlapping with a GW signal, increase the false alarm rate of GW detections as some glitches look similar to a GW signal. For example, the blip glitches have similar time-frequency evolution as GW signals from high-mass BBH mergers. 
 \end{itemize} 
 
