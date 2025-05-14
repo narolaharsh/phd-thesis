@@ -1,6 +1,13 @@
-When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist, or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where theoretical models do not exist. 
+When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist, or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
 
 \section{Artefacts in the Gaussian noise}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=12cm]{../figures/gw170817scan.pdf}
+    \caption{A loud glitch overlapping with the merger of the binary neutron star signal GW170817 in LIGO-Livingstone interferometer. Dotted white arrows are added to help trace the signal.}
+    \label{fig:bns_scan}
+\end{figure}
 A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences assume that noise in the detector is Gaussian-stationry, a violation of it could corrupt the physics inferences. Depending on the time of occurance, glitches can be problematc in two ways,
 \begin{itemize}
 \item Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. [GW170817 figure]
@@ -14,7 +21,6 @@ A case where theoretical model is expensive to simulate can be made for GW signa
 
 \section{Transdimensional Sampling Algorithms}
 
-
 \begin{figure}
     \centering
     \includegraphics[width=12cm]{../figures/morlet_gabour.pdf}
@@ -22,10 +28,7 @@ A case where theoretical model is expensive to simulate can be made for GW signa
     \label{fig:mg_wav}
 \end{figure}
 
-\section{Problem of glitches overlapping with the signals in the Einstein Telescope era}
-
-
-
+\section{Glitches overlapping with the signals in the Einstein Telescope era}
 
 \subsection{Markov chain Monte Carlo}
 Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling to address the problem. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
