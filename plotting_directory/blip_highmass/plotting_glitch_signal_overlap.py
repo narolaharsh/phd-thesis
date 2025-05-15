@@ -135,6 +135,10 @@ glitch_only_time_series = TimeSeries(coloured_glitch_only_time_array, times = if
 signal_only_timeseries = TimeSeries(ifos[0].time_domain_strain, times = ifos[0].time_array, channel = 'ET1:STRAIN')
 
 
+plt.rcParams['axes.labelsize'] = 11.
+plt.rc('xtick',labelsize=11)
+plt.rc('ytick',labelsize=11)
+
 ###### making the q scans for the ET1 and for null stream ################
 fig, axes = plt.subplots(1, 2, figsize = (8, 4), sharey = True, sharex = True, gridspec_kw = {'wspace': 0.05})
 
@@ -176,7 +180,7 @@ ax.set_xlabel('Time [s]')
 
 fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
 fig.savefig(f'../../figures/{args.label}_highmass_blip_qscan.png', bbox_inches = 'tight', dpi = 250)
-fig.savefig(f'./{args.label}_highmass_blip_qscan.png', bbox_inches = 'tight', dpi = 250)
+#fig.savefig(f'./{args.label}_highmass_blip_qscan.png', bbox_inches = 'tight', dpi = 250)
 
 ##########################################################################
 
