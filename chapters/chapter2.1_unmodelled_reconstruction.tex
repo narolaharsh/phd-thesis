@@ -1,8 +1,7 @@
 When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist, or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
 
 \section{Artefacts in the Gaussian noise}
-
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{../figures/gw170817scan.png}
     \caption{A loud glitch overlapping with the binary neutron star signal, GW170817, in LIGO-Livingston interferometer. Dashed white arrows are added to help reader trace the signal.}
@@ -10,11 +9,12 @@ When reconstructing GW signals to measure source parameters, we typically rely o
 \end{figure}
 A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurance, glitches can be problematc in two ways,
 \begin{itemize}
+
 \item \textit{Glitches overlapping with a GW signal.} Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
 \begin{figure}
     \centering
     \includegraphics[width=12cm]{../figures/thesis-plot_highmass_blip_qscan.png}
-    \caption{A high mass BBH and a blip}
+    \caption{\textit{Left:} A GW signal emmited by a BBH merger with total mass of $176 M_{\odot}$. \textit{Right:} An isolated blip glitch.}
     \label{fig:bbh_blip}
 \end{figure} 
 \item \textit{Isolated glitches.} The ones not overlapping with a GW signal, increase the false alarm rate of GW detections since some glitches look similar to a GW signal. For example, the blip glitches have similar time-frequency morphology as GW signals from high-mass BBH mergers [FIXME: Heavy BBH and glitch comparison figure]. It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
