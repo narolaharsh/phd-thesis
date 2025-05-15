@@ -22,8 +22,7 @@ A case where theoretical model is expensive to simulate can be made for GW signa
 \fi
 
 \section{Transdimensional Sampling Algorithms}
-When performing unmodelled reconstruction, the dimensionality of the parameter space of $\vec{\theta}$ is not known unlike the modelled reconstruction explained in chapter~\ref{ch:gwpe}. While the Bayesian framework, GW likelihood, and Bayesian approximation still remains robust, the Nested sampling algorithm from previous chapter is not a suitable choice to explore such a parameter space. Here, we review a transdimensional algorithm that is routienly used to perform unmodelled reconstruction. 
-
+When performing unmodelled reconstruction, the dimensionality of the parameter space of $\vec{\theta}$ is unknown, in contrast to the modelled reconstruction explained in chapter~\ref{ch:gwpe}. While the Bayesian framework, GW likelihood, and Bayesian approximation still remain robust, the Nested sampling algorithm from previous chapter is not a suitable for the problem at hand. Here, we review a transdimensional algorithm that is routienly used to explore a variable dimensional parameter space. Let us define a few standard quantites which formulate building blocks of the algorithm. 
 \subsection{Morlet-Gabor wavelets}
 \begin{figure}
     \centering
@@ -38,14 +37,13 @@ When performing unmodelled reconstruction, we use Morlet-Gabor wavelets as bases
 \end{equation}
 where $t$ denotes time, $A$ denotes amplitude, $\tau = Q/(2{\pi}f_0)$ denotes the quality factor that controls the spread of the wavelet, $\phi_0$ denotes inital phase, $t_0$ and $f_0$ respectively correspond to time and frequency at the peak of the amplitude. In Figure~\ref{fig:mg_wav}, we show a time (left) and frequency (right) domain representation of a wavelet with parameters $Q = 20$, $t_0=1$ seconds, and $f_0 = 40$ Hz. 
 
-Morlet-Gabor wavelets are sutible for the problem at hand because glitches $(\vec{g})$ we want to model can be expressed as linear combination of $N$ wavelets [BayesWave first paper],
+Morlet-Gabor wavelets are sutible for the problem at hand because glitches $(\vec{g})$ we want to reconstruct can be expressed as linear combination of $N$ wavelets [BayesWave first paper],
 \begin{equation}
     \vec{g}(t; \vec{\theta}) = \sum_{k = 0}^{N} \vec{\psi}_k(t; \vec{\theta}_k),
 \end{equation}
-where $\vec{\theta}$ is set of $N\times5$ parameters since each $\vec{\psi}_k$ needs 5 model parameters shown in Eq.~\eqref{eq:wavelet}. 
-Anoter desirable feature is that Morlet-Gabor wavelets preserve shape when switching between time-frequency domains and they have a simple analytic expression in both domains. 
+where $\vec{\theta}$ is set of $N\times5$ parameters since each $\vec{\psi}_k$ needs 5 model parameters shown in Eq.~\eqref{eq:wavelet}. A desirable feature is that Morlet-Gabor wavelets preserve shape when switching between time-frequency domains and they have a simple analytic expression in both domains. FIXME: There is an undesirable property which is that the wavelets are not orthogonal. 
 
-Here, $N$ itself is not a fixed parameters which means the parameters space we want to explore also does not have a fixed size. Therefore, we need to employ a sampling algorithm that is capable of sampling over a variable dimensional parameter space. 
+Besides ${\vec{\theta}}$, here $N$ itself is an unknown parameter therefore the dimensionality of the parameter space we want to explore is also unknown. The transdimensional algorithm used to tackle this problem is an extension of the Markov chain Monte Carlo methods. 
 
 \subsection{Markov chain Monte Carlo}
 Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling to address the problem. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
@@ -54,14 +52,13 @@ Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of
 p_t(\vec{\theta}') = \int \mathrm{d}\vec{\theta}_{t-1}~T(\vec{\theta}', \vec{\theta}_{t-1})~\vec{\theta}_{t-1}
 \end{equation}
 where $\vec{\theta}'$ is the proposed point and $\vec{\theta}_{t-1}$ is the point from previous iteration and $T$ is the transition probability. Standard MCMC algorithms aim to obtain the samples from posterior probability distribution which is in contrast to the Nested sampling algorithm where the aim is to compute the evidence and posterior distributions are the byproduct. Obtaining the evidence after an MCMC algorithm is terminated requires additional computations. Nevertheless, here we outline one such MCMC algorithm called the Metropolis–Hastings algorithm.
-
-\subsubsection{Metropolis-Hastings algorithm}
 \begin{figure}
     \centering
     \includegraphics[width=8cm]{../figures/markov_chain.pdf}
     \caption{\textit{Bottom:} Progresion of a Markov chain in the parameter space of $\vec{\theta}$. Each arrow represents an iteration, filled dots represent accepted proposal and empty dots represents rejected proposals. \textit{Top:} Probability distribution function constructed from the accepted samples of the Markov chain from the bottom plot.}
     \label{fig:mcmc}
 \end{figure}
+\subsubsection{Metropolis-Hastings algorithm}
 Metropolis-Hastings algorithm makes use of a proposal density function $Q$ to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is given by $\alpha$
 \begin{equation}
 \alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{Q(\vec{\theta}_{t-1} | \vec{\theta}')}{Q(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
