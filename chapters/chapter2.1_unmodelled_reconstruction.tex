@@ -1,4 +1,4 @@
-When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist, or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
+When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
 
 \section{Artefacts in Gaussian noise}
 \begin{figure}[h]
@@ -17,7 +17,7 @@ A case where theoretical models do not exist can be made for instrumental noise 
     \caption{\textit{Left:} A GW signal emmited by a BBH merger with total mass of $176 M_{\odot}$. \textit{Right:} An isolated blip glitch.}
     \label{fig:bbh_blip}
 \end{figure} 
-\item \textit{Isolated glitches.} The ones not overlapping with a GW signal, increase the false alarm rate of GW detections since some glitches look similar to a GW signal. For example, Figure~\ref{fig:bbh_blip} shows the time-frequency evoluation of a GW siganl from high-mass BBH mergers (left) and the time-frequency evolution of an isolated blip glitch (right). It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
+\item \textit{Glitches in isolation.} Glitches not overlapping with a GW signal increase the false alarm rate of GW detections since some glitches look similar to a signal. For example, Figure~\ref{fig:bbh_blip} shows the time-frequency evoluation of a GW siganl from high-mass BBH mergers (left) and the time-frequency evolution of an isolated blip glitch (right). It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
 \end{itemize} 
 
 
@@ -99,6 +99,13 @@ Hence, the expectation value of the log-likelihood with respect to the posterior
 \fi
 
 \subsection{Jumping between dimensions}
+How do you jump between dimensions? Peter J Green 1995
+The progression of the markov chain above does not explain \textit{birth} and \textit{death} transition. Such transition correspond to
+\begin{itemize}
+    \item Addition of new wavelet
+    \item Removal of an existing wavelet
+    \item Swapping an existing wavelet for a new wavelet
+\end{itemize}
 
 
 \subsubsection{Limitations}
