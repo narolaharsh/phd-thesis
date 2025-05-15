@@ -1,6 +1,6 @@
 When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist, or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
 
-\section{Artefacts in the Gaussian noise}
+\section{Artefacts in Gaussian noise}
 \begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{../figures/gw170817scan.png}
@@ -17,7 +17,7 @@ A case where theoretical models do not exist can be made for instrumental noise 
     \caption{\textit{Left:} A GW signal emmited by a BBH merger with total mass of $176 M_{\odot}$. \textit{Right:} An isolated blip glitch.}
     \label{fig:bbh_blip}
 \end{figure} 
-\item \textit{Isolated glitches.} The ones not overlapping with a GW signal, increase the false alarm rate of GW detections since some glitches look similar to a GW signal. For example, the blip glitches have similar time-frequency morphology as GW signals from high-mass BBH mergers [FIXME: Heavy BBH and glitch comparison figure]. It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
+\item \textit{Isolated glitches.} The ones not overlapping with a GW signal, increase the false alarm rate of GW detections since some glitches look similar to a GW signal. For example, Figure~\ref{fig:bbh_blip} shows the time-frequency evoluation of a GW siganl from high-mass BBH mergers (left) and the time-frequency evolution of an isolated blip glitch (right). It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
 \end{itemize} 
 
 
@@ -70,7 +70,7 @@ Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$
 \alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{\Gamma(\vec{\theta}_{t-1} | \vec{\theta}')}{\Gamma(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
 \end{equation}
 If the proposal is accepted, it will become $\vec{\theta}_t$ and the step is repeated. The quantity $\Gamma$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
-
+\iffalse
 \subsubsection{Computing the evidence}
 The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce a parameter $T$ which is usually known as temperature
 \begin{equation}
@@ -93,7 +93,7 @@ where $\left<.\right>_{\beta}$ stands for the expectation value with respect to 
     &\approx \sum_{\beta = 1/T_{\mathrm{max}}}^{1} \Delta \beta \left<\ln{p(\vec{d} | \vec{\theta})}\right>_{\beta}
 \end{align}
 Hence, the expectation value of the log-likelihood with respect to the posterior distribution integrated over the temprature range leads to the evidence.
-
+\fi
 \subsubsection{Limitations of Metropolis-Hastings algorithm}
 Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
 
