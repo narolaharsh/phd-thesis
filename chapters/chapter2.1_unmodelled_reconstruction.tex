@@ -22,6 +22,9 @@ A case where theoretical model is expensive to simulate can be made for GW signa
 \fi
 
 \section{Transdimensional Sampling Algorithms}
+When performing unmodelled reconstruction, the dimensionality of the parameter space of $\vec{\theta}$ is not known unlike the modelled reconstruction explained in chapter~\ref{ch:gwpe}. While the Bayesian framework, GW likelihood, and Bayesian approximation still remains robust, the Nested sampling algorithm from previous chapter is not a suitable choice to explore such a parameter space. Here, we review a transdimensional algorithm that is routienly used to perform unmodelled reconstruction. 
+
+\subsection{Morlet-Gabor wavelets}
 \begin{figure}
     \centering
     \includegraphics[width=12cm]{../figures/morlet_gabour.pdf}
@@ -35,7 +38,7 @@ When performing unmodelled reconstruction, we use Morlet-Gabor wavelets as bases
 \end{equation}
 where $t$ denotes time, $A$ denotes amplitude, $\tau = Q/(2{\pi}f_0)$ denotes the quality factor that controls the spread of the wavelet, $\phi_0$ denotes inital phase, $t_0$ and $f_0$ respectively correspond to time and frequency at the peak of the amplitude. In Figure~\ref{fig:mg_wav}, we show a time (left) and frequency (right) domain representation of a wavelet with parameters $Q = 20$, $t_0=1$ seconds, and $f_0 = 40$ Hz. 
 
-Morlet-Gabor wavelets are sutible for the problem at hand because glitches (\vec{g}) we want to model can be expressed as linear combination of $N$ wavelets [BayesWave first paper],
+Morlet-Gabor wavelets are sutible for the problem at hand because glitches $(\vec{g})$ we want to model can be expressed as linear combination of $N$ wavelets [BayesWave first paper],
 \begin{equation}
     \vec{g}(t; \vec{\theta}) = \sum_{k = 0}^{N} \vec{\psi}_k(t; \vec{\theta}_k),
 \end{equation}
