@@ -10,7 +10,13 @@ When reconstructing GW signals to measure source parameters, we typically rely o
 \end{figure}
 A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurance, glitches can be problematc in two ways,
 \begin{itemize}
-\item \textit{Glitches overlapping with a GW signal.} Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}). 
+\item \textit{Glitches overlapping with a GW signal.} Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
+\begin{figure}
+    \centering
+    \includegraphics[width=12cm]{../figures/thesis-plot_highmass_blip_qscan.png}
+    \caption{A high mass BBH and a blip}
+    \label{fig:bbh_blip}
+\end{figure} 
 \item \textit{Isolated glitches.} The ones not overlapping with a GW signal, increase the false alarm rate of GW detections since some glitches look similar to a GW signal. For example, the blip glitches have similar time-frequency morphology as GW signals from high-mass BBH mergers [FIXME: Heavy BBH and glitch comparison figure]. It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
 \end{itemize} 
 
@@ -59,14 +65,14 @@ where $\vec{\theta}'$ is the proposed point and $\vec{\theta}_{t-1}$ is the poin
     \label{fig:mcmc}
 \end{figure}
 \subsubsection{Metropolis-Hastings algorithm}
-Metropolis-Hastings algorithm makes use of a proposal density function $Q$ to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is given by $\alpha$
+Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$) to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is given by $\alpha$
 \begin{equation}
-\alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{Q(\vec{\theta}_{t-1} | \vec{\theta}')}{Q(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
+\alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{\Gamma(\vec{\theta}_{t-1} | \vec{\theta}')}{\Gamma(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
 \end{equation}
-If the proposal is accepted, it will become $\vec{\theta}_t$ and the step is repeated. The quantity $Q$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
+If the proposal is accepted, it will become $\vec{\theta}_t$ and the step is repeated. The quantity $\Gamma$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
 
 \subsubsection{Computing the evidence}
-The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce $T$ which is usually known as temperature
+The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce a parameter $T$ which is usually known as temperature
 \begin{equation}
     p_T(\vec{\theta} | \vec{d}) \propto p(\vec{d} | \vec{\theta})^{1/T} \pi(\vec{\theta}).
 \end{equation}
