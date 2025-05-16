@@ -73,6 +73,7 @@ Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$
 \alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{\Gamma(\vec{\theta}_{t-1} | \vec{\theta}')}{\Gamma(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
 \end{equation}
 Where $p(\vec{\theta} | \vec{d})$ is the posterior probability distribution (already defined in the chapter \ref{ch:gwpe}). If the proposal is accepted, $\vec{\theta}'$ is updated to $\vec{\theta}_t$ and the steps are repeated. The quantity $\Gamma$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
+
 \iffalse
 \subsubsection{Computing the evidence}
 The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce a parameter $T$ which is usually known as temperature
@@ -99,13 +100,24 @@ Hence, the expectation value of the log-likelihood with respect to the posterior
 \fi
 
 \subsection{Jumping between dimensions}
+\begin{itemize}
+    \item How are the new proposals added: BayesWave black magic
+    \item How does $\alpha$ change: Well it is by multiplying a Jacobian. But what is that Jacobian. 
+% paper1:    https://www2.stat.duke.edu/~sschmid/Courses/Stat376/Papers/TransdimMCMC/GreenHastie2009_RJMCMC_overview.pdf
+% paper2:    https://www.colorado.edu/amath/sites/default/files/attached-files/rjmcmc.pdf
+%%% choose h and h' which are inverse pdfs of each other. So like exponential and ln
+%%% and you are done. 
+\end{itemize}
 How do you jump between dimensions? Peter J Green 1995
-The progression of the markov chain above does not explain \textit{birth} and \textit{death} transition. Such transition correspond to
+The progression of the markov chain above does not yet explain \textit{birth} and \textit{death} transitions. In this context, such transition correspond to
 \begin{itemize}
     \item Addition of new wavelet
     \item Removal of an existing wavelet
     \item Swapping an existing wavelet for a new wavelet
+    \item Write actually about jump from one wavelet model to two wavelet model.
 \end{itemize}
+Let us consider a particular step in the algorithm needs to jump from 1 wavelet model to a 2 wavelet model. 
+
 
 
 \subsubsection{Limitations}
