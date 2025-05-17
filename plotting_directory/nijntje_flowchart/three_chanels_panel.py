@@ -3,14 +3,13 @@ import gengli
 import matplotlib.pyplot as plt
 import bilby
 from argparse import ArgumentParser
-from scipy.signal.windows import tukey
-from scipy.interpolate import UnivariateSpline
 from astropy.cosmology import Planck18
 from bilby.core.utils import logger
 import scienceplots
 import sys
 import os
 import json
+from tqdm import tqdm
 from gwpy.timeseries import TimeSeries
 sys.path.append('../../../null_stream_glitch_mitigation')
 import utils
@@ -19,6 +18,10 @@ plt.style.use(['science'])
 plt.rcParams['axes.labelsize'] = 11.
 plt.rc('xtick',labelsize=11)
 plt.rc('ytick',labelsize=11)
+
+red = (0.80, 0.36, 0.36)
+green = (0.62, 0.79, 0.62)
+blue = (0.27, 0.51, 0.71)
 
 parser = ArgumentParser()
 
@@ -38,6 +41,16 @@ args = parser.parse_args()
 
 bilby.core.utils.setup_logger(outdir=args.outdir, label=args.label)
 
+plot_colorbar = False
+plot_tcp = False
+plot_null_stream = False
+plot_timeseries = False
+gengli_glitch = True
+plot_signal_only_qscan = False
+make_likelihood_curve = True
+
+
+
 ###### setting up some usual arguments for bilby #########
 sampling_frequency = 2048.
 waveform_approximant = 'IMRPhenomD'
@@ -56,6 +69,7 @@ injection_parameters['luminosity_distance'] = 15924.566651659155*1 #Planck18.lum
 injection_parameters['geocent_time'] = args.glitch_trigger_time
 
 approx_duration = bilby.gw.utils.calculate_time_to_merger(args.minimum_frequency, injection_parameters['mass_1'], injection_parameters['mass_2'], safety = 1.2)
+
 
 start_time= args.glitch_trigger_time - args.duration + 3
 print('Start time of the frame', start_time)
@@ -89,25 +103,63 @@ ifos.set_strain_data_from_power_spectral_densities(
     start_time = start_time)
 
 ifos.inject_signal(waveform_generator=waveform_generator, parameters=injection_parameters)
+
+if make_likelihood_curve:
+    priors = bilby.gw.prior.BBHPriorDict()
+    likelihood = bilby.gw.GravitationalWaveTransient(interferometers=ifos,
+    waveform_generator=waveform_generator,
+    priors=priors)
+
+    truth = injection_parameters['luminosity_distance']
+
+    xvals = np.linspace(40, 50, int(500))
+
+
+    collect_likelihoods = []
+
+    for xx in tqdm(xvals):
+        p = injection_parameters.copy()
+        p['mass_1'] = xx
+        likelihood.parameters = p
+        collect_likelihoods.append(likelihood.log_likelihood_ratio())
+    
+
+    fig, ax = plt.subplots(1, 1, figsize = (4,3))
+    ax.plot(xvals, collect_likelihoods, color = 'black', lw = 1.5)
+    ax.set_xlabel('Parameter')
+    ax.set_title('Measurement', fontsize = 11)
+
+    ax.set_ylabel('PDF')
+    #ax.set_yscale('log')
+    ax.set_xticks([])
+    ax.set_yticks([])
+    #ax.grid(alpha = 0.5)
+    fig.savefig(f'{args.outdir}/{args.label}_pe_vals.pdf', bbox_inches = 'tight')
+    fig.savefig(f'../../figures/{args.label}_pe_vals.pdf', bbox_inches = 'tight')
+    exit()
+
+
+
 coloured_signal_only_data = ifos[0].time_domain_strain.copy()
 
 ################# set up a gengli glitch and injecting it into the data ############################
-gengli_glitch = True
 
 if gengli_glitch:
     generator = gengli.glitch_generator('L1')
     l1_to_ET_factor = 1
     glitch_snr = args.glitch_snr / l1_to_ET_factor #args.glitch_snr_ratio*np.abs(ifos[0].meta_data['matched_filter_SNR'])
-
+    glitch_snr = 3.5
+    args.gengli_seed = 108
     _glitch = generator.get_glitch(seed = args.gengli_seed, snr = glitch_snr, srate=sampling_frequency)
 
     glitch = utils.center_maxima(_glitch)
     
 
-glitch_delta_t_array = np.arange(0, len(glitch), 1)*1/sampling_frequency
 
 plot_gengli_glitch = False
 if plot_gengli_glitch:
+    glitch_delta_t_array = np.arange(0, len(glitch), 1)*1/sampling_frequency
+
     fig, ax = plt.subplots(1, 1)
     ax.plot(glitch_delta_t_array, glitch)
     ax.set_ylim(-10, 10)
@@ -126,9 +178,40 @@ coloured_signal_noise_glitch_timeseries = utils.white_timeseries_to_coloured_tim
 
 
 ############### saving glitch only data ######################
-signal_only_timeseries = TimeSeries(coloured_signal_only_data, times = ifos[0].time_array, channel = 'ET1:STRAIN')
+if plot_signal_only_qscan:
 
-plot_tcp = True
+    maximum_frequency = 512
+    qrange = (16, 32)
+    tres = 0.01
+    fres = 0.01
+    signal_only_timeseries = TimeSeries(coloured_signal_only_data, times = ifos[0].time_array, channel = 'ET1:STRAIN')
+    fig, ax = plt.subplots(1, 1, figsize = (5, 3))
+
+    _, ax, imshow = utils.plot_q_transform(signal_only_timeseries.crop(args.glitch_trigger_time-1.5, args.glitch_trigger_time+1), 
+                        ax = ax, whiten = True, minimum_frequency = args.minimum_frequency, 
+                        trigger_time = args.glitch_trigger_time, 
+                        maximum_frequency = maximum_frequency,
+                        qrange = qrange, tres = tres, fres = fres)
+
+
+    ax.set_xlabel('Time [s]')
+    ax.grid()
+
+    ax.set_title('Cleaned $\\mathrm{ET}_1$', fontsize = 11)
+
+    ax.set_ylabel('Frequency [Hz]')
+    ax.set_ylim(10, 300)
+    ax.set_xlim(-1.1, 0.3)
+
+    fig.savefig(f'{args.outdir}/{args.label}_cleaned_ET1.png', bbox_inches = 'tight', dpi = 500)
+    fig.savefig(f'../../figures/{args.label}_cleaned_ET1.png', bbox_inches = 'tight', dpi = 500)
+
+
+
+
+
+
+
 if plot_tcp:
     fig, axes = plt.subplots(1, 3, figsize = (15, 3), sharey = True, sharex = True, gridspec_kw = {'wspace': 0.05})
 
@@ -163,18 +246,17 @@ if plot_tcp:
     axes[0].set_ylim(10, 300)
     axes[0].set_xlim(-1.1, 0.3)
 
+    if plot_colorbar:
+        fig.subplots_adjust(right=0.8)
+        cbar_ax = fig.add_axes([0.81, 0.15, 0.01, 0.7])
 
-    fig.subplots_adjust(right=0.8)
-    cbar_ax = fig.add_axes([0.81, 0.15, 0.01, 0.7])
-
-    fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
+        fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
 
     fig.savefig(f'{args.outdir}/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
     fig.savefig(f'../../figures/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
 
 
 
-plot_null_stream = True
 if plot_null_stream:
     null_stream_timeseries = coloured_signal_noise_glitch_timeseries + ifos[1].time_domain_strain + ifos[2].time_domain_strain
     timeseries_to_plot = TimeSeries(null_stream_timeseries, times = ifos[0].time_array, channel = f'{ifo.name}:STRAIN')
@@ -200,26 +282,49 @@ if plot_null_stream:
     ax.set_title('Null Stream', fontsize = 11)
     ax.set_ylim(10, 300)
     ax.set_xlim(-1.1, 0.3)
+    if plot_colorbar:
+        fig.subplots_adjust(right=0.8)
+        cbar_ax = fig.add_axes([0.81, 0.15, 0.02, 0.7])
 
-    fig.subplots_adjust(right=0.8)
-    cbar_ax = fig.add_axes([0.81, 0.15, 0.02, 0.7])
+        fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
 
-    fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
-    
     fig.savefig(f'{args.outdir}/{args.label}_null_stream.png', bbox_inches = 'tight', dpi = 250)
     fig.savefig(f'../../figures/{args.label}_null_stream.png', bbox_inches = 'tight', dpi = 250)    
 
 
+if plot_timeseries:
+    background_data = white_signal_noise_glitch_timeseries
 
-######## make null stream #########
+    glitch_delta_t_array = np.arange(0, len(glitch), 1)*1/sampling_frequency
+
+    roll = glitch_start_time - injection_parameters['geocent_time']
+
+    fig, ax  = plt.subplots(1, 1, figsize = (4, 3))
+    lw = 1.5
+
+    ax.plot(ifos[0].time_array - injection_parameters['geocent_time'], background_data, color = 'grey', lw = 1.5, alpha = 0.4)
+
+    
+    green = (0.24, 0.9, 0.44)	#'green' #(0.62, 0.5, 0.5, 1.0)
+
+    ax.plot(glitch_delta_t_array+roll, glitch, color = 'black', ls = '--', lw = 1.5)
+
+    total_width = 0.3 + 0.1
+
+    old_right = (0.5) / (1.1 + 0.3)
+    old_left = (1.1-args.signal_delta_t) / (1.1 + 0.3)
+  
+    #ax.set_xlim(-0.2 - (total_width*old_left),  -0.2 + (total_width * old_right))
+    ax.set_xlim(-0.7, 0.05)
+    ax.set_xlabel('Time [s]')
+    ax.set_ylabel('Whitened Strain [$\\sigma$]')
+    ax.set_ylim(-30, 30)
+    ax.set_title('Reconstructed Glitch', fontsize = 11)
+    #ax.set_xticks(-1*np.array([0.35, 0.25, 0.15]))
+    ax.grid(alpha = 0.2)
+    fig.savefig(f'{args.outdir}/{args.label}_timeseries.pdf', bbox_inches = 'tight')
+    fig.savefig(f'../../figures/{args.label}_timeseries.pdf', bbox_inches = 'tight') 
+    
 
 
-###### making the q scans for the ET1 and for null stream ################
-
-
-#fig.savefig(f'{args.outdir}/{args.label}_highmass_blip_qscan.png', bbox_inches = 'tight', dpi = 250)
-#fig.savefig(f'../../phd-thesis/figures/{args.label}_highmass_blip_qscan.png', bbox_inches = 'tight', dpi = 250)
-
-
-##########################################################################
 
