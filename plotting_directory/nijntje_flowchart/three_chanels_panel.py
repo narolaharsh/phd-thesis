@@ -128,21 +128,67 @@ coloured_signal_noise_glitch_timeseries = utils.white_timeseries_to_coloured_tim
 ############### saving glitch only data ######################
 signal_only_timeseries = TimeSeries(coloured_signal_only_data, times = ifos[0].time_array, channel = 'ET1:STRAIN')
 
-fig, axes = plt.subplots(1, 3, figsize = (15, 3), sharey = True, sharex = True, gridspec_kw = {'wspace': 0.05})
+plot_tcp = True
+if plot_tcp:
+    fig, axes = plt.subplots(1, 3, figsize = (15, 3), sharey = True, sharex = True, gridspec_kw = {'wspace': 0.05})
 
-maximum_frequency = 512
-qrange = (16, 32)
-tres = 0.01
-fres = 0.01
+    maximum_frequency = 512
+    qrange = (16, 32)
+    tres = 0.01
+    fres = 0.01
 
 
-for ii, ifo in enumerate(ifos):
-    if ii==0:
-        timeseries_to_plot = TimeSeries(coloured_signal_noise_glitch_timeseries, times = ifos[0].time_array, channel = 'ET1:STRAIN')
-    else:
-        timeseries_to_plot = TimeSeries(ifo.time_domain_strain.copy(), times = ifos[0].time_array, channel = f'{ifo.name}:STRAIN')
+    for ii, ifo in enumerate(ifos):
+        if ii==0:
+            timeseries_to_plot = TimeSeries(coloured_signal_noise_glitch_timeseries, times = ifos[0].time_array, channel = 'ET1:STRAIN')
+        else:
+            timeseries_to_plot = TimeSeries(ifo.time_domain_strain.copy(), times = ifos[0].time_array, channel = f'{ifo.name}:STRAIN')
 
-    ax = axes[ii]
+        ax = axes[ii]
+        _, ax, imshow = utils.plot_q_transform(timeseries_to_plot.crop(args.glitch_trigger_time-1.5, args.glitch_trigger_time+1), 
+                        ax = ax, whiten = True, minimum_frequency = args.minimum_frequency, 
+                        trigger_time = args.glitch_trigger_time, 
+                        maximum_frequency = maximum_frequency,
+                        qrange = qrange, tres = tres, fres = fres)
+
+
+        ax.set_xlabel('Time [s]')
+        ax.grid()
+
+
+    axes[0].set_title('$\\mathrm{ET}_1$', fontsize = 11)
+    axes[1].set_title('$\\mathrm{ET}_2$', fontsize = 11)
+    axes[2].set_title('$\\mathrm{ET}_3$', fontsize = 11)
+    axes[0].set_ylabel('Frequency [Hz]')
+    axes[0].set_ylim(10, 300)
+    axes[0].set_xlim(-1.1, 0.3)
+
+
+    fig.subplots_adjust(right=0.8)
+    cbar_ax = fig.add_axes([0.81, 0.15, 0.01, 0.7])
+
+    fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
+
+    fig.savefig(f'{args.outdir}/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
+    fig.savefig(f'../../figures/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
+
+
+
+plot_null_stream = True
+if plot_null_stream:
+    null_stream_timeseries = coloured_signal_noise_glitch_timeseries + ifos[1].time_domain_strain + ifos[2].time_domain_strain
+    timeseries_to_plot = TimeSeries(null_stream_timeseries, times = ifos[0].time_array, channel = f'{ifo.name}:STRAIN')
+
+
+    maximum_frequency = 512
+    qrange = (16, 32)
+    tres = 0.01
+    fres = 0.01
+
+
+
+    fig, ax = plt.subplots(1, 1, figsize = (5, 3))
+
     _, ax, imshow = utils.plot_q_transform(timeseries_to_plot.crop(args.glitch_trigger_time-1.5, args.glitch_trigger_time+1), 
                     ax = ax, whiten = True, minimum_frequency = args.minimum_frequency, 
                     trigger_time = args.glitch_trigger_time, 
@@ -150,24 +196,22 @@ for ii, ifo in enumerate(ifos):
                     qrange = qrange, tres = tres, fres = fres)
 
 
-    ax.set_xlabel('Time [s]')
     ax.grid()
+    ax.set_title('Null Stream', fontsize = 11)
+    ax.set_ylim(10, 300)
+    ax.set_xlim(-1.1, 0.3)
+
+    fig.subplots_adjust(right=0.8)
+    cbar_ax = fig.add_axes([0.81, 0.15, 0.02, 0.7])
+
+    fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
+    
+    fig.savefig(f'{args.outdir}/{args.label}_null_stream.png', bbox_inches = 'tight', dpi = 250)
+    fig.savefig(f'../../figures/{args.label}_null_stream.png', bbox_inches = 'tight', dpi = 250)    
 
 
 
-axes[0].set_ylabel('Frequency [Hz]')
-axes[0].set_ylim(10, 300)
-axes[0].set_xlim(-1.1, 0.3)
-
-
-fig.subplots_adjust(right=0.8)
-cbar_ax = fig.add_axes([0.81, 0.15, 0.01, 0.7])
-
-fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
-fig.savefig(f'{args.outdir}/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
-fig.savefig(f'../../figures/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
-
-
+######## make null stream #########
 
 
 ###### making the q scans for the ET1 and for null stream ################
