@@ -46,12 +46,12 @@ reference_frequency = 20.
 injection_parameters = json.load(open(args.injection_file, 'r'))[args.injection_label]
 z = args.redshift
 
-injection_parameters['mass_1'] = 25
-injection_parameters['mass_2'] = 24
+injection_parameters['mass_1'] = 15
+injection_parameters['mass_2'] = 14
 
 injection_parameters['mass_1'] = injection_parameters['mass_1'] * (1 + z)
 injection_parameters['mass_2'] = injection_parameters['mass_2'] * (1 + z)
-injection_parameters['luminosity_distance'] = 15924.566651659155*2.5 #Planck18.luminosity_distance(z).to('Mpc').to_value()
+injection_parameters['luminosity_distance'] = 15924.566651659155*1 #Planck18.luminosity_distance(z).to('Mpc').to_value()
 
 injection_parameters['geocent_time'] = args.glitch_trigger_time
 
@@ -165,7 +165,7 @@ cbar_ax = fig.add_axes([0.81, 0.15, 0.01, 0.7])
 
 fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
 fig.savefig(f'{args.outdir}/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
-fig.savefig(f'../../figures/{args.outdir}/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
+fig.savefig(f'../../figures/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
 
 
 
