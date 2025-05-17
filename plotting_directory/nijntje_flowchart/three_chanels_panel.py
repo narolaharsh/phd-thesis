@@ -42,12 +42,12 @@ args = parser.parse_args()
 bilby.core.utils.setup_logger(outdir=args.outdir, label=args.label)
 
 plot_colorbar = False
-plot_tcp = False
-plot_null_stream = False
-plot_timeseries = False
+plot_tcp = True
+plot_null_stream = True
+plot_timeseries = True
 gengli_glitch = True
 plot_signal_only_qscan = False
-make_likelihood_curve = True
+make_likelihood_curve = False
 
 
 
@@ -126,7 +126,7 @@ if make_likelihood_curve:
 
     fig, ax = plt.subplots(1, 1, figsize = (4,3))
     ax.plot(xvals, collect_likelihoods, color = 'black', lw = 1.5)
-    ax.set_xlabel('Parameter')
+    ax.set_xlabel('GW Parameter')
     ax.set_title('Measurement', fontsize = 11)
 
     ax.set_ylabel('PDF')
@@ -148,9 +148,10 @@ if gengli_glitch:
     generator = gengli.glitch_generator('L1')
     l1_to_ET_factor = 1
     glitch_snr = args.glitch_snr / l1_to_ET_factor #args.glitch_snr_ratio*np.abs(ifos[0].meta_data['matched_filter_SNR'])
-    glitch_snr = 3.5
+    glitch_snr_timeseries = 3.5
+
     args.gengli_seed = 108
-    _glitch = generator.get_glitch(seed = args.gengli_seed, snr = glitch_snr, srate=sampling_frequency)
+    _glitch = generator.get_glitch(seed = args.gengli_seed, snr = 12, srate=sampling_frequency)
 
     glitch = utils.center_maxima(_glitch)
     
@@ -280,6 +281,8 @@ if plot_null_stream:
 
     ax.grid()
     ax.set_title('Null Stream', fontsize = 11)
+    ax.set_xlabel('Time [s]')
+    ax.set_ylabel('Frequency [Hz]')
     ax.set_ylim(10, 300)
     ax.set_xlim(-1.1, 0.3)
     if plot_colorbar:
@@ -307,7 +310,7 @@ if plot_timeseries:
     
     green = (0.24, 0.9, 0.44)	#'green' #(0.62, 0.5, 0.5, 1.0)
 
-    ax.plot(glitch_delta_t_array+roll, glitch, color = 'black', ls = '--', lw = 1.5)
+    ax.plot(glitch_delta_t_array+roll, glitch/4, color = 'black', ls = '--', lw = 1.5)
 
     total_width = 0.3 + 0.1
 

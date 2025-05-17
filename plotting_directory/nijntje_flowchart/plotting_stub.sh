@@ -1,1 +1,1 @@
-python three_chanels_panel.py --outdir tcp --label tcp --minimum-frequency 10 --signal-delta-t 0.2 --gengli-seed 100
+python three_chanels_panel.py --outdir tcp --label tcp_nocolorbar --minimum-frequency 10 --signal-delta-t 0.1
