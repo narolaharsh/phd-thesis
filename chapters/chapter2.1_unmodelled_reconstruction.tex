@@ -1,8 +1,7 @@
-When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist, or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
+When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
 
-\section{Artefacts in the Gaussian noise}
-
-\begin{figure}
+\section{Artefacts in Gaussian noise}
+\begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{../figures/gw170817scan.png}
     \caption{A loud glitch overlapping with the binary neutron star signal, GW170817, in LIGO-Livingston interferometer. Dashed white arrows are added to help reader trace the signal.}
@@ -10,8 +9,15 @@ When reconstructing GW signals to measure source parameters, we typically rely o
 \end{figure}
 A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurance, glitches can be problematc in two ways,
 \begin{itemize}
-\item \textit{Glitches overlapping with a GW signal.} Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}). 
-\item \textit{Isolated glitches.} The ones not overlapping with a GW signal, increase the false alarm rate of GW detections since some glitches look similar to a GW signal. For example, the blip glitches have similar time-frequency morphology as GW signals from high-mass BBH mergers [FIXME: Heavy BBH and glitch comparison figure]. It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
+
+\item \textit{Glitches overlapping with a GW signal.} Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
+\begin{figure}
+    \centering
+    \includegraphics[width=12cm]{../figures/thesis-plot_highmass_blip_qscan.png}
+    \caption{\textit{Left:} A GW signal emmited by a BBH merger with total mass of $176 M_{\odot}$. \textit{Right:} An isolated blip glitch.}
+    \label{fig:bbh_blip}
+\end{figure} 
+\item \textit{Glitches in isolation.} Glitches not overlapping with a GW signal increase the false alarm rate of GW detections since some glitches look similar to a signal. For example, Figure~\ref{fig:bbh_blip} shows the time-frequency evoluation of a GW siganl from high-mass BBH mergers (left) and the time-frequency evolution of an isolated blip glitch (right). It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
 \end{itemize} 
 
 
@@ -35,7 +41,7 @@ When performing unmodelled reconstruction, we use Morlet-Gabor wavelets as bases
     \label{eq:wavelet}
     \vec{\psi}(t; A, Q, t_0, f_0, \phi_0) = A~e^{-\frac{(t-t_0)^2}{2\tau^2}}~\sin{\left(2{\pi}f_0(t-t_0) + \phi_0\right)},
 \end{equation}
-where $t$ denotes time, $A$ denotes amplitude, $\tau = Q/(2{\pi}f_0)$ denotes the quality factor that controls the spread of the wavelet, $\phi_0$ denotes inital phase, $t_0$ and $f_0$ respectively correspond to time and frequency at the peak of the amplitude. In Figure~\ref{fig:mg_wav}, we show a time (left) and frequency (right) domain representation of a wavelet with parameters $Q = 20$, $t_0=1$ seconds, and $f_0 = 40$ Hz. 
+where $t$ denotes time, $A$ denotes amplitude, $\tau = Q/(2{\pi}f_0)$ denotes the quality factor that controls the spread of the wavelet, $\phi_0$ denotes inital phase, $t_0$ and $f_0$ respectively correspond to time and frequency at the peak of the amplitude. In Figure~\ref{fig:mg_wav}, we show a time (left) and frequency (right) domain representation of a wavelet with parameters $Q = 20$, $t_0=1$ second, and $f_0 = 40$ Hz. 
 
 Morlet-Gabor wavelets are sutible for the problem at hand because glitches $(\vec{g})$ we want to reconstruct can be expressed as linear combination of $N$ wavelets [BayesWave first paper],
 \begin{equation}
@@ -46,27 +52,31 @@ where $\vec{\theta}$ is set of $N\times5$ parameters since each $\vec{\psi}_k$ n
 Besides ${\vec{\theta}}$, here $N$ itself is an unknown parameter therefore the dimensionality of the parameter space we want to explore is also unknown. The transdimensional algorithm used to tackle this problem is an extension of the Markov chain Monte Carlo methods. 
 
 \subsection{Markov chain Monte Carlo}
-Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling to address the problem. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
+Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling. Markov chain in particular refers to an iterative process where the probability  of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from previous iteration. If we denote the probability by $p_t$, 
 
 \begin{equation}
 p_t(\vec{\theta}') = \int \mathrm{d}\vec{\theta}_{t-1}~T(\vec{\theta}', \vec{\theta}_{t-1})~\vec{\theta}_{t-1}
 \end{equation}
-where $\vec{\theta}'$ is the proposed point and $\vec{\theta}_{t-1}$ is the point from previous iteration and $T$ is the transition probability. Standard MCMC algorithms aim to obtain the samples from posterior probability distribution which is in contrast to the Nested sampling algorithm where the aim is to compute the evidence and posterior distributions are the byproduct. Obtaining the evidence after an MCMC algorithm is terminated requires additional computations. Nevertheless, here we outline one such MCMC algorithm called the Metropolis–Hastings algorithm.
+where $\vec{\theta}'$ is the proposed point, $\vec{\theta}_{t-1}$ is the point from previous iteration, and $T$ is the transition probability. 
+
+Traditional MCMC algorithms aim to obtain the samples from posterior probability distribution which is in contrast to the Nested sampling algorithm where the aim is to compute the evidence and posterior distributions are the byproduct. Obtaining the evidence after an MCMC algorithm is terminated requires additional computations. Nevertheless, here we outline one such MCMC algorithm called the Metropolis–Hastings algorithm.
+
 \begin{figure}
     \centering
     \includegraphics[width=8cm]{../figures/markov_chain.pdf}
-    \caption{\textit{Bottom:} Progresion of a Markov chain in the parameter space of $\vec{\theta}$. Each arrow represents an iteration, filled dots represent accepted proposal and empty dots represents rejected proposals. \textit{Top:} Probability distribution function constructed from the accepted samples of the Markov chain from the bottom plot.}
+    \caption{\textit{Bottom:} Progresion of a Markov chain in the parameter space of $\vec{\theta}$. Each arrow represents an iteration, solid black dots represent accepted proposal and empty dots represents rejected proposals. \textit{Top:} Posterior probability distribution constructed from the accepted samples of the Markov chain of the bottom plot.}
     \label{fig:mcmc}
 \end{figure}
 \subsubsection{Metropolis-Hastings algorithm}
-Metropolis-Hastings algorithm makes use of a proposal density function $Q$ to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is given by $\alpha$
+Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$) to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is given by $\alpha$
 \begin{equation}
-\alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{Q(\vec{\theta}_{t-1} | \vec{\theta}')}{Q(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
+\alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{\Gamma(\vec{\theta}_{t-1} | \vec{\theta}')}{\Gamma(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
 \end{equation}
-If the proposal is accepted, it will become $\vec{\theta}_t$ and the step is repeated. The quantity $Q$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
+Where $p(\vec{\theta} | \vec{d})$ is the posterior probability distribution (already defined in the chapter \ref{ch:gwpe}). If the proposal is accepted, $\vec{\theta}'$ is updated to $\vec{\theta}_t$ and the steps are repeated. The quantity $\Gamma$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
 
+\iffalse
 \subsubsection{Computing the evidence}
-The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce $T$ which is usually known as temperature
+The evidence when using Metropolis-Hastings algorithm is computed in post-processing. Let us introduce a parameter $T$ which is usually known as temperature
 \begin{equation}
     p_T(\vec{\theta} | \vec{d}) \propto p(\vec{d} | \vec{\theta})^{1/T} \pi(\vec{\theta}).
 \end{equation}
@@ -87,13 +97,33 @@ where $\left<.\right>_{\beta}$ stands for the expectation value with respect to 
     &\approx \sum_{\beta = 1/T_{\mathrm{max}}}^{1} \Delta \beta \left<\ln{p(\vec{d} | \vec{\theta})}\right>_{\beta}
 \end{align}
 Hence, the expectation value of the log-likelihood with respect to the posterior distribution integrated over the temprature range leads to the evidence.
-
-\subsubsection{Limitations of Metropolis-Hastings algorithm}
-Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
+\fi
 
 \subsection{Jumping between dimensions}
+\begin{itemize}
+    \item How are the new proposals added: BayesWave black magic
+    \item How does $\alpha$ change: Well it is by multiplying a Jacobian. But what is that Jacobian. 
+% paper1:    https://www2.stat.duke.edu/~sschmid/Courses/Stat376/Papers/TransdimMCMC/GreenHastie2009_RJMCMC_overview.pdf
+% paper2:    https://www.colorado.edu/amath/sites/default/files/attached-files/rjmcmc.pdf
+%%% choose h and h' which are inverse pdfs of each other. So like exponential and ln
+%%% and you are done. 
+\end{itemize}
+How do you jump between dimensions? Peter J Green 1995
+The progression of the markov chain above does not yet explain \textit{birth} and \textit{death} transitions. In this context, such transition correspond to
+\begin{itemize}
+    \item Addition of new wavelet
+    \item Removal of an existing wavelet
+    \item Swapping an existing wavelet for a new wavelet
+    \item Write actually about jump from one wavelet model to two wavelet model.
+\end{itemize}
+Let us consider a particular step in the algorithm needs to jump from 1 wavelet model to a 2 wavelet model. 
+
+
 
 \subsubsection{Limitations}
+Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
+
+FIXME: The wavelets are not orthogonal
 
 \section{Glitches overlapping with the signals in the Einstein Telescope era}
 If we are too aggressive subtracting, one can end up removing part of the signal. If we are too conservative, we may leave behind part of the glitch which can masquarade as signs of new physics. 
