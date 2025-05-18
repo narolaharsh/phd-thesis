@@ -121,6 +121,7 @@ Let us rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
     \Gamma(\vec{\theta}, D | \vec{\theta}', D') = \Gamma(\vec{\theta} | D, \vec{\theta'}, D')~\Gamma(D | D')
 \end{equation}
 Let's say both, one and two wavelet, states are equally likely, then $\Gamma(D | D') = \Gamma(D' | D) = 0.5$. The first term $\Gamma(\vec{\theta} | D, \vec{\theta'}, D')$
+
 \begin{equation}
     A = 5
 \end{equation}
@@ -133,11 +134,12 @@ where $\vec{\theta}'$ is the proposal under consideration with $D'$ dimensions, 
 \begin{itemize}
     \item How are the new proposals added: BayesWave black magic
     \item How does $\alpha$ change: Well it is by multiplying a Jacobian. But what is that Jacobian. 
+\end{itemize}
+
 % paper1:    https://www2.stat.duke.edu/~sschmid/Courses/Stat376/Papers/TransdimMCMC/GreenHastie2009_RJMCMC_overview.pdf
 % paper2:    https://www.colorado.edu/amath/sites/default/files/attached-files/rjmcmc.pdf
 %%% choose h and h' which are inverse pdfs of each other. So like exponential and ln
 %%% and you are done. 
-\end{itemize}
 
 
 
