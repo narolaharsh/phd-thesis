@@ -107,33 +107,17 @@ While a general treatment of switching dimensions in [paper 1, paper2, Ka Wa], a
     \item \textit{Death move} -- removal of an existing wavelet
     \item \textit{Stationary move} -- swapping an existing wavelet for a new wavelet.
 \end{itemize}
-The steps of performing a stationary move are trivial and same as Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. Below I provide a prescription on how we make those moves.  
 
-Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. For simplicity, let us say state $\vec{\theta}$ with one wavelet and state $\vec{\theta'}$ has two wavelets. Note that each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times1$ dimensions and $\vec{\theta'}$ has $5\times2$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$ 
+The stationary move is trivial and same as Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. 
 
-Let us rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
+Before explaining the steps required to perform birth and death moves let us define a few standard quantities. Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. Let us say that state $\vec{\theta}$ has $N$ wavelets and $\vec{theta'}$ has $N'$ wavelets. Since each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times N$ dimensions and $\vec{\theta'}$ has $5\times N'$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$. Now we can rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
 \begin{align}
     \alpha = \mathrm{min}~\left \{1,~\frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{\Gamma(\vec{\theta}, D | \vec{\theta}', D')}{\Gamma(\vec{\theta}', D' | \vec{\theta}, D)} \right \},
             %&= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{\Gamma(\{A_1, d\} | \{A'_1, A'_2, d'\})}{\Gamma(\{A'_1, A'_2, d'\} | \{A_1, d\})}
 \end{align}
 
-%\begin{equation}
-%    \Gamma(\vec{\theta}, D | \vec{\theta}', D') = \Gamma(\vec{\theta} | D, \vec{\theta'}, D')~\Gamma(D | D')
-%\end{equation}
-%Let's say both, one and two wavelet, states are equally likely, then $\Gamma(D | D') = \Gamma(D' | D) = 1/N$ where $N$ is total number of wavelets considered for the analysis. 
-
-%The first term $\Gamma(\vec{\theta} | D, \vec{\theta'}, D')$
-%
-%\begin{equation}
-%    A = 5
-%\end{equation}
-
-where $\Gamma$ is the proposal density function, and $\vec{d}$ is data. 
-%For the sake of argument, let consider that $\theta$ represents a state of 1 wavelet and $\theta'$.
-
 \subsubsection{From Lower to Higher dimension}
-
-Since the current state $\vec{\theta}$ has fewer dimensions then the proposed $\vec{\theta'}$, one needs to choose an auxiliary probability distribution and mapping function to account for the missing dimensions. These are typically the choice made by the user and depending on the problem at hand. 
+For this scenario, the current state $\vec{\theta}$ has fewer dimensions then the proposed $\vec{\theta'}$. Therefore, we need an auxiliary probability distribution and a mapping function to account for the missing dimensions. These are user-made choices, typically made by trial and error. 
 
 Let us choose the auxiliary probability distribution to be uniform. The user may choose any probability which is easy to sample from. It must be a five dimensional distribution which is the number equal to the missing dimensions. The user may choose any mapping function but it must be bijective and continuously differentiable i.e. a diffeomorphism. Let the bijective function be an exponential so the logarithmic function will be its inverse. 
 
@@ -169,7 +153,7 @@ If we assume that all states are equally likely i.e. $p(D | D') = p(D' | D)$ and
 \subsubsection{From lower to higher dimension}
 When going from high dimensions to low dimensions, it is incorrect to simply do
 \begin{equation}
-   \mathrm{(Incorrect:)} ~~ ~ ~ ~ ~ (A'_1, A'_2) \rightarrow (A_1)
+   \mathrm{Incorrect:} ~~ ~ ~ ~ ~ (A'_1, A'_2) \rightarrow (A_1)
 \end{equation}
 One needs to define the inverse of $f$, which is the logarithmic function in this case. Let us denote the inverse by $f'$, then when going from high dimension to low dimensions, 
 \begin{equation}
