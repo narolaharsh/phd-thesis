@@ -68,8 +68,9 @@ Traditional MCMC algorithms aim to obtain the samples from posterior probability
     \label{fig:mcmc}
 \end{figure}
 \subsubsection{Metropolis-Hastings algorithm}
-Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$) to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is given by $\alpha$
+Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$) to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is then given by $\alpha$
 \begin{equation}
+    \label{eq:mh_algo}
 \alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{\Gamma(\vec{\theta}_{t-1} | \vec{\theta}')}{\Gamma(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
 \end{equation}
 Where $p(\vec{\theta} | \vec{d})$ is the posterior probability distribution (already defined in the chapter \ref{ch:gwpe}). If the proposal is accepted, $\vec{\theta}'$ is updated to $\vec{\theta}_t$ and the steps are repeated. The quantity $\Gamma$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
@@ -99,24 +100,65 @@ where $\left<.\right>_{\beta}$ stands for the expectation value with respect to 
 Hence, the expectation value of the log-likelihood with respect to the posterior distribution integrated over the temprature range leads to the evidence.
 \fi
 
-\subsection{Jumping between dimensions}
+\subsection{GW specific treatment for jumping between dimensions}
+While a general treatment of switching dimensions in [paper 1, paper2, Ka Wa], at the time of writing of the thesis I did not find the reciepe especially for the GW data analysis. Therefore, here I focus on the special case instead of a general one. Jumping between the dimensions includes 
+\begin{itemize}
+    \item \textit{Birth move} -- addition of new wavelet
+    \item \textit{Death move} -- removal of an existing wavelet
+    \item \textit{Stationary move} -- swapping an existing wavelet for a new wavelet.
+\end{itemize}
+The steps of performing a stationary move are trivial and same as Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. Below I explain how to make those moves.  
+
+Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. For simplicity, let us say state $\vec{\theta}$ with one wavelet and state $\vec{\theta'}$ has two wavelets. Note that each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times1$ dimensions and $\vec{\theta'}$ has $5\times2$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$ 
+
+Let us rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
+\begin{align}
+    \alpha_r &= \frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{\Gamma(\vec{\theta}, D | \vec{\theta}', D')}{\Gamma(\vec{\theta}', D' | \vec{\theta}, D)} \\
+            &= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{\Gamma(\{A_1, d\} | \{A'_1, A'_2, d'\})}{\Gamma(\{A'_1, A'_2, d'\} | \{A_1, d\})}
+\end{align}
+
+\begin{equation}
+    \Gamma(\vec{\theta}, D | \vec{\theta}', D') = \Gamma(\vec{\theta} | D, \vec{\theta'}, D')~\Gamma(D | D')
+\end{equation}
+Let's say both, one and two wavelet, states are equally likely, then $\Gamma(D | D') = \Gamma(D' | D) = 0.5$. If we were dealing with N different states and if each states were equally likely, then the transition probability between any two states will be $1/N$. 
+The first term $\Gamma(\vec{\theta} | D, \vec{\theta'}, D')$
+
+\begin{equation}
+    A = 5
+\end{equation}
+
+where $\vec{\theta}'$ is the proposal under consideration with $D'$ dimensions, $\vec{\theta}$ is the previously accepted point with $D$ dimensions, $\Gamma$ is the proposal density function, and $\vec{d}$ is data. For the sake of argument, let consider that $\theta$ represents a state of 1 wavelet and $\theta'$.
+
+\begin{equation}
+    \vec{\theta} = \{A_1\}~~\mathrm{and}~~\vec{\theta'} = \{A'_1, A'_2\}.
+    \end{equation}    
 \begin{itemize}
     \item How are the new proposals added: BayesWave black magic
     \item How does $\alpha$ change: Well it is by multiplying a Jacobian. But what is that Jacobian. 
+\end{itemize}
+
 % paper1:    https://www2.stat.duke.edu/~sschmid/Courses/Stat376/Papers/TransdimMCMC/GreenHastie2009_RJMCMC_overview.pdf
 % paper2:    https://www.colorado.edu/amath/sites/default/files/attached-files/rjmcmc.pdf
 %%% choose h and h' which are inverse pdfs of each other. So like exponential and ln
 %%% and you are done. 
-\end{itemize}
+
+
+
+
+
+
 How do you jump between dimensions? Peter J Green 1995
-The progression of the markov chain above does not yet explain \textit{birth} and \textit{death} transitions. In this context, such transition correspond to
+A general treatment can be found in literature. At the time of writing, I did not find a treat exclusive meant for the GW data analysis. 
+
+Let us consider a particular step in the algorithm needs to jump from 1 wavelet model to a 2 wavelet model. 
 \begin{itemize}
-    \item Addition of new wavelet
-    \item Removal of an existing wavelet
+    \item Latest accepted state $\vec{\theta}$, 1 dimensional
+    \item Proposed state $\vec{\theta'}$, 2 dimensional
+    \item An auxiliarray variable 
     \item Swapping an existing wavelet for a new wavelet
     \item Write actually about jump from one wavelet model to two wavelet model.
 \end{itemize}
-Let us consider a particular step in the algorithm needs to jump from 1 wavelet model to a 2 wavelet model. 
+
 
 
 
