@@ -15,7 +15,7 @@ fig, ax = plt.subplots(1, 2, figsize = (8, 3))
 ax[0].set_title('2. RJMCMC', fontsize = 11)
 ax[0].set_xlabel('1.Construct null stream', fontsize = 11)
 ax[0].set_ylabel('3. Subtract glitch', fontsize = 11)
-ax[1].set_title('4. Measure GW parameters', fontsize = 11)
+ax[1].set_title('4. Measure GW parameters +', fontsize = 11)
 
 fig.savefig('./inkscape_text.pdf')
 fig.savefig('././../../figures/inkscape_text.pdf')
