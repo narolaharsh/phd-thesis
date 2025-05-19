@@ -68,10 +68,10 @@ Traditional MCMC algorithms aim to obtain the samples from posterior probability
     \label{fig:mcmc}
 \end{figure}
 \subsubsection{Metropolis-Hastings algorithm}
-Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$) to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is then given by $\alpha$
+Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$) to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that $\vec{\theta}'$ is accepted is then given by $\alpha$
 \begin{equation}
     \label{eq:mh_algo}
-\alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{\Gamma(\vec{\theta}_{t-1} | \vec{\theta}')}{\Gamma(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
+\alpha = \mathrm{min} \left \{ 1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{\Gamma(\vec{\theta}_{t-1} | \vec{\theta}')}{\Gamma(\vec{\theta}' | \vec{\theta}_{t-1})}\right \}.  
 \end{equation}
 Where $p(\vec{\theta} | \vec{d})$ is the posterior probability distribution (already defined in the chapter \ref{ch:gwpe}). If the proposal is accepted, $\vec{\theta}'$ is updated to $\vec{\theta}_t$ and the steps are repeated. The quantity $\Gamma$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
 
@@ -107,29 +107,85 @@ While a general treatment of switching dimensions in [paper 1, paper2, Ka Wa], a
     \item \textit{Death move} -- removal of an existing wavelet
     \item \textit{Stationary move} -- swapping an existing wavelet for a new wavelet.
 \end{itemize}
-The steps of performing a stationary move are trivial and same as Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. Below I explain how to make those moves.  
+The steps of performing a stationary move are trivial and same as Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. Below I provide a prescription on how we make those moves.  
 
 Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. For simplicity, let us say state $\vec{\theta}$ with one wavelet and state $\vec{\theta'}$ has two wavelets. Note that each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times1$ dimensions and $\vec{\theta'}$ has $5\times2$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$ 
 
 Let us rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
 \begin{align}
-    \alpha_r &= \frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{\Gamma(\vec{\theta}, D | \vec{\theta}', D')}{\Gamma(\vec{\theta}', D' | \vec{\theta}, D)}
+    \alpha = \mathrm{min}~\left \{1,~\frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{\Gamma(\vec{\theta}, D | \vec{\theta}', D')}{\Gamma(\vec{\theta}', D' | \vec{\theta}, D)} \right \},
             %&= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{\Gamma(\{A_1, d\} | \{A'_1, A'_2, d'\})}{\Gamma(\{A'_1, A'_2, d'\} | \{A_1, d\})}
 \end{align}
 
+%\begin{equation}
+%    \Gamma(\vec{\theta}, D | \vec{\theta}', D') = \Gamma(\vec{\theta} | D, \vec{\theta'}, D')~\Gamma(D | D')
+%\end{equation}
+%Let's say both, one and two wavelet, states are equally likely, then $\Gamma(D | D') = \Gamma(D' | D) = 1/N$ where $N$ is total number of wavelets considered for the analysis. 
+
+%The first term $\Gamma(\vec{\theta} | D, \vec{\theta'}, D')$
+%
+%\begin{equation}
+%    A = 5
+%\end{equation}
+
+where $\Gamma$ is the proposal density function, and $\vec{d}$ is data. 
+%For the sake of argument, let consider that $\theta$ represents a state of 1 wavelet and $\theta'$.
+
+\subsubsection{From Lower to Higher dimension}
+
+Since the current state $\vec{\theta}$ has fewer dimensions then the proposed $\vec{\theta'}$, one needs to choose an auxiliary probability distribution and mapping function to account for the missing dimensions. These are typically the choice made by the user and depending on the problem at hand. 
+
+Let us choose the auxiliary probability distribution to be uniform. The user may choose any probability which is easy to sample from. It must be a five dimensional distribution which is the number equal to the missing dimensions. The user may choose any mapping function but it must be bijective and continuously differentiable i.e. a diffeomorphism. Let the bijective function be an exponential so the logarithmic function will be its inverse. 
+
+For simplicity of the notation, we write down only the amplitude parameters of current state ($A_1$) and the proposed state $(A'_1, A'_2)$. Let $w$ be a sample from $p_{\mathrm{aux}}$
 
 \begin{equation}
-    \Gamma(\vec{\theta}, D | \vec{\theta}', D') = \Gamma(\vec{\theta} | D, \vec{\theta'}, D')~\Gamma(D | D')
+    (A_1, w) \xrightarrow[]{f} (A_1, e^{w}) \coloneq (A'_1, A'_2)  
 \end{equation}
-Let's say both, one and two wavelet, states are equally likely, then $\Gamma(D | D') = \Gamma(D' | D) = 1/N$ where $N$ is total number of wavelets considered for the analysis. 
-
-The first term $\Gamma(\vec{\theta} | D, \vec{\theta'}, D')$
+Hence, $f$ maps $A_1$ to $A'_1$ and $w$ to $e^w$. Now, the dimension of the current state matches with the dimensions of the proposed state. The last remaining factor is the determinant of the Jacobian
 
 \begin{equation}
-    A = 5
+    \label{eq:jacob}
+   \left| \frac{\partial (A'_1, A'_2)}{\partial (A_1, w)} \right| =  \left| 
+        \begin{array}{cc}
+        \frac{\partial A'_1}{\partial A_1} & \frac{\partial A'_1}{\partial w} \\
+        \\
+        \frac{\partial A'_2}{\partial A_1} & \frac{\partial A'_2}{\partial w} \\
+        \end{array}
+        \right| = e^{w}
+\end{equation}
+that is needed to implement the change of variables. The transitional probability ratio can now be written as
+
+
+\begin{equation}
+    \alpha  = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'} | \vec{d})}{p(\vec{\theta} | \vec{d})} \frac{p_{\mathrm{aux}}(w)~p(D' | D)}{p(D | D')} \left| \frac{\partial (A'_1, A'_2)}{\partial (A_1, w)} \right| \right \}
+\end{equation}
+If we assume that all states are equally likely i.e. $p(D | D') = p(D' | D)$ and substitute the value of the determinant from Eq.\eqref{eq:jacob},
+
+\begin{equation}
+\alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'}  | \vec{d})}{p(\vec{\theta} | \vec{d})}~p_{\mathrm{aux}}(w)~e^{w}  \right \}
 \end{equation}
 
-where $\vec{\theta}'$ is the proposal under consideration with $D'$ dimensions, $\vec{\theta}$ is the previously accepted point with $D$ dimensions, $\Gamma$ is the proposal density function, and $\vec{d}$ is data. For the sake of argument, let consider that $\theta$ represents a state of 1 wavelet and $\theta'$.
+\subsubsection{From lower to higher dimension}
+When going from high dimensions to low dimensions, it is incorrect to simply do
+\begin{equation}
+   \mathrm{(Incorrect:)} ~~ ~ ~ ~ ~ (A'_1, A'_2) \rightarrow (A_1)
+\end{equation}
+One needs to define the inverse of $f$, which is the logarithmic function in this case. Let us denote the inverse by $f'$, then when going from high dimension to low dimensions, 
+\begin{equation}
+    (A'_1, w') \xrightarrow[]{f'} (A_1, \ln{w'})
+\end{equation}
+where $w'$ is either chosen from another auxiliary distribution $p'_{\mathrm{aux}}$ and it may or may not be same as the earlier auxiliary distribution $p_{\mathrm{aux}}$. The Jacobian in this case $\Delta_{2\rightarrow}1$ will turn out to be
+
+\begin{equation}
+    \Delta_{2\rightarrow1} =  \left| 
+         \begin{array}{cc}
+         \frac{\partial A_1}{\partial A'_1} & \frac{\partial A_1}{\partial w'} \\
+         \\
+         \frac{\partial A_2}{\partial A'_1} & \frac{\partial A_2}{\partial w'} \\
+         \end{array}
+         \right| = 1/w
+\end{equation} 
 
 \begin{equation}
     \vec{\theta} = \{A_1\}~~\mathrm{and}~~\vec{\theta'} = \{A'_1, A'_2\}.
@@ -156,7 +212,7 @@ Let us consider a particular step in the algorithm needs to jump from 1 wavelet 
 \begin{itemize}
     \item Latest accepted state $\vec{\theta}$, 1 dimensional
     \item Proposed state $\vec{\theta'}$, 2 dimensional
-    \item An auxiliarray variable 
+    \item An auxiliary variable 
     \item Swapping an existing wavelet for a new wavelet
     \item Write actually about jump from one wavelet model to two wavelet model.
 \end{itemize}
@@ -169,6 +225,6 @@ Indeed, the efficieny of this algorithm depends on the choice of $Q$. In additio
 
 FIXME: The wavelets are not orthogonal.
 FIXME: Too many tuning parameters.
-
+FIXME: Initially chosen to compare to distribution e.g. exponential or Gaussian
 \section{Glitches overlapping with the signals in the Einstein Telescope era}
 If we are too aggressive subtracting, one can end up removing part of the signal. If we are too conservative, we may leave behind part of the glitch which can masquarade as signs of new physics. 
