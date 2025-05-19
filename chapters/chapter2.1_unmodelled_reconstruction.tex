@@ -113,14 +113,16 @@ Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{
 
 Let us rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
 \begin{align}
-    \alpha_r &= \frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{\Gamma(\vec{\theta}, D | \vec{\theta}', D')}{\Gamma(\vec{\theta}', D' | \vec{\theta}, D)} \\
-            &= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{\Gamma(\{A_1, d\} | \{A'_1, A'_2, d'\})}{\Gamma(\{A'_1, A'_2, d'\} | \{A_1, d\})}
+    \alpha_r &= \frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{\Gamma(\vec{\theta}, D | \vec{\theta}', D')}{\Gamma(\vec{\theta}', D' | \vec{\theta}, D)}
+            %&= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{\Gamma(\{A_1, d\} | \{A'_1, A'_2, d'\})}{\Gamma(\{A'_1, A'_2, d'\} | \{A_1, d\})}
 \end{align}
+
 
 \begin{equation}
     \Gamma(\vec{\theta}, D | \vec{\theta}', D') = \Gamma(\vec{\theta} | D, \vec{\theta'}, D')~\Gamma(D | D')
 \end{equation}
-Let's say both, one and two wavelet, states are equally likely, then $\Gamma(D | D') = \Gamma(D' | D) = 0.5$. If we were dealing with N different states and if each states were equally likely, then the transition probability between any two states will be $1/N$. 
+Let's say both, one and two wavelet, states are equally likely, then $\Gamma(D | D') = \Gamma(D' | D) = 1/N$ where $N$ is total number of wavelets considered for the analysis. 
+
 The first term $\Gamma(\vec{\theta} | D, \vec{\theta'}, D')$
 
 \begin{equation}
@@ -165,7 +167,8 @@ Let us consider a particular step in the algorithm needs to jump from 1 wavelet 
 \subsubsection{Limitations}
 Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
 
-FIXME: The wavelets are not orthogonal
+FIXME: The wavelets are not orthogonal.
+FIXME: Too many tuning parameters.
 
 \section{Glitches overlapping with the signals in the Einstein Telescope era}
 If we are too aggressive subtracting, one can end up removing part of the signal. If we are too conservative, we may leave behind part of the glitch which can masquarade as signs of new physics. 
