@@ -117,16 +117,25 @@ Before explaining the steps required to perform birth and death moves let us def
 \end{align}
 
 \subsubsection{From Lower to Higher dimension}
-Let us consider the scenarior when we are jumping from a one wavelet state $\vec{\theta}$ to a two wavelete state $(\vec{\theta'})$. Note that $\vec{\theta} (\vec{\theta'}s)$ has five (ten) dimensions. Since the current state has fewer dimensions then the proposed state, we need an auxiliary probability distribution and a mapping function to account for the missing dimensions. These are user-made choices, typically made by trial and error. 
+Let's say we want to jump from a one-wavelet state $\vec{\theta}$ to a two-wavelete state $(\vec{\theta'})$. So $\vec{\theta} (\vec{\theta'})$ will have five (ten) dimensions. Since the current state has fewer dimensions then the proposed state, we need two additional quantities to account for the missing dimensions. 
 
-The user may choose any auxiliary probability distribution from which it is easy to sample as long as it makes up for the missing dimensions. Here, we choose a five dimensional uniform distribution for the sake of the argument. The user may choose any mapping function but it must be bijective and continuously differentiable i.e. a diffeomorphism. Let the bijective function be an exponential so the logarithmic function will be its inverse. 
+\begin{itemize}
+    \item An auxiliary probability distribution $(\vec{p}_{\mathrm{aux}})$
+    \item A bijective and continuously differentiable function i.e. a diffeomorphism $(h)$
+\end{itemize}
 
-For simplicity of the notation, we write down only the wavelet amplitude parameters (see Eq.~\eqref{eq:wavelet}) of current state ($A_1$) and the proposed state $(A'_1, A'_2)$. Let $w$ be a sample from $p_{\mathrm{aux}}$
+The user may choose any auxiliary probability distribution from which it is easy to sample as long as the dimensions match
+\begin{equation}
+    \mathrm{dim} [{\vec{\theta}}] + \mathrm{dim} [{\vec{p}_{\mathrm{aux}}}] = \mathrm{dim} [\vec{\theta'}].
+\end{equation}
+Let ${\vec{p}_{\mathrm{aux}}}$ be a five dimensional uniform distribution and let the bijective function be an exponential so the logarithmic function will be its inverse. 
+
+For simplicity of the notation, we write down only the wavelet amplitude parameters (see Eq.~\eqref{eq:wavelet}) of current state ($A_1$) and the proposed state $(A'_1, A'_2)$. Let $w$ be a sample from $\vec{p}_{\mathrm{aux}}$
 
 \begin{equation}
-    (A_1, w) \xrightarrow[]{f} (A_1, e^{w}) \coloneq (A'_1, A'_2)  
+    (A_1, w) \xrightarrow[]{f} (A_1, e^{w}) \coloneq (A'_1, A'_2).  
 \end{equation}
-Hence, $f$ maps $A_1$ to $A'_1$ and $w$ to $e^w$. Now, the dimension of the current state matches with the dimensions of the proposed state. Another remaining factor is the determinant of the Jacobian
+We chose an $f$ mapping $A_1$ to $A'_1$ and $w$ to $e^w$. Now, the dimension of the current state matches with the dimensions of the proposed state. Another remaining factor is the determinant of the Jacobian
 
 \begin{equation}
     \label{eq:jacob}
@@ -136,30 +145,30 @@ Hence, $f$ maps $A_1$ to $A'_1$ and $w$ to $e^w$. Now, the dimension of the curr
         \\
         \frac{\partial A'_2}{\partial A_1} & \frac{\partial A'_2}{\partial w} \\
         \end{array}
-        \right| = e^{w}
+        \right| = e^{w},
 \end{equation}
 which accounts for the change of variables. The transitional probability ratio can now be written as
 
 
 \begin{equation}
-    \alpha  = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'} | \vec{d})}{p(\vec{\theta} | \vec{d})} \frac{p_{\mathrm{aux}}(w)~p(D' | D)}{p(D | D')} \left| \frac{\partial (A'_1, A'_2)}{\partial (A_1, w)} \right| \right \}
+    \alpha  = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'} | \vec{d})}{p(\vec{\theta} | \vec{d})} \frac{\vec{p}_{\mathrm{aux}}(w)~p(D' | D)}{p(D | D')} \left| \frac{\partial (A'_1, A'_2)}{\partial (A_1, w)} \right| \right \}
 \end{equation}
-If we assume that all states are equally likely i.e. $p(D | D') = p(D' | D)$ and substitute the value of the determinant from Eq.\eqref{eq:jacob},
+If we assume that all states are equally likely i.e. $p(D | D') = p(D' | D)$, and substitute the value of the determinant from Eq.\eqref{eq:jacob},
 
 \begin{equation}
-\alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'}  | \vec{d})}{p(\vec{\theta} | \vec{d})}~p_{\mathrm{aux}}(w)~e^{w}  \right \}
+\alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'}  | \vec{d})}{p(\vec{\theta} | \vec{d})}~\vec{p}_{\mathrm{aux}}(w)~e^{w}  \right \}
 \end{equation}
 
-\subsubsection{From higher to higher dimension}
+\subsubsection{From higher to lower dimension}
 When going from high dimensions to low dimensions, it is incorrect to simply do
 \begin{equation}
    \mathrm{Incorrect:} ~~ ~ ~ ~ ~ (A'_1, A'_2) \rightarrow (A_1)
 \end{equation}
-One needs to define the inverse of $f$, which is the logarithmic function since we chose $f$ to be the exponential function. Let us denote the inverse by $f'$, then when going from high dimension to low dimensions, 
+One needs to define the inverse of $f$. The inverse will be a logarithmic function since we chose $f$ to be the exponential function. Let us denote the inverse by $f'$, then when going from higher dimension to lower dimensions, 
 \begin{equation}
     (A'_1, w') \xrightarrow[]{f'} (A_1, \ln{w'})
 \end{equation}
-where $w'$ is either chosen from another auxiliary distribution $p'_{\mathrm{aux}}$ and it may or may not be same as the earlier auxiliary distribution $p_{\mathrm{aux}}$. The Jacobian in this case  will turn out to be
+where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\mathrm{aux}}$ and it may or may not be same as the previous auxiliary distribution $\vec{p}_{\mathrm{aux}}$. The Jacobian in this case  will turn out to be
 
 \begin{equation}
     \left| \frac{\partial (A_1, A_2)}{\partial (A'_1, w')} \right| =  \left| 
@@ -172,11 +181,9 @@ where $w'$ is either chosen from another auxiliary distribution $p'_{\mathrm{aux
 \end{equation} 
 
 \begin{equation}
-    \alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta}  | \vec{d})}{p(\vec{\theta'} | \vec{d})}~p_{\mathrm{aux}}(w')~\frac{1}{w'}  \right \}
+    \alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta}  | \vec{d})}{p(\vec{\theta'} | \vec{d})}~\vec{p}_{\mathrm{aux}}(w')~\frac{1}{w'}  \right \}
 \end{equation}
 
-
-Let us consider a particular step in the algorithm needs to jump from 1 wavelet model to a 2 wavelet model. 
 \begin{itemize}
     \item Latest accepted state $\vec{\theta}$, 1 dimensional
     \item Proposed state $\vec{\theta'}$, 2 dimensional
