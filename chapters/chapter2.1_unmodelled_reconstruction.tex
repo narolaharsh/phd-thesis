@@ -184,22 +184,11 @@ where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\math
     \alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta}  | \vec{d})}{p(\vec{\theta'} | \vec{d})}~\vec{p}_{\mathrm{aux}}(w')~\frac{1}{w'}  \right \}
 \end{equation}
 
-\begin{itemize}
-    \item Latest accepted state $\vec{\theta}$, 1 dimensional
-    \item Proposed state $\vec{\theta'}$, 2 dimensional
-    \item An auxiliary variable 
-    \item Swapping an existing wavelet for a new wavelet
-    \item Write actually about jump from one wavelet model to two wavelet model.
-\end{itemize}
-
-
-
-
-\subsubsection{Limitations}
+\section{Limitations of unmodelled reconstruction}
 Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
 
 FIXME: The wavelets are not orthogonal.
 FIXME: Too many tuning parameters.
 FIXME: Initially chosen to compare to distribution e.g. exponential or Gaussian
-\section{Glitches overlapping with the signals in the Einstein Telescope era}
+\section{Need for a unmodelled reconstruction}
 If we are too aggressive subtracting, one can end up removing part of the signal. If we are too conservative, we may leave behind part of the glitch which can masquarade as signs of new physics. 
