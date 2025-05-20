@@ -185,6 +185,12 @@ where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\math
 \end{equation}
 
 \section{Limitations of unmodelled reconstruction}
+\begin{itemize}
+    \item Too many tuning parameters
+    \item No definitive termination criteria
+    \item Need extra computations to to obtain evidence
+    \item Independent samples
+\end{itemize}
 Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
 
 FIXME: The wavelets are not orthogonal.
