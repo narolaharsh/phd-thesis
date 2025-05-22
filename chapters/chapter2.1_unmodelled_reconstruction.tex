@@ -1,13 +1,14 @@
 When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
 
 \section{Artefacts in Gaussian noise}
+\label{sec:artefact}
 \begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{../figures/gw170817scan.png}
     \caption{A loud glitch overlapping with the binary neutron star signal, GW170817, in LIGO-Livingston interferometer. Dashed white arrows are added to help reader trace the signal.}
     \label{fig:bns_scan}
 \end{figure}
-A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurance, glitches can be problematc in two ways,
+A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurance, glitches can be problematic in two ways,
 \begin{itemize}
 
 \item \textit{Glitches overlapping with a GW signal.} Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
@@ -193,5 +194,37 @@ where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\math
     \item Proposed to select two competing dictribution and an overkill. 
 
 \end{itemize}
-\section{Problems in LIGO-Virgo and thrid-generation detectors}
-If we are too aggressive subtracting, one can end up removing part of the signal. If we are too conservative, we may leave behind part of the glitch which can masquarade as signs of new physics. 
+\section{Problems of glitches in LIGO-Virgo and third-generation detectors}
+In section~\ref{sec:artefact} of this chapter, we mentioned that glitches can be problematic in two ways depending on their time of occurance. When occuring close to the merger, they can corrupt GW parameter measurement and when occuring in isolation, they could increase false alarms. A glitch overlapping with GW signal can be seen as a special case of glitch in isolation that is more harmful. 
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{p{0.45\textwidth}|p{0.45\textwidth}}
+    \toprule
+    \textbf{LIGO-Virgo interferometers} & \textbf{Third generation interferometers} \\
+    \midrule
+    \begin{enumerate}[leftmargin=*, label=\arabic*.]
+        \item Detection rate of $\mathcal{O}(1)$ signal per week
+        \item A GW signal is in-band for $\mathcal{O}(1)$ second to $\mathcal{O}(1)$ minute. Nearly every segment of data contains only noise. 
+        \item Glitch rate of $\mathcal{O}(1)$ per minute 
+        \item \textit{Almost} all glitches occur in isolation due to smaller in-band duration of the signal and smaller detection rate of GW signals. 
+        \item Almost all glitches are vetoed without incurring significant loss of GW signals. 
+    \end{enumerate}
+    &
+    \begin{enumerate}[leftmargin=*, label=\arabic*.]
+        \item Detection rate of $\mathcal{O}(1)$ signal per minute
+        \item A GW signal is in-band for $\mathcal{O}(1)$ minute to $\mathcal{O}(1)$ hour. Nearly every segment of data is expected to contain a signal. 
+        \item Glitch rate is unknown. Assume same as LIGO-Virgo interferometers
+        \item \textit{Almost} all glitches will overlap with a GW signal due to larger in-band duration and larger detection rate. 
+        \item Very few glitches can be vetoed without losing the underlying GW signals. 
+    \end{enumerate}
+    \\
+    \bottomrule
+    \end{tabular}
+    \caption{Problem posed by glitches in LIGO-Virgo interferometers versus third-generation interferometers.}
+    \label{tab:glitch_diff}
+\end{table}
+
+\subsubsection{Signal overlapping glitches}
+
+
