@@ -1,13 +1,14 @@
 When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
 
 \section{Artefacts in Gaussian noise}
+\label{sec:artefact}
 \begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{../figures/gw170817scan.png}
     \caption{A loud glitch overlapping with the binary neutron star signal, GW170817, in LIGO-Livingston interferometer. Dashed white arrows are added to help reader trace the signal.}
     \label{fig:bns_scan}
 \end{figure}
-A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurance, glitches can be problematc in two ways,
+A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurance, glitches can be problematic in two ways,
 \begin{itemize}
 
 \item \textit{Glitches overlapping with a GW signal.} Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
@@ -68,12 +69,12 @@ Traditional MCMC algorithms aim to obtain the samples from posterior probability
     \label{fig:mcmc}
 \end{figure}
 \subsubsection{Metropolis-Hastings algorithm}
-Metropolis-Hastings algorithm makes use of a proposal density function ($\Gamma$) to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that a proposal $\vec{\theta}'$ is accepted is then given by $\alpha$
+Metropolis-Hastings algorithm makes use of a proposal density function ($Q$) to determine whether a proposal point $\vec{\theta}'$ should be accepted. The probability that $\vec{\theta}'$ is accepted is then given by $\alpha$
 \begin{equation}
     \label{eq:mh_algo}
-\alpha = \mathrm{min} \left(1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{\Gamma(\vec{\theta}_{t-1} | \vec{\theta}')}{\Gamma(\vec{\theta}' | \vec{\theta}_{t-1})}\right).  
+\alpha = \mathrm{min} \left \{ 1, \frac{p(\vec{\theta}' | \vec{d})}{p(\vec{\theta}_{t-1} | \vec{d})} \frac{Q(\vec{\theta}_{t-1} | \vec{\theta}')}{Q(\vec{\theta}' | \vec{\theta}_{t-1})}\right \}.  
 \end{equation}
-Where $p(\vec{\theta} | \vec{d})$ is the posterior probability distribution (already defined in the chapter \ref{ch:gwpe}). If the proposal is accepted, $\vec{\theta}'$ is updated to $\vec{\theta}_t$ and the steps are repeated. The quantity $\Gamma$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
+Where $p(\vec{\theta} | \vec{d})$ is the posterior probability distribution (already defined in the chapter \ref{ch:gwpe}). If the proposal is accepted, $\vec{\theta}'$ is updated to $\vec{\theta}_t$ and the steps are repeated. The quantity $Q$ can be a Gaussian distribution or any distribution from which we know how to draw samples. Figure~\ref{fig:mcmc} shows an illustration for the progression of a Markov chain (bottom) and posterior distribution constructed from the accepted samples (top). 
 
 \iffalse
 \subsubsection{Computing the evidence}
@@ -107,65 +108,123 @@ While a general treatment of switching dimensions in [paper 1, paper2, Ka Wa], a
     \item \textit{Death move} -- removal of an existing wavelet
     \item \textit{Stationary move} -- swapping an existing wavelet for a new wavelet.
 \end{itemize}
-The steps of performing a stationary move are trivial and same as Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. Below I explain how to make those moves.  
 
-Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. For simplicity, let us say state $\vec{\theta}$ with one wavelet and state $\vec{\theta'}$ has two wavelets. Note that each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times1$ dimensions and $\vec{\theta'}$ has $5\times2$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$ 
+The stationary move is trivial and same as Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. 
 
-Let us rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
+Before explaining the steps required to perform birth and death moves let us define a few standard quantities. Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. Let us say that state $\vec{\theta}$ has $N$ wavelets and $\vec{theta'}$ has $N'$ wavelets. Since each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times N$ dimensions and $\vec{\theta'}$ has $5\times N'$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$. Now we can rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
 \begin{align}
-    \alpha_r &= \frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{\Gamma(\vec{\theta}, D | \vec{\theta}', D')}{\Gamma(\vec{\theta}', D' | \vec{\theta}, D)} \\
-            &= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{\Gamma(\{A_1, d\} | \{A'_1, A'_2, d'\})}{\Gamma(\{A'_1, A'_2, d'\} | \{A_1, d\})}
+    \alpha = \mathrm{min}~\left \{1,~\frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{Q(\vec{\theta}, D | \vec{\theta}', D')}{Q(\vec{\theta}', D' | \vec{\theta}, D)} \right \},
+            %&= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{Q(\{A_1, d\} | \{A'_1, A'_2, d'\})}{Q(\{A'_1, A'_2, d'\} | \{A_1, d\})}
 \end{align}
 
-\begin{equation}
-    \Gamma(\vec{\theta}, D | \vec{\theta}', D') = \Gamma(\vec{\theta} | D, \vec{\theta'}, D')~\Gamma(D | D')
-\end{equation}
-Let's say both, one and two wavelet, states are equally likely, then $\Gamma(D | D') = \Gamma(D' | D) = 0.5$. If we were dealing with N different states and if each states were equally likely, then the transition probability between any two states will be $1/N$. 
-The first term $\Gamma(\vec{\theta} | D, \vec{\theta'}, D')$
+\subsubsection{From Lower to Higher dimension}
+Let's say we want to jump from a one-wavelet state $\vec{\theta}$ to a two-wavelete state $(\vec{\theta'})$. So $\vec{\theta} (\vec{\theta'})$ will have five (ten) dimensions. Since the current state has fewer dimensions then the proposed state, we need two additional quantities to account for the missing dimensions. 
 
-\begin{equation}
-    A = 5
-\end{equation}
-
-where $\vec{\theta}'$ is the proposal under consideration with $D'$ dimensions, $\vec{\theta}$ is the previously accepted point with $D$ dimensions, $\Gamma$ is the proposal density function, and $\vec{d}$ is data. For the sake of argument, let consider that $\theta$ represents a state of 1 wavelet and $\theta'$.
-
-\begin{equation}
-    \vec{\theta} = \{A_1\}~~\mathrm{and}~~\vec{\theta'} = \{A'_1, A'_2\}.
-    \end{equation}    
 \begin{itemize}
-    \item How are the new proposals added: BayesWave black magic
-    \item How does $\alpha$ change: Well it is by multiplying a Jacobian. But what is that Jacobian. 
+    \item An auxiliary probability distribution $(\vec{p}_{\mathrm{aux}})$
+    \item A bijective and continuously differentiable function i.e. a diffeomorphism $(h)$
 \end{itemize}
 
-% paper1:    https://www2.stat.duke.edu/~sschmid/Courses/Stat376/Papers/TransdimMCMC/GreenHastie2009_RJMCMC_overview.pdf
-% paper2:    https://www.colorado.edu/amath/sites/default/files/attached-files/rjmcmc.pdf
-%%% choose h and h' which are inverse pdfs of each other. So like exponential and ln
-%%% and you are done. 
+The user may choose any auxiliary probability distribution from which it is easy to sample as long as the dimensions match
+\begin{equation}
+    \mathrm{dim} [{\vec{\theta}}] + \mathrm{dim} [{\vec{p}_{\mathrm{aux}}}] = \mathrm{dim} [\vec{\theta'}].
+\end{equation}
+Let ${\vec{p}_{\mathrm{aux}}}$ be a five dimensional uniform distribution and let the bijective function be an exponential so the logarithmic function will be its inverse. 
+
+For simplicity of the notation, we write down only the wavelet amplitude parameters (see Eq.~\eqref{eq:wavelet}) of current state ($A_1$) and the proposed state $(A'_1, A'_2)$. Let $w$ be a sample from $\vec{p}_{\mathrm{aux}}$
+
+\begin{equation}
+    (A_1, w) \xrightarrow[]{f} (A_1, e^{w}) \coloneq (A'_1, A'_2).  
+\end{equation}
+We chose an $f$ mapping $A_1$ to $A'_1$ and $w$ to $e^w$. Now, the dimension of the current state matches with the dimensions of the proposed state. Another remaining factor is the determinant of the Jacobian
+
+\begin{equation}
+    \label{eq:jacob}
+   \left| \frac{\partial (A'_1, A'_2)}{\partial (A_1, w)} \right| =  \left| 
+        \begin{array}{cc}
+        \frac{\partial A'_1}{\partial A_1} & \frac{\partial A'_1}{\partial w} \\
+        \\
+        \frac{\partial A'_2}{\partial A_1} & \frac{\partial A'_2}{\partial w} \\
+        \end{array}
+        \right| = e^{w},
+\end{equation}
+which accounts for the change of variables. The transitional probability ratio can now be written as
 
 
+\begin{equation}
+    \alpha  = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'} | \vec{d})}{p(\vec{\theta} | \vec{d})} \frac{\vec{p}_{\mathrm{aux}}(w)~p(D' | D)}{p(D | D')} \left| \frac{\partial (A'_1, A'_2)}{\partial (A_1, w)} \right| \right \}
+\end{equation}
+If we assume that all states are equally likely i.e. $p(D | D') = p(D' | D)$, and substitute the value of the determinant from Eq.\eqref{eq:jacob},
 
+\begin{equation}
+\alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'}  | \vec{d})}{p(\vec{\theta} | \vec{d})}~\vec{p}_{\mathrm{aux}}(w)~e^{w}  \right \}
+\end{equation}
 
+\subsubsection{From higher to lower dimension}
+When going from high dimensions to low dimensions, it is incorrect to simply do
+\begin{equation}
+   \mathrm{Incorrect:} ~~ ~ ~ ~ ~ (A'_1, A'_2) \rightarrow (A_1)
+\end{equation}
+One needs to define the inverse of $f$. The inverse will be a logarithmic function since we chose $f$ to be the exponential function. Let us denote the inverse by $f'$, then when going from higher dimension to lower dimensions, 
+\begin{equation}
+    (A'_1, w') \xrightarrow[]{f'} (A_1, \ln{w'})
+\end{equation}
+where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\mathrm{aux}}$ and it may or may not be same as the previous auxiliary distribution $\vec{p}_{\mathrm{aux}}$. The Jacobian in this case  will turn out to be
 
+\begin{equation}
+    \left| \frac{\partial (A_1, A_2)}{\partial (A'_1, w')} \right| =  \left| 
+         \begin{array}{cc}
+         \frac{\partial A_1}{\partial A'_1} & \frac{\partial A_1}{\partial w'} \\
+         \\
+         \frac{\partial A_2}{\partial A'_1} & \frac{\partial A_2}{\partial w'} \\
+         \end{array}
+         \right| = 1/w'
+\end{equation} 
 
-How do you jump between dimensions? Peter J Green 1995
-A general treatment can be found in literature. At the time of writing, I did not find a treat exclusive meant for the GW data analysis. 
+\begin{equation}
+    \alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta}  | \vec{d})}{p(\vec{\theta'} | \vec{d})}~\vec{p}_{\mathrm{aux}}(w')~\frac{1}{w'}  \right \}
+\end{equation}
 
-Let us consider a particular step in the algorithm needs to jump from 1 wavelet model to a 2 wavelet model. 
+\section{Limitations of unmodelled reconstruction}
 \begin{itemize}
-    \item Latest accepted state $\vec{\theta}$, 1 dimensional
-    \item Proposed state $\vec{\theta'}$, 2 dimensional
-    \item An auxiliarray variable 
-    \item Swapping an existing wavelet for a new wavelet
-    \item Write actually about jump from one wavelet model to two wavelet model.
+    \item The rate of convergence depends on the choice of auxiliary distribution and bijective functions. A universal choice that works for all problems do not exist. 
+    \item The termination criteria is not well defined.
+    \item In contarst to Nested sampling, the aim here is to obtain the posterior probability distribution. Additional computations are needed to obtain evidence. 
+    \item The wavelets are not orthogonal
+    \item Proposed to select two competing dictribution and an overkill. 
+
 \end{itemize}
+\section{Problems of glitches in LIGO-Virgo and third-generation interferometers}
+In section~\ref{sec:artefact} of this chapter, we mentioned that glitches can be problematic in two ways depending on their time of occurance. When occuring close to the merger, they can corrupt GW parameter measurement and when occuring in isolation, they could increase false alarms. A glitch overlapping with GW signal can be seen as a special case of glitch in isolation that is more harmful. 
+\begin{table}[h!]
+    \centering
+    \renewcommand{\arraystretch}{1.2}
+    \begin{tabular}{p{0.45\textwidth}|p{0.45\textwidth}}
+    \toprule
+    \textbf{LIGO-Virgo interferometers} & \textbf{Third generation interferometers} \\
+    \midrule
+    \begin{enumerate}[leftmargin=*, label=\arabic*.]
+        \item Detection rate of $\mathcal{O}(1)$ signal per week
+        \item A GW signal is in-band for $\mathcal{O}(1)$ second to $\mathcal{O}(1)$ minute. Nearly every segment of data contains only noise. 
+        \item Glitch rate of $\mathcal{O}(1)$ per minute 
+        \item \textit{Almost} all glitches occur in isolation due to smaller in-band duration of the signal and smaller detection rate of GW signals. 
+        \item Almost all glitches are vetoed without incurring significant loss of GW signals. 
+    \end{enumerate}
+    &
+    \begin{enumerate}[leftmargin=*, label=\arabic*.]
+        \item Detection rate of $\mathcal{O}(1)$ signal per minute
+        \item A GW signal is in-band for $\mathcal{O}(1)$ minute to $\mathcal{O}(1)$ hour. Nearly every segment of data is expected to contain a signal. 
+        \item Glitch rate is unknown. Assume same as LIGO-Virgo interferometers
+        \item \textit{Almost} all glitches will overlap with a GW signal due to larger in-band duration and larger detection rate. 
+        \item Very few glitches may be vetoed without losing GW signals. 
+    \end{enumerate}
+    \\
+    \bottomrule
+    \end{tabular}
+    \caption{Problem posed by glitches in LIGO-Virgo interferometers versus third-generation interferometers.}
+    \label{tab:glitch_diff}
+\end{table}
+
+\subsubsection{Signal overlapping glitches}
 
 
-
-
-\subsubsection{Limitations}
-Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
-
-FIXME: The wavelets are not orthogonal
-
-\section{Glitches overlapping with the signals in the Einstein Telescope era}
-If we are too aggressive subtracting, one can end up removing part of the signal. If we are too conservative, we may leave behind part of the glitch which can masquarade as signs of new physics. 
