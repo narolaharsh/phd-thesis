@@ -1,13 +1,15 @@
 \documentclass[a4paper,11pt, twoside]{book}
 %%%change bto twoside for printings
 %%%%%%%\documentclass[a5paper,10pt]{book}ssss
-%%%%%%%%%%%%%ssssssssssssssssssssssssssssssssssssss
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ss%%%sse%g
+%%%%%%%%%%%%%sssssssssssssssssssssssssssssssssssssssssssss
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%ss%%%sse%gs
 %\usepackage[left=1.5cm,right=1.5cm, bottom=1.5cm]{geometry}
 
 \usepackage{booktabs}
 \usepackage{array}
+%\usepackage{graphicx}
 
+%\usepackage[outdir=./]{epstopdf}
 \usepackage{tabularx}
 
 \usepackage[utf8]{inputenc}  
@@ -279,7 +281,7 @@ part of the Dutch Research Council (NWO).
 \fancyhead[RO]{\slshape\nouppercase{\rightmark}}
 \fancyhead[LE]{\slshape\nouppercase{\leftmark}}
 \renewcommand\thefigure{\arabic{chapter}.{\arabic{figure}}}
-\import{chapters/}{chapter2.1_unmodelled_reconstruction.tex}
+\import{chapters}{chapter2.1_unmodelled_reconstruction.tex}
 
 %%%%%%% New chapter %%%%%%%%%%%%%%%%%
 \chapter{Nijntje: A Null-stream Inspired Noise Transient Elimination algorithm}
