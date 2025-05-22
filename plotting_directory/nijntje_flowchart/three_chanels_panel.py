@@ -44,9 +44,9 @@ bilby.core.utils.setup_logger(outdir=args.outdir, label=args.label)
 plot_colorbar = False
 plot_tcp = True
 plot_null_stream = True
-plot_timeseries = True
+plot_timeseries = False
 gengli_glitch = True
-plot_signal_only_qscan = False
+plot_signal_only_qscan = True
 make_likelihood_curve = False
 
 
@@ -164,7 +164,7 @@ if plot_gengli_glitch:
     fig, ax = plt.subplots(1, 1)
     ax.plot(glitch_delta_t_array, glitch)
     ax.set_ylim(-10, 10)
-    fig.savefig(f'{args.outdir}/{args.label}_gengli_glitch.pdf', dpi = 250)
+    fig.savefig(f'{args.outdir}/{args.label}_gengli_glitch.pdf', dpi = 2000)
 
 ######################################################################
 
@@ -204,8 +204,8 @@ if plot_signal_only_qscan:
     ax.set_ylim(10, 300)
     ax.set_xlim(-1.1, 0.3)
 
-    fig.savefig(f'{args.outdir}/{args.label}_cleaned_ET1.png', bbox_inches = 'tight', dpi = 500)
-    fig.savefig(f'../../figures/{args.label}_cleaned_ET1.png', bbox_inches = 'tight', dpi = 500)
+    fig.savefig(f'{args.outdir}/{args.label}_cleaned_ET1.png', bbox_inches = 'tight', dpi = 2000)
+    fig.savefig(f'../../figures/{args.label}_cleaned_ET1.png', bbox_inches = 'tight', dpi = 2000)
 
 
 
@@ -214,7 +214,7 @@ if plot_signal_only_qscan:
 
 
 if plot_tcp:
-    fig, axes = plt.subplots(1, 3, figsize = (15, 3), sharey = True, sharex = True, gridspec_kw = {'wspace': 0.05})
+    fig, axes = plt.subplots(1, 3, figsize = (15, 3), sharey = True, sharex = True, gridspec_kw = {'wspace': 0.075})
 
     maximum_frequency = 512
     qrange = (16, 32)
@@ -253,8 +253,9 @@ if plot_tcp:
 
         fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
 
-    fig.savefig(f'{args.outdir}/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
-    fig.savefig(f'../../figures/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 250)
+    fig.savefig(f'{args.outdir}/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 2000)
+    fig.savefig(f'../../figures/{args.label}_tcp.png', bbox_inches = 'tight', dpi = 2000)
+    
 
 
 
@@ -291,8 +292,8 @@ if plot_null_stream:
 
         fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
 
-    fig.savefig(f'{args.outdir}/{args.label}_null_stream.png', bbox_inches = 'tight', dpi = 250)
-    fig.savefig(f'../../figures/{args.label}_null_stream.png', bbox_inches = 'tight', dpi = 250)    
+    fig.savefig(f'{args.outdir}/{args.label}_null_stream.png', bbox_inches = 'tight', dpi = 2000)
+    fig.savefig(f'../../figures/{args.label}_null_stream.png', bbox_inches = 'tight', dpi = 2000)    
 
 
 if plot_timeseries:
