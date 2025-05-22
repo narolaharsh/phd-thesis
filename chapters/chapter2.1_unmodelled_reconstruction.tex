@@ -186,15 +186,12 @@ where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\math
 
 \section{Limitations of unmodelled reconstruction}
 \begin{itemize}
-    \item Too many tuning parameters
-    \item No definitive termination criteria
-    \item Need extra computations to to obtain evidence
-    \item Independent samples
-\end{itemize}
-Indeed, the efficieny of this algorithm depends on the choice of $Q$. In addition, each chain is started at random point and we need to discard certain number of iterations at the beginning so that the dependence on the starting point is lost. This period is called the \textit{burn-in} period which again depends on the choice of $Q$. Moreover, adjcent samples for a given chain maybe correlated which is undesirable. We can choose to store the samples every $n^{\mathrm{th}}$ iterations to mitigate this issue, where n is greater then or equal to the autocorrelation time of the chain. This process is often called thinning.
+    \item The rate of convergence depends on the choice of auxiliary distribution and bijective functions. A universal choice that works for all problems do not exist. 
+    \item The termination criteria is not well defined.
+    \item In contarst to Nested sampling, the aim here is to obtain the posterior probability distribution. Additional computations are needed to obtain evidence. 
+    \item The wavelets are not orthogonal
+    \item Proposed to select two competing dictribution and an overkill. 
 
-FIXME: The wavelets are not orthogonal.
-FIXME: Too many tuning parameters.
-FIXME: Initially chosen to compare to distribution e.g. exponential or Gaussian
-\section{Need for a unmodelled reconstruction}
+\end{itemize}
+\section{Problems in LIGO-Virgo and thrid-generation detectors}
 If we are too aggressive subtracting, one can end up removing part of the signal. If we are too conservative, we may leave behind part of the glitch which can masquarade as signs of new physics. 
