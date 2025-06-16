@@ -179,7 +179,7 @@ cbar_ax = fig.add_axes([0.82, 0.15, 0.015, 0.7])
 ax.set_xlabel('Time [s]')
 
 fig.colorbar(imshow, cax=cbar_ax, label = "Normalized energy")
-fig.savefig(f'../../figures/{args.label}_highmass_blip_qscan.png', bbox_inches = 'tight', dpi = 250)
+fig.savefig(f'../../figures/{args.label}_highmass_blip_qscan.png', bbox_inches = 'tight', dpi = 2500)
 #fig.savefig(f'./{args.label}_highmass_blip_qscan.png', bbox_inches = 'tight', dpi = 250)
 
 ##########################################################################
