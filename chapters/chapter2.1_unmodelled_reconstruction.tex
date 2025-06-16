@@ -194,37 +194,7 @@ where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\math
     \item Proposed to select two competing dictribution and an overkill. 
 
 \end{itemize}
-\section{Problems of glitches in LIGO-Virgo and third-generation interferometers}
-In section~\ref{sec:artefact} of this chapter, we mentioned that glitches can be problematic in two ways depending on their time of occurance. When occuring close to the merger, they can corrupt GW parameter measurement and when occuring in isolation, they could increase false alarms. A glitch overlapping with GW signal can be seen as a special case of glitch in isolation that is more harmful. 
-\begin{table}[h!]
-    \centering
-    \renewcommand{\arraystretch}{1.2}
-    \begin{tabular}{p{0.45\textwidth}|p{0.45\textwidth}}
-    \toprule
-    \textbf{LIGO-Virgo interferometers} & \textbf{Third generation interferometers} \\
-    \midrule
-    \begin{enumerate}[leftmargin=*, label=\arabic*.]
-        \item Detection rate of $\mathcal{O}(1)$ signal per week
-        \item A GW signal is in-band for $\mathcal{O}(1)$ second to $\mathcal{O}(1)$ minute. Nearly every segment of data contains only noise. 
-        \item Glitch rate of $\mathcal{O}(1)$ per minute 
-        \item \textit{Almost} all glitches occur in isolation due to smaller in-band duration of the signal and smaller detection rate of GW signals. 
-        \item Almost all glitches are vetoed without incurring significant loss of GW signals. 
-    \end{enumerate}
-    &
-    \begin{enumerate}[leftmargin=*, label=\arabic*.]
-        \item Detection rate of $\mathcal{O}(1)$ signal per minute
-        \item A GW signal is in-band for $\mathcal{O}(1)$ minute to $\mathcal{O}(1)$ hour. Nearly every segment of data is expected to contain a signal. 
-        \item Glitch rate is unknown. Assume same as LIGO-Virgo interferometers
-        \item \textit{Almost} all glitches will overlap with a GW signal due to larger in-band duration and larger detection rate. 
-        \item Very few glitches may be vetoed without losing GW signals. 
-    \end{enumerate}
-    \\
-    \bottomrule
-    \end{tabular}
-    \caption{Problem posed by glitches in LIGO-Virgo interferometers versus third-generation interferometers.}
-    \label{tab:glitch_diff}
-\end{table}
 
-\subsubsection{Signal overlapping glitches}
+\subsubsection{Use cases for unmodelled reconstruction}
 
 
