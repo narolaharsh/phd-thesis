@@ -43,7 +43,7 @@ dec_deg = np.rad2deg(dec) *u.deg
 plus = np.zeros(N)
 cross = np.zeros(N)
 gridsize = 40
-cmap = 'gray'
+cmap = 'copper'
 for ii in range(N):
     plus[ii] = ifos[0].antenna_response(ra[ii], dec[ii], tc, psi, 'plus')
     cross[ii] =  ifos[0].antenna_response(ra[ii], dec[ii], tc, psi, 'cross')
@@ -79,6 +79,6 @@ ax.set_title('$\\sqrt{F^2_+ + F^2_{\\times}}$')
 fig.subplots_adjust(right=0.8)
 cbar_ax = fig.add_axes([0.81, 0.15, 0.015, 0.7])
 fig.colorbar(data, cax=cbar_ax)
-
+fig.savefig('../../figures/joint_pattern.pdf')
 fig.savefig('joint_pattern.pdf')
 
