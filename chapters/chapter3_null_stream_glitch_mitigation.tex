@@ -7,26 +7,29 @@
     \label{fig:qscan_null}
 \end{figure}
 \fi
-In section~\ref{sec:artefact} of this chapter, we mentioned that glitches can be problematic in two ways depending on their time of occurance. When occuring close to the merger, they can corrupt GW parameter measurement and when occuring in isolation, they could increase false alarms. A glitch overlapping with GW signal can be seen as a special case of glitch in isolation that is more harmful. 
+When occuring in the vicinity of a GW signal, glitches (or transient noises) can corrupt the signal. Signal-overlapping glitches need to be carefully removed before measuring the GW source parameters. Such glitches are problematic for the LIGO-Virgo interferometers as nearly $\sim 20$ out of 90 confident detection across three observation runs required some form of glitch mitigation and this number will keep growing as we collect more data. 
+
+While glitch mitigation is an active area of research for current detectors, it is yet to recieve similar attention in the context of 3G-detectors. In Table~\ref{tab:glitch_diff}, we compare the problem posed by glitches for the LIGO-Virgo and the 3G interferometers. Glitches could turn out to be a major bottelneck in transitioning to the precision science era. In this chapter, we introduce the \texttt{nijntje} -- a null stream inspired noise transient elimination framework to tackle this problem.   
+
 \begin{table}[h!]
     \centering
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{p{0.45\textwidth}|p{0.45\textwidth}}
     \toprule
-    \textbf{LIGO-Virgo interferometers} & \textbf{Third generation interferometers} \\
+    \textbf{LIGO-Virgo interferometers} & \textbf{Third-generation interferometers} \\
     \midrule
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
         \item Detection rate of $\mathcal{O}(1)$ signal per week
-        \item A GW signal is in-band for $\mathcal{O}(1)$ second to $\mathcal{O}(1)$ minute. Nearly every segment of data contains only noise. 
-        \item Glitch rate of $\mathcal{O}(1)$ per minute 
-        \item \textit{Almost} all glitches occur in isolation due to smaller in-band duration of the signal and smaller detection rate of GW signals. 
-        \item Almost all glitches are vetoed without incurring significant loss of GW signals. 
+        \item A GW signal is in-band for $\mathcal{O}(1)$ second to $\mathcal{O}(1)$ minute. Therefore, nearly every segment of data contains only noise. 
+        \item Glitch rate of $\mathcal{O}(1)$ per minute across three observation runs. 
+        \item \textit{Almost} all glitches occur in isolation due to smaller in-band duration and smaller detection rate of GW signals. 
+        \item Almost all glitches can be vetoed without incurring significant loss of GW signals. 
     \end{enumerate}
     &
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
         \item Detection rate of $\mathcal{O}(1)$ signal per minute
-        \item A GW signal is in-band for $\mathcal{O}(1)$ minute to $\mathcal{O}(1)$ hour. Nearly every segment of data is expected to contain a signal. 
-        \item Glitch rate is unknown. Assume same as LIGO-Virgo interferometers
+        \item A GW signal is in-band for $\mathcal{O}(1)$ minute to $\mathcal{O}(1)$ hour. Therefore, nearly every segment of data is expected to contain a signal. 
+        \item Glitch rate is unknown. Let's assume same as LIGO-Virgo interferometers.
         \item \textit{Almost} all glitches will overlap with a GW signal due to larger in-band duration and larger detection rate. 
         \item Very few glitches may be vetoed without losing GW signals. 
     \end{enumerate}
@@ -37,12 +40,16 @@ In section~\ref{sec:artefact} of this chapter, we mentioned that glitches can be
     \label{tab:glitch_diff}
 \end{table}
 
-
-\section{Introducing \texttt{nijntje} algorithm}
 \subsection{The null stream of the Einstein Telescope}
+The null stream is a linear combination of the data from a network of interferometers such that the GW signal cancels out. For the triangular geometry of the Einstein Telescope this linear combination is simply the sum of the data from three detectors. 
+
+\begin{equation}
+    \vec{d}_i = F_{+, i} h_+ + F_{\times, i} h_{\times}
+\end{equation}
+
+
 \subsection{Toy model}
-\subsection{Absence of null stream: ET-2L comparison}
-\section{Precision science measurement with speed}
+\section{Glitch mitigation without null stream: comparison between the triangle and 2L}
 \section{Caveats}
 \begin{figure}
     \centering
