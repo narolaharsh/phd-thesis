@@ -39,6 +39,9 @@ Though Newton's theory of gravity attempts to quantify the gravitational force e
 \end{equation}
 where the spacetime curvature is encoded in the Einstein tensor $(G_{\mu\nu})$ and distribution of matter is encoded in the stress-energy tensor~$(T_{\mu\nu})$. We use geometric units therefore the speed of light and universal gravitational constant in Eq.~\eqref{eq:field_eq} are set to unity. 
 
+The unknown in Eq.~\eqref{eq:field_eq} is the typically the metric tensor $g_{\mu\nu}$ which can be solved for a given distribution of matter. 
+However, The field equation itself represents a set of coupled partial differential equations and there are only a few cases where it has an exact solution, e.g., vacuum solutions also known as gravitational waves, Schwarzschild metric also known as non-spinning black holes, Kerr metric also known as spinning black holes. 
+
 \begin{equation}
 G_{\mu\nu} = R_{\mu\nu} - \frac{1}{2}g_{\mu\nu} R
 \end{equation}
@@ -49,28 +52,40 @@ where $R_{\mu\nu}$ is the Ricci tensor and $g_{\mu\nu}$ is the metric tensor.
     \Box \bar{h}_{\mu\nu} = -16\pi T_{\mu\nu}
 \end{equation}
 \subsubsection{Gravitational waves: solution to field equation in vacuum}
-To solve the linearised field equation far away from the source (which where our GW detectors are), we can safely assume that the stress-energy is equal to zero. Therefore, Eq.~\eqref{lineq} reduces to 
+To solve the linearised field equation far away from the source (which where our GW detectors are), we can assume that the stress-energy is equal to zero. Therefore, Eq.~\eqref{lineq} reduces to 
 \begin{equation}
     \label{eq:waveq}
     \Box \bar{h}_{\mu\nu} = 0.
 \end{equation}
-Eq.~\eqref{eq:waveq} is known as the wave equation as it admits plane-wave solutions, 
+Eq.~\eqref{eq:waveq} is a wave equation as it admits plane-wave solutions, 
 \begin{align}
     \bar{h} &= A_{\mu\nu} \cos{\left(k_{\alpha}x^{\alpha}\right)},\\
     k_{\mu}^{\mu} &= 0.
 \end{align}
-which are the perturbation of a flat spacetime far away from the source that produced them. 
+which are the perturbation of a flat spacetime far away from the source that produced them, i.e. gravitational waves. 
 
 \subsubsection{Plus and cross polarization}
-Due to Lorentz gauge, 
+Due to Lorenz gauge, 
 \begin{equation}
     k^{\mu}A_{\mu\nu} = 0, 
 \end{equation}
 which means a gravitational wave does not have a component in the direction of their propagation, i.e., it is a transverse wave. 
+
+The metric perturbation $\bar{h}_{\mu\nu}$ has 16 apparent degrees of freedom due to it being $4\times4$ tensor. From 16, 6 are restricted since $h_{\mu\nu}$ is symmetric in $\mu$ and $\nu$. From the remaining 10, 4 are restricted by Lorenz guage and 4 are restricted by transverse-traceless (TT) guage,
 \begin{align}
-    \bar{h_{0\mu}} &= 0,
+    \bar{h_{0\mu}} &= 0, \\
     \bar{h^{\mu}_{\mu}} &= 0.
 \end{align}
+Therefore, $h_{\mu\nu}$ is a tensor with $16-6-4-4 = 2$ degrees of freedom which are known as the plus and cross polarization of the GWs. 
+\[
+h^{TT}_{\mu\nu} =
+\begin{pmatrix}
+0 & 0 & 0 & 0 \\
+0 & h_{+} & h_{\times} & 0 \\
+0 & h_{\times} & -h_{+} & 0 \\
+0 & 0 & 0 & 0
+\end{pmatrix}
+\]
 
 \section{Source frame to detector frame projection}
 Gravitational wave detectors are sensitive to the following linear combination of the plus and cross polarization of a GW signal
