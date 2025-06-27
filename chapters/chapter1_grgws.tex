@@ -1,16 +1,21 @@
+\iffalse
 \begin{itemize}
     \item{Lorenz guage and TT guage}
     \item{Linearized field equation}
     \item{Interation of GWs with matter}
 \end{itemize}
 
-\iffalse
+What do I want to explain in this chapter?
+Geodesic equation - field equations - linearising them - gravitational waves plus and cross - generation of GW - effect on matter - detectors
+
+
 An acclerating body (due to a gravity) disturbs the medium (spacetime) in which it travels and loses energy. These disturbances (or ripples) are known as the gravitational waves. Any object acclerating under the effect of gravity produces gravitational waves. However, there only a few instances where we can detect them. One of those instances is the collisions of two heavy objects.  
 
 When they travel thorugh space, they interact with matter in the following way. Imagine gravitational waves passing through a ring of bids. The wave will stretch and squeese this bids in + and $\times$ manner. These are two polarizations of Gravitational waves. 
 
 To detect them, we use Michaelson-Morley interferometer. It is an L-shaped infrastructure with two arms of equal length. Laser bounces off of the mirrors located at the end each arms. If detectors encounters a GW signal, the arm length changes which gives rise to a constructive and destructive interference pattern. That helps us measure a GW signal. 
 \fi
+
 It is intuitive to think that if this thesis is dropped from the top of a tall building and if the earth's gravity is the only force acting on it, it will travel in a straight line. This trajectory can be determined using Newton's laws of motion. The trajectory is also unique in the sense that it traces the shortest path between the start and end points in the flat space (i.e. where the gravity is weak). The general theory of relativity also known as general relativity generalizes the notion of straight lines using geodesics, which marks the shortest path between any two points in spaces with arbitrary curvature. For example, the geodesic between any two points on a spherical surface will trace the great circle passing through the two points. 
 \subsubsection{The geodesic equation}
 In practice, the shortest path between two points in curved space is obtained by solving the geodesic equation
@@ -20,36 +25,47 @@ In practice, the shortest path between two points in curved space is obtained by
 \end{equation}    
 where $\Gamma^\mu_{\alpha\beta}$ are called Christoffel symbols of the second kind and $\tau$ is the scalar parameter of motion also known as proper time. The indices $\mu, \alpha, \beta$ vary from 0...3. If an index repeats on the same side of the equal sign, it is summed over (Einstein's summation convention). 
 
-Intutively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{When writing down axioms of motion, Newton did not use the word force. He struggled to choose from power, efficacy, vigor, strength, or virtue.}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
+Intutively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{When writing down axioms of motion initially, Newton struggled to settle on the word force, considering alternatives such as power, efficacy, vigor, strength, or virtue. [cite gallick]}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
 
 \iffalse
 \begin{equation}
     \Gamma^{\mu}_{\alpha\beta} = \frac{1}{2} g^{\mu\sigma} \left( \partial_\alpha g_{\beta\sigma} + \partial_\beta g_{\alpha\sigma} - \partial_\sigma g_{\alpha\beta} \right)
 \end{equation}
 write metric tensor and what it practically means. 
+
 \fi
 \section{Einstein field equation}
-Though Newton's theory of gravity attempts to quantify the gravitational force exerted by one body onto another, the explanation on what causes such a force was delibarately left to future work~[cite]. The general relativity refines the notion of gravitational force by establishing it as the effect caused by a massive object by curving the space around it. In the form of Einstein field equation, general relativity relates the distribution of matter to the curvature the space-time continuum (also referred to as spacetime),
+While Newton's theory of gravity attempts to quantify the gravitational force exerted by one body onto another, the explanation on what causes such a force was delibarately left to future work~[cite]. The general relativity refines the notion of gravitational force by establishing it as an effect caused by a massive object by curving the space around it. In the form of Einstein field equation, general relativity relates the distribution of matter to the curvature the space-time continuum (also referred to as spacetime),
 \begin{equation}
     \label{eq:field_eq}
     G_{\mu\nu} = 8\pi T_{\mu\nu}
 \end{equation}
 where Einstein tensor $G_{\mu\nu}$ encodes the information about the curvature and distribution of matter is encoded in the stress-energy tensor~$T_{\mu\nu}$. We use geometric units therefore the speed of light and universal gravitational constant in Eq.~\eqref{eq:field_eq} are set to unity. 
-\subsubsection{Riemann tensor and Ricci tensor}
-The Einstein tensor $G_{\mu\nu}$ is defined as
+\subsubsection{Definitions}
+The Einstein tensor $G_{\mu\nu}$ is defined using Ricci tensor $R_{\mu\nu}$, the metric tensor $g_{\mu\nu}$, and the contraction $R = g^{\mu\nu} R_{\mu\nu}$ called Ricci scalar,
 \begin{equation}
     G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2}g_{\mu\nu} R,
 \end{equation}
-where $R_{\mu\nu}$ is known as the Ricci tensor and $R$ is the Ricci scalar obatined by contracting the former. The metric tensor is represented by $g_{\mu\nu}$, used to define the notion of distance and angles on a arbitrary spacetime. 
-
-[Physical meaning of Ricci tensor and Riemann tensor].
-
-The Einstein field Eq.~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions (also known as gravitational waves), Schwarzschild metric (also known as non-spinning black holes), Kerr metric (also known as spinning black holes). 
-
+Ricci tensor is defined using contraction of Riemann tensor, 
 \begin{equation}
+R_{\mu\nu} = R^{\lambda}_{~\mu\lambda\nu}.
 \end{equation}
-where $R_{\mu\nu}$ is the Ricci tensor and $g_{\mu\nu}$ is the metric tensor.
-\subsubsection{Linearising the Einstein Field equation}
+The raising or lower of an index is done using the metric tensor, i.e., $R^{\rho}_{~\mu\lambda\nu} = g^{\rho\alpha}R_{\alpha\mu\lambda\nu}$. Riemann tensor is derived using Christoffel symbols,
+\begin{equation}
+    R^{\rho}_{\ \mu\lambda\nu} = \partial_\lambda \Gamma^{\rho}_{\nu\mu} - \partial_\nu \Gamma^{\rho}_{\lambda\mu} + \Gamma^{\rho}_{\lambda\sigma} \Gamma^{\sigma}_{\nu\mu} - \Gamma^{\rho}_{\nu\sigma} \Gamma^{\sigma}_{\lambda\mu}.
+\end{equation}
+The Christoffel symbol is derived using the partial derivatives of metric tensor,
+\begin{equation}
+    \Gamma^{\rho}_{\nu\mu} = \frac{1}{2} g^{\rho\sigma} \left( \partial_\nu g_{\mu\sigma} + \partial_\mu g_{\nu\sigma} - \partial_\sigma g_{\nu\mu} \right).
+\end{equation}
+\subsubsection{Interpretations}
+Intutively, the metric tensor introduces the notion of distance and angles on an arbitrary spacetime. Christoffel symbols use metric tensor to determine how vectors change when parally transported. Reimann tensor (also known as curvature tensor) uses Christoffel symbols to determine how tensors changes when trasnported on a closed path, which helps determine curvature. For a flat surface they do not change, so the curvature is zero. Finally, Ricci tensor specifically determines how volumes change on such path. While such physical interpretation of the quantities maybe helpful, I do not claim it to capture the essence of the formal definitions~[cite].  
+
+The Einstein field Eq.~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions (also known as the gravitational waves), Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
+
+\section{Linearized Einstein field equation}
+linearize - lorenz guage - TT guage
+
 After linearising the field equation, we get
 \begin{equation}
     \label{eq:lineq}
@@ -91,7 +107,6 @@ h^{TT}_{\mu\nu} =
 \end{pmatrix}
 \]
 \section{Generation of gravitational waves}
-\section{Interaction of GW with rings of beads}
 
 \section{Source frame to detector frame projection}
 Gravitational wave detectors are sensitive to the following linear combination of the plus and cross polarization of a GW signal
