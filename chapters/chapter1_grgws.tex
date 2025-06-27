@@ -17,7 +17,7 @@ To detect them, we use Michaelson-Morley interferometer. It is an L-shaped infra
 \fi
 
 It is intuitive to think that if this thesis is dropped from the top of a tall building and if the earth's gravity is the only force acting on it, it will travel in a straight line. This trajectory can be determined using Newton's laws of motion. The trajectory is also unique in the sense that it traces the shortest path between the start and end points in the flat space (i.e. where the gravity is weak). The general theory of relativity also known as general relativity generalizes the notion of straight lines using geodesics, which marks the shortest path between any two points in spaces with arbitrary curvature. For example, the geodesic between any two points on a spherical surface will trace the great circle passing through the two points. 
-\subsubsection{The geodesic equation}
+\subsubsection{Geodesics}
 In practice, the shortest path between two points in curved space is obtained by solving the geodesic equation
 \begin{equation}
     \label{eq:geodesic}
@@ -58,13 +58,26 @@ The Christoffel symbol is derived using the partial derivatives of metric tensor
 \begin{equation}
     \Gamma^{\rho}_{\nu\mu} = \frac{1}{2} g^{\rho\sigma} \left( \partial_\nu g_{\mu\sigma} + \partial_\mu g_{\nu\sigma} - \partial_\sigma g_{\nu\mu} \right).
 \end{equation}
-\subsubsection{Interpretations}
+\subsubsection{Interpretation}
 Intutively, the metric tensor introduces the notion of distance and angles on an arbitrary spacetime. Christoffel symbols use metric tensor to determine how vectors change when parally transported. Reimann tensor (also known as curvature tensor) uses Christoffel symbols to determine how tensors changes when trasnported on a closed path, which helps determine curvature. For a flat surface they do not change, so the curvature is zero. Finally, Ricci tensor specifically determines how volumes change on such path. While such physical interpretation of the quantities maybe helpful, I do not claim it to capture the essence of the formal definitions~[cite].  
 
 The Einstein field Eq.~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions (also known as the gravitational waves), Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
 
 \section{Linearized Einstein field equation}
-linearize - lorenz guage - TT guage
+\begin{equation}
+    \label{eq:line_approx}
+    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}, \text{for} \left|h_{\mu\nu}\right| << 1.
+\end{equation}
+Gauge transformation to preserve the invariance
+
+\begin{align}
+\Gamma^{\rho}_{\mu\nu} &= \frac{1}{2}\left( \partial_\mu h^{\rho}_{\nu} + \partial_\nu h^{\rho}_{\mu} - \partial^{\rho} h_{\mu\nu} \right) + \mathcal{O}(h^2) \\
+R_{~\rho \mu \nu}^\lambda &= \frac{1}{2}\left(\partial_{\rho \mu}^2 h_\nu^\lambda-\partial_\rho \partial_\nu h_\mu^\lambda+\partial^\lambda \partial_\nu h_{\rho \mu}-\partial^\lambda \partial_\mu h_{\rho \nu}\right)+\mathcal{O}\left(h^2\right) \\
+R_{\mu \nu} & =\frac{1}{2}\left(\partial_\nu \partial_\lambda h_\mu^\lambda+\partial_\mu \partial_\lambda h_\nu^\lambda-\partial^\lambda \partial_\lambda h_{\mu \nu}-\partial_\mu \partial_\nu h_\lambda^\lambda\right)+\mathcal{O}\left(h^2\right) \\
+R &= \frac{1}{2 }\left(\partial^\mu \partial^\nu h_{\mu \nu}-\partial^\mu \partial_\mu h_\nu^\nu\right)+\mathcal{O}\left(h^2\right) \\
+G_{\mu\nu} &= \frac{1}{2}\left(\partial_\lambda \partial_\mu h_\nu^\lambda+\partial_\lambda \partial_\nu h_\mu^\lambda-\partial_\mu \partial_\nu h-\square h_{\mu \nu}-\eta_{\mu \nu} \partial_\rho \partial_\lambda h^{\rho \lambda}+\eta_{\mu \nu} \square h\right) 
+\end{align}
+where $h$ is the trace of $h_{\mu\nu}$ and $\square$ is equal to $\eta^{\mu\nu}\partial_{\mu\nu}$, also known as the d'Alembert or box operator. 
 
 After linearising the field equation, we get
 \begin{equation}
