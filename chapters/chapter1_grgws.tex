@@ -1,39 +1,27 @@
 \iffalse
 \begin{itemize}
-    \item{Lorenz guage and TT guage}
-    \item{Linearized field equation}
-    \item{Interation of GWs with matter}
+    \item{Lorenz gauge and TT gauge}
+    \item{linearised field equation}
 \end{itemize}
 
 What do I want to explain in this chapter?
-Geodesic equation - field equations - linearising them - gravitational waves plus and cross - generation of GW - effect on matter - detectors
-
-
-An acclerating body (due to a gravity) disturbs the medium (spacetime) in which it travels and loses energy. These disturbances (or ripples) are known as the gravitational waves. Any object acclerating under the effect of gravity produces gravitational waves. However, there only a few instances where we can detect them. One of those instances is the collisions of two heavy objects.  
-
-When they travel thorugh space, they interact with matter in the following way. Imagine gravitational waves passing through a ring of bids. The wave will stretch and squeese this bids in + and $\times$ manner. These are two polarizations of Gravitational waves. 
+Geodesic equation - field equations - linearising them - gravitational waves plus and cross - generation of GW - effect on matter - detectors 
 
 To detect them, we use Michaelson-Morley interferometer. It is an L-shaped infrastructure with two arms of equal length. Laser bounces off of the mirrors located at the end each arms. If detectors encounters a GW signal, the arm length changes which gives rise to a constructive and destructive interference pattern. That helps us measure a GW signal. 
 \fi
 
-It is intuitive to think that if this thesis is dropped from the top of a tall building and if the earth's gravity is the only force acting on it, it will travel in a straight line. This trajectory can be determined using Newton's laws of motion. The trajectory is also unique in the sense that it traces the shortest path between the start and end points in the flat space (i.e. where the gravity is weak). The general theory of relativity also known as general relativity generalizes the notion of straight lines using geodesics, which marks the shortest path between any two points in spaces with arbitrary curvature. For example, the geodesic between any two points on a spherical surface will trace the great circle passing through the two points. 
+It is intuitive to think that if this thesis is dropped from the top of a tall building and if the earth's gravity is the only force acting on it, it will travel in a straight line. This trajectory can be determined using Newton's laws of motion. The trajectory is also unique in the sense that it traces the shortest path between the start and end points in a flat space such as the one we are in (i.e. where the gravity is weak). The notion of straight lines in flat spaces can be generalized using geodesics, which marks the shortest path between any two points in spaces with arbitrary curvature. For example, the geodesic between any two points on a spherical surface will trace the great circle passing through the two points. 
+
 \subsubsection{Geodesics}
 In practice, the shortest path between two points in curved space is obtained by solving the geodesic equation
 \begin{equation}
     \label{eq:geodesic}
     \frac{d^2 x^\mu}{d\tau^2} + \Gamma^\mu_{\alpha\beta} \frac{dx^\alpha}{d\tau} \frac{dx^\beta}{d\tau} = 0,
 \end{equation}    
-where $\Gamma^\mu_{\alpha\beta}$ are called Christoffel symbols of the second kind and $\tau$ is the scalar parameter of motion also known as proper time. The indices $\mu, \alpha, \beta$ vary from 0...3. If an index repeats on the same side of the equal sign, it is summed over (Einstein's summation convention). 
+where $\Gamma^\mu_{\alpha\beta}$ are called Christoffel symbols of the second kind. $\tau$ is the scalar parameter of motion also known as proper time. The indices $\mu, \alpha, \beta$ vary from 0 to 3. If an index repeats on the same side of the equal sign, it is summed over (Einstein's summation convention). 
 
-Intutively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{When writing down axioms of motion initially, Newton struggled to settle on the word force, considering alternatives such as power, efficacy, vigor, strength, or virtue. [cite gallick]}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
+Intuitively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{When writing down axioms of motion initially, Newton struggled to settle on the word force, considering alternatives such as power, efficacy, vigor, strength, or virtue. [cite gallick]}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
 
-\iffalse
-\begin{equation}
-    \Gamma^{\mu}_{\alpha\beta} = \frac{1}{2} g^{\mu\sigma} \left( \partial_\alpha g_{\beta\sigma} + \partial_\beta g_{\alpha\sigma} - \partial_\sigma g_{\alpha\beta} \right)
-\end{equation}
-write metric tensor and what it practically means. 
-
-\fi
 \section{Einstein field equation}
 While Newton's theory of gravity attempts to quantify the gravitational force exerted by one body onto another, the explanation on what causes such a force was delibarately left to future work~[cite]. The general relativity refines the notion of gravitational force by establishing it as an effect caused by a massive object by curving the space around it. In the form of Einstein field equation, general relativity relates the distribution of matter to the curvature the space-time continuum (also referred to as spacetime),
 \begin{equation}
@@ -44,6 +32,7 @@ where Einstein tensor $G_{\mu\nu}$ encodes the information about the curvature a
 \subsubsection{Definitions}
 The Einstein tensor $G_{\mu\nu}$ is defined using Ricci tensor $R_{\mu\nu}$, the metric tensor $g_{\mu\nu}$, and the contraction $R = g^{\mu\nu} R_{\mu\nu}$ called Ricci scalar,
 \begin{equation}
+    \label{eq:einstein_tensor_ricci}
     G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2}g_{\mu\nu} R,
 \end{equation}
 Ricci tensor is defined using contraction of Riemann tensor, 
@@ -56,61 +45,73 @@ The raising or lower of an index is done using the metric tensor, i.e., $R^{\rho
 \end{equation}
 The Christoffel symbol is derived using the partial derivatives of metric tensor,
 \begin{equation}
+    \label{eq:christoffel_symbols}
     \Gamma^{\rho}_{\nu\mu} = \frac{1}{2} g^{\rho\sigma} \left( \partial_\nu g_{\mu\sigma} + \partial_\mu g_{\nu\sigma} - \partial_\sigma g_{\nu\mu} \right).
 \end{equation}
 \subsubsection{Interpretation}
-Intutively, the metric tensor introduces the notion of distance and angles on an arbitrary spacetime. Christoffel symbols use metric tensor to determine how vectors change when parally transported. Reimann tensor (also known as curvature tensor) uses Christoffel symbols to determine how tensors changes when trasnported on a closed path, which helps determine curvature. For a flat surface they do not change, so the curvature is zero. Finally, Ricci tensor specifically determines how volumes change on such path. While such physical interpretation of the quantities maybe helpful, I do not claim it to capture the essence of the formal definitions~[cite].  
+Intuitively, the metric tensor introduces the notion of distance and angles on an arbitrary surface. Christoffel symbols use metric tensor to track how vectors change when transported parallelly. Riemann tensor (also known as curvature tensor) uses Christoffel symbols to determine how tensors changes when trasnported on a closed path, which helps determine curvature. For a flat surface they do not change, so the curvature is zero. Finally, Ricci tensor specifically determines how volumes change on such path. While I find such physical interpretation of the quantities helpful, I do not claim it to capture the essence of the formal definitions~[cite].  
 
 The Einstein field Eq.~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions (also known as the gravitational waves), Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
 
-\section{Linearized Einstein field equation}
+\section{linearised Einstein field equation}
+For simplicity, let us first attempt to solve for the metric tensor when gravity is weak. We expand $g_{\mu\nu}$ as a sum of flat space metric and linear perturbation tensor $h_{\mu\nu}$ when the gravity is weak for some coordinate system,
 \begin{equation}
     \label{eq:line_approx}
-    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu}, \text{for} \left|h_{\mu\nu}\right| << 1.
+    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},~\text{for}~\left|h_{\mu\nu}\right| << 1.
 \end{equation}
-Gauge transformation to preserve the invariance
-
-\begin{align}
-\Gamma^{\rho}_{\mu\nu} &= \frac{1}{2}\left( \partial_\mu h^{\rho}_{\nu} + \partial_\nu h^{\rho}_{\mu} - \partial^{\rho} h_{\mu\nu} \right) + \mathcal{O}(h^2) \\
-R_{~\rho \mu \nu}^\lambda &= \frac{1}{2}\left(\partial_{\rho \mu}^2 h_\nu^\lambda-\partial_\rho \partial_\nu h_\mu^\lambda+\partial^\lambda \partial_\nu h_{\rho \mu}-\partial^\lambda \partial_\mu h_{\rho \nu}\right)+\mathcal{O}\left(h^2\right) \\
-R_{\mu \nu} & =\frac{1}{2}\left(\partial_\nu \partial_\lambda h_\mu^\lambda+\partial_\mu \partial_\lambda h_\nu^\lambda-\partial^\lambda \partial_\lambda h_{\mu \nu}-\partial_\mu \partial_\nu h_\lambda^\lambda\right)+\mathcal{O}\left(h^2\right) \\
-R &= \frac{1}{2 }\left(\partial^\mu \partial^\nu h_{\mu \nu}-\partial^\mu \partial_\mu h_\nu^\nu\right)+\mathcal{O}\left(h^2\right) \\
-G_{\mu\nu} &= \frac{1}{2}\left(\partial_\lambda \partial_\mu h_\nu^\lambda+\partial_\lambda \partial_\nu h_\mu^\lambda-\partial_\mu \partial_\nu h-\square h_{\mu \nu}-\eta_{\mu \nu} \partial_\rho \partial_\lambda h^{\rho \lambda}+\eta_{\mu \nu} \square h\right) 
-\end{align}
-where $h$ is the trace of $h_{\mu\nu}$ and $\square$ is equal to $\eta^{\mu\nu}\partial_{\mu\nu}$, also known as the d'Alembert or box operator. 
-
-After linearising the field equation, we get
+where $\eta_{\mu\nu}$ is the metric in the flat space also known as the Minkowski metric. Choosing a coordinate system to demand $\left|h_{\mu\nu}\right| << 1$ breaks the coordinate invariance of the theory, we address this issue later. Using linearised metric of Eq.~\eqref{eq:line_approx}, we linearise Eq.~\eqref{eq:einstein_tensor_ricci} to Eq.~\eqref{eq:christoffel_symbols}. We start with Christoffel symbols,
 \begin{equation}
-    \label{eq:lineq}
-    \Box \bar{h}_{\mu\nu} = -16\pi T_{\mu\nu}
+\Gamma^{\rho}_{\mu\nu} = \frac{1}{2}\left( \partial_\mu h^{\rho}_{\nu} + \partial_\nu h^{\rho}_{\mu} - \partial^{\rho} h_{\mu\nu} \right) + \mathcal{O}(h^2), \\
 \end{equation}
-\subsubsection{Gravitational waves: solution to field equation in vacuum}
-To solve the linearised field equation far away from the source (which where our GW detectors are), we can assume that the stress-energy is equal to zero. Therefore, Eq.~\eqref{lineq} reduces to 
+then linearize Riemann tensor,
+\begin{equation}
+R_{~\rho \mu \nu}^\lambda = \frac{1}{2}\left(\partial_{\rho \mu}^2 h_\nu^\lambda-\partial_\rho \partial_\nu h_\mu^\lambda+\partial^\lambda \partial_\nu h_{\rho \mu}-\partial^\lambda \partial_\mu h_{\rho \nu}\right)+\mathcal{O}\left(h^2\right),
+\end{equation}
+linearize Ricci tensor and scalar,
+\begin{align}
+R_{\mu \nu} &=\frac{1}{2}\left(\partial_\nu \partial_\lambda h_\mu^\lambda+\partial_\mu \partial_\lambda h_\nu^\lambda-\partial^\lambda \partial_\lambda h_{\mu \nu}-\partial_\mu \partial_\nu h_\lambda^\lambda\right)+\mathcal{O}\left(h^2\right), \\
+R &= \frac{1}{2 }\left(\partial^\mu \partial^\nu h_{\mu \nu}-\partial^\mu \partial_\mu h_\nu^\nu\right)+\mathcal{O}\left(h^2\right),
+\end{align} 
+and finally linearize Einstein tensor,
+\begin{equation}
+\label{eq:einstein_tensor}
+G_{\mu\nu} = \frac{1}{2}\left(\partial_\lambda \partial_\mu h_\nu^\lambda+\partial_\lambda \partial_\nu h_\mu^\lambda-\partial_\mu \partial_\nu h-\square h_{\mu \nu}-\eta_{\mu \nu} \partial_\rho \partial_\lambda h^{\rho \lambda}+\eta_{\mu \nu} \square h\right).
+\end{equation}
+where $h$ is the trace of $h_{\mu\nu}$ and $\square$ is equal to $\eta^{\mu\nu}\partial_{\mu\nu}$, also known as the d'Alembert or box operator. We introduce the trace-reversed $\bar{h}_{\mu\nu}$ to simplify Eq.~\eqref{eq:einstein_tensor}.
+\begin{equation}
+    \label{eq:g_hbar}
+G_{\mu \nu}=\frac{1}{2}\left(\partial^\lambda \partial_\nu \bar{h}_{\mu \lambda}+\partial^\lambda \partial_\mu \bar{h}_{\nu \lambda}-\square \bar{h}_{\mu \nu}-\eta_{\mu \nu} \partial^\lambda \partial^\rho \bar{h}_{\lambda \rho}\right)
+\end{equation}
+Since we made a choice for coordinate system in Eq.~\eqref{eq:line_approx}, the invariance of the theory is broken. We can partially restore this by choosing the harmonic gauge, 
+\begin{equation}
+\partial^{\nu}\bar{h}_{\mu\nu} = 0,
+\end{equation}
+for transformations $x^{\mu} \rightarrow x^{\mu} + \xi^{\mu}$ where we need to ensure that $\left|\partial_{\nu}\xi_{\mu}\right|\lesssim\left|h_{\mu\nu}\right|$ so that perturbations are small. In harmonic gauge, Eq.\eqref{eq:g_hbar} furhter simplifies to,
+\begin{equation}
+    \label{eq:liner_last}
+    G_{\mu \nu} = -\frac{1}{2}\square \bar{h}_{\mu \nu} = 8\pi T_{\mu\nu},
+\end{equation}
+the linearised field equation. 
+
+\subsubsection{Gravitational waves as solution to linearised field equation in vacuum}
+To solve the linearised field equation far away from the source (which where our GW detectors are), we can assume that the stress-energy is equal to zero. Therefore, Eq.~\eqref{eq:liner_last} reduces to 
 \begin{equation}
     \label{eq:waveq}
     \Box \bar{h}_{\mu\nu} = 0.
 \end{equation}
 Eq.~\eqref{eq:waveq} is a wave equation as it admits plane-wave solutions, 
 \begin{align}
-    \bar{h} &= A_{\mu\nu} \cos{\left(k_{\alpha}x^{\alpha}\right)},\\
-    k_{\mu}^{\mu} &= 0.
+    \bar{h}_{\mu\nu} &= A_{\mu\nu} \cos{\left(k_{\alpha}x^{\alpha}\right)}
 \end{align}
-which are the perturbation of a flat spacetime far away from the source that produced them, i.e. gravitational waves. 
+which are the perturbation of a flat spacetime far away from the source or gravitational waves in vacuum. To satisfy the wave-equation, $k_{\alpha}k^{\alpha}$ should be equal to zero, meaning GWs in vacuum travel at the speed of light. The harmonic gauge ensures that 
+\begin{equation}
+    k^{\mu}A_{\mu\nu} = 0,
+\end{equation}
+so GWs are transverse, i.e., the polarization of the waves are perpendicular to the direction of propagation.  
 
 \subsubsection{Plus and cross polarization}
-Due to Lorenz gauge, 
+Let us now count the degrees of freedom of the metric perturbation $\bar{h}_{\mu\nu}$. We start with 16 which which is the number of degrees of freedom of a $4x4$ tensor. From 16, 6 are restricted due to $\bar{h}_{\mu\nu}$ being symmetric. From the remaining 10, 4 are restricted by harmonic gauge and 4 more are restricted by choosing $\box\xi_\mu = 0$. Therefore, the metric perturbation in transverse-traceless gauge $\bar{h}^{TT}_{\mu\nu}$ has 2 degrees of freedom which we call the plus and cross polarizations. For a gravitational wave travelling in $z$-direction, we can write,
 \begin{equation}
-    k^{\mu}A_{\mu\nu} = 0, 
-\end{equation}
-which means a gravitational wave does not have a component in the direction of their propagation, i.e., it is a transverse wave. 
-
-The metric perturbation $\bar{h}_{\mu\nu}$ has 16 apparent degrees of freedom due to it being $4\times4$ tensor. From 16, 6 are restricted since $h_{\mu\nu}$ is symmetric in $\mu$ and $\nu$. From the remaining 10, 4 are restricted by Lorenz guage and 4 are restricted by transverse-traceless (TT) guage,
-\begin{align}
-    \bar{h_{0\mu}} &= 0, \\
-    \bar{h^{\mu}_{\mu}} &= 0.
-\end{align}
-Therefore, $h_{\mu\nu}$ is a tensor with $16-6-4-4 = 2$ degrees of freedom which are known as the plus and cross polarization of the GWs. 
-\[
 h^{TT}_{\mu\nu} =
 \begin{pmatrix}
 0 & 0 & 0 & 0 \\
@@ -118,7 +119,8 @@ h^{TT}_{\mu\nu} =
 0 & h_{\times} & -h_{+} & 0 \\
 0 & 0 & 0 & 0
 \end{pmatrix}
-\]
+\end{equation}
+
 \section{Generation of gravitational waves}
 
 \section{Source frame to detector frame projection}
