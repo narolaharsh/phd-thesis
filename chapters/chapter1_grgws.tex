@@ -120,9 +120,24 @@ h^{TT}_{\mu\nu} =
 0 & 0 & 0 & 0
 \end{pmatrix}
 \end{equation}
-for a gravitational wave propagating along in $z$-direction.
+for a gravitational wave propagating along in $z$-direction. Effect of gravitational waves on beads of rings. 
 
 \section{Generation of gravitational waves}
+Moving on from the discussion on the vacuum solution, we now consider a scenario where the stress-energy tensor is non-zero. 
+\begin{equation}
+    \square \bar{h}_{\mu \nu} = -16\pi T_{\mu\nu},
+\end{equation}
+a formal solution to this problem can be written down using the Green's function with appropriate boundry conditions. In this case, we impose that there is no incoming radiation. The solution then is,
+\begin{equation}
+    \bar{h}_{\mu \nu}(t, \vec{x})=4 \int d^3 \vec{y} \frac{T_{\mu \nu}(t-|\vec{x}-\vec{y}|, \vec{y})}{|\vec{x}-\vec{y}|},
+\end{equation}
+where $\vec{x}$ is the distance to the source, $\vec{y}$ is restricted within the source, and $|\vec{x}|<<|\vec{y}|$. We still restrict ourselves to a scenario where the distance between us and the source is much larger then the length scale of the source. Projection operator. 
+\begin{equation}
+    \bar{h}^{TT}_{\mu \nu}(t, \vec{x}) =4 \Lambda_{i j k l} \int d^3 \vec{y} \frac{T_{k l}(t-|\vec{x}-\vec{y}|, \vec{y})}{|\vec{x}-\vec{y}|} .
+\end{equation}
+Such scenarios are often encountered when computing electric potential of an arbitrary charge distribution. A routienly employed approch to this problem is the multipolar expansion. 
+
+
 
 \section{Source frame to detector frame projection}
 Gravitational wave detectors are sensitive to the following linear combination of the plus and cross polarization of a GW signal
