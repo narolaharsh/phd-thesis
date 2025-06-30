@@ -94,7 +94,7 @@ for transformations $x^{\mu} \rightarrow x^{\mu} + \xi^{\mu}$ where we need to e
 \end{equation}
 the linearised field equation. 
 
-\subsubsection{Gravitational waves as solution to linearised field equation in vacuum}
+\subsection{Solution in vacuum}
 To solve the linearised field equation far away from the source (which where our GW detectors are), we can assume that the stress-energy is equal to zero. Therefore, Eq.~\eqref{eq:liner_last} reduces to 
 \begin{equation}
     \label{eq:waveq}
@@ -111,7 +111,7 @@ which are the perturbation of a flat spacetime far away from the source or gravi
 so GWs are transverse, i.e., the polarization of the waves are perpendicular to the direction of propagation.  
 
 \subsubsection{Plus and cross polarization}
-Let us now count the degrees of freedom of the metric perturbation $\bar{h}_{\mu\nu}$. We start with 16 which which is the number of degrees of freedom of a $4x4$ tensor. From 16, 6 are restricted due to $\bar{h}_{\mu\nu}$ being symmetric. From the remaining 10, 4 are restricted by harmonic gauge and 4 more are restricted by choosing $\box\xi_\mu = 0$. Therefore, the metric perturbation in transverse-traceless gauge $\bar{h}^{\mathrm{TT}}_{\mu\nu}$ has 2 degrees of freedom which we call the plus and cross polarizations, 
+Let us now count the degrees of freedom of the metric perturbation $\bar{h}_{\mu\nu}$. We start with 16 which which is the number of degrees of freedom of a $4\times4$ tensor. From 16, 6 are restricted due to $\bar{h}_{\mu\nu}$ being symmetric. From the remaining 10, 4 are restricted by harmonic gauge and 4 more are restricted by choosing $\box\xi_\mu = 0$. Therefore, the metric perturbation in transverse-traceless gauge $\bar{h}^{\mathrm{TT}}_{\mu\nu}$ has 2 degrees of freedom which we call the plus and cross polarizations, 
 \begin{equation}
 h^{\mathrm{TT}}_{\mu\nu} =
 \begin{pmatrix}
@@ -123,27 +123,36 @@ h^{\mathrm{TT}}_{\mu\nu} =
 \end{equation}
 for a gravitational wave propagating along in $z$-direction. Effect of gravitational waves on beads of rings. 
 
-\section{Generation of gravitational waves}
+\subsection{Solutions far away from a source}
 Moving on from the discussion on the vacuum solution, we now consider a scenario where the stress-energy tensor is non-zero,
 \begin{equation}
     \square \bar{h}_{\mu \nu} = -16\pi T_{\mu\nu}.
 \end{equation}
-One can draw analogy here from the calculations does in electrodynamics to calculate electric potential of a arbitrary charge distribution. Similary, we use here the retarded Green's function with appropriate boundry conditions. We assume that there is no incoming radiation and our distance to source $(\vec{x})$ is much larger then the length scale of the source $(d)$.
+Here, we can draw analogy from the calculation of electromagnetic radiation from arbitrary charge distribution at a distance, done using multipole expansion. Each term in the series obtained using multipole expansion approximates the spatial distribution of the source and represents the contribution to far-field radiation in decreasing order. First term (also known as the monopole term) in the expansion is simply the total charge which does not contribute to the electromagnetic radiation due to law of conservation of electric charge. Therefore, the dominant contribution here is due to the dipole term.  
+
+Similarly, before writing down equations, we can argue that the gravitational radiation does not have a contribution from the monopole term due to conservation of mass. Unlike the electromagnetic radiation, the lowest order contribution to the gravitational radiation is the quadrupole term. The mass dipole term $(\approx \Sigma m_i\vec{x}_i)$ can be made zero constant by moving to the center of mass frame of the system. We cannot do the same in the case of electromagnetic radiation since charges (unlike mass) can be negative. While the mass and 
+
+Similary, we use here the retarded Green's function with appropriate boundry conditions. We assume that there is no incoming radiation and our distance to source $(\vec{x})$ is much larger then the length scale of the source $(d)$.
 \begin{equation}
     \bar{h}^{\mathrm{TT}}_{ij}(t, \vec{x}) =4 \Lambda_{i j k l} \int d^3 \vec{y} \frac{T^{k l}(t-|\vec{x}-\vec{y}|, \vec{y})}{|\vec{x}-\vec{y}|} .
 \end{equation}
 here $\vec{y}$ is contained within the source. Expanding the distance $|\vec{x}-\vec{y}|$ measurement,
 \begin{equation}
-    |\vec{x}-\vec{y}| = x - \vec{y}\cdot\hat{n} + \mathcal{O}\left(\frac{d^2}{x}\right),
+    |\vec{x}-\vec{y}| = r - \vec{y}\cdot\hat{n} + \mathcal{O}\left(\frac{d^2}{x}\right),
 \end{equation} 
 and the stress-energy tensor around $t-x$,
 \begin{align}
-        T^{k l}(t-x+\vec{y} \cdot \hat{n}, \vec{y}) &\approx~T^{k l}(t-x, \vec{y})+ (\vec{y} \cdot \hat{n}) \partial_0 T^{k l}(t-x, \vec{y}) \\
-        & +\frac{1}{2} (\vec{y} \cdot \hat{n})^2 \partial_0 \partial_0 T^{k l}(t-x, \vec{y})+\ldots
+        T^{k l}(t-r+\vec{y} \cdot \hat{n}, \vec{y}) &\approx~T^{k l}(t-r, \vec{y})+ (y^a n_a) \partial_0 T^{k l}(t-r, \vec{y}) \\
+        & +\frac{1}{2} (y^a n_a) (y^b n_b) \partial_0 \partial_0 T^{k l}(t-r, \vec{y})+\ldots
 \end{align}
-To the leading order, 
+The monopole moment and the dipole moment will be zero due to mass and energy conservation.  
+\begin{align}
+    \bar{h}^{\mathrm{TT}}_{ij}(t, \vec{x}) &= 4 \Lambda_{i j k l} \int d^3 \vec{y}~T^{k l}(t-r, \vec{y}) \\
+    &= \frac{2}{r} \Lambda_{ijkl} \ddot{M}^{kl}(t-r)
+\end{align}
+Remove the line below
 \begin{equation}
-    h_{ij}^{\mathrm{TT}} = \frac{2}{r}\Lambda_{ijkl}\ddot{M}^{kl}(t-x)
+    h_{ij}^{\mathrm{TT}} = \frac{2}{r}\Lambda_{ijkl}\ddot{M}^{kl}(t-r)
 \end{equation}
 \section{Source frame to detector frame projection}
 Gravitational wave detectors are sensitive to the following linear combination of the plus and cross polarization of a GW signal
