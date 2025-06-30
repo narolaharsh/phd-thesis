@@ -1,6 +1,7 @@
+
 \iffalse
 \begin{itemize}
-    \item{Lorenz gauge and TT gauge}
+    \item{Lorenz gauge and \mathrm{TT} gauge}
     \item{linearised field equation}
 \end{itemize}
 
@@ -53,7 +54,7 @@ Intuitively, the metric tensor introduces the notion of distance and angles on a
 
 The Einstein field Eq.~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions (also known as the gravitational waves), Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
 
-\section{linearised Einstein field equation}
+\section{Linearised Einstein field equation}
 For simplicity, let us first attempt to solve for the metric tensor when gravity is weak. We expand $g_{\mu\nu}$ as a sum of flat space metric and linear perturbation tensor $h_{\mu\nu}$ when the gravity is weak for some coordinate system,
 \begin{equation}
     \label{eq:line_approx}
@@ -110,9 +111,9 @@ which are the perturbation of a flat spacetime far away from the source or gravi
 so GWs are transverse, i.e., the polarization of the waves are perpendicular to the direction of propagation.  
 
 \subsubsection{Plus and cross polarization}
-Let us now count the degrees of freedom of the metric perturbation $\bar{h}_{\mu\nu}$. We start with 16 which which is the number of degrees of freedom of a $4x4$ tensor. From 16, 6 are restricted due to $\bar{h}_{\mu\nu}$ being symmetric. From the remaining 10, 4 are restricted by harmonic gauge and 4 more are restricted by choosing $\box\xi_\mu = 0$. Therefore, the metric perturbation in transverse-traceless gauge $\bar{h}^{TT}_{\mu\nu}$ has 2 degrees of freedom which we call the plus and cross polarizations, 
+Let us now count the degrees of freedom of the metric perturbation $\bar{h}_{\mu\nu}$. We start with 16 which which is the number of degrees of freedom of a $4x4$ tensor. From 16, 6 are restricted due to $\bar{h}_{\mu\nu}$ being symmetric. From the remaining 10, 4 are restricted by harmonic gauge and 4 more are restricted by choosing $\box\xi_\mu = 0$. Therefore, the metric perturbation in transverse-traceless gauge $\bar{h}^{\mathrm{TT}}_{\mu\nu}$ has 2 degrees of freedom which we call the plus and cross polarizations, 
 \begin{equation}
-h^{TT}_{\mu\nu} =
+h^{\mathrm{TT}}_{\mu\nu} =
 \begin{pmatrix}
 0 & 0 & 0 & 0 \\
 0 & h_{+} & h_{\times} & 0 \\
@@ -123,22 +124,27 @@ h^{TT}_{\mu\nu} =
 for a gravitational wave propagating along in $z$-direction. Effect of gravitational waves on beads of rings. 
 
 \section{Generation of gravitational waves}
-Moving on from the discussion on the vacuum solution, we now consider a scenario where the stress-energy tensor is non-zero. 
+Moving on from the discussion on the vacuum solution, we now consider a scenario where the stress-energy tensor is non-zero,
 \begin{equation}
-    \square \bar{h}_{\mu \nu} = -16\pi T_{\mu\nu},
+    \square \bar{h}_{\mu \nu} = -16\pi T_{\mu\nu}.
 \end{equation}
-a formal solution to this problem can be written down using the Green's function with appropriate boundry conditions. In this case, we impose that there is no incoming radiation. The solution then is,
+One can draw analogy here from the calculations does in electrodynamics to calculate electric potential of a arbitrary charge distribution. Similary, we use here the retarded Green's function with appropriate boundry conditions. We assume that there is no incoming radiation and our distance to source $(\vec{x})$ is much larger then the length scale of the source $(d)$.
 \begin{equation}
-    \bar{h}_{\mu \nu}(t, \vec{x})=4 \int d^3 \vec{y} \frac{T_{\mu \nu}(t-|\vec{x}-\vec{y}|, \vec{y})}{|\vec{x}-\vec{y}|},
+    \bar{h}^{\mathrm{TT}}_{ij}(t, \vec{x}) =4 \Lambda_{i j k l} \int d^3 \vec{y} \frac{T^{k l}(t-|\vec{x}-\vec{y}|, \vec{y})}{|\vec{x}-\vec{y}|} .
 \end{equation}
-where $\vec{x}$ is the distance to the source, $\vec{y}$ is restricted within the source, and $|\vec{x}|<<|\vec{y}|$. We still restrict ourselves to a scenario where the distance between us and the source is much larger then the length scale of the source. Projection operator. 
+here $\vec{y}$ is contained within the source. Expanding the distance $|\vec{x}-\vec{y}|$ measurement,
 \begin{equation}
-    \bar{h}^{TT}_{\mu \nu}(t, \vec{x}) =4 \Lambda_{i j k l} \int d^3 \vec{y} \frac{T_{k l}(t-|\vec{x}-\vec{y}|, \vec{y})}{|\vec{x}-\vec{y}|} .
+    |\vec{x}-\vec{y}| = x - \vec{y}\cdot\hat{n} + \mathcal{O}\left(\frac{d^2}{x}\right),
+\end{equation} 
+and the stress-energy tensor around $t-x$,
+\begin{align}
+        T^{k l}(t-x+\vec{y} \cdot \hat{n}, \vec{y}) &\approx~T^{k l}(t-x, \vec{y})+ (\vec{y} \cdot \hat{n}) \partial_0 T^{k l}(t-x, \vec{y}) \\
+        & +\frac{1}{2} (\vec{y} \cdot \hat{n})^2 \partial_0 \partial_0 T^{k l}(t-x, \vec{y})+\ldots
+\end{align}
+To the leading order, 
+\begin{equation}
+    h_{ij}^{\mathrm{TT}} = \frac{2}{r}\Lambda_{ijkl}\ddot{M}^{kl}(t-x)
 \end{equation}
-Such scenarios are often encountered when computing electric potential of an arbitrary charge distribution. A routienly employed approch to this problem is the multipolar expansion. 
-
-
-
 \section{Source frame to detector frame projection}
 Gravitational wave detectors are sensitive to the following linear combination of the plus and cross polarization of a GW signal
 \begin{equation}
