@@ -94,7 +94,7 @@ for transformations $x^{\mu} \rightarrow x^{\mu} + \xi^{\mu}$ where we need to e
 \end{equation}
 the linearised field equation. 
 
-\subsection{Solution in vacuum}
+\subsection{Solutions in vacuum}
 To solve the linearised field equation far away from the source (which where our GW detectors are), we can assume that the stress-energy is equal to zero. Therefore, Eq.~\eqref{eq:liner_last} reduces to 
 \begin{equation}
     \label{eq:waveq}
@@ -162,11 +162,31 @@ The momenta $T^{kl}$ depend on the distribution of stresses inside the body whic
     \bar{h}^{\mathrm{TT}}_{ij}(t, \vec{x}) = \frac{2}{r} \Lambda_{ijkl} \frac{\partial^2}{\partial t^2}{M}^{kl}(t-r),
 \end{equation}
 where $M^{kl} = \int \mathrm{d}\vec{y} T^{00} y^ky^l$. 
-\section{Source frame to detector frame projection}
-Gravitational wave detectors are sensitive to the following linear combination of the plus and cross polarization of a GW signal
+\section{Gravitational wave detectors}
+Ground-based GW detectors are Michaelson interferometers. A schematic diagram of an L-shaped interferometer is shown in Figure~\ref{fig:det_l}. A laser beam split into two travel through each arm. The light bounces back from the mirrors at the end of the arm. The laser travels equal distance in each arm in the abscence of any external disturbances, e.g. a gravitational wave. When a gravitational wave passes by, it periodically stretches and squeezes the arms and the light no longer travels the same distance in both arms. The collected light contains constructive and destructive interference which is used to measure the strain of the gravitational waves. The strain is proportional to relative the change in arm length 
 \begin{equation}
-    h(t) = F_+h_+(t) + F_{\times}h_{\times}(t),
+    h(t) =  \frac{\Delta L}{L},
 \end{equation}
+and GW detectors measure the following linear combination of plus and cross polarization of a GW signal,
+\begin{equation}
+    h(t) =  \frac{\Delta L}{L} = F_+h_+(t) + F_{\times}h_{\times}(t).
+\end{equation}
+Figure~\ref{fig:triangle} shows a simple schematic representation of the triangular geometry of Einstein Telescope. 
+\begin{figure}
+    \centering
+    \includegraphics[width=.4\textwidth]{../figures/simple_detector.pdf}
+    \caption{Schematic diagram of an L-shaped laser interferometer. The labels denote following objects. LS: Source of laser. B: Beam splitter. M: Mirror. P: Photo diode. The arm-length is marked by L which is the distance between the input and output mirror in the given arm.}
+    \label{fig:}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=.75\textwidth]{../figures/triangle_detector.pdf}
+    \caption{Simply layout of the triangular design of Einstein Telescope. It consists of 3 V-shaped interferometers with an opening angle of 60 degrees. The object notations are same as those shown in L-shpaed interferometer.}
+    \label{fig:triangle}
+\end{figure}
+
+
 where $F_+$ and $F_{\times}$ are called antenna pattern functions of the detector. They enable the projection of the GW polarizations from source frame to the detector frame. Each $F_i$ is a function of four parameters, 
 \begin{equation}
     F_i := F_i(\alpha, \delta, \psi, t_c),
