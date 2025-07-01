@@ -163,22 +163,20 @@ The momenta $T^{kl}$ depend on the distribution of stresses inside the body whic
 \end{equation}
 where $M^{kl} = \int \mathrm{d}\vec{y} T^{00} y^ky^l$. 
 \section{Gravitational wave detectors}
-Ground-based GW detectors are Michaelson interferometers. A schematic diagram of an L-shaped interferometer is shown in Figure~\ref{fig:det_l}. A laser beam split into two travel through each arm. The light bounces back from the mirrors at the end of the arm. The laser travels equal distance in each arm in the abscence of any external disturbances, e.g. a gravitational wave. When a gravitational wave passes by, it periodically stretches and squeezes the arms and the light no longer travels the same distance in both arms. The collected light contains constructive and destructive interference which is used to measure the strain of the gravitational waves. The strain is proportional to relative the change in arm length 
-\begin{equation}
-    h(t) =  \frac{\Delta L}{L},
-\end{equation}
-and GW detectors measure the following linear combination of plus and cross polarization of a GW signal,
-\begin{equation}
-    h(t) =  \frac{\Delta L}{L} = F_+h_+(t) + F_{\times}h_{\times}(t).
-\end{equation}
-Figure~\ref{fig:triangle} shows a simple schematic representation of the triangular geometry of Einstein Telescope. 
 \begin{figure}
     \centering
     \includegraphics[width=.4\textwidth]{../figures/simple_detector.pdf}
     \caption{Schematic diagram of an L-shaped laser interferometer. The labels denote following objects. LS: Source of laser. B: Beam splitter. M: Mirror. P: Photo diode. The arm-length is marked by L which is the distance between the input and output mirror in the given arm.}
-    \label{fig:}
+    \label{fig:del_l}
 \end{figure}
+Ground-based GW detectors such as LIGO, Virgo, and KAGRA, work on the principles of interferometry. By observing the constructive and destructive interference, they can measure very small changes in length. The configuration of ground-based detectors is that of a Michaelson interferometer. 
 
+A schematic diagram of an L-shaped interferometer is shown in Figure~\ref{fig:det_l}. A laser beam split into two travel through each arm. The light bounces back from the mirrors at the end of the arm. The laser travels equal distance in each arm in the abscence of an external disturbances, e.g. a gravitational wave. When a gravitational wave passes by, it periodically stretches and squeezes the arms so the light no longer travels the same distance in both arms. By observing the constructive and destructive interference pattern in the light collect by the photo diode, we can measure the strain $(h(t))$ of the gravitational wave signal. The strain is proportional to relative the change in arm length 
+\begin{equation}
+    h(t) =  \frac{\Delta L}{L},
+\end{equation}
+where $L$ denotes the arm length. 
+We also show a simple schematic representation of the triangular geometry of Einstein Telescope in~Figure~\ref{fig:triangle}. 
 \begin{figure}
     \centering
     \includegraphics[width=.75\textwidth]{../figures/triangle_detector.pdf}
@@ -186,8 +184,12 @@ Figure~\ref{fig:triangle} shows a simple schematic representation of the triangu
     \label{fig:triangle}
 \end{figure}
 
+GW detectors measure the following linear combination of plus and cross polarization of a GW signal,
+\begin{equation}
+    h(t) =  \frac{\Delta L}{L} = F_+h_+(t) + F_{\times}h_{\times}(t).
+\end{equation}
 
-where $F_+$ and $F_{\times}$ are called antenna pattern functions of the detector. They enable the projection of the GW polarizations from source frame to the detector frame. Each $F_i$ is a function of four parameters, 
+Here, $F_+$ and $F_{\times}$ are called antenna pattern functions of the detector. They enable the projection of the GW polarizations from source frame to the detector frame. Each $F_i$ is a function of four parameters, 
 \begin{equation}
     F_i := F_i(\alpha, \delta, \psi, t_c),
 \end{equation}
@@ -200,4 +202,4 @@ the right ascension ($\alpha$), declination ($\delta$), polarization angle ($\ps
     \label{fig:antenna_pattern}
 \end{figure}
 
-Figure~\ref{fig:antenna_pattern} shows the antenna pattern functions of the Virgo detector. We plot the $F_+$ and $F_{\times}$ over the whole sky by varying right ascension from $-\pi$ to $\pi$ and declination to $-\pi/2$ to $\pi/2$, at the time of arrival of GW170817. 
+Figure~\ref{fig:antenna_pattern} shows the antenna pattern functions of the Virgo detector. We plot the $F_+$ and $F_{\times}$ over the whole sky by varying right ascension from $-\pi$ to $\pi$ and declination to $-\pi/2$ to $\pi/2$, at the time of arrival of the first detection of a gravitational wave signal from a binary neutron star merger. 
