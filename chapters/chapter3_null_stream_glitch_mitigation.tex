@@ -7,9 +7,6 @@
     \label{fig:qscan_null}
 \end{figure}
 \fi
-When occuring in the vicinity of a GW signal, glitches (or transient noises) can corrupt the signal. Signal-overlapping glitches need to be carefully removed before measuring the GW source parameters. Such glitches are problematic for the LIGO-Virgo interferometers as nearly $\sim 20$ out of 90 confident detection across three observation runs required some form of glitch mitigation and this number will keep growing as we collect more data. 
-
-While glitch mitigation is an active area of research for current detectors, it is yet to recieve similar attention in the context of 3G-detectors. In Table~\ref{tab:glitch_diff}, we compare the problem posed by glitches for the LIGO-Virgo and the 3G interferometers. Glitches could turn out to be a major bottelneck in transitioning to the precision science era. In this chapter, we introduce the \texttt{nijntje} -- a null stream inspired noise transient elimination framework to tackle this problem.   
 
 \begin{table}[h!]
     \centering
@@ -39,18 +36,31 @@ While glitch mitigation is an active area of research for current detectors, it 
     \caption{Problem posed by glitches in LIGO-Virgo interferometers versus third-generation interferometers.}
     \label{tab:glitch_diff}
 \end{table}
+When occuring in the vicinity of a GW signal, glitches (or transient noises) can corrupt the signal. Signal-overlapping glitches need to be carefully removed before measuring the GW source parameters. Such glitches are problematic for the LIGO-Virgo interferometers as nearly $\sim 20$ out of 90 confident detection across three observation runs required some form of glitch mitigation and this number will keep growing as we collect more data. 
 
-\subsection{The null stream of the Einstein Telescope}
+
+
+
+While glitch mitigation is an active area of research for current detectors, it is yet to recieve similar attention in the context of 3G-detectors. In Table~\ref{tab:glitch_diff}, we compare the problem posed by glitches for the LIGO-Virgo and the 3G interferometers. Glitches could turn out to be a major bottelneck in transitioning to the precision science era. In this chapter, we introduce the \texttt{nijntje} -- a null stream inspired noise transient elimination framework to tackle this problem.   
+
+\section{The null stream of the Einstein Telescope}
 The null stream is a linear combination of the data from a network of interferometers such that the GW signal cancels out. For the triangular geometry of the Einstein Telescope this linear combination is simply the sum of the data from three detectors. 
 
 \begin{equation}
     \vec{d}_i = F_{+, i} h_+ + F_{\times, i} h_{\times}
 \end{equation}
 
+[Place holder figure of null stream antenna pattern functions]
 
-\subsection{Toy model}
-\section{Glitch mitigation without null stream: comparison between the triangle and 2L}
-\section{Caveats}
+\section{A null-stream inspired noise transient elimination (\texttt{nijntje}) framework}
+\begin{figure}
+    \centering
+    \includegraphics[width=16cm]{../figures/assemble_nijntje.pdf}
+    \caption{The blue box outlines the workflow of \texttt{nijntje} algorithm. \textit{Step 1}: Construct the null stream by summing the strain data from three interferometers. \textit{Step 2}: Using the null stream data and an RJMCMC method, perform an unmodelled reconstruction of the glitch timeseries. \textit{Step 3}: Find the glitch timeseries which corresponds to the median of the posterior samples and subtract it from $\mathrm{ET}_1$ frame. \textit{Step 4} (Optional): Perform parameter estimation using the cleaned data from $\mathrm{ET}_1$, and the existing data from $\mathrm{ET}_2$ and $\mathrm{ET}_3$ to verify the accuracy.}
+    \label{fig:nijntje_chart}
+\end{figure}
+
+\section{Comparison between the triangle and L-shpaed interferometer}
 \begin{figure}
     \centering
     \includegraphics[width=10cm]{../figures/et2l_delta_glitch_overlap_glitch_master.pdf}
@@ -79,10 +89,6 @@ The null stream is a linear combination of the data from a network of interferom
     \label{fig:trend_delta}
 \end{figure}
 
-\begin{figure}
-    \centering
-    \includegraphics[width=16cm]{../figures/assemble_nijntje.pdf}
-    \caption{The blue box outlines the workflow of \texttt{nijntje} algorithm. \textit{Step 1}: Construct the null stream by summing the strain data from three interferometers. \textit{Step 2}: Using the null stream data and an RJMCMC method, perform an unmodelled reconstruction of the glitch timeseries. \textit{Step 3}: Find the glitch timeseries which corresponds to the median of the posterior samples and subtract it from $\mathrm{ET}_1$ frame. \textit{Step 4} (Optional): Perform parameter estimation using the cleaned data from $\mathrm{ET}_1$, and the existing data from $\mathrm{ET}_2$ and $\mathrm{ET}_3$ to verify the accuracy.}
-    \label{fig:nijntje_chart}
-\end{figure}
+\section{Caveats}
+
 
