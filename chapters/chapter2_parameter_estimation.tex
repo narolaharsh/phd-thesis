@@ -1,4 +1,4 @@
-A GW signal emmited during the merger of two compact objects can be typically modelled using 15 parameters. Eight of them are considered intrinsic parameters; two for the masses and six for three dimensional spins of the two objects. The rest of them, e.g. sky location, distance, are considered extrinsic parameters. If one of the compact object is a neutron star, an additonal intrinsic parameter is added to model its tidal deformibility. Measurement of these parameters is a key step which enables various physics related insigts from the data, e.g. testing the prediction of the general relativiy, constraining the neutron star equation of state. In this chapter, I illustrate how the parameters of merging binary black holes and/or neutron stars are measured from a GW signal. 
+Gravitational wave signals emitted by merger of two compact object are routienly detected by current generation of GW detectors. Such a GW signal can be typically modelled using 15 parameters. Eight of them are considered intrinsic parameters; two for the masses and six for three dimensional spins of the two objects. The rest of them, e.g. sky location, distance, are considered extrinsic parameters. If one of the compact object is a neutron star, an additional intrinsic parameter is added to model its tidal deformibility. Measurement of these parameters is a key step which enables various physics related insights from the data, e.g. testing the prediction of the general relativiy, constraining the neutron star equation of state. In this chapter, I illustrate how the parameters of merging binary black holes and/or neutron stars are measured from a GW signal. 
 
 \section{What counts as a measurement?}
 
@@ -20,7 +20,7 @@ We formalize the problem of converting the prior probability distribution to the
 where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}$ which is typically assumed to be uniform. The term $p(\vec{d} | \vec{\theta})$ is the likelihood of observing data given the parameters $\vec{\theta}$. The term $p(\vec{d})$ can be treated as the normalization term for the time being. This term is typically known as the evidence if we use Bayes theorem to test competing hypothesis. Figure~\ref{fig:prior_post} shows an illustration of the prior probability distribution (blue) and the posterior probability distribution (red) of the parameter $(D_{\mathrm{L}})$ where the latter is obtained by updating the prior weights by the weight of likelihood (green) for the corresponding value.
 
 \subsection{Gravitational wave likelihood}
-While the Bayesian framework described above is conceptually easy, it is a computationally challenging task to do parameter estimation due to the dimensionality of the space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal models. Before diving into how the we tackle these issues, let us define a few standard quantites used during the computation, starting with the likelihood function $p(\vec{d} | \vec{\theta})$ itself
+While the Bayesian framework described above is conceptually easy, it is a computationally challenging task to do parameter estimation due to the dimensionality of the space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal models. Before diving into how the we tackle these issues, let us define a few standard quantities used during the computation, starting with the likelihood function $p(\vec{d} | \vec{\theta})$ itself
 \begin{figure}
     \centering
     \includegraphics[width=8cm]{../figures/white_noise_distribution.pdf}
@@ -33,17 +33,17 @@ While the Bayesian framework described above is conceptually easy, it is a compu
     \label{eq:likelihood}
     \ln{p(\vec{d} | \vec{\theta})} = -\frac{1}{2}\left<\vec{d} - \vec{h}(\vec{\theta}) | \vec{d} - \vec{h}(\vec{\theta})\right>,
 \end{equation}
-where $\vec{h}$ denotes the GW signal model computed as a function of the source paraemters $\vec{\theta}$. The brackets $\left<.|.\right>$ denote the noise weighted inner product 
+where $\vec{h}$ denotes the GW signal model computed as a function of the source paraemters $\vec{\theta}$~\cite{Pratten:2020ceb,Ramos-Buades:2023ehm}. The brackets $\left<.|.\right>$ denote the noise weighted inner product 
 \begin{equation}
     <\vec{a}|\vec{b}> = \frac{4}{T}~\sum_{f}~\frac{\tilde{a}(f)~\tilde{b}^{*}(f)}{S_{n}(f)},
 \end{equation}
 where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The term $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD).
 
 \subsection{Gaussian noise approximation}
-The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationary at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq. \eqref{eq:likelihood} is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and variance equal to $S_n(f)$ for each frequency. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal but does not contain the signal. 
+The expression of the likelihood function is inspired from the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationary at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. In fact, the likelihood expression in Eq. \eqref{eq:likelihood} is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and variance equal to $S_n(f)$ for each frequency. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal, the first direct detection of a GW signal from the merger of two black holes. 
 
 \section{Nested sampling}
-When performing parameter estimation, we need to explore the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^{15}$ to $10^{17}$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling algorithms to efficiently explore a large parameter space. Here, I explain Nested sampling, an algorithm routienly used for parameter estimation and also the one used to obtain results in the later chapters of this thesis. 
+When performing parameter estimation, we need to explore the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^{15}$ to $10^{17}$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling algorithms to efficiently explore a large parameter space. Here, I explain Nested sampling, an algorithm routienly used for parameter estimation and also the one used to obtain majority of the results in the later chapters of this thesis. 
 
 %\subsection{Nested sampling}
 \begin{figure}
@@ -52,7 +52,7 @@ When performing parameter estimation, we need to explore the likelihood function
     \caption{\textit{Left}: Constant likelihood surfaces for a two dimensional parameter space $\vec{\theta} = \{\theta_1, \theta_2\}$, illustrating the nested contours. \textit{Right}: Evolution of the prior mass ($X$) enclosed by the constant likelihood surfaces shown in the left plot.}
     \label{fig:nests}
 \end{figure}
-Nested sampling algorithm was introduced in 2004 by Skilling. The names derives from derives from the fact that the progression of the algorithm relies on \textit{nested} contours of likelihood (Figure~\ref{fig:nests} (left)) and not the individual likelihood values. The aim of the algorithm is to compute the evidence~$Z$, 
+Nested sampling algorithm was introduced in 2004 by John Skilling~\cite{Skilling:2006gxv} and it was first applied to analyze GW signals by Veitch and Vecchio~\cite{Veitch:2009hd}. The names derives from derives from the fact that the progression of the algorithm relies on \textit{nested} contours of likelihood (Figure~\ref{fig:nests} (left)) and not the individual likelihood values. The aim of the algorithm is to compute the evidence~$Z$, 
 \begin{equation}
 \label{eq:evidence}
   Z = \int~\mathrm{d}\vec{\theta}~\pi(\vec{\theta})~p(\vec{d} | \vec{\theta})
@@ -99,7 +99,7 @@ where we assume that the samples are independent of each other. The probability 
 \begin{equation}
     p(\chi) = \frac{d}{d\chi} P(\chi > \{X_i\}) = K \chi^{K-1}.
 \end{equation}
-The above equality suggests that random variable $\chi$ indeed follows the Beta distrubtion with
+The above equality suggests that random variable $\chi$ indeed follows the Beta distribution with
 \begin{equation}
 \chi \sim B(K, 1).
 \end{equation}
@@ -132,22 +132,23 @@ We provide the pseudocdoe how the nested sampling progress in Algorithm block~\r
         Increase Z by adding $\Delta Z =  \frac{1}{2}\left(\mathcal{L}_i + \mathcal{L}_{i-1}\right) \left(X_i - X_{i-1}\right)$\;
         Evaluate termination criterion\;
         \eIf{criterion not met}
-        {Sample a new point from the prior such that its likelihood is higer then the point that was just discarded. Add it to the set of live points so that number of live points are equal to K again\;
+        {Sample a new point from the prior such that its likelihood is higher then the point that was just discarded. Add it to the set of live points so that number of live points are equal to K again\;
         $i = i+1$\;}{{criterion met}}
         
     }
 \end{algorithm}
 \subsubsection{Terminating criterion}
-Since the aim of the Nested sampling algorithm is to accumulate the evidence Z in small increament of $\Delta Z$, it may be terminate when the increament is smaller then a user specified number $\epsilon$,
+Since the aim of the Nested sampling algorithm is to accumulate the evidence Z in small increment of $\Delta Z$, it may be terminate when the increment is smaller then a user specified number $\epsilon$,
 \begin{equation}
     \ln{\left(Z_i + X_i \mathcal{L}_{\mathrm{max}}\right)} - \ln{(Z_i)} < \epsilon,
 \end{equation}
 where $\mathcal{L}_{\mathrm{max}}$ is the maximum value of likelihood encountered during sampling. 
 
 \subsubsection{Limitations of nested sampling}
-\begin{itemize}
-    \item Stopping criteria is arbitrary
-    \item Scales poorly with dimensions and not massively parllelizable
-    \item Advantage: Fewer tuning parameters
-    \item Sampling over a fixed parameter space
-\end{itemize}
+While Nested sampling has become the preferred choice of sampling algorithm for parameter estimation of GW signals~\cite{Speagle:2019ivv, Ashton:2018jfp}, it certainly still has some aspects that can be improved upon. 
+\begin{enumerate}
+    \item Sampling over a variable parameter space, i.e., when the dimension of the model itself is an unknown parameter, is not strightforward. 
+    \item The stopping criteria of the algorithm is somewhat arbitrary. 
+    \item The algorithm scales poorly as dimensions of the model increases.
+    \item Hard to achieve independent samples.
+\end{enumerate}

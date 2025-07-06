@@ -1,4 +1,4 @@
-When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models predicted by general relativity [Phenom, SEOBNR, NRSur]. However, there are cases where theoretical models either do not exist or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particulary for a case where robust theoretical models do not exist. 
+When reconstructing GW signals to measure source parameters, we typically rely on a \textit{modelled} approach i.e. relying on GW signal models obtained by solving the field equations. However, there are cases where theoretical models either do not exist or are expensive to simulate. For such scenarios, it becomes important to be able to perform \textit{unmodelled} reconstruction. Here, we review how unmodelled reconstruction is done, particularly for a case where robust theoretical models do not exist. 
 
 \section{Artefacts in Gaussian noise}
 \label{sec:artefact}
@@ -8,28 +8,28 @@ When reconstructing GW signals to measure source parameters, we typically rely o
     \caption{A loud glitch overlapping with the binary neutron star signal, GW170817, in LIGO-Livingston interferometer. Dashed white arrows are added to help reader trace the signal.}
     \label{fig:bns_scan}
 \end{figure}
-A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurance of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurance, glitches can be problematic in two ways,
+A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, occurrence of a glitch violates this assumption. As most of our physics inferences hinges on the assumption that background noise is Gaussian-stationry, a violation of it could corrupt the inferences. Depending on the time of occurrence, glitches can be problematic in two ways,
 \begin{itemize}
 
-\item \textit{Glitches overlapping with a GW signal.} Glitches occuring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
+\item \textit{Glitches overlapping with a GW signal.} Glitches occurring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without the contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from merger of two neutron star (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
 \begin{figure}
     \centering
     \includegraphics[width=12cm]{../figures/thesis-plot_highmass_blip_qscan.png}
-    \caption{\textit{Left:} A GW signal emmited by a BBH merger with total mass of $176 M_{\odot}$. \textit{Right:} An isolated blip glitch.}
+    \caption{\textit{Left:} A GW signal emitted by a BBH merger with total mass of $176 M_{\odot}$. \textit{Right:} An isolated blip glitch.}
     \label{fig:bbh_blip}
 \end{figure} 
-\item \textit{Glitches in isolation.} Glitches not overlapping with a GW signal increase the false alarm rate of GW detections since some glitches look similar to a signal. For example, Figure~\ref{fig:bbh_blip} shows the time-frequency evoluation of a GW siganl from high-mass BBH mergers (left) and the time-frequency evolution of an isolated blip glitch (right). It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
+\item \textit{Glitches in isolation.} Glitches not overlapping with a GW signal increase the false alarm rate of GW detections since some glitches look similar to a signal. For example, Figure~\ref{fig:bbh_blip} shows the time-frequency evolution of a GW signal from high-mass BBH mergers (left) and the time-frequency evolution of an isolated blip glitch (right). It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
 \end{itemize} 
 
 
-Glitches could be caused by instrumental (control systems, scattered light) or environmental (earthquakes, wind, anthropogenic) factors, though their origins often remain unknown in many cases [FIXME: pictures of glitches]. Thefore, it is not possible to devise a theoretical model for glitches in most cases. We need to rely on the unmodelled approach to reconstruct and subtract glitches. 
+Glitches could be caused by instrumental (control systems, scattered light) or environmental (earthquakes, wind, anthropogenic) factors, though their origins often remain unknown in many cases. Therefore, it is not possible to devise a theoretical model for glitches in most cases. We need to rely on the unmodelled approach to reconstruct and subtract glitches. 
 
 \iffalse
 A case where theoretical model is expensive to simulate can be made for GW signals from the core collapse of a supernova. A case where theoretical models are not mature enough can be made for the echoes of GW signal. Why do we still do on-source PSD estimation? 
 \fi
 
 \section{Transdimensional Sampling Algorithms}
-When performing unmodelled reconstruction, the dimensionality of the parameter space of $\vec{\theta}$ is unknown, in contrast to the modelled reconstruction explained in chapter~\ref{ch:gwpe}. While the Bayesian framework, GW likelihood, and Bayesian approximation still remain robust, the Nested sampling algorithm from previous chapter is not a suitable for the problem at hand. Here, we review a transdimensional algorithm that is routienly used to explore a variable dimensional parameter space. Let us define a few standard quantites which formulate building blocks of the algorithm. 
+When performing unmodelled reconstruction, the dimensionality of the parameter space of $\vec{\theta}$ is unknown, in contrast to the modelled reconstruction explained in chapter~\ref{ch:gwpe}. While the Bayesian framework, GW likelihood, and Bayesian approximation still remain robust, the Nested sampling algorithm from previous chapter is not a suitable for the problem at hand. Here, we review a transdimensional algorithm that is routienly used to explore a variable dimensional parameter space. Let us define a few standard quantities which formulate building blocks of the algorithm. 
 \subsection{Morlet-Gabor wavelets}
 \begin{figure}
     \centering
@@ -42,13 +42,13 @@ When performing unmodelled reconstruction, we use Morlet-Gabor wavelets as bases
     \label{eq:wavelet}
     \vec{\psi}(t; A, Q, t_0, f_0, \phi_0) = A~e^{-\frac{(t-t_0)^2}{2\tau^2}}~\sin{\left(2{\pi}f_0(t-t_0) + \phi_0\right)},
 \end{equation}
-where $t$ denotes time, $A$ denotes amplitude, $\tau = Q/(2{\pi}f_0)$ denotes the quality factor that controls the spread of the wavelet, $\phi_0$ denotes inital phase, $t_0$ and $f_0$ respectively correspond to time and frequency at the peak of the amplitude. In Figure~\ref{fig:mg_wav}, we show a time (left) and frequency (right) domain representation of a wavelet with parameters $Q = 20$, $t_0=1$ second, and $f_0 = 40$ Hz. 
+where $t$ denotes time, $A$ denotes amplitude, $\tau = Q/(2{\pi}f_0)$ denotes the quality factor that controls the spread of the wavelet, $\phi_0$ denotes initial phase, $t_0$ and $f_0$ respectively correspond to time and frequency at the peak of the amplitude. In Figure~\ref{fig:mg_wav}, we show a time (left) and frequency (right) domain representation of a wavelet with parameters $Q = 20$, $t_0=1$ second, and $f_0 = 40$ Hz. 
 
 Morlet-Gabor wavelets are sutible for the problem at hand because glitches $(\vec{g})$ we want to reconstruct can be expressed as linear combination of $N$ wavelets [BayesWave first paper],
 \begin{equation}
     \vec{g}(t; \vec{\theta}) = \sum_{k = 0}^{N} \vec{\psi}_k(t; \vec{\theta}_k),
 \end{equation}
-where $\vec{\theta}$ is set of $N\times5$ parameters since each $\vec{\psi}_k$ needs 5 model parameters shown in Eq.~\eqref{eq:wavelet}. A desirable feature is that Morlet-Gabor wavelets preserve shape when switching between time-frequency domains and they have a simple analytic expression in both domains. FIXME: There is an undesirable property which is that the wavelets are not orthogonal. 
+where $\vec{\theta}$ is set of $N\times5$ parameters since each $\vec{\psi}_k$ needs 5 model parameters shown in Eq.~\eqref{eq:wavelet}. A desirable feature is that Morlet-Gabor wavelets preserve shape when switching between time-frequency domains and they have a simple analytic expression in both domains.
 
 Besides ${\vec{\theta}}$, here $N$ itself is an unknown parameter therefore the dimensionality of the parameter space we want to explore is also unknown. The transdimensional algorithm used to tackle this problem is an extension of the Markov chain Monte Carlo methods. 
 
@@ -65,7 +65,7 @@ Traditional MCMC algorithms aim to obtain the samples from posterior probability
 \begin{figure}
     \centering
     \includegraphics[width=8cm]{../figures/markov_chain.pdf}
-    \caption{\textit{Bottom:} Progresion of a Markov chain in the parameter space of $\vec{\theta}$. Each arrow represents an iteration, solid black dots represent accepted proposal and empty dots represents rejected proposals. \textit{Top:} Posterior probability distribution constructed from the accepted samples of the Markov chain of the bottom plot.}
+    \caption{\textit{Bottom:} Progression of a Markov chain in the parameter space of $\vec{\theta}$. Each arrow represents an iteration, solid black dots represent accepted proposal and empty dots represents rejected proposals. \textit{Top:} Posterior probability distribution constructed from the accepted samples of the Markov chain of the bottom plot.}
     \label{fig:mcmc}
 \end{figure}
 \subsubsection{Metropolis-Hastings algorithm}
@@ -102,16 +102,15 @@ Hence, the expectation value of the log-likelihood with respect to the posterior
 \fi
 
 \subsection{GW specific treatment for jumping between dimensions}
-While a general treatment of switching dimensions in [paper 1, paper2, Ka Wa], at the time of writing of the thesis I did not find the reciepe especially for the GW data analysis. Therefore, here I focus on the special case instead of a general one. Jumping between the dimensions includes 
+A general treatment of switching dimensions was proposed in 1995 by Peter Green~\cite{Green:1995mxx}. The method was initially proposed to determince which distribution fits the data best among various competing distribution. Additionally, two competing distributions do no need to have same number of model parameters and the method can jump between different dimension. Therefore, it is commonly known as the reversible jump Markov chain Monte Carlo (RJMCMC) method. Since its inception, this sampling method is applied to various use cases in gravitational wave data analysis. However, at the time of writing of the thesis I did not find the reciepe in the context of reconstruction using wavelets. Therefore, here I focus on the special case instead of a general one. Jumping between the dimensions in this case means,
 \begin{itemize}
     \item \textit{Birth move} -- addition of new wavelet
     \item \textit{Death move} -- removal of an existing wavelet
     \item \textit{Stationary move} -- swapping an existing wavelet for a new wavelet.
 \end{itemize}
-
 The stationary move is trivial and same as Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. 
 
-Before explaining the steps required to perform birth and death moves let us define a few standard quantities. Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. Let us say that state $\vec{\theta}$ has $N$ wavelets and $\vec{theta'}$ has $N'$ wavelets. Since each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times N$ dimensions and $\vec{\theta'}$ has $5\times N'$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$. Now we can rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
+Before explaining the steps required to perform birth and death moves let us define a few standard quantities. Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. Let us say that state $\vec{\theta}$ has $N$ wavelets and $\vec{\theta'}$ has $N'$ wavelets. Since each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times N$ dimensions and $\vec{\theta'}$ has $5\times N'$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$. Now we can rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
 \begin{align}
     \alpha = \mathrm{min}~\left \{1,~\frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{Q(\vec{\theta}, D | \vec{\theta}', D')}{Q(\vec{\theta}', D' | \vec{\theta}, D)} \right \},
             %&= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{Q(\{A_1, d\} | \{A'_1, A'_2, d'\})}{Q(\{A'_1, A'_2, d'\} | \{A_1, d\})}
@@ -186,15 +185,12 @@ where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\math
 \end{equation}
 
 \section{Limitations of unmodelled reconstruction}
-\begin{itemize}
-    \item The rate of convergence depends on the choice of auxiliary distribution and bijective functions. A universal choice that works for all problems do not exist. 
+Unmodelled reconstruction of generic excess power also has important use cases. These include reconstruction of instrumental glitches, noise power spectral density, and reconstruction of signals which are costly to simulate such as GWs from the core-collapse of supernova and the post-merger phase of a BNS signal~\cite{Cornish:2014kda, Cornish:2020dwh}. This approach also has a few limitations that can be improved upon,
+\begin{enumerate}
+    \item In contarst to Nested sampling, the aim here is to obtain the posterior probability distribution. Additional computations are required to obtain the evidence. 
+    \item The rate of convergence in the case of RJMCMC depends on the choice of auxiliary distribution and bijective functions. A universal choice that works for all uses cases in GWs are difficult to determine. It has more number of tuning parameters compared to the fixed dimension reconstruction done by Nested sampling. 
     \item The termination criteria is not well defined.
-    \item In contarst to Nested sampling, the aim here is to obtain the posterior probability distribution. Additional computations are needed to obtain evidence. 
-    \item The wavelets are not orthogonal
-    \item Proposed to select two competing dictribution and an overkill. 
-
-\end{itemize}
-
-\subsubsection{Use cases for unmodelled reconstruction}
+    \item The lack of orthogonality of Morlet-Gabor wavelets may also reduce the rate of convergence.
+\end{enumerate}
 
 
