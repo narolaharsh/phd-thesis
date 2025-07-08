@@ -88,10 +88,6 @@ The framework \texttt{ninjtje} is unique to the triangular geometry of the ET. T
 The setup of the simulation for ET-2L network remains similar to the one described in section~\ref{sec:framework}. The GW signal parameters and the glitch morphology are the same as triangular ET, leading to a GW network SNR 
 of 124, with the Sardinia and EMR interferometers contributing SNRs of 90 and 85, respectively. The glitch is introduced in the Sardinia interferometer, the SNR of which matches the glitch SNR in ${\rm ET}_1$. For this setup, we perform a glitch mitigation using BayesWave codebase -- a routinely used tool to perform joint modelling of GW signal and glitch coherently across the detector network. To reiterate, the GW signal here is modelled using the signal model and glitch is modelled using wavelets. While one can model both, signal and the glitch, using wavelets, this approach increases the amount of mismodelling and hence not preferred. 
 
-\section{Results of source parameter measurement: triangle and 2L comparison}
-
-For each configuration, \ETT and 2L, we consider 9 different scenarios. All settings are kept identical across these scenarios except the time interval between the GW merger and glitch onset. For \ETT, we perform glitch mitigation using \texttt{nijntje} and obtain cleaned frames. For ET-2L, in the absence of \texttt{nijntje} framework, we perform glitch mitigation by doing joint signal plus glitch modelling. After the glitch is removed, we perform the parameter estimation to quantify the accuracy of glitch mitigation. If the glitch mitigation is precise, the measurement should be similar to a scenario where a glitch is not introduced to the data. 
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=.4\textwidth]{../figures/thesis_et2l_delta_glitch_overlap_glitch_master.pdf}\hspace{.5cm}
@@ -100,17 +96,12 @@ For each configuration, \ETT and 2L, we consider 9 different scenarios. All sett
     \label{fig:glitch_overlap}
 \end{figure}
 
-Before present the parameter estimation results, we showcase the results of glitch mitigation, i.e., how close the reconstructed glitch is to the true glitch. This serves as a precursor to the parameter estimation results since accurate glitch mitigation leads to the accurate parameter measurement. A visualization of the glitch reconstruction is presented in Figure~\ref{fig:glitch_overlap}. The ET triangle configuration, due to the null stream, achieves a more accurate glitch reconstruction by avoiding mismodeling from the GW signal. In contrast, for the ET-2L configuration inevitably some additional features from the signal are incurred. 
+\section{Results of source parameter measurement: Triangle and 2L comparison}
 
-\iffalse
-\begin{figure}
-    \centering
-    \includegraphics[width=10cm]{../figures/newsnr_mismatch_comparison.pdf}
-    \caption{Mismatch}
-    \label{fig:mismatch}
-\end{figure}
-\fi
-\subsubsection{Glitch onset coinciding with the GW merger}
+For each configuration, \ETT and 2L, we consider 9 different scenarios. All settings are kept identical across these scenarios except the time interval between the GW merger and glitch onset. For \ETT, we perform glitch mitigation using \texttt{nijntje} and obtain cleaned frames. For ET-2L, in the absence of \texttt{nijntje} framework, we perform glitch mitigation by doing joint signal plus glitch modelling. After the glitch is removed, we perform the parameter estimation to quantify the accuracy of glitch mitigation. If the glitch mitigation is precise, the measurement should be similar to a scenario where a glitch is not introduced to the data. 
+
+Before we present the parameter estimation results, we showcase the results of glitch mitigation, i.e., how close the reconstructed glitch is to the true glitch. This serves as a precursor to the parameter estimation results since accurate glitch mitigation leads to the accurate parameter measurement. A visualization of the glitch reconstruction is presented in Figure~\ref{fig:glitch_overlap}. The ET triangle configuration, due to the null stream, achieves a more accurate glitch reconstruction by avoiding mismodeling from the GW signal. In contrast, for the ET-2L configuration inevitably some additional features from the signal are incurred. 
+
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{../figures/newsnr_fig_4.pdf}
@@ -122,6 +113,17 @@ Before present the parameter estimation results, we showcase the results of glit
     with the benchmark. Though the red posterior for the total mass $M_{\rm total}$ recovers the true value, it shows clear signs of bias and widening. In contrast, the measurements of luminosity distance and sky location are biased and miss the true values.}
     \label{fig:delta_zero}
 \end{figure}
+
+\iffalse
+\begin{figure}
+    \centering
+    \includegraphics[width=10cm]{../figures/newsnr_mismatch_comparison.pdf}
+    \caption{Mismatch}
+    \label{fig:mismatch}
+\end{figure}
+\fi
+\subsubsection{Glitch onset coinciding with the GW merger}
+
 Next, we turn to the results of parameter estimation when glitch precisely conincides with the GW merger. Figure~\ref{fig:delta_zero} presents a comparison of the posterior distributions of the GW signal parameters after the glitch is mitigated, for $\Delta t = 0$. For all parameters shown, glitch mitigation with null stream for \ETT~results in posteriors 
 that demonstrate high consistency and closely align with the benchmark results, where ``benchmark'' refers to a scenario when no glitch is introduced to the data.
 
@@ -129,8 +131,7 @@ For the ET-2L configuration, though the total mass $M_{\rm total}$ posterior sho
 in the glitch-free interferometer, enabling intrinsic parameter recovery. In contrast, posteriors for extrinsic parameters, 
 namely luminosity distance and sky location, are inconsistent with the benchmark's posteriors and miss the true value. 
 
-\subsubsection{Glitch onset away from the GW merger}
-\begin{figure}
+\begin{figure}[h]
     \centering
     \includegraphics[width=.45\textwidth]{../figures/newsnr_rank_10_single_block_percentile_parameters_short.pdf}
     \caption{A comparison of the credible level of the true parameter value relative to the posterior 
@@ -139,6 +140,9 @@ namely luminosity distance and sky location, are inconsistent with the benchmark
     glitch as a benchmark (dotted for $\Omega$, dashed for $D_{\rm L}$). For the null stream based appraoch, the credible levels closely align with the benchmark, indicating accurate measurements. The posteriors for ET-2L lead to wider credible levels and generally exclude the true value, except for the edge cases where the glitch is sufficiently distant in time from the GW merger.}
     \label{fig:trend}
 \end{figure}
+
+\subsubsection{Glitch onset away from the GW merger}
+
 Finally, we turn to the scenarios when glitch is not coninciding with the merger. Figure~\ref{fig:trend} shows that the characteristics of extrinsic parameter recovery remain consistent 
 across different $\Delta t$ values. A negative (positive) value of $\Delta t$ implies that the glitch 
 onset falls before (after) the GW merger. For all time intervals considered, the~\ETT~configuration 
@@ -154,20 +158,22 @@ The null stream provides us with an extra piece of information in the form of Eq
     \renewcommand{\arraystretch}{1.2}
     \begin{tabular}{p{0.45\textwidth}|p{0.45\textwidth}}
     \toprule
-    Glitch mitigation using \ETT & Glitch mitigation using ET2l \\
+    Glitch mitigation using ET-2L & Glitch mitigation using \ETT \\
     \midrule
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
-        \item Able to undo the effect of the glitch for all scenarios and restore the accuracy of the parameter estimation.
-        \item Does not require any prior knowledge of the signal model. Ready to analyze scenarios when the signals are expensive to simulate or challening to model. 
-        \item $\mathcal{O}(1)$ hour per analysis.
-        \item Robust against varying morphologies of glitches.
+        \item Biases expected in the parameter estimation execpt for the edge cases when glitch and signals are far apart
+        \item True signal model needs to be known \textit{apriori}. Biases worsen if used without using a signal model / using incorrect signal model. 
+        \item $\mathcal{O}(10)$ hours per analysis
+        \item Adaptations required depending on the type of the GW signal and glitch. 
+        \item Biases worsen when two interferometers have unequal SNRs. 
     \end{enumerate}
     &
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
-        \item Biases expected in the parameter estimation execpt for the edge cases when glitch and signals are far apart
-        \item Signal model needs to be known aprior. Biases worsen if used without the correct signal model. 
-        \item $\mathcal{O}(10)$ hours per analysis
-        \item Needs to be adapted depending on the type of the GW signal and glitch. 
+        \item Restore the accuracy of parameter estimation which is similar to the case when no glitch introduced
+        \item Does not require any prior knowledge of the signal model. Ready to use even when the signals are expensive to simulate or challening to model. 
+        \item $\mathcal{O}(1)$ hour per analysis.
+        \item Ready to use against varying morphologies of glitches.
+        \item Individual detector SNR does not play any role. 
     \end{enumerate}
     \\
     \bottomrule
