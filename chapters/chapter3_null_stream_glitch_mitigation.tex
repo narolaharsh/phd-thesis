@@ -67,9 +67,13 @@ The null stream is a geometic feature of the triangle configuration of ET. It co
 Indeed, the individual antenna pattern functions vary over the whole sky and the equalities presented in Eq.~\eqref{eq:sum_pattern} hold for the whole sky as well. As an illustration, we show the projection of antenna pattern functions along the right ascension (RA) coordinate.
 
 \section{A null-stream inspired noise transient elimination (\texttt{nijntje}) framework}
-The \texttt{nijntje} framework uses the null stream of the triangular ET to remove signal-overlapping glitches. We demonstrate the workings of this framework using a toy model where a glitch is overlapping with a signal. We show how \texttt{nijntje} can effectively undo the effect of the glitch without corrupting the GW signal. Additionly, we also show how one can approach this problem without \texttt{nijntje} framework. 
+The null stream of the triangular ET enables a novel framework to remove signal-overlapping glitches. For brevity, we refere to it as \texttt{nijntje} -- null-stream inspired noise transient elimination -- framework. Figure~\ref{fig:nijntje_chart} shows the workflow of \texttt{nijntje} framework.
 
-We consider a toy model where a blip glitch is overlapping with a GW signal. 
+We consier a scenario where a glitch is overlapping with a GW signal. While the glitches exhibit a range of morphology, here we choose a morphology that is ubiquitous in the data, i.e. the blips. For the sake of the exmple, we assume that the only one interferometer encounters the glitch. The rest of the two interferometers of the triangle contains a GW signal in Gaussian noise. The GW source is placed at redshift of 2, where the merger rate distribution of BBH peaks, making it a typical source. The source frame masses of the two black holes are $38\,M_\odot$ and $33\,M_\odot$. This choice of parameters results into a GW signal with network signal-to-noise ratio (SNR) of 83 divided equally among three interferometers. We inject a blip glitch in ET$_1$ interferometer such that is overlapping with GW signal. We ensure that the SNR of the glitch is similar to the SNR of the GW signal in ET$_1$, i.e. $83/\sqrt{3} \sim 47$. Thanks to recent developments in machine learning based methods, it is now possible to simulate glitches.  
+For example, the \texttt{gengli} codebase can generate blip glitches akin to the ones observed during the second observing run of Advanced LIGO and Virgo~\cite{Lopez:2022lkd, Lopez:2022dho}. An illustration of this setup is shown in the top panel of Figure~\ref{fig:nijntje_chart}. 
+
+
+We ensure that the SNR of the glitch is similar to the SNR of the GW in 
 \begin{figure}
     \centering
     \includegraphics[width=16cm]{../figures/assemble_nijntje.pdf}
