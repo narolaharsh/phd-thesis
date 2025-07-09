@@ -77,6 +77,7 @@ component modes~\cite{Pratten:2020ceb}
 h(f) = \sum_{l, m}(F_+C^{+}_{l, m}(f)+F_\times C^{\times}_{l, m}(f))\,h^L_{l, m}(f)\,.
 \label{eqn:comp-mode}
 \end{equation} 
+
 Here, $F_+$ and $F_\times$ are the antenna pattern functions of the interferometer, which depend 
 only on extrinsic parameters; $\vec{h}^{L}$ denotes the waveform in the co-precessing frame 
 (also known as the $L$-frame); and the indices $l$ and $m$ label the different modes. The coefficients $C^{+}_{l, m}$ and $C^{\times}_{l, m}$ account for 
@@ -85,7 +86,7 @@ co-precessing frame to the inertial (or observer) frame.
 The benefit of handling each mode in the $L$-frame separately is that the ratio of a 
 fiducial $\vec{h}'^{L}_{l, m}$ to a proposal $\vec{h}^{L}_{l, m}$ oscillates less compared to the 
 ratio of the full waveforms $\vec{h}/\vec{h}'$. This can be seen by comparing the bottom right panel of 
-Figure~\ref{dxp-ratio} with the top right panel of Figure~\ref{hlc-plot}. 
+Figure~\ref{fig:dxp-ratio} with the top right panel of Figure~\ref{hlc-plot}. 
 Therefore, a linear expansion similar to the one in Eq.~\eqref{eqn:ratio} 
 can be made using the ratio $\vec{h}^{L}_{l, m}/\vec{h}'^L_{l, m}$ instead of 
 $\vec{h}/\vec{h}'$ and will require a lower number of frequency bins for more complex models:
@@ -93,6 +94,184 @@ $\vec{h}/\vec{h}'$ and will require a lower number of frequency bins for more co
 \label{eqn:l-ratio}
 \frac{h^{L}_{l, m}}{h'^L_{l, m}} (f) = r_{1, l, m}(b) + r_{2, l, m} (b)(f-f_c(b)) + \mathcal{O}(f^2) \,,
 \end{equation}
+
+Now, let us denote the factor $(F_+C^{+}_{l, m}(f)+F_\times C^{\times}_{l, m}(f))$ in 
+Eq.~(\ref{eqn:comp-mode}) by $\vec{C}_{l, m}$. We can perform similar expansions on the ratios 
+$\vec{C}_{l, m}/\vec{C}'_{l, m}$:
+\begin{equation}
+\label{eqn:c-ratio}
+\frac{C_{l, m}}{C'_{l, m}}(f) = s_{1, l, m}(b) + s_{2, l, m}(b)(f-f_c(b)) + \mathcal{O}(f^2).
+\end{equation}
+Below, the expansion coefficients will collectively be denoted 
+$\mathcal{R} = \{\vec{r}_1, \vec{r}_2, \vec{s}_1, \vec{s}_2\}$. 
+For now, we assume we can find frequency bins such that the piece-wise linear interpolations 
+in Eqs.~(\ref{eqn:l-ratio}) and (\ref{eqn:c-ratio}) are 
+valid. How such bins can be found will be explained in Sec.~\ref{sec:bin-selection}.
+
+Once the frequency bins are made based on the chosen fiducial waveforms, we can pre-compute some 
+\textit{summary data}~\cite{Leslie:2021ssu} based only on the reference waveform and useful for the 
+computation of the inner products in Eq.~(\ref{eqn:short-l}). These are:
+\begin{eqnarray}
+&& W_{l, m}(b) = \frac{4}{T} \sum_{f\in b}\frac{d(f)h'^{L*}_{l, m}(f)C'^{*}_{l, m}(f)}{S_n(f)} \, , 
+\nonumber \\
+&& X_{l, m}(b) = \frac{4}{T} \sum_{f\in b}\frac{d(f)h'^{L*}_{l, m}(f)C'^*_{l, m}(f)}{S_n(f)}(f-f_c(b)) \,, 
+\nonumber\\
+&& Y_{l, m, \bar{l}, \bar{m}}(b) = \frac{4}{T} \sum_{f\in b}\frac{h'^L_{l, m}(f)C'_{l, m}(f)h'^{L*}_{\bar{l}, \bar{m}}(f)C'^*_{\bar{l}, \bar{m}}(f)}{S_n(f)} \,, 
+\nonumber\\
+&&Z_{l, m, \bar{l}, \bar{m}}(b)  \nonumber\\
+&&= \frac{4}{T} \sum_{f\in b}\frac{h'^L_{l, m}(f)C'_{l, m}(f)h'^{L*}_{\bar{l}, \bar{m}}(f)C'^*_{\bar{l}, \bar{m}}(f)}{S_n(f)}(f-f_c(b))\,.
+\nonumber\\
+\end{eqnarray}
+
+Note that the summary data 
+$\mathcal{D} = \{W_{l, m}, X_{l, m}, Y_{l, m, \bar{l}, \bar{m}}, Z_{l, m, \bar{l}, \bar{m}} \}$ 
+need to be computed only once per analysis and they depend only on the choice of the fiducial 
+parameters $\vec{\theta}'$. On the other hand, the coefficients $\mathcal{R}$ need to be computed for every 
+proposal waveform as they depend on $\vec{\theta}$ and $\vec{\theta}'$.  
+
+Using the summary data $\mathcal{D}$ and the coefficients $\mathcal{R}$, we can estimate $\ln\mathcal{L}_{dh}$ and $\ln\mathcal{L}_{hh}$ in Eq.~\eqref{eqn:short-l} 
+for given $\vec{\theta}$ as
+
+
+\begin{align}
+\label{eqn:dh}
+\ln\mathcal{L}_{dh} &= \Re \sum_{(l, m)} \sum_{b}  \left\{  W_{l, m}(b)\left[r_{1, l, m}^*(b) s_{1, l, m}^*(b)\right] +X_{l, m}(b)\left[r_{1, l, m}^*(b)s_{2, l, m}^*(b) + r_{2, l, m}^*(b) s_{1, l, m}^*(b) \right]  \right\} \,, \\
+\label{eqn:hh}
+\ln\mathcal{L}_{hh} &=\Re  \sum_{(l, m), (\bar{l}, \bar{m})} \sum_{b} \left\{  Y_{l, m, \bar{l}, \bar{m}}(b) \left[ r_{1, l, m}(b)s_{1, l, m}(b) r^*_{1, \bar{l}, \bar{m}}(b) s^*_{1, \bar{l}, \bar{m}}(b) \right] \right. \nonumber \\
+&\qquad\qquad\qquad\qquad +  \left. Z_{l, m, \bar{l}, \bar{m}}(b) \left[r_{1, l, m}(b) r_{1, \bar{l}, \bar{m}}^*(b) \left( s_{1, \bar{l}, \bar{m}}^*(b) s_{2, l, m}(b) + s_{1, l, m}(b) s_{2, \bar{l}, \bar{m}}^*(b) \right) \right. \right. \nonumber \\ 
+&\qquad\qquad\qquad\qquad + \left. \left.  s_{1, l, m}(b)s_{1, \bar{l}, \bar{m}}^*(b)\left(r_{1, \bar{l}, \bar{m}}^*(b) r_{2, l, m}(b) + r_{1, l, m}(b) r_{2, \bar{l}, \bar{m}}^*(b)\right) \right] \right\},
+\end{align}
+
+which together with Eq.~(\ref{eqn:short-l}) enables us to approximate the likelihood. Provided the number of bins is reduced compared to the usual method, this approach should offer a rapid likelihood evaluation, leading to a rapid parameter inference.
+
+\section{P\lowercase{arameter Estimation for Strong Lensing}}
+\label{sec:rb2}
+When analyzing a strongly-lensed gravitational wave signal that has been split into several images, one can perform joint parameter estimation, i.e.~one can analyze the images at the same time 
+taking into account the common parameters in addition to the ones introduced by lensing~\cite{Janquart:2023osz, Liu:2020par, Lo:2021nae, Janquart:2021qov}. 
+For two observable images, the joint analysis requires 19 parameters (see Table~\ref{bbh_params}), hence 4 more than single unlensed signal parameter 
+estimation. If more than two images are present, each additional image will introduce three more parameters, thereby further increasing the computational time.
+In this section, we recall the main aspects of strong lensing and describe the extension of the relative binning method to perform joint parameter estimation. For 
+simplicity we focus on the case of two images, but the extension to $N > 2$ images is straightforward.
+
+\subsection{Effect of strong lensing on gravitational-wave signals}
+
+When a GW signal is strongly lensed, it is split into multiple images, each undergoing a (de-)magnification, time delay and overall phase shift~\cite{Dai2020SearchO2}. 
+The $j^{\mathrm{th}}$ lensed image ($\bm{h}^l_j$) is related to the unlensed waveform ($\bm{h}^u$) through 
+\begin{equation}
+h^l_j (f; \boldsymbol{\Theta}, \mu_j, t_j, n_j) = \sqrt{\mu_j} h^{u}(f;\boldsymbol{\Theta})e^{2i\pi f t_j -in_j\pi} \,,
+\end{equation}
+where $\mu_j$, $t_j$ and $n_j$ denote the magnification factor, arrival time, and Morse factor for the $j^{\text{th}}$ image, respectively. We refer to them as the \textit{lensing parameters} of the $j^{\text{th}}$ image.
+ 
+For a given image, these lensing parameters can not all be separately measured. Indeed, the magnification and the time delay are degenerate with the luminosity distance and the time of coalescence, 
+respectively~\cite{Dai:2017huk, Lo:2021nae, Janquart:2021qov}. Therefore, we can absorb $\sqrt{\mu_j}$ into the luminosity distance $D_L$, and $t_j$ into the coalescence time $t_c$ 
+to define the following effective quantities for the $j^{th}$ image:
+\begin{align}
+D_{L, j}^{\text{eff}} &= \frac{D_L}{\sqrt{\mu_j}} \,, \\
+t_{c, j}^{\text{eff}} &= t_c+t_j \,.
+\end{align}
+These quantities can be measured from the GW data. 
+On the other hand, the Morse phase is not necessarily degenerate with the phase of coalescence, as the presence of HOMs can break the possible phase-Morse factor 
+degeneracy~\cite{Dai:2017huk, Ezquiaga2020PhaseWaves, Janquart:2021nus}
+
+As mentioned above, for simplicity we focus on the scenario where two strongly-lensed images are analyzed. We refer to the image that arrives first at the detector as image 1, 
+and denote its observed parameters by $\boldsymbol{\Theta}_1$\footnote{Note that in the context of strong lensing $\boldsymbol{\Theta}_1$ includes the Morse factor, and the effective luminosity and time delay for the first image.}. Since some of the lensing parameters are not measurable on their own, let us define \emph{relative lensing parameters} linking the lensing parameters of the two images:
+\begin{align}
+\label{eqn:mu21}
+\mu_{21} = \mu_2/\mu_1  &= \left(D_{L, 1}^{\text{eff}} / D_{L, 2}^{\text{eff}}\right)^2  \\\
+\Delta t_{21} &= t^{\text{eff}}_{c, 2}-t^{\text{eff}}_{c, 1} \\
+\label{eqn:n21}
+\Delta n_{21} &= n_2 - n_1 
+\end{align}
+We collectively denote the relative lensing parameters by $\boldsymbol{\Phi}_{21} = \{\mu_{21}, \Delta t_{21}, \Delta n_{21}\}$. 
+Table \ref{tab:notation-table} summarizes all the parameters defined in the context of strong lensing. 
+The relative lensing parameters can be used to express the GW from the second image in terms of the waveform for the first image:
+\begin{equation}
+\label{eqn:wf-mapping}
+h^l_2(f; \boldsymbol{\Theta}_2) = \sqrt{\mu_{21}}h^{l}_1(f; \boldsymbol{\Theta}_1)e^{2i\pi f \Delta t_{21} - i\Delta n_{21}\pi}.
+\end{equation}
+
+\begin{table}
+\begin{center}
+\begin{tabular}{| c | p{1 in} | p{1.7 in} |}
+\hline 
+ Notation & Description & Parameters  \\ \hline 
+ $\boldsymbol{\Lambda}$ & Source parameters common between the two images & \{$\mathcal{M}_c, \eta, a_1, a_2, \theta_1, \theta_2, \Delta \phi, \phi_{JL}$, $\text{RA}, \text{DEC}, \theta_{JN}, \psi, \phi \}$ \\ \hline
+$\boldsymbol{\Theta}_1$ & Observed parameters of image 1 & $ \boldsymbol{\Lambda} \cup \{D^{\text{eff}}_{L, 1}, t^{\text{eff}}_{c, 1}, n_1\}  $ \\ \hline 
+$\boldsymbol{\Theta}_2$ & Observed parameters of image 2 & $\boldsymbol{\Lambda} \cup \{D^{\text{eff}}_{L, 2}, t^{\text{eff}}_{c, 2}, n_2 $\} \\ \hline 
+$\boldsymbol{\Phi}_{21}$ & Lensing parameters of image 2 relative to image 1 & ${\mu_{21}, \Delta t_{21}, \Delta n_{21}}$ \\ \hline 
+\end{tabular}
+\end{center}
+\caption{Lensing parameters and source parameters defined in context of a pair of strongly lensed GW signals.}
+\label{tab:notation-table}
+\end{table}
+
+\subsection{Joint parameter estimation for strong lensing}
+
+Under the hypothesis that two GW events are strongly lensed, the two data streams can be written as $\bm{d}_1$ and $\bm{d}_2$, and the joint parameter estimation aims to measure 
+\begin{equation}
+p(\boldsymbol{\Theta}_1, \boldsymbol{\Theta}_2 | \bm{d}_1, \bm{d}_2, \mathcal{H}_l)\, ,
+\end{equation}
+where $\mathcal{H}_l$ denotes the strong lensing hypothesis. 
+However, given $\boldsymbol{\Theta}_1$ and $\Phi_{21}$, we can calculate $\boldsymbol{\Theta}_2$ using Eq.(\ref{eqn:mu21})-(\ref{eqn:n21}). 
+Therefore, we can equivalently infer
+\begin{equation}
+p(\boldsymbol{\Theta}_1, \Phi_{21} | \bm{d}_1, \bm{d}_2, \mathcal{H}_l)\, .
+\end{equation}
+Using Bayes' theorem we can write 
+\begin{eqnarray}
+\label{eqn:jpe-eqn}
+&& p(\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21} | \bm{d}_1, \bm{d}_2, \mathcal{H}_l) \nonumber\\
+&& = \frac{\pi(\boldsymbol{\Theta}_{1}, \boldsymbol{\Phi}_{21} | \mathcal{H}_l) p( \bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}, \mathcal{H}_l)}{\mathcal{Z}_l} \,,
+\end{eqnarray}
+where $\pi(\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21} | \mathcal{H}_l)$ is the prior on $\boldsymbol{\Theta}_1$ and $\boldsymbol{\Phi}_{21}$, 
+$p( \bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}, \mathcal{H}_l)$ is the likelihood, and $\mathcal{Z}_l$ is the evidence under the strong lensing 
+hypothesis\footnote{Excluding selection and population effects; see Ref.~\cite{Lo:2021nae} for more details.}: 
+\begin{equation}
+\mathcal{Z}_l = \int \mathrm{d}\boldsymbol{\Theta}_1 \mathrm{d}\boldsymbol{\Phi}_{21} \,  p(\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21} | \mathcal{H}_l) \,  p(\bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}, \mathcal{H}_l) \,. 
+\label{eqn:zL}
+\end{equation}
+
+Additionally, the joint likelihood in Eq.(\ref{eqn:jpe-eqn}) can be decomposed as
+\begin{align}
+\label{eqn:jpe-small-eqn}
+p(\bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) &= p(\bm{d}_1|\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) \, p(\bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) \nonumber \\ 
+& = p(\bm{d}_1 | \boldsymbol{\Theta}_1) \,  p(\bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) \,,
+\end{align}
+hinting at a possible way to perform relative binning analyses, where each of the terms above can be computed using the relative binning approximation before being combined.
+
+\subsection{Relative binning for strong lensing}
+
+The likelihood $p(\bm{d}_1| \boldsymbol{\Theta}_1)$ in Eq.~\eqref{eqn:jpe-small-eqn} is similar to the one expressed in Eq.(\ref{eqn:indi-likelihood}), except for the Morse factor, 
+which is a simple constant phase shift to add to the waveform. So, the framework in Eqs.~(\ref{eqn:l-ratio})-(\ref{eqn:hh}) of Sec.~\ref{sec:rb1} to estimate the likelihood 
+for individual events is also applicable here.
+First, we choose appropriate fiducial parameters $\boldsymbol{\Theta}'_1$ and calculate the summary data $\mathcal{D}_1$ and the coefficients $\mathcal{R}_1$ for event 1.
+Using $\mathcal{D}_1$ and $\mathcal{R}_1$, we can compute $\ln\mathcal{L}_{d_1h_1}$ and $\ln\mathcal{L}_{h_1h_1}$ as shown in Eqs.~(\ref{eqn:dh}) and 
+(\ref{eqn:hh}). 
+The likelihood $p(\bm{d}_1|\boldsymbol{\Theta}_1)$ is then obtained by
+\begin{equation}
+\label{eqn:ll-one}
+\ln p(\bm{d}_1|\boldsymbol{\Theta}_1) = \ln\mathcal{L}_{d_1h_1} - \frac{1}{2} \ln\mathcal{L}_{h_1h_1} - \frac{1}{2} (\bm{d}_1 | \bm{d}_1) \,,
+\end{equation}
+where $(\bm{d}_1 | \bm{d}_1)$ again needs to be computed only once for the given GW data.  
+
+The waveform $\bm{h}_1$ used to calculate the likelihood of $\bm{d}_1$ given $\boldsymbol{\Theta}_1$ can be rescaled 
+to obtain $\bm{h}_2$ using Eq.(\ref{eqn:wf-mapping}) and $\boldsymbol{\Phi}_{21}$. 
+The rescaled waveforms $\bm{h}_2$ can be used when sampling the likelihood of $\bm{d}_2$ given $\boldsymbol{\Theta}_2$;  
+this approach saves additional computational costs that would be incurred in generating completely new waveforms. 
+The rest of the steps are similar to the ones performed when calculating $p(\bm{d}_1|\boldsymbol{\Theta}_1)$, and we obtain 
+\begin{equation}
+\label{eqn:ll-two}
+\ln p(\bm{d}_2|\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) = \ln\mathcal{L}_{d_2h_2}-\frac{1}{2} \ln\mathcal{L}_{h_2h_2} - \frac{1}{2} (\bm{d}_2 | \bm{d}_2) \,.
+\end{equation}
+
+The joint likelihood defined in Eq.(\ref{eqn:jpe-small-eqn}) can be then calculated from Eqs.~(\ref{eqn:ll-one}) and (\ref{eqn:ll-two}) as
+\begin{eqnarray}
+&& \ln p(\bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) \nonumber\\
+&& = \ln\mathcal{L}_{d_1h_1} - \frac{1}{2} \ln\mathcal{L}_{h_1h_1} - \frac{1}{2} (\bm{d}_1 | \bm{d}_1) \nonumber \\
+&& \quad + \ln\mathcal{L}_{d_2h_2}-\frac{1}{2} \ln\mathcal{L}_{h_2h_2} - \frac{1}{2} (\bm{d}_2 | \bm{d}_2) \,.
+\end{eqnarray}
+The combination of the relative binning for the first image and the waveform recycling to produce waveforms for the second image leads 
+to a faster joint parameter estimation for strongly-lensed GW signals.
 
 
 
