@@ -144,135 +144,55 @@ for given $\vec{\theta}$ as
 
 which together with Eq.~(\ref{eqn:short-l}) enables us to approximate the likelihood. Provided the number of bins is reduced compared to the usual method, this approach should offer a rapid likelihood evaluation, leading to a rapid parameter inference.
 
-\section{P\lowercase{arameter Estimation for Strong Lensing}}
-\label{sec:rb2}
-When analyzing a strongly-lensed gravitational wave signal that has been split into several images, one can perform joint parameter estimation, i.e.~one can analyze the images at the same time 
-taking into account the common parameters in addition to the ones introduced by lensing~\cite{Janquart:2023osz, Liu:2020par, Lo:2021nae, Janquart:2021qov}. 
-For two observable images, the joint analysis requires 19 parameters (see Table~\ref{bbh_params}), hence 4 more than single unlensed signal parameter 
-estimation. If more than two images are present, each additional image will introduce three more parameters, thereby further increasing the computational time.
-In this section, we recall the main aspects of strong lensing and describe the extension of the relative binning method to perform joint parameter estimation. For 
-simplicity we focus on the case of two images, but the extension to $N > 2$ images is straightforward.
+\subsection{Constructing the relative binning grid}
+\label{sec:bin-selection}
 
-\subsection{Effect of strong lensing on gravitational-wave signals}
+The selection of bins is an important step when using the relative binning method, as it determines not only the quality 
+of the approximation but also the final speed-up obtained. Previous works focusing on the relative binning method have proposed various bin selection algorithms~\cite{Zackay:2018qdy, Dai:2018dca, Leslie:2021ssu}. The choice of algorithm can vary depending on the waveform model and the scope of applicibality. Indeed, in~\cite{Zackay:2018qdy} and~\cite{Dai:2018dca} the bins are chosen based on the differential phase change of the GW signal whereas in~\cite{Leslie:2021ssu} they are chosen by bisecting the uniform grid until the error in the likelihood in each bin is below desired value.  
 
-When a GW signal is strongly lensed, it is split into multiple images, each undergoing a (de-)magnification, time delay and overall phase shift~\cite{Dai2020SearchO2}. 
-The $j^{\mathrm{th}}$ lensed image ($\bm{h}^l_j$) is related to the unlensed waveform ($\bm{h}^u$) through 
-\begin{equation}
-h^l_j (f; \boldsymbol{\Theta}, \mu_j, t_j, n_j) = \sqrt{\mu_j} h^{u}(f;\boldsymbol{\Theta})e^{2i\pi f t_j -in_j\pi} \,,
-\end{equation}
-where $\mu_j$, $t_j$ and $n_j$ denote the magnification factor, arrival time, and Morse factor for the $j^{\text{th}}$ image, respectively. We refer to them as the \textit{lensing parameters} of the $j^{\text{th}}$ image.
- 
-For a given image, these lensing parameters can not all be separately measured. Indeed, the magnification and the time delay are degenerate with the luminosity distance and the time of coalescence, 
-respectively~\cite{Dai:2017huk, Lo:2021nae, Janquart:2021qov}. Therefore, we can absorb $\sqrt{\mu_j}$ into the luminosity distance $D_L$, and $t_j$ into the coalescence time $t_c$ 
-to define the following effective quantities for the $j^{th}$ image:
-\begin{align}
-D_{L, j}^{\text{eff}} &= \frac{D_L}{\sqrt{\mu_j}} \,, \\
-t_{c, j}^{\text{eff}} &= t_c+t_j \,.
-\end{align}
-These quantities can be measured from the GW data. 
-On the other hand, the Morse phase is not necessarily degenerate with the phase of coalescence, as the presence of HOMs can break the possible phase-Morse factor 
-degeneracy~\cite{Dai:2017huk, Ezquiaga2020PhaseWaves, Janquart:2021nus}
+The objective of the bin selection step is to identify a minimal set of frequency bins in which the ratios of proposal waveform components 
+($\boldsymbol{h}^L_{l, m}$ and $\boldsymbol{C}_{l, m}$) to fiducial waveform components are linear to sufficient approximation.
+We refer to a set of frequency bins which satisfy this condition as an RBGrid. 
+The RBGrid is used to compute the summary data $\mathcal{D}$, and, once the sampling begins, 
+to compute coefficients $\mathcal{R}$ for the points in parameter space proposed by the sampler.  
 
-As mentioned above, for simplicity we focus on the scenario where two strongly-lensed images are analyzed. We refer to the image that arrives first at the detector as image 1, 
-and denote its observed parameters by $\boldsymbol{\Theta}_1$\footnote{Note that in the context of strong lensing $\boldsymbol{\Theta}_1$ includes the Morse factor, and the effective luminosity and time delay for the first image.}. Since some of the lensing parameters are not measurable on their own, let us define \emph{relative lensing parameters} linking the lensing parameters of the two images:
-\begin{align}
-\label{eqn:mu21}
-\mu_{21} = \mu_2/\mu_1  &= \left(D_{L, 1}^{\text{eff}} / D_{L, 2}^{\text{eff}}\right)^2  \\\
-\Delta t_{21} &= t^{\text{eff}}_{c, 2}-t^{\text{eff}}_{c, 1} \\
-\label{eqn:n21}
-\Delta n_{21} &= n_2 - n_1 
-\end{align}
-We collectively denote the relative lensing parameters by $\boldsymbol{\Phi}_{21} = \{\mu_{21}, \Delta t_{21}, \Delta n_{21}\}$. 
-Table \ref{tab:notation-table} summarizes all the parameters defined in the context of strong lensing. 
-The relative lensing parameters can be used to express the GW from the second image in terms of the waveform for the first image:
-\begin{equation}
-\label{eqn:wf-mapping}
-h^l_2(f; \boldsymbol{\Theta}_2) = \sqrt{\mu_{21}}h^{l}_1(f; \boldsymbol{\Theta}_1)e^{2i\pi f \Delta t_{21} - i\Delta n_{21}\pi}.
-\end{equation}
+To initialize the bin selection algorithm, we need the following quantities: 
+a uniform frequency grid with spacing $\Delta f = 1/T$, where the time $T$ is sufficiently long so as to easily accommodate the length of the signal; 
+a fixed value of ``total error'' on log likelihood, $\epsilon$; 
+an initial value $N_0$ for the total number of frequency bins;  
+a set of fiducial waveform parameters; and a set of test parameters. For definiteness we set  
+$\epsilon = 0.01$ and $N_0 = 200$. In simulations, the fiducial parameters are set to the injection parameters, while for real events they are set to the 
+maximum likelihood parameters obtained from earlier analyses. To choose a set of test parameters, we perturb the chirp mass and the 
+mass ratio of the fiducial parameters by a random relative value in a $[ -10\%, 10\%]$ interval, and the rest of the parameters are kept the same. 
 
-\begin{table}
-\begin{center}
-\begin{tabular}{| c | p{1 in} | p{1.7 in} |}
-\hline 
- Notation & Description & Parameters  \\ \hline 
- $\boldsymbol{\Lambda}$ & Source parameters common between the two images & \{$\mathcal{M}_c, \eta, a_1, a_2, \theta_1, \theta_2, \Delta \phi, \phi_{JL}$, $\text{RA}, \text{DEC}, \theta_{JN}, \psi, \phi \}$ \\ \hline
-$\boldsymbol{\Theta}_1$ & Observed parameters of image 1 & $ \boldsymbol{\Lambda} \cup \{D^{\text{eff}}_{L, 1}, t^{\text{eff}}_{c, 1}, n_1\}  $ \\ \hline 
-$\boldsymbol{\Theta}_2$ & Observed parameters of image 2 & $\boldsymbol{\Lambda} \cup \{D^{\text{eff}}_{L, 2}, t^{\text{eff}}_{c, 2}, n_2 $\} \\ \hline 
-$\boldsymbol{\Phi}_{21}$ & Lensing parameters of image 2 relative to image 1 & ${\mu_{21}, \Delta t_{21}, \Delta n_{21}}$ \\ \hline 
-\end{tabular}
-\end{center}
-\caption{Lensing parameters and source parameters defined in context of a pair of strongly lensed GW signals.}
-\label{tab:notation-table}
-\end{table}
+Using the quantities described in the paragraph above, we construct the RBGrid as follows. 
+We start from the first bin of the uniform frequency grid. 
+We merge the first bin with the next one and calculate the partial relative binning log likelihoods $\ln\mathcal{L}_{dh}$ and $\ln\mathcal{L}_{hh}$ 
+defined in Eqs.~\eqref{eqn:dh}-\eqref{eqn:hh}, 
+using as test quantities the edges of the combined frequency bin, and the fiducial waveform parameters.
+We also compute the corresponding exact partial likelihoods obtained by using all frequencies within the bins and not just the edges. 
+If the absolute difference between the partial relative binning likelihoods and the exact partial likelihoods is less than $\epsilon/\sqrt{N_0}$, 
+we add a subsequent bin into it and repeat. 
+If the difference is larger than that, we do not add any more bins and move to the next bin and repeat. 
+This continues until the maximum frequency of the uniform grid is reached. The value of $N_0$ is then updated to the total number of bins obtained 
+through the above process, and the same procedure is started again with the same $\epsilon$ but the updated $N_0$. 
+The algorithm terminates when $N_0$ ceases to change, and the edges of the merged bins in the final iteration become the RBGrid. 
 
-\subsection{Joint parameter estimation for strong lensing}
+The choice of $\epsilon$ controls the trade-off between speed and accuracy, where a larger value increases speed but reduces accuracy. By contrast, we have verified
+that the bin selection procedure is not very sensitive to the initial value of $N_0$; it mainly affects the convergence rate of the algorithm. 
+Setting $N_0$ equal to the length of the uniform grid would eliminate the need for this additional tuning parameter, but this would slow down the bin selection
+algorithm as a whole\footnote{Our implementation of the bin selection and relative binning parameter estimation framework can be found in the git repository at~\cite{janquart:2022}.   
+}. 
 
-Under the hypothesis that two GW events are strongly lensed, the two data streams can be written as $\bm{d}_1$ and $\bm{d}_2$, and the joint parameter estimation aims to measure 
-\begin{equation}
-p(\boldsymbol{\Theta}_1, \boldsymbol{\Theta}_2 | \bm{d}_1, \bm{d}_2, \mathcal{H}_l)\, ,
-\end{equation}
-where $\mathcal{H}_l$ denotes the strong lensing hypothesis. 
-However, given $\boldsymbol{\Theta}_1$ and $\Phi_{21}$, we can calculate $\boldsymbol{\Theta}_2$ using Eq.(\ref{eqn:mu21})-(\ref{eqn:n21}). 
-Therefore, we can equivalently infer
-\begin{equation}
-p(\boldsymbol{\Theta}_1, \Phi_{21} | \bm{d}_1, \bm{d}_2, \mathcal{H}_l)\, .
-\end{equation}
-Using Bayes' theorem we can write 
-\begin{eqnarray}
-\label{eqn:jpe-eqn}
-&& p(\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21} | \bm{d}_1, \bm{d}_2, \mathcal{H}_l) \nonumber\\
-&& = \frac{\pi(\boldsymbol{\Theta}_{1}, \boldsymbol{\Phi}_{21} | \mathcal{H}_l) p( \bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}, \mathcal{H}_l)}{\mathcal{Z}_l} \,,
-\end{eqnarray}
-where $\pi(\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21} | \mathcal{H}_l)$ is the prior on $\boldsymbol{\Theta}_1$ and $\boldsymbol{\Phi}_{21}$, 
-$p( \bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}, \mathcal{H}_l)$ is the likelihood, and $\mathcal{Z}_l$ is the evidence under the strong lensing 
-hypothesis\footnote{Excluding selection and population effects; see Ref.~\cite{Lo:2021nae} for more details.}: 
-\begin{equation}
-\mathcal{Z}_l = \int \mathrm{d}\boldsymbol{\Theta}_1 \mathrm{d}\boldsymbol{\Phi}_{21} \,  p(\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21} | \mathcal{H}_l) \,  p(\bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}, \mathcal{H}_l) \,. 
-\label{eqn:zL}
-\end{equation}
+%The construction of the RBGrid when performing joint parameter estimation on pairs of lensed images is straightforward.
+%Besides the fiducial parameters, test parameters, and threshold value $\epsilon$, the RBGrid also depends on the signal-to-noise ratio (SNR) and PSD of each event. 
+%As the latter two quantities and the lensing parameters can vary significantly between two events in a pair,  
+%we construct the RBGrid for each event separately and use each of them to calculate $\{\mathcal{R}_1, \mathcal{D}_1\}$ and $\{\mathcal{R}_2, \mathcal{D}_2\}$ during the 
+%data analysis. 
 
-Additionally, the joint likelihood in Eq.(\ref{eqn:jpe-eqn}) can be decomposed as
-\begin{align}
-\label{eqn:jpe-small-eqn}
-p(\bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) &= p(\bm{d}_1|\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) \, p(\bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) \nonumber \\ 
-& = p(\bm{d}_1 | \boldsymbol{\Theta}_1) \,  p(\bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) \,,
-\end{align}
-hinting at a possible way to perform relative binning analyses, where each of the terms above can be computed using the relative binning approximation before being combined.
-
-\subsection{Relative binning for strong lensing}
-
-The likelihood $p(\bm{d}_1| \boldsymbol{\Theta}_1)$ in Eq.~\eqref{eqn:jpe-small-eqn} is similar to the one expressed in Eq.(\ref{eqn:indi-likelihood}), except for the Morse factor, 
-which is a simple constant phase shift to add to the waveform. So, the framework in Eqs.~(\ref{eqn:l-ratio})-(\ref{eqn:hh}) of Sec.~\ref{sec:rb1} to estimate the likelihood 
-for individual events is also applicable here.
-First, we choose appropriate fiducial parameters $\boldsymbol{\Theta}'_1$ and calculate the summary data $\mathcal{D}_1$ and the coefficients $\mathcal{R}_1$ for event 1.
-Using $\mathcal{D}_1$ and $\mathcal{R}_1$, we can compute $\ln\mathcal{L}_{d_1h_1}$ and $\ln\mathcal{L}_{h_1h_1}$ as shown in Eqs.~(\ref{eqn:dh}) and 
-(\ref{eqn:hh}). 
-The likelihood $p(\bm{d}_1|\boldsymbol{\Theta}_1)$ is then obtained by
-\begin{equation}
-\label{eqn:ll-one}
-\ln p(\bm{d}_1|\boldsymbol{\Theta}_1) = \ln\mathcal{L}_{d_1h_1} - \frac{1}{2} \ln\mathcal{L}_{h_1h_1} - \frac{1}{2} (\bm{d}_1 | \bm{d}_1) \,,
-\end{equation}
-where $(\bm{d}_1 | \bm{d}_1)$ again needs to be computed only once for the given GW data.  
-
-The waveform $\bm{h}_1$ used to calculate the likelihood of $\bm{d}_1$ given $\boldsymbol{\Theta}_1$ can be rescaled 
-to obtain $\bm{h}_2$ using Eq.(\ref{eqn:wf-mapping}) and $\boldsymbol{\Phi}_{21}$. 
-The rescaled waveforms $\bm{h}_2$ can be used when sampling the likelihood of $\bm{d}_2$ given $\boldsymbol{\Theta}_2$;  
-this approach saves additional computational costs that would be incurred in generating completely new waveforms. 
-The rest of the steps are similar to the ones performed when calculating $p(\bm{d}_1|\boldsymbol{\Theta}_1)$, and we obtain 
-\begin{equation}
-\label{eqn:ll-two}
-\ln p(\bm{d}_2|\boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) = \ln\mathcal{L}_{d_2h_2}-\frac{1}{2} \ln\mathcal{L}_{h_2h_2} - \frac{1}{2} (\bm{d}_2 | \bm{d}_2) \,.
-\end{equation}
-
-The joint likelihood defined in Eq.(\ref{eqn:jpe-small-eqn}) can be then calculated from Eqs.~(\ref{eqn:ll-one}) and (\ref{eqn:ll-two}) as
-\begin{eqnarray}
-&& \ln p(\bm{d}_1, \bm{d}_2 | \boldsymbol{\Theta}_1, \boldsymbol{\Phi}_{21}) \nonumber\\
-&& = \ln\mathcal{L}_{d_1h_1} - \frac{1}{2} \ln\mathcal{L}_{h_1h_1} - \frac{1}{2} (\bm{d}_1 | \bm{d}_1) \nonumber \\
-&& \quad + \ln\mathcal{L}_{d_2h_2}-\frac{1}{2} \ln\mathcal{L}_{h_2h_2} - \frac{1}{2} (\bm{d}_2 | \bm{d}_2) \,.
-\end{eqnarray}
-The combination of the relative binning for the first image and the waveform recycling to produce waveforms for the second image leads 
-to a faster joint parameter estimation for strongly-lensed GW signals.
-
+\section{Extending the relative binning method to}
+\subsubsection{Perform parameter estimation on the overlapping signals}
+\subsubsection{Perform strong lensing searches}
 
 
 \section{Validation of the method}
