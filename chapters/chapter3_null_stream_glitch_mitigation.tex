@@ -150,8 +150,8 @@ yields measurements where the true distance and sky location lie within $3\sigma
 align with the no-glitch benchmark. In contrast, with the ET-2L configuration, the resulting measurements 
 are wider or generally exclude the true values, except when the glitch onset is 100 ms before or 20 ms after the merger. We infer that at those values of $\Delta t$, the glitch is far enough from GW signal to cause any biases. 
 
-\section{Conclusions and outlook}
-The null stream provides us with an extra piece of information in the form of Eq.~\ref{eq:null-stream-eq}. For the first time, we show how this information can be used to address a pressing problem posed by glitches. We highlight the key features of \texttt{nijntje} framework and \ETT configuration in table \ref{tab:nijntje_conclusion}. 
+\section{Conclusions and future work}
+The null stream provides us with an extra piece of information in the form of Eq.~\ref{eq:null-stream-eq}. For the first time, we quantitatively show how this information can be used to address the problem posed by glitches. Further, in the table \ref{tab:nijntje_conclusion}, we present a qualitative comparison between the \ETT and ET-2L~configuration in context of glitch mitigation. 
 
 \begin{table}[h!]
     \centering
@@ -161,24 +161,28 @@ The null stream provides us with an extra piece of information in the form of Eq
     Glitch mitigation using ET-2L & Glitch mitigation using \ETT \\
     \midrule
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
-        \item Biases expected in the parameter estimation execpt for the edge cases when glitch and signals are far apart
-        \item True signal model needs to be known \textit{apriori}. Biases worsen if used without using a signal model / using incorrect signal model. 
-        \item $\mathcal{O}(10)$ hours per analysis
-        \item Adaptations required depending on the type of the GW signal and glitch. 
-        \item Biases worsen when two interferometers have unequal SNRs. 
+        \item Biases expected in the measurements.
+        \item True signal model needs to be known \textit{apriori}. Biases worsen if signal model is not known or incorrect.
+        \item $\mathcal{O}(10)$ hours per analysis. Difficult to scale to meet the demands of 3G-era. \textcolor{white}{lorem ipsum lorem ipsum.}
+        \item Modification required depending on the type of the GW signal and glitch. Modification required when multiple signals and glitches are overlapping with eachother -- a scenario highly likely in the 3G-era.
+        \item Biases worsen when two interferometers have unequal SNRs.
     \end{enumerate}
     &
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
-        \item Restore the accuracy of parameter estimation which is similar to the case when no glitch introduced
-        \item Does not require any prior knowledge of the signal model. Ready to use even when the signals are expensive to simulate or challening to model. 
-        \item $\mathcal{O}(1)$ hour per analysis.
-        \item Ready to use against varying morphologies of glitches.
-        \item Individual detector SNR does not play any role. 
+        \item Quality of measurements identical to the scenario when glitches are not introduced.
+        \item Does not require any prior knowledge of the signal model. Ready-to-use for all kinds of signals. 
+        \item $\mathcal{O}(1)$ hour per analysis. Fast and accurate framework \texttt{nijntje}; a ready-to-use tool for the 3G-era. 
+        \item Ready-to-use against varying morphologies of glitches. Ready-to-use even when multiple signals and glitches are overlapping. \textcolor{white}{lorem ipsum lorem ipsum lorem ipsum dolor lorem ipsum}
+        \item Individual interferometer SNRs do not play any role. 
     \end{enumerate}
     \\
     \bottomrule
     \end{tabular}
-    \caption{Addressing the problem of signal-overlapping glitches with \ETT and ET-2L}
+    \caption{Comparison \ETT and ET-2L configuration in context of glitch mitigation}
     \label{tab:nijntje_conclusion}
 \end{table}
+
+We plan to extend this work by including various kinds of signals and glitches in our analysis. We also plan to investigate the possibility of occurance and mitigation of coincident glitches, i.e., glitches that appear in all interferometers of a network at the same time. We also plan to investigate the impact of newtonian noise -- the models of which are poorly known at the time of writing of this thesis. In addition, the null stream can be constructed when all three interferometers are online. We leave it to the future work to include the duty cycle in our analysis. Note that, in the absence of null stream, one can revert to performing joint signal and glitch mitigation for the triangular configuration.
+
+The problem posed by glitches is a pressing one and it could hinder our transition to the precision science era. The comparison presented in this chapter shows a clear edge the null stream inherent in the triangular configuration has to offer, over the alternate configuration. 
 
