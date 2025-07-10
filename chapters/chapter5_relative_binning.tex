@@ -59,7 +59,7 @@ $\vec{h}/\vec{h}'$ can be linearly approximated as
 within a given bin, where $r_1(b)$ and $r_2(b)$ are expansion coefficients 
 and $f_c$ denotes the central value of the frequency bin $b$. 
 
-The approximation made in Eq.~(\ref{eqn:ratio}) performs better for the IMRPhenomD waveform compared to the IMRPhenomXPHM one because the ratio $\vec{h}/\vec{h}'$ varies more smoothly with $f$ for the former (see left plot of Figure~\ref{fig:dxp-ratio}). Therefore, when using the IMRPhenomD waveform a few bins are sufficient to make the linear expansion from Eq.(\ref{eqn:ratio}) precise in each bin. This is not the case anymore for more complex waveform models. When using the IMPRhenomXPHM waveform, as the ratio is subject to more fluctuation, we need to consider a larger number of bins, which increases waveform generation costs and makes the likelihood evaluation slow. 
+The approximation made in Eq.~\eqref{eqn:ratio} performs better for the IMRPhenomD waveform compared to the IMRPhenomXPHM one because the ratio $\vec{h}/\vec{h}'$ varies more smoothly with $f$ for the former (see left plot of Figure~\ref{fig:dxp-ratio}). Therefore, when using the IMRPhenomD waveform a few bins are sufficient to make the linear expansion from Eq.(\ref{eqn:ratio}) precise in each bin. This is not the case anymore for more complex waveform models. When using the IMPRhenomXPHM waveform, as the ratio is subject to more fluctuation, we need to consider a larger number of bins, which increases waveform generation costs and makes the likelihood evaluation slow. 
 
 \begin{figure}
     \centering
@@ -70,7 +70,7 @@ The approximation made in Eq.~(\ref{eqn:ratio}) performs better for the IMRPheno
 \end{figure}
 
 \subsection{Inclusion of higher order modes and precessing spins}
-In order to make the approximation in Eq.~(\ref{eqn:ratio}) robust for precessing waveforms with HOMs, 
+In order to make the approximation in Eq.~\eqref{eqn:ratio} robust for precessing waveforms with HOMs, 
 let us express the detector frame waveform for given $\vec{\theta}$ into its 
 component modes~\cite{Pratten:2020ceb} 
 \begin{equation}
@@ -96,7 +96,7 @@ $\vec{h}/\vec{h}'$ and will require a lower number of frequency bins for more co
 \end{equation}
 
 Now, let us denote the factor $(F_+C^{+}_{l, m}(f)+F_\times C^{\times}_{l, m}(f))$ in 
-Eq.~(\ref{eqn:comp-mode}) by $\vec{C}_{l, m}$. We can perform similar expansions on the ratios 
+Eq.~\eqref{eqn:comp-mode} by $\vec{C}_{l, m}$. We can perform similar expansions on the ratios 
 $\vec{C}_{l, m}/\vec{C}'_{l, m}$:
 \begin{equation}
 \label{eqn:c-ratio}
@@ -105,12 +105,12 @@ $\vec{C}_{l, m}/\vec{C}'_{l, m}$:
 Below, the expansion coefficients will collectively be denoted 
 $\mathcal{R} = \{\vec{r}_1, \vec{r}_2, \vec{s}_1, \vec{s}_2\}$. 
 For now, we assume we can find frequency bins such that the piece-wise linear interpolations 
-in Eqs.~(\ref{eqn:l-ratio}) and (\ref{eqn:c-ratio}) are 
+in Eq.~\eqref{eqn:l-ratio} and Eq.\eqref{eqn:c-ratio} are 
 valid. How such bins can be found will be explained in Sec.~\ref{sec:bin-selection}.
 
 Once the frequency bins are made based on the chosen fiducial waveforms, we can pre-compute some 
 \textit{summary data}~\cite{Leslie:2021ssu} based only on the reference waveform and useful for the 
-computation of the inner products in Eq.~(\ref{eqn:short-l}). These are:
+computation of the inner products in Eq.~\eqref{eqn:short-l}. These are:
 \begin{eqnarray}
 && W_{l, m}(b) = \frac{4}{T} \sum_{f\in b}\frac{d(f)h'^{L*}_{l, m}(f)C'^{*}_{l, m}(f)}{S_n(f)} \, , 
 \nonumber \\
@@ -142,18 +142,14 @@ for given $\vec{\theta}$ as
 &\qquad\qquad\qquad\qquad + \left. \left.  s_{1, l, m}(b)s_{1, \bar{l}, \bar{m}}^*(b)\left(r_{1, \bar{l}, \bar{m}}^*(b) r_{2, l, m}(b) + r_{1, l, m}(b) r_{2, \bar{l}, \bar{m}}^*(b)\right) \right] \right\},
 \end{align}
 
-which together with Eq.~(\ref{eqn:short-l}) enables us to approximate the likelihood. Provided the number of bins is reduced compared to the usual method, this approach should offer a rapid likelihood evaluation, leading to a rapid parameter inference.
+which together with Eq.~\eqref{eqn:short-l} enables us to approximate the likelihood. Provided the number of bins is reduced compared to the usual method, this approach should offer a rapid likelihood evaluation, leading to a rapid parameter inference.
 
 \subsection{Constructing the relative binning grid}
 \label{sec:bin-selection}
 
-The selection of bins is an important step when using the relative binning method, as it determines not only the quality 
-of the approximation but also the final speed-up obtained. Previous works focusing on the relative binning method have proposed various bin selection algorithms~\cite{Zackay:2018qdy, Dai:2018dca, Leslie:2021ssu}. The choice of algorithm can vary depending on the waveform model and the scope of applicibality. Indeed, in~\cite{Zackay:2018qdy} and~\cite{Dai:2018dca} the bins are chosen based on the differential phase change of the GW signal whereas in~\cite{Leslie:2021ssu} they are chosen by bisecting the uniform grid until the error in the likelihood in each bin is below desired value.  
-
 The objective of the bin selection step is to identify a minimal set of frequency bins in which the ratios of proposal waveform components 
 ($\vec{h}^L_{l, m}$ and $\vec{C}_{l, m}$) to fiducial waveform components are linear to sufficient approximation.
-We refer to a set of frequency bins which satisfy this condition as an RBGrid. 
-The RBGrid is used to compute the summary data $\mathcal{D}$, and, once the sampling begins, 
+We refer to a set of frequency bins which satisfy this condition as an RBGrid. The RBGrid is used to compute the summary data $\mathcal{D}$, and, once the sampling begins, 
 to compute coefficients $\mathcal{R}$ for the points in parameter space proposed by the sampler.  
 
 To initialize the bin selection algorithm, we need the following quantities: 
@@ -168,9 +164,7 @@ mass ratio of the fiducial parameters by a random relative value in a $[ -10\%, 
 Using the quantities described in the paragraph above, we construct the RBGrid as follows. 
 We start from the first bin of the uniform frequency grid. 
 We merge the first bin with the next one and calculate the partial relative binning log likelihoods $\ln\mathcal{L}_{dh}$ and $\ln\mathcal{L}_{hh}$ 
-defined in Eqs.~\eqref{eqn:dh}-\eqref{eqn:hh}, 
-using as test quantities the edges of the combined frequency bin, and the fiducial waveform parameters.
-We also compute the corresponding exact partial likelihoods obtained by using all frequencies within the bins and not just the edges. 
+defined in Eq.~\eqref{eqn:dh} and Eq.~\eqref{eqn:hh}, using as test quantities the edges of the combined frequency bin, and the fiducial waveform parameters. We also compute the corresponding exact partial likelihoods obtained by using all frequencies within the bins and not just the edges. 
 If the absolute difference between the partial relative binning likelihoods and the exact partial likelihoods is less than $\epsilon/\sqrt{N_0}$, 
 we add a subsequent bin into it and repeat. 
 If the difference is larger than that, we do not add any more bins and move to the next bin and repeat. 
