@@ -218,13 +218,14 @@ For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1 + 
 \vec{h}_2(\vec{\theta}, \vec{\theta}_{L}) = \sqrt{\mu_{12}}\vec{h}_1(\vec{\theta})e^{2i\pi f \Delta t_{12} - i\Delta n_{12}\pi}
 \end{equation}
 where the set $\{\vec{\theta}, \vec{\theta}_L\}$ now represent a 18 dimensional parameter space. The factorization of the likelihood expression is slightly different from the case of overlapping signals since we need to incorporate two data stream. Let us denote them by $\vec{d}_1$ and $\vec{d}_2$ for each image. The likelihood function then is,
-\begin{equation}
-    \label{eq:lensing-likelihood}
+
+\begin{align}
     \ln \mathcal{L}(\vec{\theta}, \vec{\theta}_L) &= \left<\vec{d}_1|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}_2|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
-    \label{eq:two-likelihood}
+    \label{eq:lesing_small_likelihood}
     & = \ln \mathcal{L}_{d_1h_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{d_2h_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
-\end{equation}
-Note, that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at relevant places. Next we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{wf-mapping}. Use RBGrid to generate the summary data and using the summary data, we can approximate the likelihood. 
+\end{align}
+
+Note, that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at relevant places. Next we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{eqn:wf-mapping}. Use RBGrid to generate the summary data and using the summary data, we can approximate the likelihood. 
 
 Now, we have all the ingredients to perform paramter estimation on the isolated signals, overlapping signals, and strongly lensed signals. 
     
