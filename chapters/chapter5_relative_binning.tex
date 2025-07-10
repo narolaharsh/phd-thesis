@@ -179,7 +179,22 @@ algorithm as a whole\footnote{Our implementation of the bin selection and relati
 
 
 \section{Extension of the relative binning method}
+A fast parameter estimation method has a wide range of application. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two siganls. Figure~\ref{fig:lensing-overlaps} gives an illustration of two overlapping signals (top) and strongly lensed signals (bottom). 
+
+When two or more signals merge close to each other, we refer to them as overlapping signals (top panel of Figure~\ref{fig:lensing-overlaps}). It is intutive to think that if two signals are far apart, we can analyze each of them while ignoring the presence of the other signal. However, when they are close, they need to be analyze jointly in order to avoide biases in the measurements. A comprehansive investigation on this topic was done in the Tomek et al work by extending the relative binning method discussed in this chapter. 
+
+When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lening, the GW signals is split into multiple time-separated copies (referred to as images) which maybe observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the parameters of two GW signals, i.e. by performing \textit{joint} parameter estimation. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.75\textwidth]{../figures/vis_overlap_signals.pdf} 
+    \hspace*{.5cm}\includegraphics[width=0.75\textwidth]{../figures/lensing_overlap_signals.pdf}
+    \caption{Top: Bottom:}
+    \label{fig:lensing-overlaps}
+\end{figure}
+
 \subsubsection{To perform parameter estimation on the overlapping signals}
+The LIGO-Virgo interferometers have not yet observed any overlapping signals and it is unlikely that we do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipeline are designed to analyze a single, isolated signal. However, in the 3G-era, due to increase detection rate and increase duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develope parameter estimation methods to analyze overlapping signals. 
 \subsubsection{To perform strong lensing searches}
 
 
@@ -211,8 +226,8 @@ algorithm as a whole\footnote{Our implementation of the bin selection and relati
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.53\textwidth]{../figures/thesis_pair_191103_191105.pdf} 
-    \hspace{.5cm}\includegraphics[width=0.41\textwidth]{../figures/lens_pair_191103_191105.pdf}
+    \includegraphics[width=0.53\textwidth]{../figures/thesis_pair_191103_191105.pdf} \hspace{.5cm}
+    \includegraphics[width=0.41\textwidth]{../figures/lens_pair_191103_191105.pdf}
     \caption{Investigating the pair GW191103 (red) and GW191105 (green) under strong lensing hypothesis (blue).}
     \label{fig:lensed_pair}
 \end{figure}
