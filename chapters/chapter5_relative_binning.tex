@@ -176,8 +176,6 @@ The choice of $\epsilon$ controls the trade-off between speed and accuracy, wher
 that the bin selection procedure is not very sensitive to the initial value of $N_0$; it mainly affects the convergence rate of the algorithm. 
 Setting $N_0$ equal to the length of the uniform grid would eliminate the need for this additional tuning parameter, but this would slow down the bin selection
 algorithm as a whole\footnote{Our implementation of the bin selection and relative binning parameter estimation framework can be found in the git repository at~\cite{janquart:2022}.}. 
-
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.75\textwidth]{../figures/vis_overlap_signals.pdf} 
@@ -185,6 +183,9 @@ algorithm as a whole\footnote{Our implementation of the bin selection and relati
     \caption{Top: An example of two gravitational wave signals merging close to each other. Bottom: An example of a gravitational wave signal that is strongly lensed producing two images. The fiducial time separation between the two signals marked by $\Delta t_{12}$ and relative (de-)magnification marked by $\mu_{12}$.}
     \label{fig:lensing-overlaps}
 \end{figure}
+
+
+
 \section{Extension of the relative binning method}
 A fast parameter estimation method has a wide range of application. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two siganls. Figure~\ref{fig:lensing-overlaps} gives an illustration of two overlapping signals (top) and strongly lensed signals (bottom). 
 
@@ -199,18 +200,34 @@ The LIGO-Virgo interferometers have not yet observed any overlapping signals and
 
 We account for two signals in the signal model by replacing $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ in the expression of the likelihood (cc. Eq.~\eqref{eqn:indi-likelihood}). This leads to
 \begin{equation}
-\ln \mathcal{L}(\vec{\theta}) = -\frac{1}{2}\left<\vec{d}-\vec{h}_1(\vec{\theta}) - \vec{h}_2(\vec{\theta}) |\vec{d}-\vec{h}_1(\vec{\theta}) - \vec{h}_2(\vec{\theta})\right>\,,
+\ln \mathcal{L}(\vec{\theta}_1, \vec{\theta}_2) = -\frac{1}{2}\left<\vec{d}-\vec{h}_1(\vec{\theta}_1) - \vec{h}_2(\vec{\theta}_2) |\vec{d}-\vec{h}_1(\vec{\theta}_2) - \vec{h}_2(\vec{\theta}_2)\right>\,,
 \end{equation}
-where $\vec{\theta}$ now represent a 30 dimensional parameter space in place of 15 dimensional. Follwing the steps from Eq.~\eqref{eqn:indi-likelihood}-Eq.~\eqref{eqn:short-l}, we can factorise the likelihood into
+where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensional parameter space. Follwing the steps from Eq.~\eqref{eqn:indi-likelihood}-Eq.~\eqref{eqn:short-l}, we can factorise the likelihood into
 \begin{align}
     \ln \mathcal{L}(\vec{\theta}) &= \left<\vec{d}|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
     \label{eq:two-likelihood}
-    & = \ln \mathcal{L}(\vec{\theta}) = \ln \mathcal{L}_{dh_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{dh_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
+    & = \ln \mathcal{L}_{dh_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{dh_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
 \end{align}
 where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Now, we have all the ingredients to compute the joint likelihood. Each term in factorised likelihod expression of the Eq.~\ref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
 
 \subsubsection{To perform strong lensing searches}
+For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ to account for two images. However, since two images are copies of the same GW signals, we expect that the source parameters are identical between the two except for the merger time, luminosity distance, and morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as
 
+\begin{equation}
+\label{eqn:wf-mapping}
+\vec{h}_2(\vec{\theta}, \vec{\theta}_{L}) = \sqrt{\mu_{12}}\vec{h}_1(\vec{\theta})e^{2i\pi f \Delta t_{12} - i\Delta n_{12}\pi}
+\end{equation}
+where the set $\{\vec{\theta}, \vec{\theta}_L\}$ now represent a 18 dimensional parameter space. The factorization of the likelihood expression is slightly different from the case of overlapping signals since we need to incorporate two data stream. Let us denote them by $\vec{d}_1$ and $\vec{d}_2$ for each image. The likelihood function then is,
+\begin{equation}
+    \label{eq:lensing-likelihood}
+    \ln \mathcal{L}(\vec{\theta}, \vec{\theta}_L) &= \left<\vec{d}_1|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}_2|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
+    \label{eq:two-likelihood}
+    & = \ln \mathcal{L}_{d_1h_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{d_2h_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
+\end{equation}
+Note, that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at relevant places. Next we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{wf-mapping}. Use RBGrid to generate the summary data and using the summary data, we can approximate the likelihood. 
+
+Now, we have all the ingredients to perform paramter estimation on the isolated signals, overlapping signals, and strongly lensed signals. 
+    
 
 \section{Validation of the method}
 \subsection{On simulated data}
