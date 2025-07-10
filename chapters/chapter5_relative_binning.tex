@@ -151,7 +151,7 @@ The selection of bins is an important step when using the relative binning metho
 of the approximation but also the final speed-up obtained. Previous works focusing on the relative binning method have proposed various bin selection algorithms~\cite{Zackay:2018qdy, Dai:2018dca, Leslie:2021ssu}. The choice of algorithm can vary depending on the waveform model and the scope of applicibality. Indeed, in~\cite{Zackay:2018qdy} and~\cite{Dai:2018dca} the bins are chosen based on the differential phase change of the GW signal whereas in~\cite{Leslie:2021ssu} they are chosen by bisecting the uniform grid until the error in the likelihood in each bin is below desired value.  
 
 The objective of the bin selection step is to identify a minimal set of frequency bins in which the ratios of proposal waveform components 
-($\boldsymbol{h}^L_{l, m}$ and $\boldsymbol{C}_{l, m}$) to fiducial waveform components are linear to sufficient approximation.
+($\vec{h}^L_{l, m}$ and $\vec{C}_{l, m}$) to fiducial waveform components are linear to sufficient approximation.
 We refer to a set of frequency bins which satisfy this condition as an RBGrid. 
 The RBGrid is used to compute the summary data $\mathcal{D}$, and, once the sampling begins, 
 to compute coefficients $\mathcal{R}$ for the points in parameter space proposed by the sampler.  
@@ -181,18 +181,12 @@ The algorithm terminates when $N_0$ ceases to change, and the edges of the merge
 The choice of $\epsilon$ controls the trade-off between speed and accuracy, where a larger value increases speed but reduces accuracy. By contrast, we have verified
 that the bin selection procedure is not very sensitive to the initial value of $N_0$; it mainly affects the convergence rate of the algorithm. 
 Setting $N_0$ equal to the length of the uniform grid would eliminate the need for this additional tuning parameter, but this would slow down the bin selection
-algorithm as a whole\footnote{Our implementation of the bin selection and relative binning parameter estimation framework can be found in the git repository at~\cite{janquart:2022}.   
-}. 
+algorithm as a whole\footnote{Our implementation of the bin selection and relative binning parameter estimation framework can be found in the git repository at~\cite{janquart:2022}.}. 
 
-%The construction of the RBGrid when performing joint parameter estimation on pairs of lensed images is straightforward.
-%Besides the fiducial parameters, test parameters, and threshold value $\epsilon$, the RBGrid also depends on the signal-to-noise ratio (SNR) and PSD of each event. 
-%As the latter two quantities and the lensing parameters can vary significantly between two events in a pair,  
-%we construct the RBGrid for each event separately and use each of them to calculate $\{\mathcal{R}_1, \mathcal{D}_1\}$ and $\{\mathcal{R}_2, \mathcal{D}_2\}$ during the 
-%data analysis. 
 
-\section{Extending the relative binning method to}
-\subsubsection{Perform parameter estimation on the overlapping signals}
-\subsubsection{Perform strong lensing searches}
+\section{Extension of the relative binning method}
+\subsubsection{To perform parameter estimation on the overlapping signals}
+\subsubsection{To perform strong lensing searches}
 
 
 \section{Validation of the method}
