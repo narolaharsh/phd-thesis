@@ -225,17 +225,78 @@ where the set $\{\vec{\theta}, \vec{\theta}_L\}$ now represent a 18 dimensional 
     & = \ln \mathcal{L}_{d_1h_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{d_2h_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
 \end{align}
 
-Note, that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at relevant places. Next we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{eqn:wf-mapping}. Use RBGrid to generate the summary data and using the summary data, we can approximate the likelihood. 
+Note that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at relevant places. Next we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{eqn:wf-mapping}. Use RBGrid to generate the summary data and using the summary data, we can approximate the likelihood. 
 
 Now, we have all the ingredients to perform paramter estimation on the isolated signals, overlapping signals, and strongly lensed signals. 
     
 
 \section{Validation of the method}
 \subsection{On simulated data}
+\begin{table}
+    \centering
+    \begin{tabular}{| p{8cm} | p{5cm}|}
+      \hline
+      \textbf{Parameter} & \textbf{Population Prior} \\
+      \hline
+      Chirp mass $(\mathcal{M}_c)$ &  Uniform($5M_{\odot},$ $100M_{\odot}$) \\
+      \hline
+      Mass ratio $(q)$ & Uniform(0.1, 10) \\
+      \hline
+     Dimensionless spin of the $i^{th}$ black hole $(a_i)$  & Uniform(0, 1) \\
+      \hline
+      Zenith angle between the spin and orbital angular momentum for 
+      $i^{th}$ black hole $(\theta_i )$ &Sine($0, \pi$)\\
+      \hline
+       Difference between the azimuthal angles of the individual spin vector projections onto the orbital plane $(\Delta \phi)$ & Uniform($0, 2\pi$)\\
+      \hline
+      Difference between total and orbital angular momentum azimuthal angles $(\phi_{JL})$ &  Uniform($0, 2\pi$) \\
+      \hline
+      Right Ascension (RA) &  Uniform($0, 2\pi$)\\
+      \hline
+      Declination (DEC) &  Cosine($-\pi/2,$ $\pi/2$)\\
+      \hline
+     Angle between the line of sight and total angular momentum$ (\theta_{JN})$ &  Sine($0, \pi$)\\
+      \hline
+      Polarization angle $(\psi)$ &  Sine($0, \pi$)\\
+      \hline
+     Phase of coalescence $(\phi_c)$ &  Uniform($0, 2\pi$)\\
+      \hline 
+      Luminosity distance $(d_L)$ &  UniformSourceFrame(0.1 \text{Gpc}, 5 \text{Gpc}) \\
+      \hline
+      Time of coalescence $(t_c)$ &  Uniform(0s, 86400s) \\
+      \hline
+      Morse factor for image 1 $(n_1)$ &  Uniform\{0, 0.5, 1\} \\
+      \hline
+      Magnification of image 2 w.r.t image 1 $(\mu_{12})$ &  Uniform(0, 10) \\
+      \hline
+      Delay in arrival time between two images $(\Delta t_{12})$ &  Uniform(0s, 86400s) \\
+      \hline
+      Difference in Morse factor $(\Delta n_{12})$ &  Uniform\{0, 0.5, 1\} \\
+      \hline
+       \end{tabular}
+      \caption{Parameters and corresponding priors used to simulate individual GW signals and the pairs of lensed GW signals. 
+      For a detailed description of each prior probability distribution refer to~\cite{Ashton2018Bilby:Astronomy}.}
+       \label{bbh_params}
+  \end{table}
+  
+For a parameter estimation method to be trustworthy, it should recover the injected parameters within a given confidence interval for a corresponding fraction of injections; the 
+extent to which it does so can be assessed using a so-called P-P plot~\cite{Sidery:2013zua, Veitch:2014wba, Berry:2014jja, Singer:2015ema, Romero-Shaw:2020owr}. 
+To this end we simulate a population of 70 BBH signals by sampling the appropriate source parameters from the prior distributions specified in Table~\ref{bbh_params}. 
+We adjust the luminosity distance in such a way that each event has a network SNR above 13. 
+The network consists of the two LIGO~\cite{LIGOScientific:2014pky} and the Virgo interferometers~\cite{VIRGO:2014yos} at their design sensitivity~\cite{KAGRA:2013rdx}. 
+We perform parameter estimation on each event and show the collective results in Fig.~\ref{fig:pp-plot}, representing a P-P plot for our relative binning framework. Ideally, each coloured 
+line should trace the diagonal; however, some fluctuations are expected due to a finite number of signals being analyzed and the presence of noise. 
+We perform a Kolmogorov–Smirnov (KS) test~\cite{2020SciPy-NMeth} and quote the p-value (in brackets) as a measure of the consistency between each colored line and the diagonal line.
+To further quantify this consistency, we can define a binomial random variable $X$ as the number of times the injected value is recovered within 
+a confidence interval corresponding to a value on the horizontal axis. 
+For this binomial distribution, the shape parameter $N$ equals 70 and $p$ equals the confidence corresponding to the x-axis.  
+The shaded regions in Fig.~\ref{fig:pp-plot} cover 1$\sigma$, 2$\sigma$, and 3$\sigma$ confidence intervals of the binomial probability distribution in decreasing order of opacity. 
+As all the plotted curves for the different parameters fall within the 3$\sigma$ boundary and the accompanying p-values indicate good consistency with the diagonal, 
+we conclude that our method is robust.
 \begin{figure}[h]
     \centering
     \includegraphics[width=.75\textwidth]{../figures/pp_3.0_partial_no_railing.pdf}
-    \caption{Percentile-percentile showcasing the robustness of relative binning method on BBH events. Each line traces the diagonal, indicating that the parameter corresponding to it is recovered with expected accuracy. The numbers in the brackets of the legend show the p-values of the KS tests. The combined p-value of all parameters is 0.6625, consistent with the hypothesis that individual p-values were derived from a uniform distribution as expected. The shaded regions show 1$\sigma$,2$\sigma$,3$\sigma$ confidence intervals in decreasing order of opacity.}
+    \caption{Percentile-percentile showcasing the robustness of relative binning method on BBH events. Each line traces the diagonal, indicating that the parameter corresponding to it is recovered with expected accuracy. The numbers in the brackets of the legend show the p-values of the KS tests. The combined p-value of all parameters is 0.6625, consistent with the hypothesis that individual p-values were derived from a uniform distribution as expected. The shaded regions show 1$\sigma$, 2$\sigma$, 3$\sigma$ confidence intervals in decreasing order of opacity.}
     \label{fig:pp-plot}
 \end{figure}
 
