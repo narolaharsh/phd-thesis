@@ -132,9 +132,9 @@ ifos_B[0].inject_signal(
 fig, ax = plt.subplots(1, 1, figsize = (8, 4))
 trigger_time = injection_parameters['geocent_time_A'] + 34e-3
 
-ax.plot(1e3*(ifos_A[0].time_array-trigger_time), ifos_A[0].whitened_time_domain_strain, color = 'royalblue', lw = 2, alpha = 1, label = 'Signal A')
-ax.plot(1e3*(ifos_B[0].time_array-trigger_time), ifos_B[0].whitened_time_domain_strain, color = 'darkseagreen', lw = 2, alpha = 1, label = 'Signal B')
-ax.plot(1e3*(ifos[0].time_array-trigger_time), ifos[0].whitened_time_domain_strain, color = 'black', lw = 2, ls = '--', label = 'Signal A + Signal B')
+ax.plot(1e3*(ifos_A[0].time_array-trigger_time), ifos_A[0].whitened_time_domain_strain, color = 'royalblue', lw = 2, alpha = 1, label = 'Signal 1')
+ax.plot(1e3*(ifos_B[0].time_array-trigger_time), ifos_B[0].whitened_time_domain_strain, color = 'darkseagreen', lw = 2, alpha = 1, label = 'Signal 2')
+ax.plot(1e3*(ifos[0].time_array-trigger_time), ifos[0].whitened_time_domain_strain, color = 'black', lw = 2, ls = '--', label = 'Signal 1 + Signal 2')
 ax.legend(frameon = True, fancybox = True)
 ax.set_xlim(1e3*-0.25, 1e3*.03)
 ax.set_ylabel('Whitened strain [$\sigma$]')
