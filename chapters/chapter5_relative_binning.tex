@@ -178,23 +178,37 @@ Setting $N_0$ equal to the length of the uniform grid would eliminate the need f
 algorithm as a whole\footnote{Our implementation of the bin selection and relative binning parameter estimation framework can be found in the git repository at~\cite{janquart:2022}.}. 
 
 
-\section{Extension of the relative binning method}
-A fast parameter estimation method has a wide range of application. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two siganls. Figure~\ref{fig:lensing-overlaps} gives an illustration of two overlapping signals (top) and strongly lensed signals (bottom). 
-
-When two or more signals merge close to each other, we refer to them as overlapping signals (top panel of Figure~\ref{fig:lensing-overlaps}). It is intutive to think that if two signals are far apart, we can analyze each of them while ignoring the presence of the other signal. However, when they are close, they need to be analyze jointly in order to avoide biases in the measurements. A comprehansive investigation on this topic was done in the Tomek et al work by extending the relative binning method discussed in this chapter. 
-
-When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lening, the GW signals is split into multiple time-separated copies (referred to as images) which maybe observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the parameters of two GW signals, i.e. by performing \textit{joint} parameter estimation. 
-
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.75\textwidth]{../figures/vis_overlap_signals.pdf} 
     \hspace*{.5cm}\includegraphics[width=0.75\textwidth]{../figures/lensing_overlap_signals.pdf}
-    \caption{Top: Bottom:}
+    \caption{Top: An example of two gravitational wave signals merging close to each other. Bottom: An example of a gravitational wave signal that is strongly lensed producing two images. The fiducial time separation between the two signals marked by $\Delta t_{12}$ and relative (de-)magnification marked by $\mu_{12}$.}
     \label{fig:lensing-overlaps}
 \end{figure}
+\section{Extension of the relative binning method}
+A fast parameter estimation method has a wide range of application. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two siganls. Figure~\ref{fig:lensing-overlaps} gives an illustration of two overlapping signals (top) and strongly lensed signals (bottom). 
+
+When two or more signals merge close to each other, we refer to them as overlapping signals (top panel of Figure~\ref{fig:lensing-overlaps}). It is intutive to think that if two signals are far apart, we can analyze each of them while ignoring the presence of the other signal. However, when they are close, they need to be analyze jointly in order to avoide biases in the measurements. A comprehansive investigation on this topic was done in the Tomek et al [in preparation]. Tomek et al extend the relative binning method developed in this work to perform \textit{joint} parameter estimation on two GW signals. 
+
+When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lening, the GW signals is split into multiple time-separated copies (referred to as images) which maybe observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the parameters of any two GW signals, i.e. by again performing \textit{joint} parameter estimation. 
 
 \subsubsection{To perform parameter estimation on the overlapping signals}
+\iffalse
 The LIGO-Virgo interferometers have not yet observed any overlapping signals and it is unlikely that we do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipeline are designed to analyze a single, isolated signal. However, in the 3G-era, due to increase detection rate and increase duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develope parameter estimation methods to analyze overlapping signals. 
+\fi
+
+We account for two signals in the signal model by replacing $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ in the expression of the likelihood (cc. Eq.~\eqref{eqn:indi-likelihood}). This leads to
+\begin{equation}
+\ln \mathcal{L}(\vec{\theta}) = -\frac{1}{2}\left<\vec{d}-\vec{h}_1(\vec{\theta}) - \vec{h}_2(\vec{\theta}) |\vec{d}-\vec{h}_1(\vec{\theta}) - \vec{h}_2(\vec{\theta})\right>\,,
+\end{equation}
+where $\vec{\theta}$ now represent a 30 dimensional parameter space in place of 15 dimensional. Follwing the steps from Eq.~\eqref{eqn:indi-likelihood}-Eq.~\eqref{eqn:short-l}, we can factorise the likelihood into
+\begin{align}
+    \ln \mathcal{L}(\vec{\theta}) &= \left<\vec{d}|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
+    \label{eq:two-likelihood}
+    & = \ln \mathcal{L}(\vec{\theta}) = \ln \mathcal{L}_{dh_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{dh_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
+\end{align}
+where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Now, we have all the ingredients to compute the joint likelihood. Each term in factorised likelihod expression of the Eq.~\ref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
+
 \subsubsection{To perform strong lensing searches}
 
 
