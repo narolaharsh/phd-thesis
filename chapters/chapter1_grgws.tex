@@ -1,16 +1,3 @@
-
-\iffalse
-\begin{itemize}
-    \item{Lorenz gauge and \mathrm{TT} gauge}
-    \item{linearised field equation}
-\end{itemize}
-
-What do I want to explain in this chapter?
-Geodesic equation - field equations - linearising them - gravitational waves plus and cross - generation of GW - effect on matter - detectors 
-
-To detect them, we use Michaelson-Morley interferometer. It is an L-shaped infrastructure with two arms of equal length. Laser bounces off of the mirrors located at the end each arms. If detectors encounters a GW signal, the arm length changes which gives rise to a constructive and destructive interference pattern. That helps us measure a GW signal. 
-\fi
-
 It is intuitive to think that if this thesis is dropped from the top of a tall building and if the earth's gravity is the only force acting on it, it will travel in a straight line. This trajectory can be determined using Newton's laws of motion~\cite{Newton:1687eqk}. The trajectory is also unique in the sense that it traces the shortest path between the start and end points in a flat space such as the one we are in (i.e. where the gravity is weak). The notion of straight lines in flat spaces can be generalized using geodesics, which represents the extereme path between the two points. For example, the geodesic between any two points on a spherical surface will trace the great circle passing through the two points. When travelling along the great circle from a fixed start and end point, we can take two different paths. One represents the shortest path and other represents the longest path. In that sense, a geodesic represents the extereme path between two points. 
 
 \subsubsection{Geodesics}
@@ -19,9 +6,7 @@ In practice, the shortest path between two points in curved space is obtained by
     \label{eq:geodesic}
     \frac{d^2 x^\mu}{d\tau^2} + \Gamma^\mu_{\alpha\beta} \frac{dx^\alpha}{d\tau} \frac{dx^\beta}{d\tau} = 0,
 \end{equation}    
-where $\Gamma^\mu_{\alpha\beta}$ are called Christoffel symbols of the second kind, $\tau$ is the scalar parameter of motion also known as proper time. The indices $\mu, \alpha, \beta$ vary from 0 to 3. If an index repeats in the same term of a tensor equation, it is summed over. This is known as Einstein's summation convention. For example, indices $\alpha$ and $\beta$ are summed over since they repeat on the same term. Index $\mu$ also repeats but not in the same term so it is not summed over. 
-
-If an index repeats on the same side of the equal sign, it is summed over (Einstein's summation convention). 
+where $\Gamma^\mu_{\alpha\beta}$ are called the Christoffel symbols of the second kind, $\tau$ is the scalar parameter of motion also known as proper time. The indices $\mu, \alpha, \beta$ vary from 0 to 3. If an index repeats in the same term of a tensor equation, it is summed over. This is known as Einstein's summation convention. For example, indices $\alpha$ and $\beta$ are summed over since they repeat on the same term. Index $\mu$ also repeats but not in the same term so it is not summed over. 
 
 Intuitively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{Some accounts~\cite{gleick2003isaac} hint that Newton initially struggled to settle on the word force, considering alternatives such as power, efficacy, vigor, strength, or virtue. Though the nuance maybe lost in translation from Latin to English.}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
 
@@ -31,21 +16,36 @@ While Newton's theory of gravity attempts to quantify the gravitational force ex
     \label{eq:field_eq}
     G_{\mu\nu} = 8\pi T_{\mu\nu}
 \end{equation}
-where the Einstein tensor $G_{\mu\nu}$ encodes the information about the curvature and the density and flow of matter and energy is encoded in the stress-energy tensor~$T_{\mu\nu}$. We use geometric units, therefore the speed of light and universal gravitational constant in Eq.~\eqref{eq:field_eq} are set to unity. 
+where the Einstein tensor $G_{\mu\nu}$ encodes the information about the curvature. The density and flow of matter and energy is encoded in the stress-energy tensor~$T_{\mu\nu}$. We use geometric units, therefore the speed of light and universal gravitational constant in Eq.~\eqref{eq:field_eq} are set to unity. 
+
+Einstein's field equations form a set of couple partial differential equations for the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the field equation for given distribution of mass and energy density. Intuitively, the metric tensor introduces the notion of distance and angles on a surface with arbitrary curvature. The $g_{\mu\nu}$ is encoded in the field equation in the following way. 
+
 \subsubsection{Definitions}
-The Einstein tensor $G_{\mu\nu}$ is defined using Ricci tensor $R_{\mu\nu}$, the metric tensor $g_{\mu\nu}$, and the contraction $R = g^{\mu\nu} R_{\mu\nu}$ called Ricci scalar,
+Let us first revisit the Christoffel symbols $\Gamma^{\rho}_{\nu\mu}$. They are defined as:
+\begin{equation}
+    \label{eq:christoffel_symbols}
+    \Gamma^{\rho}_{\nu\mu} = \frac{1}{2} g^{\rho\sigma} \left( \partial_\nu g_{\mu\sigma} + \partial_\mu g_{\nu\sigma} - \partial_\sigma g_{\nu\mu} \right).
+\end{equation}
+Specifically, these are the Christoffel symbols of the second kind. They are expressed in terms of partial derivatives of metric tensor and they track how vectors change when transported parallelly. Christoffel symbols are used to derive the Riemann tensor,
+\begin{equation}
+    R^{\rho}_{\ \mu\lambda\nu} = \partial_\lambda \Gamma^{\rho}_{\nu\mu} - \partial_\nu \Gamma^{\rho}_{\lambda\mu} + \Gamma^{\rho}_{\lambda\sigma} \Gamma^{\sigma}_{\nu\mu} - \Gamma^{\rho}_{\nu\sigma} \Gamma^{\sigma}_{\lambda\mu},
+\end{equation}
+which tracks how tensors change when trasnported on a closed path to determine curvature of the surface. For a flat surface they do not change, so the curvature is zero. Next, we define the Ricci tensor which is the contraction of the Riemann tensor, 
+\begin{equation}
+R_{\mu\nu} \equiv R^{\lambda}_{~\mu\lambda\nu}.
+\end{equation}
+The raising or lower of an index is done using the metric tensor, i.e., $R^{\rho}_{~\mu\lambda\nu} = g^{\rho\alpha}R_{\alpha\mu\lambda\nu}$. The Ricci tensor specifically determines how volumes change on a closed path. Next, we define the Ricci scalar:
+\begin{equation}
+    R \equiv g^{\mu\nu}R_{\mu\nu}.
+\end{equation}
+Finally, we can define the Einstein tensor using the Ricci tensor, the Ricci scalar, and the metric tensor:
 \begin{equation}
     \label{eq:einstein_tensor_ricci}
     G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2}g_{\mu\nu} R.
 \end{equation}
-The Ricci tensor is defined using contraction of Riemann tensor, 
-\begin{equation}
-R_{\mu\nu} = R^{\lambda}_{~\mu\lambda\nu}.
-\end{equation}
-The raising or lower of an index is done using the metric tensor, i.e., $R^{\rho}_{~\mu\lambda\nu} = g^{\rho\alpha}R_{\alpha\mu\lambda\nu}$. The Riemann tensor is derived using the Christoffel symbols,
-\begin{equation}
-    R^{\rho}_{\ \mu\lambda\nu} = \partial_\lambda \Gamma^{\rho}_{\nu\mu} - \partial_\nu \Gamma^{\rho}_{\lambda\mu} + \Gamma^{\rho}_{\lambda\sigma} \Gamma^{\sigma}_{\nu\mu} - \Gamma^{\rho}_{\nu\sigma} \Gamma^{\sigma}_{\lambda\mu}.
-\end{equation}
+The Einstein's field equations are connected to the metric tensor in this manner. 
+\iffalse
+The Ricci tensor is defined using  The Riemann tensor is derived using the Christoffel symbols,
 The Christoffel symbol is derived using the partial derivatives of metric tensor,
 \begin{equation}
     \label{eq:christoffel_symbols}
@@ -53,8 +53,9 @@ The Christoffel symbol is derived using the partial derivatives of metric tensor
 \end{equation}
 \subsubsection{Interpretation}
 Intuitively, the metric tensor introduces the notion of distance and angles on an arbitrary surface. The Christoffel symbols use metric tensor to track how vectors change when transported parallelly. The Riemann tensor (also known as curvature tensor) uses the Christoffel symbols to determine how tensors changes when trasnported on a closed path, which helps determine curvature. For a flat surface they do not change, so the curvature is zero. Finally, the Ricci tensor specifically determines how volumes change on such path. While I find such physical interpretation of the quantities helpful, I do not claim it to capture the essence of the formal definitions~\cite{Misner:1973prb}.  
+\fi
 
-The Einstein's field equations~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions, Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
+Despite the apparent simplicity of Einstein's field equations, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions, Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
 
 \section{Linearising Einstein's field equations}
 This section contains the discussion on the linearising Einstein's field equations and their solutions. Specifically, I discuss the solutions in vacuum and far away from the source. I follow the treatment from commonly used textbooks on general relativity and gravitational waves~\cite{Misner:1973prb, Maggiore:2007ulw}
