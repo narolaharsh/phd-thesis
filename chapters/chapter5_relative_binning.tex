@@ -192,7 +192,7 @@ When two or more signals merge close to each other, we refer to them as overlapp
 
 When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lening, the GW signals is split into multiple time-separated copies (referred to as images) which maybe observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the parameters of any two GW signals, i.e. by again performing \textit{joint} parameter estimation. 
 
-\subsubsection{To perform parameter estimation on the overlapping signals}
+\subsection{To perform parameter estimation on the overlapping signals}
 \iffalse
 The LIGO-Virgo interferometers have not yet observed any overlapping signals and it is unlikely that we do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipeline are designed to analyze a single, isolated signal. However, in the 3G-era, due to increase detection rate and increase duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develope parameter estimation methods to analyze overlapping signals. 
 \fi
@@ -209,7 +209,7 @@ where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensiona
 \end{align}
 where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Now, we have all the ingredients to compute the joint likelihood. Each term in factorised likelihod expression of the Eq.~\ref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
 
-\subsubsection{To perform strong lensing searches}
+\subsection{To perform strong lensing searches}
 For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ to account for two images. However, since two images are copies of the same GW signals, we expect that the source parameters are identical between the two except for the merger time, luminosity distance, and morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as
 
 \begin{equation}
