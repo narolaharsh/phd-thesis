@@ -57,12 +57,12 @@ Intuitively, the metric tensor introduces the notion of distance and angles on a
 The Einstein's field equations~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions, Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
 
 \section{Linearising Einstein's field equations}
-This section contains the discussion on the linearising the Einstein's field equation and the solutions of the linearised field equation. We discuss the solution in vacuum and far away from the source. I follows the treatment from commonly used textbooks on general relativity and gravitational waves~\cite{Misner:1973prb, Maggiore:2007ulw}
+This section contains the discussion on the linearising Einstein's field equations and their solutions. Specifically, I discuss the solutions in vacuum and far away from the source. I follow the treatment from commonly used textbooks on general relativity and gravitational waves~\cite{Misner:1973prb, Maggiore:2007ulw}
 
-For simplicity, let us first attempt to solve for the metric tensor when gravity is weak. We expand $g_{\mu\nu}$ as a sum of flat spacetime metric and linear perturbation tensor $h_{\mu\nu}$ for some coordinate system,
+For simplicity, let us first attempt to solve for the metric tensor when gravity is weak. We expand $g_{\mu\nu}$ as a sum of flat spacetime metric and linear perturbation tensor $h_{\mu\nu}$ for some coordinate system, i.e.,
 \begin{equation}
     \label{eq:line_approx}
-    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},~\text{for}~\left|h_{\mu\nu}\right| \ll 1.
+    g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},~\text{for}~\left|h_{\mu\nu}\right| \ll 1,
 \end{equation}
 where $\eta_{\mu\nu}$ is the metric in the flat spacetime also known as the Minkowski metric
 \begin{equation}
@@ -94,21 +94,21 @@ G_{\mu \nu}=\frac{1}{2}\left(\partial^\lambda \partial_\nu \bar{h}_{\mu \lambda}
 \end{equation}
 
 
-Since we made a choice for coordinate system in Eq.~\eqref{eq:line_approx}, the invariance of the theory is broken. We can partially restore it by allowing for transformations of the form
+Since we made a choice for coordinate system in Eq.~\eqref{eq:line_approx}, the invariance of the theory is broken. We can partially restore it by allowing for transformations of the form:
 \begin{equation}
     \label{eq:transform_vector}
-    x^{\mu} \rightarrow x^{\prime\mu} = x^{\mu} + \xi^{\mu},
+    x^{\mu} \rightarrow x^{\prime\mu} = x^{\mu} + \xi^{\mu}~\text{where}~\left|\partial_{\nu}\xi_{\mu}\right|\lesssim\left|h_{\mu\nu}\right|.
 \end{equation} 
-where we need to ensure that $\left|\partial_{\nu}\xi_{\mu}\right|\lesssim\left|h_{\mu\nu}\right|$ so that perturbations remain small. Under the transformations proposed in Eq.~\eqref{eq:transform_vector}, the trace-reversed metric perturbations transform as
+The additional condition ensures that the perturbations remain small. Under the transformations proposed in Eq.~\eqref{eq:transform_vector}, the trace-reversed metric perturbations transform as
 \begin{equation}
     \label{eq:transform_metric}
     \bar{h}_{\mu \nu} \rightarrow \bar{h}^{\prime}_{\mu \nu} =  \bar{h}_{\mu \nu}-\left(\partial_\mu \xi_\nu+\partial_\nu \xi_\mu-\eta_{\mu \nu} \partial_\sigma \xi^\sigma\right) .
 \end{equation}
-Such transformations do not change the value of the tensor components, a solution of the linearised field equations remains a solution in every coordinate systems obtained under these transformation. Therefore, when choosing a coordinate system, we have the freedom to choose one that can simplify Eq.~\eqref{eq:g_hbar}. Specifically, we can always find a transformation under which
+Such transformations do not change the value of the tensor components so a solution of the linearised field equations remains a solution in every coordinate systems obtained under these transformation. Therefore, when choosing a coordinate system, we have the freedom to work with the one that simplifies Eq.~\eqref{eq:g_hbar}. Specifically, we can always find a $\xi^{\nu}$ for which
 \begin{equation}
 \partial^{\nu}\bar{h}^{\prime}_{\mu\nu} = 0.
 \end{equation}
-This choice is called the harmonic gauge. The $\xi^{\nu}$ for such a transformation is obtained by solving the follwing equation
+This choice is called the harmonic gauge. The $\xi^{\nu}$ for such a transformation is obtained by solving the follwing equation:
 \begin{equation}
     \square\xi_{\nu} = \partial^{\mu}\bar{h}_{\mu\nu},
 \end{equation}
@@ -149,15 +149,15 @@ h^{\mathrm{TT}}_{\mu\nu} =
 for a gravitational wave propagating along $z$-direction. The names follow from the phenomena that if a gravitational wave passes by ring of beads in vacuum, the plus (cross) polarization will periodically stretch and squeeze the ring in $+~(\times)$ shape. 
 
 \subsection{Solutions far away from a source}
-Moving on from the discussion on the vacuum solution, we now consider a scenario where the stress-energy tensor is non-zero,
+Moving on from the discussion on the vacuum solutions, we now consider a scenario where the stress-energy tensor is non-zero,
 \begin{equation}
     \label{eq:non_vacuum}
     \square \bar{h}_{\mu \nu} = -16\pi T_{\mu\nu}.
 \end{equation}
 \subsubsection{Quadruple radiation}
-Here, we can draw analogy from the calculation of electromagnetic radiation from arbitrary charge distribution at a distance. This calculation is usually done using multipole expansion. Each term in the series obtained from multipole expansion approximates the spatial distribution of the source and represents the contribution to far-field radiation in decreasing order. The first term (also known as the monopole term) in the expansion is simply the total charge which does not contribute to the electromagnetic radiation due to law of conservation of electric charge. Therefore, the dominant contribution to the electromagnetic radiation is due to the dipole term.  
+Here, we can draw analogy from the calculation of electromagnetic radiation from arbitrary charge distribution at a distance. This calculation is usually done using multipole expansion. Each term in the series obtained from multipole expansion approximates the spatial distribution of the source and represents the contribution to far-field radiation in decreasing order. The first term (also known as the monopole term) in the expansion is simply the total charge. It does not contribute to the electromagnetic radiation due to the law of conservation of electric charge. Therefore, the dominant contribution to the electromagnetic radiation is due to second term, also known as the dipole term.  
 
-Similarly, before attempting to solve Eq.~\eqref{eq:non_vacuum}, we can argue that the gravitational radiation does not have a contribution from the monopole term due to law of conservation of mass. Unlike the electromagnetic radiation, the lowest order contribution to the gravitational radiation is the quadrupole term. The mass dipole term $(\approx \Sigma_i m_i\vec{x}_i)$ can be made zero by moving to the center of mass frame of the system. We cannot do the same in the case of electromagnetic radiation since charges (unlike mass) can be negative. 
+Similarly, before attempting to solve Eq.~\eqref{eq:non_vacuum}, we can argue that the gravitational radiation does not have a contribution from the monopole term due to the law of conservation of mass. Unlike the electromagnetic radiation, the lowest order contribution to the gravitational radiation is due to the quadrupole term. The mass dipole term $(\approx \Sigma_i m_i\vec{x}_i)$ can be made zero by moving to the center of mass frame of the system. The same is not applicable in the case of electromagnetic radiation since charges (unlike mass) can be negative. 
 
 Next, we write down the formal solution for Eq.~\eqref{eq:non_vacuum} using retarded Green's function. We impose boundary conditions such that there is no incoming radiation. Due to the far-field regime, our distance to the source $(\vec{x})$ is much larger than the length scale of the source $(d)$.
 \begin{equation}
@@ -168,7 +168,7 @@ here $\vec{y}$ is contained within the source and $\Lambda_{ijkl}$ is the projec
 \begin{equation}
     |\vec{x}-\vec{y}| = r - \vec{y}\cdot\hat{n} + \mathcal{O}\left(\frac{d^2}{x}\right),
 \end{equation} 
-where $\hat{n}$ is the unit vector along $|\vec{x}-\vec{y}|$. Approximating the reciprocal term $\frac{1}{|\vec{x}-\vec{y}|} \approx \frac{1}{r}$ and expanding the the stress-energy tensor around $t-r$,
+where $\hat{n}$ is the unit vector along the direction $\vec{x}-\vec{y}$. Approximating the reciprocal term $\frac{1}{|\vec{x}-\vec{y}|} \approx \frac{1}{r}$ and expanding the the stress-energy tensor around $t-r$,
 \begin{equation}
     \label{eq:multipole_exp}
     \begin{split}
@@ -182,12 +182,12 @@ Using Eq.~\eqref{eq:multipole_exp}, the solution in Eq.~\eqref{eq:green_eq} to t
 \bar{h}^{\mathrm{TT}}_{ij}(t, \vec{x}) = \frac{4}{r} \Lambda_{i j k l} \int \mathrm{d}\vec{y}~T^{k l}(t-r, \vec{y}) 
 \end{equation}
     %&= \frac{2}{r} \Lambda_{ijkl} \ddot{M}^{kl}(t-r)
-The momenta $T^{kl}$ are the components of the stress tensors% which might be difficult to determine compared to the total mass of the body. 
-Using the conservation of stress-energy tensor $(\partial_{\nu}T^{\mu\nu}=0)$ and the fact that the source is confined in space, we can express Eq.~\eqref{eq:leading_ord} in terms of the mass quadrupole moment~\cite{Maggiore:2007ulw},
+The momenta $T^{kl}$ are the components of the stress tensors.% which might be difficult to determine compared to the total mass of the body. 
+Using the conservation of stress-energy tensor $(\partial_{\nu}T^{\mu\nu}=0)$ and the fact that the source is confined in space, we can express Eq.~\eqref{eq:leading_ord} in terms of the mass quadrupole moment,
 \begin{equation}
     \bar{h}^{\mathrm{TT}}_{ij}(t, \vec{x}) = \frac{2}{r} \Lambda_{ijkl} \frac{\partial^2}{\partial t^2}{M}^{kl}(t-r),
 \end{equation}
-where $M^{kl} = \int \mathrm{d}\vec{y} T^{00} y^ky^l$ is the mass quadrupole moment. It shows the leading order contribution to the far-field gravitational radiation. The mass and linear momentum is conserved only in the case of the linearised theory. A radiating body in fact loses mass and linear momentum. However, the absence of monopole and dipole term holds more generally. It can be derived in the full non-linear treatment of the field equation. 
+where $M^{kl} = \int \mathrm{d}\vec{y} T^{00} y^ky^l$ is the mass quadrupole moment. It shows the leading order contribution to the far-field gravitational radiation. The mass and linear momentum is conserved only in the case of the linearised theory. A radiating body in fact loses mass and linear momentum. However, the absence of monopole and dipole term holds more generally. It can be derived in the full non-linear treatment of the field equation~\cite{Maggiore:2007ulw}. 
 \section{Gravitational wave detectors}
 
 %\begin{figure}
