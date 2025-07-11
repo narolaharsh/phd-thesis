@@ -23,7 +23,7 @@ where $\Gamma^\mu_{\alpha\beta}$ are called Christoffel symbols of the second ki
 
 If an index repeats on the same side of the equal sign, it is summed over (Einstein's summation convention). 
 
-Intuitively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{Some accounts~\cite{gleick2003isaac} hint that Newton initially struggled to settle on the word force, considering alternatives such as power, efficacy, vigor, strength, or virtue. Though this nuance maybe lost in translation from Latin to English.}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
+Intuitively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{Some accounts~\cite{gleick2003isaac} hint that Newton initially struggled to settle on the word force, considering alternatives such as power, efficacy, vigor, strength, or virtue. Though the nuance maybe lost in translation from Latin to English.}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
 
 \section{Einstein's field equations}
 While Newton's theory of gravity attempts to quantify the gravitational force exerted by one body onto another, the explanation on what causes such a force was left to future work. General relativity refines the notion of gravitational force by establishing it as an effect caused by a massive object by curving the space around it~\cite{origin:gr}. In the form of Einstein's field equations, general relativity relates the distribution of matter to the curvature the space-time continuum (also referred to as spacetime),
@@ -93,22 +93,29 @@ G_{\mu \nu}=\frac{1}{2}\left(\partial^\lambda \partial_\nu \bar{h}_{\mu \lambda}
 Since we made a choice for coordinate system in Eq.~\eqref{eq:line_approx}, the invariance of the theory is broken. We can partially restore it by allowing for transformations of the form
 \begin{equation}
     \label{eq:transform_vector}
-    x^{\mu} \rightarrow x^{\mu} + \xi^{\mu},
+    x^{\mu} \rightarrow x^{\prime\mu} = x^{\mu} + \xi^{\mu},
 \end{equation} 
-where we need to ensure that $\left|\partial_{\nu}\xi_{\mu}\right|\lesssim\left|h_{\mu\nu}\right|$ so that perturbations remain small. 
-
-choosing the harmonic gauge, 
-
+where we need to ensure that $\left|\partial_{\nu}\xi_{\mu}\right|\lesssim\left|h_{\mu\nu}\right|$ so that perturbations remain small. Under the transformations proposed in Eq.~\eqref{eq:transform_vector}, the trace-reversed metric perturbation transform as
 \begin{equation}
-\partial^{\nu}\bar{h}_{\mu\nu} = 0,
+    \label{eq:transform_metric}
+    \bar{h}_{\mu \nu} \rightarrow \bar{h}^{\prime}_{\mu \nu} =  \bar{h}_{\mu \nu}-\left(\partial_\mu \xi_\nu+\partial_\nu \xi_\mu-\eta_{\mu \nu} \partial_\sigma \xi^\sigma\right) .
 \end{equation}
-for transformations 
-In harmonic gauge, Eq.\eqref{eq:g_hbar} further simplifies to,
+Since such transformations do not change the value of the tensor components, a solution of the linearised field equations remains a solution in every coordinate systems obtained under these transformation. Therefore, when choosing a coordinate systems, we have the freedom to choose one that can simplify Eq.~\eqref{eq:g_hbar}. Specifically, we can always find a transformation under which
 \begin{equation}
-    \label{eq:liner_last}
-    G_{\mu \nu} = -\frac{1}{2}\square \bar{h}_{\mu \nu} = 8\pi T_{\mu\nu},
+\partial^{\nu}\bar{h}^{\prime}_{\mu\nu} = 0.
 \end{equation}
-the linearised field equation. 
+This choice is called the harmonic gauge. The $\xi^{\nu}$ for such a transformation is obtained by the solution of the following equation
+\begin{equation}
+    \square\xi^{\nu} = \partial^{\mu}\bar{h}_{\mu\nu}.
+\end{equation}
+The solution to which can be found using an appropriate Green's function. The harmonic gauge leaves room for additional transformations which satisfy the equation, $\square\xi^{\nu} = 0$. I later explain the consequence of it. 
+
+In harmonic gauge, the linearised field equation \eqref{eq:g_hbar} further simplifies to
+\begin{equation}
+\label{eq:liner_last}
+    G_{\mu \nu} = -\frac{1}{2}\square \bar{h}_{\mu \nu} = 8\pi T_{\mu\nu}.
+\end{equation}
+We dropped the prime mark in writing above equation. 
 
 \subsection{Solutions in vacuum}
 Next, we attempt to solve the linearised field equations in vacuum. The stress-energy tensor $T_{\mu\nu}$ is equal to zero in this case. Therefore, Eq.~\eqref{eq:liner_last} reduces to 
@@ -127,7 +134,7 @@ which are the perturbation of a flat spacetime far away from the source or gravi
 so GWs are transverse, i.e., the polarization of the waves are perpendicular to the direction of propagation.  
 
 \subsubsection{Plus and cross polarization}
-Let us now count the degrees of freedom of the metric perturbation $\bar{h}_{\mu\nu}$. We start with 16 which which is the number of degrees of freedom of a $4\times4$ tensor. From 16, 6 are restricted due to $\bar{h}_{\mu\nu}$ being symmetric. From the remaining 10, 4 are restricted by harmonic gauge and 4 more are restricted by choosing $\square\xi_{\mu} = 0$ where $\xi_{\mu}$ is the vector field introduced Eq.~\eqref{eq:transform_vector}. Therefore, the metric perturbation in transverse-traceless (TT) gauge $\bar{h}^{\mathrm{TT}}_{\mu\nu}$ has 2 degrees of freedom, which are called the plus and cross polarizations, 
+Let us now count the degrees of freedom of the metric perturbation $\bar{h}_{\mu\nu}$. We start with 16 which which is the number of degrees of freedom of a $4\times4$ tensor. From 16, 6 are restricted due to $\bar{h}_{\mu\nu}$ being symmetric. From the remaining 10, 4 are restricted by harmonic gauge. As mentioned earlier, even after imposing harmoinc gauge, we can allow for transformation of the form $\square\xi_{\mu} = 0$. This restricts 4 more degrees of freedom. Therefore, the metric perturbation in transverse-traceless (TT) gauge $\bar{h}^{\mathrm{TT}}_{\mu\nu}$ has 2 degrees of freedom, which are called the plus and cross polarizations, 
 \begin{equation}
 h^{\mathrm{TT}}_{\mu\nu} =
 \begin{pmatrix}
@@ -146,7 +153,7 @@ Moving on from the discussion on the vacuum solution, we now consider a scenario
     \square \bar{h}_{\mu \nu} = -16\pi T_{\mu\nu}.
 \end{equation}
 \subsubsection{Quadruple radiation}
-Here, we can draw analogy from the calculation of electromagnetic radiation from arbitrary charge distribution at a distance. This calculation is usually done using multicol expansion. Each term in the series obtained from multipole expansion approximates the spatial distribution of the source and represents the contribution to far-field radiation in decreasing order. First term (also known as the monopole term) in the expansion is simply the total charge which does not contribute to the electromagnetic radiation due to law of conservation of electric charge. Therefore, the dominant contribution to the electromagnetic radiation is due to the dipole term.  
+Here, we can draw analogy from the calculation of electromagnetic radiation from arbitrary charge distribution at a distance. This calculation is usually done using multipole expansion. Each term in the series obtained from multipole expansion approximates the spatial distribution of the source and represents the contribution to far-field radiation in decreasing order. First term (also known as the monopole term) in the expansion is simply the total charge which does not contribute to the electromagnetic radiation due to law of conservation of electric charge. Therefore, the dominant contribution to the electromagnetic radiation is due to the dipole term.  
 
 Similarly, before attempting to solve Eq.~\eqref{eq:non_vacuum}, we can argue that the gravitational radiation does not have a contribution from the monopole term due to law of conservation of mass. Unlike the electromagnetic radiation, the lowest order contribution to the gravitational radiation is the quadrupole term. The mass dipole term $(\approx \Sigma_i m_i\vec{x}_i)$ can be made zero by moving to the center of mass frame of the system. We cannot do the same in the case of electromagnetic radiation since charges (unlike mass) can be negative. 
 
