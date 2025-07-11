@@ -23,26 +23,26 @@ where $\Gamma^\mu_{\alpha\beta}$ are called Christoffel symbols of the second ki
 
 If an index repeats on the same side of the equal sign, it is summed over (Einstein's summation convention). 
 
-Intuitively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{While it maybe lost in translation from Latin to English, some accounts~\cite{gleick2003isaac} hint that Newton initially struggled to settle on the word force, considering alternatives such as power, efficacy, vigor, strength, or virtue.}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
+Intuitively, $\Gamma^\mu_{\alpha\beta}$ encodes the notion of force (e.g. gravity) of the Newtonian dynamics\footnote{Some accounts~\cite{gleick2003isaac} hint that Newton initially struggled to settle on the word force, considering alternatives such as power, efficacy, vigor, strength, or virtue. Though this nuance maybe lost in translation from Latin to English.}. For example, when an inertial frame of an object is described using cartesian coordinate system, $\Gamma^\mu_{\alpha\beta}$ will be zero everywhere. Therefore, Eq.~\eqref{eq:geodesic} reduces to Newton's second law of motion in the absence of any external force, $\ddot{x} = 0$. 
 
-\section{Einstein field equation}
-While Newton's theory of gravity attempts to quantify the gravitational force exerted by one body onto another, the explanation on what causes such a force was delibarately left to future work. The general relativity refines the notion of gravitational force by establishing it as an effect caused by a massive object by curving the space around it~\cite{origin:gr}. In the form of Einstein field equation, general relativity relates the distribution of matter to the curvature the space-time continuum (also referred to as spacetime),
+\section{Einstein's field equations}
+While Newton's theory of gravity attempts to quantify the gravitational force exerted by one body onto another, the explanation on what causes such a force was left to future work. General relativity refines the notion of gravitational force by establishing it as an effect caused by a massive object by curving the space around it~\cite{origin:gr}. In the form of Einstein's field equations, general relativity relates the distribution of matter to the curvature the space-time continuum (also referred to as spacetime),
 \begin{equation}
     \label{eq:field_eq}
     G_{\mu\nu} = 8\pi T_{\mu\nu}
 \end{equation}
-where Einstein tensor $G_{\mu\nu}$ encodes the information about the curvature and distribution of matter is encoded in the stress-energy tensor~$T_{\mu\nu}$. We use geometric units therefore the speed of light and universal gravitational constant in Eq.~\eqref{eq:field_eq} are set to unity. 
+where the Einstein tensor $G_{\mu\nu}$ encodes the information about the curvature and the density and flow of matter and energy is encoded in the stress-energy tensor~$T_{\mu\nu}$. We use geometric units, therefore the speed of light and universal gravitational constant in Eq.~\eqref{eq:field_eq} are set to unity. 
 \subsubsection{Definitions}
 The Einstein tensor $G_{\mu\nu}$ is defined using Ricci tensor $R_{\mu\nu}$, the metric tensor $g_{\mu\nu}$, and the contraction $R = g^{\mu\nu} R_{\mu\nu}$ called Ricci scalar,
 \begin{equation}
     \label{eq:einstein_tensor_ricci}
-    G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2}g_{\mu\nu} R,
+    G_{\mu\nu} \equiv R_{\mu\nu} - \frac{1}{2}g_{\mu\nu} R.
 \end{equation}
-Ricci tensor is defined using contraction of Riemann tensor, 
+The Ricci tensor is defined using contraction of Riemann tensor, 
 \begin{equation}
 R_{\mu\nu} = R^{\lambda}_{~\mu\lambda\nu}.
 \end{equation}
-The raising or lower of an index is done using the metric tensor, i.e., $R^{\rho}_{~\mu\lambda\nu} = g^{\rho\alpha}R_{\alpha\mu\lambda\nu}$. Riemann tensor is derived using Christoffel symbols,
+The raising or lower of an index is done using the metric tensor, i.e., $R^{\rho}_{~\mu\lambda\nu} = g^{\rho\alpha}R_{\alpha\mu\lambda\nu}$. The Riemann tensor is derived using the Christoffel symbols,
 \begin{equation}
     R^{\rho}_{\ \mu\lambda\nu} = \partial_\lambda \Gamma^{\rho}_{\nu\mu} - \partial_\nu \Gamma^{\rho}_{\lambda\mu} + \Gamma^{\rho}_{\lambda\sigma} \Gamma^{\sigma}_{\nu\mu} - \Gamma^{\rho}_{\nu\sigma} \Gamma^{\sigma}_{\lambda\mu}.
 \end{equation}
@@ -52,54 +52,58 @@ The Christoffel symbol is derived using the partial derivatives of metric tensor
     \Gamma^{\rho}_{\nu\mu} = \frac{1}{2} g^{\rho\sigma} \left( \partial_\nu g_{\mu\sigma} + \partial_\mu g_{\nu\sigma} - \partial_\sigma g_{\nu\mu} \right).
 \end{equation}
 \subsubsection{Interpretation}
-Intuitively, the metric tensor introduces the notion of distance and angles on an arbitrary surface. Christoffel symbols use metric tensor to track how vectors change when transported parallelly. Riemann tensor (also known as curvature tensor) uses Christoffel symbols to determine how tensors changes when trasnported on a closed path, which helps determine curvature. For a flat surface they do not change, so the curvature is zero. Finally, Ricci tensor specifically determines how volumes change on such path. While I find such physical interpretation of the quantities helpful, I do not claim it to capture the essence of the formal definitions~\cite{Misner:1973prb}.  
+Intuitively, the metric tensor introduces the notion of distance and angles on an arbitrary surface. The Christoffel symbols use metric tensor to track how vectors change when transported parallelly. The Riemann tensor (also known as curvature tensor) uses the Christoffel symbols to determine how tensors changes when trasnported on a closed path, which helps determine curvature. For a flat surface they do not change, so the curvature is zero. Finally, the Ricci tensor specifically determines how volumes change on such path. While I find such physical interpretation of the quantities helpful, I do not claim it to capture the essence of the formal definitions~\cite{Misner:1973prb}.  
 
-The Einstein field Eq.~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions (also known as gravitational waves), Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
+The Einstein's field equations~\eqref{eq:field_eq} can be thought of as an equation of the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equation for a given distribution of matter. Despite the apparent simplicity of Eq.~\eqref{eq:field_eq}, there are only a few cases where one can obtain an exact solution, e.g., vacuum solutions, Schwarzschild metric (also known as the non-spinning black holes), Kerr metric (also known as the spinning black holes). 
 
-\section{Linearised Einstein field equation}
-For simplicity, let us first attempt to solve for the metric tensor when gravity is weak. We expand $g_{\mu\nu}$ as a sum of flat space metric and linear perturbation tensor $h_{\mu\nu}$ when the gravity is weak for some coordinate system,
+\section{Linearising Einstein's field equations}
+For simplicity, let us first attempt to solve for the metric tensor when gravity is weak. We expand $g_{\mu\nu}$ as a sum of flat spacetime metric and linear perturbation tensor $h_{\mu\nu}$ for some coordinate system,
 \begin{equation}
     \label{eq:line_approx}
     g_{\mu\nu} = \eta_{\mu\nu} + h_{\mu\nu},~\text{for}~\left|h_{\mu\nu}\right| \ll 1.
 \end{equation}
-where $\eta_{\mu\nu}$ is the metric in the flat space also known as the Minkowski metric. 
+where $\eta_{\mu\nu}$ is the metric in the flat spacetime also known as the Minkowski metric. 
 \begin{equation}
     \eta_{\mu\nu} = \mathrm{diag}(-1, 1, 1, 1)
 \end{equation}
 
-
-Choosing a coordinate system to demand $\left|h_{\mu\nu}\right| \ll 1$ breaks the coordinate invariance of the theory, we address this issue later. Using linearised metric of Eq.~\eqref{eq:line_approx}, we linearise Eq.~\eqref{eq:einstein_tensor_ricci} to Eq.~\eqref{eq:christoffel_symbols}. Starting from the last equation, We linearize Christoffel symbols,
+Choosing a coordinate system to demand $\left|h_{\mu\nu}\right| \ll 1$ breaks the coordinate invariance of the theory, we address this issue later. Using linearised metric of Eq.~\eqref{eq:line_approx}, we linearise Eqs.~\eqref{eq:einstein_tensor_ricci}-~\eqref{eq:christoffel_symbols}. Starting from the last equation, we linearise the Christoffel symbols,
 \begin{equation}
 \Gamma^{\rho}_{\mu\nu} = \frac{1}{2}\left( \partial_\mu h^{\rho}_{\nu} + \partial_\nu h^{\rho}_{\mu} - \partial^{\rho} h_{\mu\nu} \right) + \mathcal{O}(h^2), \\
 \end{equation}
-then linearize Riemann tensor,
+then linearise the Riemann tensor,
 \begin{equation}
 R_{~\rho \mu \nu}^\lambda = \frac{1}{2}\left(\partial_{\rho \mu}^2 h_\nu^\lambda-\partial_\rho \partial_\nu h_\mu^\lambda+\partial^\lambda \partial_\nu h_{\rho \mu}-\partial^\lambda \partial_\mu h_{\rho \nu}\right)+\mathcal{O}\left(h^2\right),
 \end{equation}
-linearize Ricci tensor and scalar,
+linearise the Ricci tensor and scalar,
 \begin{align}
 R_{\mu \nu} &=\frac{1}{2}\left(\partial_\nu \partial_\lambda h_\mu^\lambda+\partial_\mu \partial_\lambda h_\nu^\lambda-\partial^\lambda \partial_\lambda h_{\mu \nu}-\partial_\mu \partial_\nu h_\lambda^\lambda\right)+\mathcal{O}\left(h^2\right), \\
 R &= \frac{1}{2 }\left(\partial^\mu \partial^\nu h_{\mu \nu}-\partial^\mu \partial_\mu h_\nu^\nu\right)+\mathcal{O}\left(h^2\right),
 \end{align} 
-and finally linearize Einstein tensor,
+and finally linearise the Einstein tensor,
 \begin{equation}
 \label{eq:einstein_tensor}
-G_{\mu\nu} = \frac{1}{2}\left(\partial_\lambda \partial_\mu h_\nu^\lambda+\partial_\lambda \partial_\nu h_\mu^\lambda-\partial_\mu \partial_\nu h-\square h_{\mu \nu}-\eta_{\mu \nu} \partial_\rho \partial_\lambda h^{\rho \lambda}+\eta_{\mu \nu} \square h\right).
+G_{\mu\nu} = \frac{1}{2}\left(\partial_\lambda \partial_\mu h_\nu^\lambda+\partial_\lambda \partial_\nu h_\mu^\lambda-\partial_\mu \partial_\nu h-\square h_{\mu \nu}-\eta_{\mu \nu} \partial_\rho \partial_\lambda h^{\rho \lambda}+\eta_{\mu \nu} \square h\right),
 \end{equation}
-where $h$ is the trace of $h_{\mu\nu}$ and the $\square$ symbol represents $\eta^{\mu\nu}\partial_{\mu\nu}$, also known as the d'Alembert operator or box operator. We introduce the trace-reversed $\bar{h}_{\mu\nu}=h_{\mu \nu}-\frac{1}{2} \eta_{\mu \nu} h$ to simplify Eq.~\eqref{eq:einstein_tensor}.
+where $h$ is the trace of $h_{\mu\nu}$ and the box ($\square$) symbol represents $\eta^{\mu\nu}\partial_{\mu}\partial_{\nu}$, also known as the d'Alembert operator or box operator. We introduce the trace-reversed $\bar{h}_{\mu\nu}=h_{\mu \nu}-\frac{1}{2} \eta_{\mu \nu} h$ to simplify Eq.~\eqref{eq:einstein_tensor};
 \begin{equation}
     \label{eq:g_hbar}
-G_{\mu \nu}=\frac{1}{2}\left(\partial^\lambda \partial_\nu \bar{h}_{\mu \lambda}+\partial^\lambda \partial_\mu \bar{h}_{\nu \lambda}-\square \bar{h}_{\mu \nu}-\eta_{\mu \nu} \partial^\lambda \partial^\rho \bar{h}_{\lambda \rho}\right)
+G_{\mu \nu}=\frac{1}{2}\left(\partial^\lambda \partial_\nu \bar{h}_{\mu \lambda}+\partial^\lambda \partial_\mu \bar{h}_{\nu \lambda}-\square \bar{h}_{\mu \nu}-\eta_{\mu \nu} \partial^\lambda \partial^\rho \bar{h}_{\lambda \rho}\right).
 \end{equation}
-Since we made a choice for coordinate system in Eq.~\eqref{eq:line_approx}, the invariance of the theory is broken. We can partially restore this by choosing the harmonic gauge, 
+Since we made a choice for coordinate system in Eq.~\eqref{eq:line_approx}, the invariance of the theory is broken. We can partially restore it by allowing for transformations of the form
+\begin{equation}
+    \label{eq:transform_vector}
+    x^{\mu} \rightarrow x^{\mu} + \xi^{\mu},
+\end{equation} 
+where we need to ensure that $\left|\partial_{\nu}\xi_{\mu}\right|\lesssim\left|h_{\mu\nu}\right|$ so that perturbations remain small. 
+
+choosing the harmonic gauge, 
+
 \begin{equation}
 \partial^{\nu}\bar{h}_{\mu\nu} = 0,
 \end{equation}
 for transformations 
-\begin{equation}
-    \label{eq:transform_vector}
-    x^{\mu} \rightarrow x^{\mu} + \xi^{\mu}
-\end{equation} where we need to ensure that $\left|\partial_{\nu}\xi_{\mu}\right|\lesssim\left|h_{\mu\nu}\right|$ so that perturbations are small. In harmonic gauge, Eq.\eqref{eq:g_hbar} further simplifies to,
+In harmonic gauge, Eq.\eqref{eq:g_hbar} further simplifies to,
 \begin{equation}
     \label{eq:liner_last}
     G_{\mu \nu} = -\frac{1}{2}\square \bar{h}_{\mu \nu} = 8\pi T_{\mu\nu},
@@ -173,7 +177,7 @@ The momenta $T^{kl}$ depend on the distribution of stresses inside the body whic
 \begin{equation}
     \bar{h}^{\mathrm{TT}}_{ij}(t, \vec{x}) = \frac{2}{r} \Lambda_{ijkl} \frac{\partial^2}{\partial t^2}{M}^{kl}(t-r),
 \end{equation}
-where $M^{kl} = \int \mathrm{d}\vec{y} T^{00} y^ky^l$ is the mass quadrupole moment. It shows the leading order contribution to the far-field gravitational radiation. The mass and liner momentum is conserved only in the case of linearized theory. A radiating body in fact loses mass and linear momentum. However, the absence of monopole and dipole term holds more generally. It can be derived in the full non-linear treatment of the field equation. 
+where $M^{kl} = \int \mathrm{d}\vec{y} T^{00} y^ky^l$ is the mass quadrupole moment. It shows the leading order contribution to the far-field gravitational radiation. The mass and liner momentum is conserved only in the case of the linearised theory. A radiating body in fact loses mass and linear momentum. However, the absence of monopole and dipole term holds more generally. It can be derived in the full non-linear treatment of the field equation. 
 \section{Gravitational wave detectors}
 
 %\begin{figure}
