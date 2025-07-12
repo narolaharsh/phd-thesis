@@ -1,4 +1,4 @@
-Bayesian inference discussed in chapter~\ref{ch:gwpe} is the key to achieving a wide range of scientific insights from gravitational wave signal. The cost of it increases with the complexity of the signal model and the signal's duration. With standard methods, such analyses require at least a few days. Moreover, for third generation detectors, due to the lowered minimum sensitive frequency, the signal duration increases, leading to even longer analysis times. With the increased detection rate, such analyses can then become intractable. In this work, we present a fast parameter estimation method that includes higher order modes and precession using relative binning. Additionally, we extend the method so that it can be used to analyze individual GW as well as two overlapping GW signals in the 3G-era. We adapt our method to perform strong lensing searches. Indeed, a fast parameter estimation has a wide range of application. Specifically, we apply our method to
+Bayesian inference discussed in chapter~\ref{ch:gwpe} is the key to achieving a wide range of scientific insights from gravitational wave signals. The cost of it increases with the complexity of the signal model and the signal's duration. With standard methods, such analyses require at least a few days. Moreover, for third-generation detectors, due to the lowered minimum sensitive frequency, the signal duration increases, leading to even longer analysis times. With the increased detection rate, such analyses can then become intractable. In this work, we present a fast parameter estimation method that includes higher-order modes and precession using relative binning. Additionally, we extend the method so that it can be used to analyze individual GW as well as two overlapping GW signals in the 3G era. We adapt our method to perform strong lensing searches. Indeed, a fast parameter estimation method has a wide range of applications. Specifically, we apply our method to
 \begin{enumerate}
     \item A set of simulated BBH signals covering full parameter space to establish validity. 
     \item Two LIGO-Virgo events with significant contribution from higher order modes: GW190412~\cite{LIGOScientific:2020stg} and GW190814~\cite{LIGOScientific:2020zkf}.
@@ -27,10 +27,10 @@ Expanding $\left<\vec{d}-\vec{h}(\vec{\theta})|\vec{d}-\vec{h}(\vec{\theta}))$ i
 \ln \mathcal{L}(\vec{\theta}) = \left<\vec{d}|\vec{h}\right> - \frac{1}{2}\left<\vec{h}|\vec{h}\right> - \frac{1}{2}\left<\vec{d}|\vec{d}\right>.
 \end{equation}
 
-Likelihood-based inference involves calculating the innder products for a large number of values for $\vec{\theta}$ to explore the parameter space. Therefore, we want to improve the speed in computing these quantities. Let us introduce the notations
+Likelihood-based inference involves calculating the inner products for a large number of values for $\vec{\theta}$ to explore the parameter space. Therefore, we want to improve the speed of computing these quantities. Let us introduce the notations
 \begin{align}
-    \ln \mathcal{L}_{dh} &\equiv \left<\vec{d}|\vec{h}\right>, \\
-    \ln \mathcal{L}_{hh} &\equiv \left<\vec{h}|\vec{h}\right>, 
+ \ln \mathcal{L}_{dh} &\equiv \left<\vec{d}|\vec{h}\right>, \\
+ \ln \mathcal{L}_{hh} &\equiv \left<\vec{h}|\vec{h}\right>, 
 \end{align}
 
 to rewrite Eq.~\eqref{eqn:logL} as 
@@ -41,7 +41,7 @@ to rewrite Eq.~\eqref{eqn:logL} as
 Note that we dropped the last term of Eq.~\eqref{eqn:logL} in the equation above. It is also known as the noise log likelihood. Since it does not depend on the source parameters, it need only be computed once for the data.
 
 \subsubsection{Dominant mode and aligned spin}
-When performing parameter estimation, we are interested in knowing the shape of likelihood around its peak. In other words, we want to evaluate the likelihoods 
+When performing parameter estimation, we are interested in knowing the shape of likelihood around its peak. In other words, we want to evaluate the likelihood 
 for waveforms that are {\it similar} to the waveform at which the likelihood peaks. 
 If we choose a fiducial value of $\vec{\theta}$ which is close enough to the peak, 
 we can estimate the likelihood by expanding it around the fiducial value. 
@@ -65,12 +65,12 @@ The approximation made in Eq.~\eqref{eqn:ratio} performs better for the IMRPheno
     \centering
     \includegraphics[width=.4\textwidth]{../figures/phenom_d_xphm_full_waveform_ratio.pdf}\hspace{.5cm}
     \includegraphics[width=.4\textwidth]{../figures/hL_C_ratio.pdf}
-    \caption{\textit{Left}: Ratio of the real part of the proposal to the fiducial waveform for the plus polarization as a function of frequency. The IMRPhenomD (brown) waveform model includes only the dominant mode and aligned spins. The IMRPhenomXPHM (black) model includes higher order modes and precessing spins. \textit{Right}: Decomposition of IMRPhenomXPHM waveform into component modes (top right) and precession coefficients (bottom right). The fiducial parameters are similar to the source parameters of GW190412~\cite{LIGOScientific:2020stg}, a BBH merger with asymmetric masses and detectable HOM content, and the proposal parameters have a 5$\%$ shift from the fiducial chirp mass and mass ratio.}
+    \caption{\textit{Left}: Ratio of the real part of the proposal to the fiducial waveform for the plus polarization as a function of frequency. The IMRPhenomD (brown) waveform model includes only the dominant mode and aligned spins. The IMRPhenomXPHM (black) model includes higher-order modes and precessing spins. \textit{Right}: Decomposition of IMRPhenomXPHM waveform into component modes (top right) and precession coefficients (bottom right). The fiducial parameters are similar to the source parameters of GW190412~\cite{LIGOScientific:2020stg}, a BBH merger with asymmetric masses and detectable HOM content, and the proposal parameters have a 5$\%$ shift from the fiducial chirp mass and mass ratio.}
     \label{fig:dxp-ratio}
 \end{figure}
 
 \subsection{Inclusion of higher order modes and precessing spins}
-In order to make the approximation in Eq.~\eqref{eqn:ratio} robust for precessing waveforms with HOMs, 
+To make the approximation in Eq.~\eqref{eqn:ratio} robust for precessing waveforms with HOMs, 
 let us express the detector frame waveform for given $\vec{\theta}$ into its 
 component modes~\cite{Pratten:2020ceb} 
 \begin{equation}
@@ -153,7 +153,7 @@ We refer to a set of frequency bins which satisfy this condition as an RBGrid. T
 to compute coefficients $\mathcal{R}$ for the points in parameter space proposed by the sampler.  
 
 To initialize the bin selection algorithm, we need the following quantities: 
-a uniform frequency grid with spacing $\Delta f = 1/T$, where the time $T$ is sufficiently long so as to easily accommodate the length of the signal; 
+a uniform frequency grid with spacing $\Delta f = 1/T$, where the time $T$ is sufficiently long to accommodate the length of the signal easily; 
 a fixed value of ``total error'' on log likelihood, $\epsilon$; 
 an initial value $N_0$ for the total number of frequency bins;  
 a set of fiducial waveform parameters; and a set of test parameters. For definiteness we set  
@@ -180,53 +180,53 @@ algorithm as a whole\footnote{Our implementation of the bin selection and relati
     \centering
     \includegraphics[width=0.75\textwidth]{../figures/vis_overlap_signals.pdf} 
     \hspace*{.5cm}\includegraphics[width=0.75\textwidth]{../figures/lensing_overlap_signals.pdf}
-    \caption{Top: An example of two gravitational wave signals merging close to each other. Bottom: An example of a gravitational wave signal that is strongly lensed producing two images. The fiducial time separation between the two signals marked by $\Delta t_{12}$ and relative (de-)magnification marked by $\mu_{12}$.}
+    \caption{Top: An example of two gravitational wave signals merging close to each other. Bottom: An example of a gravitational wave signal that is strongly lensed producing two images. The fiducial time separation between the two signals is marked by $\Delta t_{12}$ and relative (de-)magnification is marked by $\mu_{12}$.}
     \label{fig:lensing-overlaps}
 \end{figure}
 
 
 \section{Extension of the relative binning method}
-A fast parameter estimation method has a wide range of application. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two siganls. Figure~\ref{fig:lensing-overlaps} gives an illustration of two overlapping signals (top) and strongly lensed signals (bottom). 
+A fast parameter estimation method has a wide range of applications. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two signals. Figure~\ref{fig:lensing-overlaps} gives an illustration of two overlapping signals (top) and strongly lensed signals (bottom). 
 
-When two or more signals merge close to each other, we refer to them as overlapping signals (top panel of Figure~\ref{fig:lensing-overlaps}). It is intutive to think that if two signals are far apart, we can analyze each of them while ignoring the presence of the other signal. However, when they are close, they need to be analyze jointly in order to avoide biases in the measurements. A comprehansive investigation on this topic was done in the Tomek et al [in preparation]. Tomek et al extend the relative binning method developed in this work to perform \textit{joint} parameter estimation on two GW signals. 
+When two or more signals merge close to each other, we refer to them as overlapping signals (top panel of Figure~\ref{fig:lensing-overlaps}). It is intuitive to think that if two signals are far apart, we can analyze each of them while ignoring the presence of the other signal. However, when they are close, they need to be analysed jointly to avoid biases in the measurements. A comprehensive investigation on this topic was done by Tomek et al [in preparation]. Tomek et al extend the relative binning method developed in this work to perform \textit{joint} parameter estimation on two GW signals. 
 
-When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lening, the GW signals is split into multiple time-separated copies (referred to as images) which maybe observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the parameters of any two GW signals, i.e. by again performing \textit{joint} parameter estimation. 
+When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lensing, the GW signal is split into multiple time-separated copies (referred to as images) which may be observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the parameters of any two GW signals, i.e. by again performing \textit{joint} parameter estimation. 
 
 \subsection{To perform parameter estimation on the overlapping signals}
 \iffalse
-The LIGO-Virgo interferometers have not yet observed any overlapping signals and it is unlikely that we do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipeline are designed to analyze a single, isolated signal. However, in the 3G-era, due to increase detection rate and increase duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develope parameter estimation methods to analyze overlapping signals. 
+The LIGO-Virgo interferometers have not yet observed any overlapping signals and it is unlikely that we do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipelines are designed to analyze a single, isolated signal. However, in the 3G era, due to the increased detection rate and increased duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develop parameter estimation methods to analyze overlapping signals. 
 \fi
 
 We account for two signals in the signal model by replacing $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ in the expression of the likelihood (cc. Eq.~\eqref{eqn:indi-likelihood}). This leads to
 \begin{equation}
 \ln \mathcal{L}(\vec{\theta}_1, \vec{\theta}_2) = -\frac{1}{2}\left<\vec{d}-\vec{h}_1(\vec{\theta}_1) - \vec{h}_2(\vec{\theta}_2) |\vec{d}-\vec{h}_1(\vec{\theta}_2) - \vec{h}_2(\vec{\theta}_2)\right>\,,
 \end{equation}
-where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensional parameter space. Follwing the steps from Eq.~\eqref{eqn:indi-likelihood}-Eq.~\eqref{eqn:short-l}, we can factorise the likelihood into
+where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensional parameter space. Following the steps from Eq.~\eqref{eqn:indi-likelihood}-Eq.~\eqref{eqn:short-l}, we can factorise the likelihood into
 \begin{align}
-    \ln \mathcal{L}(\vec{\theta}) &= \left<\vec{d}|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
+ \ln \mathcal{L}(\vec{\theta}) &= \left<\vec{d}|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
     \label{eq:two-likelihood}
     & = \ln \mathcal{L}_{dh_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{dh_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
 \end{align}
-where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Now, we have all the ingredients to compute the joint likelihood. Each term in factorised likelihod expression of the Eq.~\ref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
+where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Now, we have all the ingredients to compute the joint likelihood. Each term in the factorised likelihood expression of the Eq.~\ref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
 
 \subsection{To perform strong lensing searches}
-For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ to account for two images. However, since two images are copies of the same GW signals, we expect that the source parameters are identical between the two except for the merger time, luminosity distance, and morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as
+For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ to account for two images. However, since the two images are copies of the same GW signals, we expect that the source parameters are identical between the two except for the merger time, luminosity distance, and morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as
 
 \begin{equation}
 \label{eqn:wf-mapping}
 \vec{h}_2(\vec{\theta}, \vec{\theta}_{L}) = \sqrt{\mu_{12}}\vec{h}_1(\vec{\theta})e^{2i\pi f \Delta t_{12} - i\Delta n_{12}\pi}
 \end{equation}
-where the set $\{\vec{\theta}, \vec{\theta}_L\}$ now represent a 18 dimensional parameter space. The factorization of the likelihood expression is slightly different from the case of overlapping signals since we need to incorporate two data stream. Let us denote them by $\vec{d}_1$ and $\vec{d}_2$ for each image. The likelihood function then is,
+where the set $\{\vec{\theta}, \vec{\theta}_L\}$ now represent a 18 dimensional parameter space. The factorization of the likelihood expression is slightly different from the case of overlapping signals since we need to incorporate two data streams. Let us denote them by $\vec{d}_1$ and $\vec{d}_2$ for each image. The likelihood function then is,
 
 \begin{align}
-    \ln \mathcal{L}(\vec{\theta}, \vec{\theta}_L) &= \left<\vec{d}_1|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}_2|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
+ \ln \mathcal{L}(\vec{\theta}, \vec{\theta}_L) &= \left<\vec{d}_1|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}_2|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
     \label{eq:lesing_small_likelihood}
     & = \ln \mathcal{L}_{d_1h_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{d_2h_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
 \end{align}
 
-Note that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at relevant places. Next we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{eqn:wf-mapping}. Use RBGrid to generate the summary data and using the summary data, we can approximate the likelihood. 
+Note that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at relevant places. Next, we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{eqn:wf-mapping}. Use RBGrid to generate the summary data and using the summary data, we can approximate the likelihood. 
 
-Now, we have all the ingredients to perform paramter estimation on the isolated signals, overlapping signals, and strongly lensed signals. 
+Now, we have all the ingredients to perform parameter estimation on the isolated signals, overlapping signals, and strongly lensed signals. 
     
 
 \section{Validation of the method}
@@ -237,55 +237,55 @@ Now, we have all the ingredients to perform paramter estimation on the isolated 
       \hline
       \textbf{Parameter} & \textbf{Population Prior} \\
       \hline
-      Chirp mass $(\mathcal{M}_c)$ &  Uniform($5M_{\odot},$ $100M_{\odot}$) \\
+ Chirp mass $(\mathcal{M}_c)$ & Uniform($5M_{\odot},$ $100M_{\odot}$) \\
       \hline
-      Mass ratio $(q)$ & Uniform(0.1, 10) \\
+ Mass ratio $(q)$ & Uniform(0.1, 10) \\
       \hline
-     Dimensionless spin of the $i^{th}$ black hole $(a_i)$  & Uniform(0, 1) \\
+ Dimensionless spin of the $i^{th}$ black hole $(a_i)$  & Uniform(0, 1) \\
       \hline
-      Zenith angle between the spin and orbital angular momentum for 
+ Zenith angle between the spin and orbital angular momentum for 
       $i^{th}$ black hole $(\theta_i )$ &Sine($0, \pi$)\\
       \hline
-       Difference between the azimuthal angles of the individual spin vector projections onto the orbital plane $(\Delta \phi)$ & Uniform($0, 2\pi$)\\
+ Difference between the azimuthal angles of the individual spin vector projections onto the orbital plane $(\Delta \phi)$ & Uniform($0, 2\pi$)\\
       \hline
-      Difference between total and orbital angular momentum azimuthal angles $(\phi_{JL})$ &  Uniform($0, 2\pi$) \\
+ Difference between total and orbital angular momentum azimuthal angles $(\phi_{JL})$ & Uniform($0, 2\pi$) \\
       \hline
-      Right Ascension (RA) &  Uniform($0, 2\pi$)\\
+ Right Ascension (RA) & Uniform($0, 2\pi$)\\
       \hline
-      Declination (DEC) &  Cosine($-\pi/2,$ $\pi/2$)\\
+ Declination (DEC) & Cosine($-\pi/2,$ $\pi/2$)\\
       \hline
-     Angle between the line of sight and total angular momentum$ (\theta_{JN})$ &  Sine($0, \pi$)\\
+ Angle between the line of sight and total angular momentum$ (\theta_{JN})$ & Sine($0, \pi$)\\
       \hline
-      Polarization angle $(\psi)$ &  Sine($0, \pi$)\\
+ Polarization angle $(\psi)$ & Sine($0, \pi$)\\
       \hline
-     Phase of coalescence $(\phi_c)$ &  Uniform($0, 2\pi$)\\
+ Phase of coalescence $(\phi_c)$ & Uniform($0, 2\pi$)\\
       \hline 
-      Luminosity distance $(d_L)$ &  UniformSourceFrame(0.1 \text{Gpc}, 5 \text{Gpc}) \\
+ Luminosity distance $(d_L)$ & UniformSourceFrame(0.1 \text{Gpc}, 5 \text{Gpc}) \\
       \hline
-      Time of coalescence $(t_c)$ &  Uniform(0s, 86400s) \\
+ Time of coalescence $(t_c)$ & Uniform(0s, 86400s) \\
       \hline
-      Morse factor for image 1 $(n_1)$ &  Uniform\{0, 0.5, 1\} \\
+ Morse factor for image 1 $(n_1)$ & Uniform\{0, 0.5, 1\} \\
       \hline
-      Magnification of image 2 w.r.t image 1 $(\mu_{12})$ &  Uniform(0, 10) \\
+ Magnification of image 2 w.r.t image 1 $(\mu_{12})$ & Uniform(0, 10) \\
       \hline
-      Delay in arrival time between two images $(\Delta t_{12})$ &  Uniform(0s, 86400s) \\
+ Delay in arrival time between two images $(\Delta t_{12})$ & Uniform(0s, 86400s) \\
       \hline
-      Difference in Morse factor $(\Delta n_{12})$ &  Uniform\{0, 0.5, 1\} \\
+ Difference in Morse factor $(\Delta n_{12})$ & Uniform\{0, 0.5, 1\} \\
       \hline
        \end{tabular}
       \caption{Parameters and corresponding priors used to simulate individual GW signals and the pairs of lensed GW signals. 
-      For a detailed description of each prior probability distribution refer to~\cite{Ashton2018Bilby:Astronomy}.}
+ For a detailed description of each prior probability distribution refer to~\cite{Ashton2018Bilby:Astronomy}.}
        \label{bbh_params}
   \end{table}
   
 For a parameter estimation method to be trustworthy, it should recover the injected parameters within a given confidence interval for a corresponding fraction of injections; the 
-extent to which it does so can be assessed using a so-called P-P plot~\cite{Sidery:2013zua, Veitch:2014wba, Berry:2014jja, Singer:2015ema, Romero-Shaw:2020owr}. 
-To this end we simulate a population of 70 BBH signals by sampling the appropriate source parameters from the prior distributions specified in Table~\ref{bbh_params}. 
+the extent to which it does so can be assessed using a so-called P-P plot~\cite{Sidery:2013zua, Veitch:2014wba, Berry:2014jja, Singer:2015ema, Romero-Shaw:2020owr}. 
+To this end, we simulate a population of 70 BBH signals by sampling the appropriate source parameters from the prior distributions specified in Table~\ref{bbh_params}. 
 We adjust the luminosity distance in such a way that each event has a network SNR above 13. 
 The network consists of the two LIGO and the Virgo interferometers at their design sensitivity~\cite{KAGRA:2013rdx}. 
 We perform parameter estimation on each event and show the collective results in Figure~\ref{fig:pp-plot}, representing a P-P plot for our relative binning framework. Ideally, each coloured 
 line should trace the diagonal; however, some fluctuations are expected due to a finite number of signals being analyzed and the presence of noise. 
-We perform a Kolmogorov–Smirnov (KS) test~\cite{2020SciPy-NMeth} and quote the p-value (in brackets) as a measure of the consistency between each colored line and the diagonal line.
+We perform a Kolmogorov–Smirnov (KS) test~\cite{2020SciPy-NMeth} and quote the p-value (in brackets) as a measure of the consistency between each coloured line and the diagonal line.
 To further quantify this consistency, we can define a binomial random variable $X$ as the number of times the injected value is recovered within 
 a confidence interval corresponding to a value on the horizontal axis. 
 For this binomial distribution, the shape parameter $N$ equals 70 and $p$ equals the confidence corresponding to the x-axis.  
@@ -295,72 +295,70 @@ we conclude that our method is robust.
 \begin{figure}[h]
     \centering
     \includegraphics[width=.75\textwidth]{../figures/pp_3.0_partial_no_railing.pdf}
-    \caption{Percentile-percentile showcasing the robustness of relative binning method on BBH events. Each line traces the diagonal, indicating that the parameter corresponding to it is recovered with expected accuracy. The numbers in the brackets of the legend show the p-values of the KS tests. The combined p-value of all parameters is 0.6625, consistent with the hypothesis that individual p-values were derived from a uniform distribution as expected. The shaded regions show 1$\sigma$, 2$\sigma$, 3$\sigma$ confidence intervals in decreasing order of opacity.}
+    \caption{Percentile-percentile showcasing the robustness of the relative binning method on BBH events. Each line traces the diagonal, indicating that the parameter corresponding to it is recovered with expected accuracy. The numbers in the brackets of the legend show the p-values of the KS tests. The combined p-value of all parameters is 0.6625, consistent with the hypothesis that individual p-values were derived from a uniform distribution as expected. The shaded regions show 1$\sigma$, 2$\sigma$, and 3$\sigma$ confidence intervals in decreasing order of opacity.}
     \label{fig:pp-plot}
 \end{figure}
 
 \subsection{On real data: analysing GW signals detected by LIGO-Virgo interferometers}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190412_gwtc.pdf}
+    %\includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190814_corr_branch_gwtc.pdf}
+    \caption{Analysis of GW190412. The blue colour marks the results obtained from the relative binning method and the grey colour marks the results reported in the GWTC-3 data release.}
+    \label{fig:gw190412}
+\end{figure}
+
 Next, we turn to parameter estimation on the events detected by LIGO-Virgo. 
 We choose GW190412, GW190814, GW191103, and GW191105. 
 The first two events are chosen as they consist of BBHs with highly asymmetric masses. This feature allows for a significant contribution from the higher 
-harmonics~\cite{LIGOScientific:2020stg}, enabling us to stress-test our framework regarding HOMs.  
+harmonics~\cite{LIGOScientific:2020stg}, enabling us to stress-test our framework with higher harmonics.  
 The remaining two events were chosen because they were part of a candidate event pair from the strong lensing searches~\cite{LIGOScientific:2023bwz, Janquart:2023mvf}. 
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190814_corr_branch_gwtc.pdf}
+    \caption{Analysis of GW190814. The blue colour marks the results obtained from the relative binning method and the grey colour marks the results reported in the GWTC-3 data release.}
+    \label{fig:gw190814}
+\end{figure}
 
 For GW190412 and GW190814, a truncated corner plot showing posterior distributions for selected parameters is presented in Figs.~\ref{fig:gw190412} and \ref{fig:gw190814}, respectively.
 The blue (grey) curves represent the results of parameter estimation with (without) relative binning. 
 The grey curves are generated by using the posterior samples provided in the public data release of LVK~\cite{LIGOScientific:GWTC3DR, LIGOScientific:GWTC2.1DR}. 
-Figures~\ref{fig:gw190412} and \ref{fig:gw190814} show a qualitative agreement between the posterior distributions obtained by the regular method (without making any approximation) and the relative binning method. 
-Similarly, we analyzed GW191103 and GW191105 with the relative binning method, which led to comparable agreement with the regular method. 
-
+Figures~\ref{fig:gw190412} and \ref{fig:gw190814} show a qualitative agreement between the posterior distributions obtained by the regular method (without making any approximation) and the relative binning method. Similarly, we analyzed GW191103 and GW191105 with the relative binning method, which led to a comparable agreement with the regular method. 
 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=.75\textwidth]{../figures/real_threeg_lensed_jsd.pdf}
+    \includegraphics[width=\textwidth]{../figures/real_threeg_lensed_jsd.pdf}
     \caption{JS divergence plot for all events}
     \label{fig:master-jsd}
 \end{figure}
 
-To quantify the mismatch between the posterior samples obtained using the relative binning method to ones obtained with the regular method, we use the Jensen-Shannon 
-(JS) divergence~\cite{2020SciPy-NMeth}. 
+To quantify the mismatch between the posterior samples obtained using the relative binning method to the ones obtained with the regular method, we use the Jensen-Shannon (JS) divergence~\cite{2020SciPy-NMeth}. 
 We do not perform a regular parameter estimation run due to computation cost. Instead, we reweigh the posterior samples obtained using the relative binning 
 method to obtain the posterior samples for the regular method as discussed in the next paragraph.
 We repeat this step for all four events, GW190412, GW190814, GW191103, and GW191105, and plot the JS divergence between the relative 
-binning samples and the regular samples for each parameter in Figure~\ref{individual-js}. Each event is represented by a different marker. 
-To determine a heuristic threshold value for statistical indistinguishability (represented by the dashed line in Figures~\ref{individual-js},~\ref{three-g-js}, and~\ref{median-jpe}), 
+binning samples and the regular samples for each parameter in Figure~\ref{master-jsd}. Each event is represented by a different coloured marker. 
+To determine a heuristic threshold value for statistical indistinguishability (represented by the dashed line in Figure~\ref{fig:master-jsd}), 
 we compute the JS statistic for 2000 pairs of sets of $10^5$ samples taken from Gaussian distributions. 
-We then define as heuristic threshold for indistinguishably the 99th percentile of the obtained values 
-(black dashed line in Figure~\ref{fig:gw190412} and Figure~\ref{fig:gw190814}). The JS divergence for each parameter remains well below the threshold, 
-indicating that the posterior distributions produced by the relative binning method and the regular method are statistically indistinguishable. As an additonal validation test, we use the posterior samples obtained through relative binning method on the GW190412, GW190814, GW191103, and GW191105 events to compute the exact likelihoods (i.e. Eq.~\eqref{eqn:short-l}). The standard deviation of the absolute difference between the exact and the relative binning likelihoods turns out to be $\leq 0.1$ which indicates that the error incurred by the relative binning likelihood is sufficiently small to not impact the posterior distribution~\cite{Leslie:2021ssu}. 
+We then define a heuristic threshold for indistinguishably the 99th percentile of the obtained values. The JS divergence for each parameter remains well below the threshold, 
+indicating that the posterior distributions produced by the relative binning method and the regular method are statistically indistinguishable. As an additional validation test, we use the posterior samples obtained through the relative binning method on the GW190412, GW190814, GW191103, and GW191105 events to compute the exact likelihoods (i.e. Eq.~\eqref{eqn:short-l}). The standard deviation of the absolute difference between the exact and the relative binning likelihoods turns out to be $\leq 0.1$ which indicates that the error incurred by the relative binning likelihood is sufficiently small to not impact the posterior distribution~\cite{Leslie:2021ssu}. 
 
 \subsubsection{Checking the efficiency: Reweighing of the relative binning posterior samples}
 \label{reweight}
-We reweight the posterior samples obtained using relative binning to match the samples obtained with the usual likelihood to test the method's efficiency. 
+We reweigh the posterior samples obtained using relative binning to match the samples obtained with the usual likelihood to test the method's efficiency. 
 Let us denote the likelihood evaluated for the posterior samples produced by the relative binning 
 method by $\mathcal{L}^{\text{RB}}(\vec{\theta})$, where $\vec{\theta}$ stands for the 
 posterior samples; and the probability for $\vec{\theta}$ according to the relative binning 
-samples by $p^{\text{RB}}(\vec{\theta})$. To perform the reweighting, for each posterior sample $\vec{\theta}$, we compute the likelihood according to the usual method, which we denote by $\mathcal{L}^{\text{RG}}(\vec{\theta})$. 
+samples by $p^{\text{RB}}(\vec{\theta})$. To perform the reweighed, for each posterior sample $\vec{\theta}$, we compute the likelihood according to the usual method, which we denote by $\mathcal{L}^{\text{RG}}(\vec{\theta})$. 
 Using $\mathcal{L}^{\text{RB}}(\vec{\theta})$, $\mathcal{L}^{\text{RG}}(\vec{\theta})$, 
-we can reweight $p^{\text{RB}}(\vec{\theta})$ to obtain the probability 
+we can reweigh $p^{\text{RB}}(\vec{\theta})$ to obtain the probability 
 for $\vec{\theta}$ according to the regular method:
 \begin{equation}
 p^{\text{RG}}(\vec{\theta})  = \frac{\mathcal{L}^{\text{RG}}(\vec{\theta})}{\mathcal{L}^{\text{RB}}(\vec{\theta})}p^{\text{RB}}(\vec{\theta})\,.
 \end{equation}
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190412_gwtc.pdf}
-    %\includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190814_corr_branch_gwtc.pdf}
-    \caption{Analysis of GW190412. The blue colour marks the results obtained from relative binning method and grey colour marks the results reported in GWTC-3 data release.}
-    \label{fig:gw190412}
-\end{figure}
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190814_corr_branch_gwtc.pdf}
-    \caption{Analysis of GW190814. The blue colour marks the results obtained from relative binning method and grey colour marks the results reported in GWTC-3 data release.}
-    \label{fig:gw190814}
-\end{figure}
 
 
 \begin{figure}[h]
@@ -374,8 +372,8 @@ p^{\text{RG}}(\vec{\theta})  = \frac{\mathcal{L}^{\text{RG}}(\vec{\theta})}{\mat
 \subsection{Third generation events}
 
 Now we turn to parameter estimation for the case of 3G observatories. 
-In order to test our method, we analyze a subset of GWTC-3 events as they would be seen by these detectors. 
-We arbitrarily choose six events with varying total masses from the GWTC-3 catalog, specified in table~\ref{tab:gwtc-3-table}. 
+To test our method, we analyze a subset of GWTC-3 events as they would be seen by these detectors. 
+We arbitrarily choose six events with varying total masses from the GWTC-3 catalogue, specified in table~\ref{tab:gwtc-3-table}. 
 
 \begin{table}[h]
     \centering
@@ -383,17 +381,17 @@ We arbitrarily choose six events with varying total masses from the GWTC-3 catal
         \hline
         \textbf{Event} & \textbf{Total Mass ($M_{\odot}$)} & \textbf{Network SNR} \\
         \hline
-        GW191126\_115259 & 26.51 & 192.52 \\
+ GW191126\_115259 & 26.51 & 192.52 \\
         \hline
-        GW191127\_050227 & 138.71 &  260.33 \\
+ GW191127\_050227 & 138.71 & 260.33 \\
         \hline
-        GW191230\_180458 &  144.69 & 383.10 \\
+ GW191230\_180458 & 144.69 & 383.10 \\
         \hline
-        GW200112\_155838 & 78.10 & 1103.53 \\
+ GW200112\_155838 & 78.10 & 1103.53 \\
         \hline
-        GW200220\_061928 &  282.50 & 224.91 \\
+ GW200220\_061928 & 282.50 & 224.91 \\
         \hline
-        GW200306\_093714 & 62.10 &  326.02 \\
+ GW200306\_093714 & 62.10 & 326.02 \\
         \hline
     \end{tabular}
     \caption{Table of events from GWTC-3, their (maximum-likelihood, observed) total masses, and their respective network SNRs as obtained for a network of 3G detectors.}
@@ -410,12 +408,12 @@ The $1\sigma$, $2\sigma$, and $3\sigma$ confidence contours are indicated by the
 As can be seen from the plot, all injected parameters have been recovered well. 
 
 To quantify the accuracy of our method for the 3G scenario, we repeat the steps which were performed in subsection~\ref{sss:hlv-sensitivity}.
-We again reweight the posterior samples obtained using the relative binning method following the procedure in Appendix~\ref{reweight} and 
-calculate the JS divergence between the reweighted samples and the relative binning samples. 
+We again reweigh the posterior samples obtained using the relative binning method following the procedure in Appendix~\ref{reweight} and 
+calculate the JS divergence between the reweighed samples and the relative binning samples. 
 This process is repeated for each of the six events and the results are shown in Figure~\ref{three-g-js}. 
 Each event is represented by a different marker and the dashed black line shows the threshold value, which is calculated in the same way as in~\ref{sss:hlv-sensitivity}. 
 Here too the JS divergence for each parameter remains well below the threshold, indicating that the posterior distributions produced by the relative binning method and the 
-regular method are statistically indistinguishable.
+regular methods are statistically indistinguishable.
 
 
 \begin{figure}[h]
@@ -439,7 +437,7 @@ regular method are statistically indistinguishable.
 \begin{figure}[h]
     \centering
     \includegraphics[width=.5\textwidth]{../figures/thesis_speed_up_summary.pdf}
-    \caption{Relation between the speed up achieved by the the method in relation to the total mass}
+    \caption{Relation between the speed up achieved by the method in relation to the total mass}
     \label{fig:speed}
 \end{figure}
 
