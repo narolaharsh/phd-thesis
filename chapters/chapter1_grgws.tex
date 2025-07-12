@@ -26,15 +26,15 @@ Let us first revisit the Christoffel symbols $\Gamma^{\rho}_{\nu\mu}$. They are 
     \label{eq:christoffel_symbols}
     \Gamma^{\rho}_{\nu\mu} = \frac{1}{2} g^{\rho\sigma} \left( \partial_\nu g_{\mu\sigma} + \partial_\mu g_{\nu\sigma} - \partial_\sigma g_{\nu\mu} \right).
 \end{equation}
-Specifically, these are the Christoffel symbols of the second kind. They are expressed in terms of partial derivatives of metric tensor and they track how vectors change under parallel transport. Christoffel symbols are used to derive the Riemann tensor,
+Specifically, these are the Christoffel symbols of the second kind. They are expressed in terms of partial derivatives of metric tensor and they track how vectors change under parallel transport. Christoffel symbols are used to derive the Riemann tensor $R^{\rho}_{\ \mu\lambda\nu}$,
 \begin{equation}
  R^{\rho}_{\ \mu\lambda\nu} = \partial_\lambda \Gamma^{\rho}_{\nu\mu} - \partial_\nu \Gamma^{\rho}_{\lambda\mu} + \Gamma^{\rho}_{\lambda\sigma} \Gamma^{\sigma}_{\nu\mu} - \Gamma^{\rho}_{\nu\sigma} \Gamma^{\sigma}_{\lambda\mu},
 \end{equation}
-which tracks how tensors change when transported on a closed path to determine the curvature of the surface. For a flat surface they do not change, so the curvature is zero. Next, we define the Ricci tensor which is the contraction of the Riemann tensor, 
+which tracks how tensors change when transported on a closed path, to determine the curvature of the surface. For a flat surface they do not change so the curvature is zero. Next, we define the Ricci tensor $R_{\mu\nu}$ which is the contraction of the Riemann tensor, 
 \begin{equation}
 R_{\mu\nu} \equiv R^{\lambda}_{~\mu\lambda\nu}.
 \end{equation}
-The raising or lower of an index is done using the metric tensor, i.e., $R^{\rho}_{~\mu\lambda\nu} = g^{\rho\alpha}R_{\alpha\mu\lambda\nu}$. The Ricci tensor specifically determines how volumes change on a closed path. Next, we define the Ricci scalar:
+The raising or lower of an index is done using the metric tensor, i.e., $R^{\rho}_{~\mu\lambda\nu} = g^{\rho\alpha}R_{\alpha\mu\lambda\nu}$. The Ricci tensor specifically determines how volumes change on a closed path. Next, we define the Ricci scalar (R);
 \begin{equation}
  R \equiv g^{\mu\nu}R_{\mu\nu}.
 \end{equation}
