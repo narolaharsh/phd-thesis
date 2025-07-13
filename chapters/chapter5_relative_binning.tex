@@ -1,4 +1,4 @@
-Bayesian inference discussed in chapter~\ref{ch:gwpe} is the key to achieving a wide range of scientific insights from gravitational wave signals. The cost of it increases with the complexity of the signal model and the signal's duration. With standard methods, such analyses require at least a few days. Moreover, for third-generation detectors, due to the lowered minimum sensitive frequency, the signal duration increases, leading to even longer analysis times. With the increased detection rate, such analyses can then become intractable. In this work, we present a fast parameter estimation method that includes higher-order modes and precession using relative binning. Additionally, we extend the method so that it can be used to analyze individual GW as well as two overlapping GW signals in the 3G era. We adapt our method to perform strong lensing searches. Indeed, a fast parameter estimation method has a wide range of applications. Specifically, we apply our method to
+Bayesian inference discussed in chapter~\ref{ch:gwpe} is the key to achieving a wide range of scientific insights from gravitational wave signals. The cost of it increases with the complexity of the signal model and the signal's duration. With standard methods, such analyses require at least a few days. Moreover, for third-generation detectors, due to the lowered minimum sensitive frequency, the signal duration increases, leading to even longer analysis times. With the increased detection rate, such analyses can then become intractable. In this work, we present a fast parameter estimation method that includes higher-order modes and precession using relative binning. Additionally, we extend the method so that it can be used to analyse individual GW as well as two overlapping GW signals in the 3G era. We adapt our method to perform strong lensing searches. Indeed, a fast parameter estimation method has a wide range of applications. Specifically, we apply our method to
 \begin{enumerate}
     \item A set of simulated BBH signals covering full parameter space to establish validity. 
     \item Two LIGO-Virgo events with significant contribution from higher order modes: GW190412~\cite{LIGOScientific:2020stg} and GW190814~\cite{LIGOScientific:2020zkf}.
@@ -188,13 +188,13 @@ algorithm as a whole\footnote{Our implementation of the bin selection and relati
 \section{Extension of the relative binning method}
 A fast parameter estimation method has a wide range of applications. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two signals. Figure~\ref{fig:lensing-overlaps} gives an illustration of two overlapping signals (top) and strongly lensed signals (bottom). 
 
-When two or more signals merge close to each other, we refer to them as overlapping signals (top panel of Figure~\ref{fig:lensing-overlaps}). It is intuitive to think that if two signals are far apart, we can analyze each of them while ignoring the presence of the other signal. However, when they are close, they need to be analysed jointly to avoid biases in the measurements. A comprehensive investigation on this topic was done by Tomek et al [in preparation]. Tomek et al extend the relative binning method developed in this work to perform \textit{joint} parameter estimation on two GW signals. 
+When two or more signals merge close to each other, we refer to them as overlapping signals (top panel of Figure~\ref{fig:lensing-overlaps}). It is intuitive to think that if two signals are far apart, we can analyse each of them while ignoring the presence of the other signal. However, when they are close, they need to be analysed jointly to avoid biases in the measurements. A comprehensive investigation on this topic was done by Tomek et al [in preparation]. Tomek et al extend the relative binning method developed in this work to perform \textit{joint} parameter estimation on two GW signals. 
 
 When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lensing, the GW signal is split into multiple time-separated copies (referred to as images) which may be observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the parameters of any two GW signals, i.e. by again performing \textit{joint} parameter estimation. 
 
 \subsection{To perform parameter estimation on the overlapping signals}
 \iffalse
-The LIGO-Virgo interferometers have not yet observed any overlapping signals and it is unlikely that we do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipelines are designed to analyze a single, isolated signal. However, in the 3G era, due to the increased detection rate and increased duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develop parameter estimation methods to analyze overlapping signals. 
+The LIGO-Virgo interferometers have not yet observed any overlapping signals and it is unlikely that we do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipelines are designed to analyse a single, isolated signal. However, in the 3G era, due to the increased detection rate and increased duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develop parameter estimation methods to analyse overlapping signals. 
 \fi
 
 We account for two signals in the signal model by replacing $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ in the expression of the likelihood (cc. Eq.~\eqref{eqn:indi-likelihood}). This leads to
@@ -284,7 +284,7 @@ To this end, we simulate a population of 70 BBH signals by sampling the appropri
 We adjust the luminosity distance in such a way that each event has a network SNR above 13. 
 The network consists of the two LIGO and the Virgo interferometers at their design sensitivity~\cite{KAGRA:2013rdx}. 
 We perform parameter estimation on each event and show the collective results in Figure~\ref{fig:pp-plot}, representing a P-P plot for our relative binning framework. Ideally, each coloured 
-line should trace the diagonal; however, some fluctuations are expected due to a finite number of signals being analyzed and the presence of noise. 
+line should trace the diagonal; however, some fluctuations are expected due to a finite number of signals being analysed and the presence of noise. 
 We perform a Kolmogorov–Smirnov (KS) test~\cite{2020SciPy-NMeth} and quote the p-value (in brackets) as a measure of the consistency between each coloured line and the diagonal line.
 To further quantify this consistency, we can define a binomial random variable $X$ as the number of times the injected value is recovered within 
 a confidence interval corresponding to a value on the horizontal axis. 
@@ -325,7 +325,7 @@ The remaining two events were chosen because they were part of a candidate event
 For GW190412 and GW190814, a truncated corner plot showing posterior distributions for selected parameters is presented in Figs.~\ref{fig:gw190412} and \ref{fig:gw190814}, respectively.
 The blue (grey) curves represent the results of parameter estimation with (without) relative binning. 
 The grey curves are generated by using the posterior samples provided in the public data release of LVK~\cite{LIGOScientific:GWTC3DR, LIGOScientific:GWTC2.1DR}. 
-Figures~\ref{fig:gw190412} and \ref{fig:gw190814} show a qualitative agreement between the posterior distributions obtained by the regular method (without making any approximation) and the relative binning method. Similarly, we analyzed GW191103 and GW191105 with the relative binning method, which led to a comparable agreement with the regular method. 
+Figures~\ref{fig:gw190412} and \ref{fig:gw190814} show a qualitative agreement between the posterior distributions obtained by the regular method (without making any approximation) and the relative binning method. Similarly, we analysed GW191103 and GW191105 with the relative binning method, which led to a comparable agreement with the regular method. 
 
 \begin{figure}[h]
     \centering
@@ -358,9 +358,9 @@ for $\vec{\theta}$ according to the regular method:
 p^{\text{RG}}(\vec{\theta})  = \frac{\mathcal{L}^{\text{RG}}(\vec{\theta})}{\mathcal{L}^{\text{RB}}(\vec{\theta})}p^{\text{RB}}(\vec{\theta})\,.
 \end{equation}
 
-\subsection{On simulated signals for 3G interferometers}
+\subsection{On the parameter estimation of 3G-era events}
 
-To further test our method, we analyze a subset of LIGO-Virgo events as they would be appear in 3G interferometers. 
+To further test our method, we analyse a subset of LIGO-Virgo events as they would be appear in 3G interferometers. 
 We arbitrarily choose six events with varying total masses, specified in table~\ref{tab:gwtc-3-table}. 
 
 \begin{table}[h]
@@ -412,8 +412,7 @@ Each event is represented by a different marker and the dashed black line shows 
 Here too the JS divergence for each parameter remains well below the threshold, indicating that the posterior distributions produced by the relative binning method and the 
 regular methods are statistically indistinguishable.
 
-
-
+\subsubsection{Overlapping signals example}
 
 
 \begin{figure}[h]
@@ -423,6 +422,8 @@ regular methods are statistically indistinguishable.
     \caption{Analysis of overlapping signals using joint parameter estimation}
     \label{fig:overlapping-signal}
 \end{figure}
+
+To test if the relative binning method is useful to perform joint parameter estimation of overlapping signals, we analyze the example presented in the top panel of Figure~\ref{fig:lensing-overlaps}. We collectively present the results in Figure~\ref{fig:overlapping-signal}. The red (green) line in top (bottom) plot shows how accurately we can recover signal A (signal B) when it is in isolocation. This establishes the benchmark for the accuracy. The blue line in both plot shows the results of joint parameter estimation, i.e., how well the parameters of the two signals are recovered when they are overlapping. The agreement of the blue curves with the green and red curves suggest that our relative binning framework can be reliably extended to perform joint parameters estimation when two GW signals are overlapping. This examples served as a building block to carry out comprehensive study on overlapping signals analysis by Baka et al. 
 
 \subsection{On strongly lensed events}
 
@@ -434,7 +435,7 @@ regular methods are statistically indistinguishable.
     \label{fig:lensed_pair}
 \end{figure}
 
-We analyze eight simulated lensed pairs and the GW191103--GW191105 event pair to test the relative binning framework for joint parameter estimation. 
+We analyse eight simulated lensed pairs and the GW191103--GW191105 event pair to test the relative binning framework for joint parameter estimation. 
 The latter event pair is of interest as it was followed up by strong lensing searches because it showed some prototypical features of galaxy lensing, such as a mild posterior overlap and a short time delay~\cite{LIGOScientific:2023bwz, Janquart:2023mvf}. 
 On the other hand, the simulated pairs were generated by sampling the relevant source parameters from the priors shown in Table~\ref{bbh_params}. 
 We adjust the luminosity distance and the relative magnification of each lensed pair to ensure that the network SNR of each image is above 13.
