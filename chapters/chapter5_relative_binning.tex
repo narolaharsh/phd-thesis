@@ -175,7 +175,7 @@ The algorithm terminates when $N_0$ ceases to change, and the edges of the merge
 The choice of $\epsilon$ controls the trade-off between speed and accuracy, where a larger value increases speed but reduces accuracy. By contrast, we have verified
 that the bin selection procedure is not very sensitive to the initial value of $N_0$; it mainly affects the convergence rate of the algorithm. 
 Setting $N_0$ equal to the length of the uniform grid would eliminate the need for this additional tuning parameter, but this would slow down the bin selection
-algorithm as a whole\footnote{Our implementation of the bin selection and relative binning parameter estimation framework can be found in the git repository at~\cite{janquart:2022}.}. 
+algorithm as a whole. 
 \begin{figure}[h]
     \centering
     \includegraphics[width=0.75\textwidth]{../figures/vis_overlap_signals.pdf} 
@@ -472,14 +472,11 @@ The 3G detectors have a lower starting frequency, meaning they can observe a giv
 Therefore, one might expect relative binning to show a larger speed-up in the 3G scenario compared to similar total systems as seen in LIGO-Virgo, and 
 this effect is partially visible in Figure~\ref{fig:speed}. However, the 3G injections considered for the analysis have a considerably higher SNR than the corresponding 
 P-P injections for the LIGO-Virgo interferometers (blue cross markers). A higher SNR will increase the size of the coarse grid and decrease the speed of the relative binning method. 
+In addition, the median of the SNR for the set of P-P injections is $59.44$  which is $\simeq 2.2$ times larger compared to the loudest GW event observed to date \cite{LIGOScientific:GWTC3DR}. Since a large value of SNR increases the size of the coarse grid, the factor of speed-up reported by the P-P injections is on the conservative side.  
 
-
-For one of the P-P injections, with a total mass of $\simeq 95 M_{\odot}$, the speed-up achieved 
-by the relative binning method is below 1 (see Figure~\ref{fig:speed}). 
-This can be explained by the large network SNR ($\simeq 100$) of this particular event. 
-In addition, the median of the SNR for the set of P-P injections is $59.44$  which is $\simeq 2.2$ 
-times larger compared to the loudest GW event observed to date \cite{LIGOScientific:GWTC3DR}. 
-Since a large value of SNR increases the size of the coarse grid, the factor of speed-up reported by the P-P injections is on the conservative side.  
+%For one of the P-P injections, with a total mass of $\simeq 95 M_{\odot}$, the speed-up achieved 
+%by the relative binning method is below 1 (see Figure~\ref{fig:speed}). 
+%This can be explained by the large network SNR ($\simeq 100$) of this particular event. 
 
 Joint parameter estimation reports a similar speed-up as individual parameter estimation. Here we note that the exact joint parameter estimation framework used 
 in this work also rescales the first waveform to obtain the second one, by-passing the complete waveform generation step. 
@@ -487,8 +484,13 @@ However, this is not the case in all lensing analysis methods, and when joint pa
 we expect a larger speed-up factor for relative binning.
 
 \section{Conclusion and outlook}
+In this chapter, we have presented a relative binning based framework to perform fast parameter estimation. We have shown the robustness of the method by performing parameter estimation on a large set of simulated as well as real events. We have also extended the method to perform parameter estimation on overlapping signals and to perform strong lensing searches. This marks the fist instance where the relative binning method has been tested in a comprehensive manner. Our implementation of the bin selection and relative binning parameter estimation framework can be found in the git repository at~\cite{janquart:2022}.
+
+The performance of our method depends on the choice of the fiducial waveform. In this work, we have assumed that the fiducial waveform is either (a) the same as the injected waveform for simulations, or (b) the maximum likelihood waveform for real events. However, the method can be seeded in a more realistic way by using the best-fitting template reported by the templated-based searches or maximum likelihood estimator routines can be used to determine the fiducial waveforms' parameters. We plan to work on the choice of the fiducial waveform and understanding how it can impact the performance of our method in the future. This is an important step if one wants to use relative binning techniques on real data, where we do not know parameters in advance.
+
+While the relative binning method is shown to work well in the joint parameter estimation of the overlapping signals, it is crucial to determine when such a joint parameter estimation is required, i.e., if the signals are sufficiently apart, they can be analysed separately which may help reudce the cost of the analysis. This question was addressed in the in-depth analysis performed by Baka et al [in preparation]. The codebase presented in this chapter served as a building block for it. 
+
 \begin{itemize}
     \item Maximum likelihood parameters
     \item 3G-ready method work needed
     \item comprehensive analysis of all kinds of signals
-\end{itemize}
