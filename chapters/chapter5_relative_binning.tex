@@ -414,8 +414,7 @@ regular methods are statistically indistinguishable.
 
 \subsubsection{Overlapping signals example}
 
-
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=.72\textwidth]{../figures/overlapping_signals_A.pdf}\vspace{.5cm}
     \includegraphics[width=.72\textwidth]{../figures/overlapping_signals_B.pdf}
@@ -427,7 +426,7 @@ To test if the relative binning method is useful to perform joint parameter esti
 
 \subsection{On strongly lensed events}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=0.53\textwidth]{../figures/thesis_pair_191103_191105.pdf} \hspace{.5cm}
     \includegraphics[width=0.41\textwidth]{../figures/lens_pair_191103_191105.pdf}
@@ -455,10 +454,54 @@ This is in favor of the lensing hypothesis and comparable to the one reported by
 
 \section{Comparison of speed-up and accuracy}
 
-\begin{figure}[h]
+\begin{figure}
     \centering
     \includegraphics[width=.5\textwidth]{../figures/thesis_speed_up_summary.pdf}
     \caption{Relation between the speed up achieved by the method in relation to the total mass}
     \label{fig:speed}
 \end{figure}
 
+The speed-up achieved by the relative binning method can be broadly attributed to two factors. 
+First, every proposal waveform is generated on fewer frequency nodes -- provided by the RBGrid -- compared to the regular method, reducing the time required to generate the waveforms during sampling. 
+Second, as the summary data are pre-computed, the summation in Eqs.~\eqref{eqn:dh}-~\eqref{eqn:hh} needs to be computed at fewer frequency points, reducing the number of operations.
+The first point is the more significant contributor to the overall speed-up.
+With this, the total speed-up for relative binning mainly depends on how coarse the RBGrid is compared to the corresponding uniform grid. The reduction in frequency nodes depends on the signal characteristics such as the duration, SNR, fiducial parameters, and also the total error chosen to generate the RBGrid.
+
+
+Here we use the various parameter estimation runs done in previous sections to asses the speed-up obtained when using relative binning compared to traditional methods.
+Fig.~\ref{fig:speed} shows the speed-up achieved by the relative binning method over the regular method as a function of the total mass of the systems. The colorbar shows the ratio of the length of the uniform frequency grid to the length of the corresponding RBGrid. We denote the ratio by $\Delta$.  
+The circles indicate the ratio of total sampling time taken by the regular method compared to the relative binning method. 
+The rest of the markers show the ratio of the average single likelihood evaluation time taken between the two methods calculated over a set of $10^4$ points. The latter is an approximation but makes it possible to 
+assess the speed-up factor given by relative binning without having to do the regular parameter estimation runs. Still, for our various tests, 
+the number of likelihood evaluations done for the relative binning and regular methods is in the same ballpark, so that this is a reasonable approximation to make.
+
+ 
+
+We observe that the relative binning runs are up to a factor of $\sim 34$ faster for the LIGO-Virgo interferometers and up to a factor of $\sim 47$ faster for the 3G interferometers. 
+The speed-up decreases as the total mass of the system increases. 
+This is as expected since the grid can be made the coarsest for the inspiral part of the signal, which is less prominent for higher mass systems. 
+However, within a given total mass regime, some fluctuations in the speed-up can happen due to other signal characteristics.   
+The 3G detectors have a lower starting frequency, meaning they can observe a given signal for a longer period compared to the LIGO-Virgo interferometers. 
+Therefore, one might expect relative binning to show a larger speed-up in the 3G scenario compared to similar total systems as seen in LIGO-Virgo, and 
+this effect is partially visible in Fig.~\ref{fig:speed}. However, the 3G injections considered for the analysis have a considerably higher SNR than the corresponding 
+P-P injections for the LIGO-Virgo interferometers (blue cross markers). A higher SNR will increase the size of the coarse grid and decrease the speed of the relative binning method. 
+
+
+For one of the P-P injections, with a total mass of $\simeq 95 M_{\odot}$, the speed-up achieved 
+by the relative binning method is below 1 (see Fig.~\ref{fig:speed}). 
+This can be explained by the large network SNR ($\simeq 100$) of this particular event. 
+In addition, the median of the SNR for the set of P-P injections is $59.44$  which is $\simeq 2.2$ 
+times larger compared to the loudest GW event observed to date \cite{LIGOScientific:GWTC3DR}. 
+Since a large value of SNR increases the size of the coarse grid, the factor of speed-up reported by the P-P injections is on the conservative side.  
+
+Joint parameter estimation reports a similar speed-up as individual parameter estimation. Here we note that the regular joint parameter estimation framework used 
+in this work also rescales the first waveform to obtain the second one, by-passing the complete waveform generation step. 
+However, this is not the case in all lensing analysis methods, and when joint parameter estimation methods generate the two waveforms independently, 
+we expect a larger speed-up factor for relative binning.
+
+\section{Conclusion and outlook}
+\begin{itemize}
+    \item Maximum likelihood parameters
+    \item 3G-ready method work needed
+    \item comprehensive analysis of all kinds of signals
+\end{itemize}
