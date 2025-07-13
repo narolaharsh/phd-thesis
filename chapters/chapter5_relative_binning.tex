@@ -344,36 +344,24 @@ we compute the JS statistic for 2000 pairs of sets of $10^5$ samples taken from 
 We then define a heuristic threshold for indistinguishably the 99th percentile of the obtained values. The JS divergence for each parameter remains well below the threshold, 
 indicating that the posterior distributions produced by the relative binning method and the regular method are statistically indistinguishable. As an additional validation test, we use the posterior samples obtained through the relative binning method on the GW190412, GW190814, GW191103, and GW191105 events to compute the exact likelihoods (i.e. Eq.~\eqref{eqn:short-l}). The standard deviation of the absolute difference between the exact and the relative binning likelihoods turns out to be $\leq 0.1$ which indicates that the error incurred by the relative binning likelihood is sufficiently small to not impact the posterior distribution~\cite{Leslie:2021ssu}. 
 
-\subsubsection{Checking the efficiency: Reweighing of the relative binning posterior samples}
+\subsubsection{Checking the efficiency: Reweighing the relative binning posterior samples}
 \label{reweight}
 We reweigh the posterior samples obtained using relative binning to match the samples obtained with the usual likelihood to test the method's efficiency. 
 Let us denote the likelihood evaluated for the posterior samples produced by the relative binning 
 method by $\mathcal{L}^{\text{RB}}(\vec{\theta})$, where $\vec{\theta}$ stands for the 
 posterior samples; and the probability for $\vec{\theta}$ according to the relative binning 
-samples by $p^{\text{RB}}(\vec{\theta})$. To perform the reweighed, for each posterior sample $\vec{\theta}$, we compute the likelihood according to the usual method, which we denote by $\mathcal{L}^{\text{RG}}(\vec{\theta})$. 
+samples by $p^{\text{RB}}(\vec{\theta})$. To perform the reweighting, for each posterior sample $\vec{\theta}$, we compute the likelihood according to the usual method, which we denote by $\mathcal{L}^{\text{RG}}(\vec{\theta})$. 
 Using $\mathcal{L}^{\text{RB}}(\vec{\theta})$, $\mathcal{L}^{\text{RG}}(\vec{\theta})$, 
-we can reweigh $p^{\text{RB}}(\vec{\theta})$ to obtain the probability 
+we reweigh $p^{\text{RB}}(\vec{\theta})$ to obtain the probability 
 for $\vec{\theta}$ according to the regular method:
 \begin{equation}
 p^{\text{RG}}(\vec{\theta})  = \frac{\mathcal{L}^{\text{RG}}(\vec{\theta})}{\mathcal{L}^{\text{RB}}(\vec{\theta})}p^{\text{RB}}(\vec{\theta})\,.
 \end{equation}
 
+\subsection{Simulated signals for 3G interferometers}
 
-
-
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=0.53\textwidth]{../figures/thesis_pair_191103_191105.pdf} \hspace{.5cm}
-    \includegraphics[width=0.41\textwidth]{../figures/lens_pair_191103_191105.pdf}
-    \caption{Investigating the pair GW191103 (red) and GW191105 (green) under strong lensing hypothesis (blue).}
-    \label{fig:lensed_pair}
-\end{figure}
-
-\subsection{Third generation events}
-
-Now we turn to parameter estimation for the case of 3G observatories. 
-To test our method, we analyze a subset of GWTC-3 events as they would be seen by these detectors. 
-We arbitrarily choose six events with varying total masses from the GWTC-3 catalogue, specified in table~\ref{tab:gwtc-3-table}. 
+To further test our method, we analyze a subset of LIGO-Virgo events as they would be appear in 3G interferometers. 
+We arbitrarily choose six events with varying total masses, specified in table~\ref{tab:gwtc-3-table}. 
 
 \begin{table}[h]
     \centering
@@ -383,45 +371,49 @@ We arbitrarily choose six events with varying total masses from the GWTC-3 catal
         \hline
  GW191126\_115259 & 26.51 & 192.52 \\
         \hline
+GW200306\_093714 & 62.10 & 326.02 \\
+        \hline
+GW200112\_155838 & 78.10 & 1103.53 \\
+        \hline
  GW191127\_050227 & 138.71 & 260.33 \\
         \hline
  GW191230\_180458 & 144.69 & 383.10 \\
         \hline
- GW200112\_155838 & 78.10 & 1103.53 \\
-        \hline
  GW200220\_061928 & 282.50 & 224.91 \\
         \hline
- GW200306\_093714 & 62.10 & 326.02 \\
-        \hline
+
     \end{tabular}
     \caption{Table of events from GWTC-3, their (maximum-likelihood, observed) total masses, and their respective network SNRs as obtained for a network of 3G detectors.}
     \label{tab:gwtc-3-table}
 \end{table}
 
-We inject the signal corresponding to the maximum likelihood parameters, as obtained from the GWOSC data release, into Gaussian noise and perform parameter estimation with 
+\begin{figure}[t]
+    \centering
+    \includegraphics[width=.75\textwidth]{../figures/prod_third_gen.pdf}
+    \caption{A truncated corner plot showing the results of parameter estimation performed using relative binning on a GW200220\_061928 
+    signal as seen by the ET+CE network of detectors. The black lines show the injected values. 
+    The blue contours correspond to $1\sigma$, $2\sigma$, and $3\sigma$ confidence, in order of decreasing opacity.
+    }
+    \label{fig:third-gen}
+\end{figure}
+
+We inject the signal corresponding to the maximum likelihood parameters, as obtained from the public data release, into Gaussian noise and perform parameter estimation with 
 the relative binning framework. 
-Our detector network consists of a triangular ET~\cite{Punturo:2010zz, Maggiore2019ScienceTelescope, Branchesi:2023mws} with an arm length of 10 km and one L-shaped CE~\cite{Reitze:2019iox} with an arm length of 40 km.
+Our detector network consists of a triangular ET~\cite{Branchesi:2023mws} with an arm length of 10 km and one L-shaped CE~\cite{Reitze:2019iox} with an arm length of 40 km.
 The noise curves and detector configurations are read from~\cite{threeGdesign}. 
-A representative, truncated corner plot for this analysis is shown in Figure~\ref{3g-event} for the GW200220\_061928 event. 
-The orange lines in the plot show the injected parameter values and the green dashed lines indicate $1\sigma$ confidence intervals. 
-The $1\sigma$, $2\sigma$, and $3\sigma$ confidence contours are indicated by the green shading, in order of decreasing opacity. 
+A representative, truncated corner plot for this analysis is shown in Figure~\ref{fig:third-gen} for the GW200220\_061928 event. 
+The black lines in the plot show the injected parameter values 
+The $1\sigma$, $2\sigma$, and $3\sigma$ confidence contours are indicated by the blue shading, in order of decreasing opacity. 
 As can be seen from the plot, all injected parameters have been recovered well. 
 
-To quantify the accuracy of our method for the 3G scenario, we repeat the steps which were performed in subsection~\ref{sss:hlv-sensitivity}.
-We again reweigh the posterior samples obtained using the relative binning method following the procedure in Appendix~\ref{reweight} and 
-calculate the JS divergence between the reweighed samples and the relative binning samples. 
-This process is repeated for each of the six events and the results are shown in Figure~\ref{three-g-js}. 
-Each event is represented by a different marker and the dashed black line shows the threshold value, which is calculated in the same way as in~\ref{sss:hlv-sensitivity}. 
+To quantify the accuracy of our method for the 3G scenario, we again reweigh the posterior samples obtained using the relative binning method following the reweighting procedure discussed in Section~\ref{reweight}. Then, we calculate the JS divergence between the reweighted samples and the relative binning samples. 
+This process is repeated for each of the six events and the results are shown in Figure~\ref{fig:master-jsd}. 
+Each event is represented by a different marker and the dashed black line shows the threshold value. 
 Here too the JS divergence for each parameter remains well below the threshold, indicating that the posterior distributions produced by the relative binning method and the 
 regular methods are statistically indistinguishable.
 
 
-\begin{figure}[h]
-    \centering
-    \includegraphics[width=.75\textwidth]{../figures/prod_third_gen.pdf}
-    \caption{Third generation injection example}
-    \label{fig:third-gen}
-\end{figure}
+
 
 
 \begin{figure}[h]
@@ -430,6 +422,16 @@ regular methods are statistically indistinguishable.
     \includegraphics[width=.72\textwidth]{../figures/overlapping_signals_B.pdf}
     \caption{Analysis of overlapping signals using joint parameter estimation}
     \label{fig:overlapping-signal}
+\end{figure}
+
+\subsection{Strong lensing searches}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.53\textwidth]{../figures/thesis_pair_191103_191105.pdf} \hspace{.5cm}
+    \includegraphics[width=0.41\textwidth]{../figures/lens_pair_191103_191105.pdf}
+    \caption{Investigating the pair GW191103 (red) and GW191105 (green) under strong lensing hypothesis (blue).}
+    \label{fig:lensed_pair}
 \end{figure}
 
 \section{Comparison of speed-up and accuracy}
