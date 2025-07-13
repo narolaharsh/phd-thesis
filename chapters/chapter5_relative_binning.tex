@@ -60,19 +60,19 @@ $\vec{h}/\vec{h}'$ can be linearly approximated as
 within a given bin, where $r_1(b)$ and $r_2(b)$ are expansion coefficients 
 and $f_c$ denotes the central value of the frequency bin $b$. 
 
-The approximation made in Eq.~\eqref{eqn:ratio} performs better for the waveforms that only include dominant mode and aligned spins description. In the phenomenological waveform family, they are known as IMRPhenomD waveforms. For more complete waveforms, i.e, the ones including the effects of higher order modes and precessing spins (known as IMRPhenomXPHM), the ratio $\vec{h}/\vec{h}'$ is fluctuates rapidly as a function of frequency (see left plot of Figure~\ref{fig:dxp-ratio}). Therefore, when using the IMRPhenomD waveform a few bins are sufficient to make the linear expansion from Eq.(\ref{eqn:ratio}) precise in each bin. When using the IMPRhenomXPHM waveform, as the ratio is subject to more fluctuation, we need to consider a larger number of bins, incresing the waveform generation cost which is the most expensive operation in the calculation of $\ln \mathcal{L}_{dh}$ and $\ln \mathcal{L}_{hh}$
+The approximation made in Eq.~\eqref{eqn:ratio} performs better for the waveforms that only include dominant mode and aligned spins description. In the phenomenological waveform family, they are known as IMRPhenomD waveforms. For more complete waveforms, i.e, the ones including the effects of higher order modes and precessing spins (known as IMRPhenomXPHM), the ratio $\vec{h}/\vec{h}'$ is fluctuates rapidly as a function of frequency (see left plot of Figure~\ref{fig:dxp-ratio}). Therefore, when using the IMRPhenomD waveform a few bins are sufficient to make the linear expansion from Eq.(\ref{eqn:ratio}) precise in each bin. When using the IMPRhenomXPHM waveform, as the ratio is subject to more fluctuation, we need to consider a larger number of bins, incresing the waveform generation cost which is the most expensive operation in the calculation of $\ln \mathcal{L}_{dh}$ and $\ln \mathcal{L}_{hh}$.
 \begin{figure}
     \centering
     \includegraphics[width=.4\textwidth]{../figures/phenom_d_xphm_full_waveform_ratio.pdf}\hspace{.5cm}
     \includegraphics[width=.4\textwidth]{../figures/hL_C_ratio.pdf}
-    \caption{\textit{Left}: Ratio of the real part of the proposal to the fiducial waveform for the plus polarization as a function of frequency. The waveform model corresponding to the brown curve represents only the dominant mode and aligned spins whereas the one corresponding to the black curve includes higher order modes and precessing spins (XPHM). The ratio for XPHM wiggles more due to increased complexity of the waveform model. \textit{Right}: Decomposition of XPHM waveform into component modes (top right) and precession coefficients (bottom right). Each mode is marked with a different color. The decomposition makes the ratios smoother allowing an effcient implementation of the relative binning method.}
+    \caption{\textit{Left}: Ratio of the real part of the proposal to the fiducial waveform for the plus polarization as a function of frequency. The waveform model corresponding to the brown curve represents only the dominant mode and aligned spins whereas the one corresponding to the black curve includes higher order modes and precessing spins (referred to as IMRPhenomXPHM). The ratio for the latter wiggles more due to increased complexity of the model. \textit{Right}: Decomposition of IMRPhenomXPHM waveform into component modes (top right) and precession coefficients (bottom right). Each mode is marked with a different color. The decomposition makes the ratios smoother allowing for an effcient implementation of the relative binning method.}
     \label{fig:dxp-ratio}
 \end{figure}
 
 \subsection{Inclusion of higher order modes and precessing spins}
-To make the approximation in Eq.~\eqref{eqn:ratio} robust for precessing waveforms with HOMs, 
+To make the approximation in Eq.~\eqref{eqn:ratio} robust for precessing waveforms with higher order modes, 
 let us express the detector frame waveform for given $\vec{\theta}$ into its 
-component modes~\cite{Pratten:2020ceb} 
+component modes~\cite{Pratten:2020ceb};
 \begin{equation}
 h(f) = \sum_{l, m}(F_+C^{+}_{l, m}(f)+F_\times C^{\times}_{l, m}(f))\,h^L_{l, m}(f)\,.
 \label{eqn:comp-mode}
@@ -81,12 +81,12 @@ h(f) = \sum_{l, m}(F_+C^{+}_{l, m}(f)+F_\times C^{\times}_{l, m}(f))\,h^L_{l, m}
 Here, $F_+$ and $F_\times$ are the antenna pattern functions of the interferometer, which depend 
 only on extrinsic parameters; $\vec{h}^{L}$ denotes the waveform in the co-precessing frame 
 (also known as the $L$-frame); and the indices $l$ and $m$ label the different modes. The coefficients $C^{+}_{l, m}$ and $C^{\times}_{l, m}$ account for 
-the {\it twisting-up} procedure~\cite{Pratten:2020ceb} which transforms the waveform from a 
-co-precessing frame to the inertial (or observer) frame. 
+the {\it twisting-up} procedure which transforms the waveform from a 
+co-precessing frame to the inertial (or observer) frame~\cite{Pratten:2020ceb}. 
 The benefit of handling each mode in the $L$-frame separately is that the ratio of a 
 fiducial $\vec{h}'^{L}_{l, m}$ to a proposal $\vec{h}^{L}_{l, m}$ oscillates less compared to the 
 ratio of the full waveforms $\vec{h}/\vec{h}'$. This can be seen by comparing the bottom right panel of 
-Figure~\ref{fig:dxp-ratio} with the top right panel of Figure~\ref{hlc-plot}. 
+Figure~\ref{fig:dxp-ratio} with the top right panel of Figure~\ref{dxp-ratio}. 
 Therefore, a linear expansion similar to the one in Eq.~\eqref{eqn:ratio} 
 can be made using the ratio $\vec{h}^{L}_{l, m}/\vec{h}'^L_{l, m}$ instead of 
 $\vec{h}/\vec{h}'$ and will require a lower number of frequency bins for more complex models:
@@ -109,8 +109,8 @@ in Eq.~\eqref{eqn:l-ratio} and Eq.\eqref{eqn:c-ratio} are
 valid. How such bins can be found will be explained in Sec.~\ref{sec:bin-selection}.
 
 Once the frequency bins are made based on the chosen fiducial waveforms, we can pre-compute some 
-\textit{summary data}~\cite{Leslie:2021ssu} based only on the reference waveform and useful for the 
-computation of the inner products in Eq.~\eqref{eqn:short-l}. These are:
+\textit{summary data} based only on the reference waveform and useful for the 
+computation of the inner products in Eq.~\eqref{eqn:short-l}~\cite{Leslie:2021ssu}. These are:
 \begin{eqnarray}
 && W_{l, m}(b) = \frac{4}{T} \sum_{f\in b}\frac{d(f)h'^{L*}_{l, m}(f)C'^{*}_{l, m}(f)}{S_n(f)} \, , 
 \nonumber \\
@@ -142,7 +142,7 @@ for given $\vec{\theta}$ as
 &\qquad\qquad\qquad\qquad + \left. \left.  s_{1, l, m}(b)s_{1, \bar{l}, \bar{m}}^*(b)\left(r_{1, \bar{l}, \bar{m}}^*(b) r_{2, l, m}(b) + r_{1, l, m}(b) r_{2, \bar{l}, \bar{m}}^*(b)\right) \right] \right\},
 \end{align}
 
-which together with Eq.~\eqref{eqn:short-l} enables us to approximate the likelihood. Provided the number of bins is reduced compared to the usual method, this approach should offer a rapid likelihood evaluation, leading to a rapid parameter inference.
+which together with Eq.~\eqref{eqn:short-l} enables us to approximate the likelihood. Provided the number of bins is reduced compared to the exact method, this approach should offer a rapid likelihood evaluation, leading to a rapid parameter inference.
 
 \subsection{Constructing the relative binning grid}
 \label{sec:bin-selection}
@@ -186,35 +186,33 @@ algorithm as a whole\footnote{Our implementation of the bin selection and relati
 
 
 \section{Extension of the relative binning method}
-A fast parameter estimation method has a wide range of applications. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two signals. Figure~\ref{fig:lensing-overlaps} gives an illustration of two overlapping signals (top) and strongly lensed signals (bottom). 
+A fast parameter estimation method has a wide range of applications. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two signals. Figure~\ref{fig:lensing-overlaps} gives an illustration of overlapping signals (top) and strongly lensed signals (bottom). 
 
-When two or more signals merge close to each other, we refer to them as overlapping signals (top panel of Figure~\ref{fig:lensing-overlaps}). It is intuitive to think that if two signals are far apart, we can analyse each of them while ignoring the presence of the other signal. However, when they are close, they need to be analysed jointly to avoid biases in the measurements. A comprehensive investigation on this topic was done by Tomek et al [in preparation]. Tomek et al extend the relative binning method developed in this work to perform \textit{joint} parameter estimation on two GW signals. 
-
-When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lensing, the GW signal is split into multiple time-separated copies (referred to as images) which may be observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the parameters of any two GW signals, i.e. by again performing \textit{joint} parameter estimation. 
+Overlapping signals refers to a phenomenon where the arrival time two (or more) GW signals is close to each other. If the two signals are close to each other may need to analyze them jointy, i.e., we may need to perform a \textit{joint} parameter estimation on two signals. In contrast, phenomenon associated to strong lensing is slightly more complex. When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lensing, the GW signal is split into multiple time-separated copies (referred to as images) which may be observed at the detectors. The imprint of strong lensing on a GW signal can be characterized with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the measured parameters of any two GW signals, i.e. by again performing \textit{joint} parameter estimation. 
 
 \subsection{To perform parameter estimation on the overlapping signals}
 \iffalse
 The LIGO-Virgo interferometers have not yet observed any overlapping signals and it is unlikely that we do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipelines are designed to analyse a single, isolated signal. However, in the 3G era, due to the increased detection rate and increased duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develop parameter estimation methods to analyse overlapping signals. 
 \fi
 
-We account for two signals in the signal model by replacing $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ in the expression of the likelihood (cc. Eq.~\eqref{eqn:indi-likelihood}). This leads to
+We account for two signals in the signal model by replacing $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ in the expression of the likelihood (cc. Eq.~\eqref{eqn:indi-likelihood}). This leads to;
 \begin{equation}
 \ln \mathcal{L}(\vec{\theta}_1, \vec{\theta}_2) = -\frac{1}{2}\left<\vec{d}-\vec{h}_1(\vec{\theta}_1) - \vec{h}_2(\vec{\theta}_2) |\vec{d}-\vec{h}_1(\vec{\theta}_2) - \vec{h}_2(\vec{\theta}_2)\right>\,,
 \end{equation}
-where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensional parameter space. Following the steps from Eq.~\eqref{eqn:indi-likelihood}-Eq.~\eqref{eqn:short-l}, we can factorise the likelihood into
+where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensional parameter space. Following the steps from Eq.~\eqref{eqn:indi-likelihood}-\eqref{eqn:short-l}, we can factorise the likelihood into
 \begin{align}
  \ln \mathcal{L}(\vec{\theta}) &= \left<\vec{d}|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
     \label{eq:two-likelihood}
     & = \ln \mathcal{L}_{dh_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{dh_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
 \end{align}
-where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Now, we have all the ingredients to compute the joint likelihood. Each term in the factorised likelihood expression of the Eq.~\ref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
+where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Now, we have all the ingredients to compute the joint likelihood. Each term in the factorised likelihood expression of the Eq.~\eqref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
 
 \subsection{To perform strong lensing searches}
-For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ to account for two images. However, since the two images are copies of the same GW signals, we expect that the source parameters are identical between the two except for the merger time, luminosity distance, and morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as
+For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ to account for two images. However, since the two images are copies of the same GW signals, we expect that the source parameters are identical between the two except for the merger time, luminosity distance, and morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as;
 
 \begin{equation}
 \label{eqn:wf-mapping}
-\vec{h}_2(\vec{\theta}, \vec{\theta}_{L}) = \sqrt{\mu_{12}}\vec{h}_1(\vec{\theta})e^{2i\pi f \Delta t_{12} - i\Delta n_{12}\pi}
+\vec{h}_2(\vec{\theta}, \vec{\theta}_{L}) = \sqrt{\mu_{12}}\vec{h}_1(\vec{\theta})e^{2i\pi f \Delta t_{12} - i\Delta n_{12}\pi},
 \end{equation}
 where the set $\{\vec{\theta}, \vec{\theta}_L\}$ now represent a 18 dimensional parameter space. The factorization of the likelihood expression is slightly different from the case of overlapping signals since we need to incorporate two data streams. Let us denote them by $\vec{d}_1$ and $\vec{d}_2$ for each image. The likelihood function then is,
 
@@ -229,7 +227,7 @@ Note that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at releva
 Now, we have all the ingredients to perform parameter estimation on the isolated signals, overlapping signals, and strongly lensed signals. 
     
 
-\section{Validation of the method}
+\section{Validation of the method by performing parameter estimation}
 \subsection{On simulated events: analysing GW signals in Gaussian noise}
 \begin{table}
     \centering
@@ -322,46 +320,46 @@ The remaining two events were chosen because they were part of a candidate event
     \label{fig:gw190814}
 \end{figure}
 
-For GW190412 and GW190814, a truncated corner plot showing posterior distributions for selected parameters is presented in Figs.~\ref{fig:gw190412} and \ref{fig:gw190814}, respectively.
+For GW190412 and GW190814, a truncated corner plot showing posterior distributions for selected parameters is presented in Figures~\ref{fig:gw190412} and Figure~\ref{fig:gw190814}, respectively.
 The blue (grey) curves represent the results of parameter estimation with (without) relative binning. 
 The grey curves are generated by using the posterior samples provided in the public data release of LVK~\cite{LIGOScientific:GWTC3DR, LIGOScientific:GWTC2.1DR}. 
-Figures~\ref{fig:gw190412} and \ref{fig:gw190814} show a qualitative agreement between the posterior distributions obtained by the regular method (without making any approximation) and the relative binning method. Similarly, we analysed GW191103 and GW191105 with the relative binning method, which led to a comparable agreement with the regular method. 
+Figures~\ref{fig:gw190412} and \ref{fig:gw190814} show a qualitative agreement between the posterior distributions obtained by the exact method (without making any approximation) and the relative binning method. Similarly, we analysed GW191103 and GW191105 with the relative binning method, which led to a comparable agreement with the exact method. 
 
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{../figures/real_threeg_lensed_jsd.pdf}
-    \caption{JS divergence values to quantify if the measurements made using relative binning method are consistent with the ones mades using regular method. The black line marks the JS divergence below which two measurements are indistinguishable. The plot contains the JS divergence values for all parameters for all signals, simulated as well as real, analyzed using relative binning mehtod. For compactness, we use the same marker for the set of 3G signals and for the set of lensed signals. All markers remain below the threshold, indicating that measurements obtained using relative binning method are reliable.}
+    \caption{JS divergence values to quantify if the measurements made using relative binning method are consistent with the ones mades using exact computation. The black line marks the JS divergence below which two measurements are indistinguishable. The plot contains the JS divergence values for all parameters for all signals, simulated as well as real, analyzed in this chapter. For compactness, we use the same marker for the set of 3G signals (circles) and for the set of lensed signals (crosses). We uses different coloured markers for LIGO-Virgo events. All JS divergence values remain below the threshold, indicating that measurements obtained using relative binning method are reliable.}
     \label{fig:master-jsd}
 \end{figure}
 
-To quantify the mismatch between the posterior samples obtained using the relative binning method to the ones obtained with the regular method, we use the Jensen-Shannon (JS) divergence~\cite{2020SciPy-NMeth}. 
-We do not perform a regular parameter estimation run due to computation cost. Instead, we reweigh the posterior samples obtained using the relative binning 
-method to obtain the posterior samples for the regular method as discussed in the next paragraph.
+To quantify the mismatch between the posterior samples obtained using the relative binning method to the ones obtained with the exact method, we use the Jensen-Shannon (JS) divergence~\cite{2020SciPy-NMeth}. 
+We do not perform a exact parameter estimation run due to computation cost. Instead, we reweigh the posterior samples obtained using the relative binning 
+method to obtain the posterior samples for the exact method as discussed in the next paragraph.
 We repeat this step for all four events, GW190412, GW190814, GW191103, and GW191105, and plot the JS divergence between the relative 
-binning samples and the regular samples for each parameter in Figure~\ref{fig:master-jsd}. Each event is represented by a different coloured marker. 
+binning samples and the exact samples for each parameter in Figure~\ref{fig:master-jsd}. Each event is represented by a different coloured marker. 
 To determine a heuristic threshold value for statistical indistinguishability (represented by the dashed line in Figure~\ref{fig:master-jsd}), 
 we compute the JS statistic for 2000 pairs of sets of $10^5$ samples taken from Gaussian distributions. 
 We then define a heuristic threshold for indistinguishably the 99th percentile of the obtained values. The JS divergence for each parameter remains well below the threshold, 
-indicating that the posterior distributions produced by the relative binning method and the regular method are statistically indistinguishable. As an additional validation test, we use the posterior samples obtained through the relative binning method on the GW190412, GW190814, GW191103, and GW191105 events to compute the exact likelihoods (i.e. Eq.~\eqref{eqn:short-l}). The standard deviation of the absolute difference between the exact and the relative binning likelihoods turns out to be $\leq 0.1$ which indicates that the error incurred by the relative binning likelihood is sufficiently small to not impact the posterior distribution~\cite{Leslie:2021ssu}. 
+indicating that the posterior distributions produced by the relative binning method and the exact method are statistically indistinguishable. As an additional validation test, we use the posterior samples obtained through the relative binning method on the GW190412, GW190814, GW191103, and GW191105 events to compute the exact likelihoods (i.e. Eq.~\eqref{eqn:short-l}). The standard deviation of the absolute difference between the exact and the relative binning likelihoods turns out to be $\leq 0.1$ which indicates that the error incurred by the relative binning likelihood is sufficiently small to not impact the posterior distribution~\cite{Leslie:2021ssu}. 
 
 \subsubsection{Checking the efficiency: Reweighing the relative binning posterior samples}
 \label{reweight}
-We reweigh the posterior samples obtained using relative binning to match the samples obtained with the usual likelihood to test the method's efficiency. 
+We reweigh the posterior samples obtained using relative binning to match the samples obtained with the exact likelihood to test the method's efficiency. 
 Let us denote the likelihood evaluated for the posterior samples produced by the relative binning 
 method by $\mathcal{L}^{\text{RB}}(\vec{\theta})$, where $\vec{\theta}$ stands for the 
 posterior samples; and the probability for $\vec{\theta}$ according to the relative binning 
-samples by $p^{\text{RB}}(\vec{\theta})$. To perform the reweighting, for each posterior sample $\vec{\theta}$, we compute the likelihood according to the usual method, which we denote by $\mathcal{L}^{\text{RG}}(\vec{\theta})$. 
-Using $\mathcal{L}^{\text{RB}}(\vec{\theta})$, $\mathcal{L}^{\text{RG}}(\vec{\theta})$, 
+samples by $p^{\text{RB}}(\vec{\theta})$. To perform the reweighting, for each posterior sample $\vec{\theta}$, we compute the likelihood according to the exact method, which we denote by $\mathcal{L}^{\text{X}}(\vec{\theta})$. 
+Using $\mathcal{L}^{\text{RB}}(\vec{\theta})$, $\mathcal{L}^{\text{X}}(\vec{\theta})$, 
 we reweigh $p^{\text{RB}}(\vec{\theta})$ to obtain the probability 
-for $\vec{\theta}$ according to the regular method:
+for $\vec{\theta}$ according to the exact method:
 \begin{equation}
-p^{\text{RG}}(\vec{\theta})  = \frac{\mathcal{L}^{\text{RG}}(\vec{\theta})}{\mathcal{L}^{\text{RB}}(\vec{\theta})}p^{\text{RB}}(\vec{\theta})\,.
+p^{\text{X}}(\vec{\theta})  = \frac{\mathcal{L}^{\text{X}}(\vec{\theta})}{\mathcal{L}^{\text{RB}}(\vec{\theta})}p^{\text{RB}}(\vec{\theta})\,.
 \end{equation}
 
 \subsection{On the parameter estimation of 3G-era events}
 
 To further test our method, we analyse a subset of LIGO-Virgo events as they would be appear in 3G interferometers. 
-We arbitrarily choose six events with varying total masses, specified in table~\ref{tab:gwtc-3-table}. 
+We arbitrarily choose six events with varying total masses, specified in Table~\ref{tab:gwtc-3-table}. 
 
 \begin{table}[h]
     \centering
@@ -383,31 +381,29 @@ GW200112\_155838 & 78.10 & 1103.53 \\
         \hline
 
     \end{tabular}
-    \caption{Table of events from GWTC-3, their (maximum-likelihood, observed) total masses, and their respective network SNRs as obtained for a network of 3G detectors.}
+    \caption{Table of events analysed in context of 3G detectors. The second column show the maximum likelihood values of the total mass obtained from public data release of LVK. The third column shows the respective network SNRs if they were observed by a network of 3G detectors. The events were detected by LIGO-Virgo interferometers during their third observation runs and the naming convention follows the pattern GWYYMMDD\_HHMMSS. }
     \label{tab:gwtc-3-table}
 \end{table}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=.75\textwidth]{../figures/prod_third_gen.pdf}
-    \caption{A truncated corner plot showing the results of parameter estimation performed using relative binning on LIGO-Virgo event as it would appear in the 3G interferometer. The black lines show the injected values. The blue contours correspond to $1\sigma$, $2\sigma$, and $3\sigma$ confidence, in order of decreasing opacity.}
+    \caption{A representative corner plot showing the results of parameter estimation on GW200220\_061928 using relative binning. The event was observed by LIGO-Virgo interferometers in the third observation run. Here, we analyze a simulated equivalent of it as if it was observed by a network of 3G detectors. The black lines show the true values of the parameters. The blue contours correspond to $1\sigma$, $2\sigma$, and $3\sigma$ confidence, in order of decreasing opacity, indicating that all parameters are recovered with expected accuracy.}
     \label{fig:third-gen}
 \end{figure}
 
 We inject the signal corresponding to the maximum likelihood parameters, as obtained from the public data release, into Gaussian noise and perform parameter estimation with 
 the relative binning framework. 
-Our detector network consists of a triangular ET~\cite{Branchesi:2023mws} with an arm length of 10 km and one L-shaped CE~\cite{Reitze:2019iox} with an arm length of 40 km.
-The noise curves and detector configurations are read from~\cite{threeGdesign}. 
+Our detector network consists of a triangular ET with an arm length of 10 km~\cite{Branchesi:2023mws} and one L-shaped CE with an arm length of 40 km~\cite{Reitze:2019iox}.
+The noise curves and detector configurations are obtained from~\cite{threeGdesign}. The starting frequency for our analysis is 5 Hz. 
 A representative, truncated corner plot for this analysis is shown in Figure~\ref{fig:third-gen} for the GW200220\_061928 event. 
 The black lines in the plot show the injected parameter values 
 The $1\sigma$, $2\sigma$, and $3\sigma$ confidence contours are indicated by the blue shading, in order of decreasing opacity. 
 As can be seen from the plot, all injected parameters have been recovered well. 
 
 To quantify the accuracy of our method for the 3G scenario, we again reweigh the posterior samples obtained using the relative binning method following the reweighting procedure discussed in Section~\ref{reweight}. Then, we calculate the JS divergence between the reweighted samples and the relative binning samples. 
-This process is repeated for each of the six events and the results are shown in Figure~\ref{fig:master-jsd}. 
-Each event is represented by a different marker and the dashed black line shows the threshold value. 
-Here too the JS divergence for each parameter remains well below the threshold, indicating that the posterior distributions produced by the relative binning method and the 
-regular methods are statistically indistinguishable.
+This process is repeated for each of the six events and the results are shown in Figure~\ref{fig:master-jsd}. For compactness, we use circle maker for all events since our aim here is to verify if the JS divergence is below the threshold. Here too the JS divergence for each parameter remains well below the threshold, indicating that the posterior distributions produced by the relative binning method and the 
+exact methods are statistically indistinguishable.
 
 \subsubsection{Overlapping signals example}
 
@@ -418,8 +414,7 @@ regular methods are statistically indistinguishable.
     \caption{Analysis of overlapping signals using joint parameter estimation}
     \label{fig:overlapping-signal}
 \end{figure}
-
-To test if the relative binning method is useful to perform joint parameter estimation of overlapping signals, we analyze the example presented in the top panel of Figure~\ref{fig:lensing-overlaps}. We collectively present the results in Figure~\ref{fig:overlapping-signal}. The red (green) line in top (bottom) plot shows how accurately we can recover signal A (signal B) when it is in isolocation. This establishes the benchmark for the accuracy. The blue line in both plot shows the results of joint parameter estimation, i.e., how well the parameters of the two signals are recovered when they are overlapping. The agreement of the blue curves with the green and red curves suggest that our relative binning framework can be reliably extended to perform joint parameters estimation when two GW signals are overlapping. This examples served as a building block to carry out comprehensive study on overlapping signals analysis by Baka et al. 
+We collectively present the results for overlapping signals analysis in Figure~\ref{fig:overlapping-signal}. The red (green) line in top (bottom) plot shows how accurately we can recover signal A (signal B) when they are in isolation. This establishes the benchmark for the accuracy. The blue line in both plot shows the results of joint parameter estimation, i.e., how well the parameters of the two signals are recovered when they are overlapping. The agreement of the blue curves with the green and red curves suggest that our relative binning framework can be reliably extended to perform joint parameters estimation when two GW signals are overlapping. 
 
 \subsection{On strongly lensed events}
 
@@ -436,18 +431,17 @@ The latter event pair is of interest as it was followed up by strong lensing sea
 On the other hand, the simulated pairs were generated by sampling the relevant source parameters from the priors shown in Table~\ref{bbh_params}. 
 We adjust the luminosity distance and the relative magnification of each lensed pair to ensure that the network SNR of each image is above 13.
 
-Again, we compute the JS divergence between the posterior distributions obtained using the regular and relative binning methods;  
+Again, we compute the JS divergence between the posterior distributions obtained using the exact and relative binning methods;  
 see Figure~\ref{fig:master-jsd}. Note that, for the lensed injections, we do not use reweighting as was done for the individual parameter estimation cases. 
-We instead perform the regular joint parameter estimation runs with \textsc{Golum}~\cite{Janquart:2023osz} and compare the results with the ones obtained using relative binning. Each injection is represented by a different coloured dot. All crosses are below the threshold value, suggesting that the posterior distributions obtained using the regular and relative binning frameworks are statistically indistinguishable. For compactness, we use the cross marker for all 8 pairs and all parameters since our aim here is to test weather JS divergence is below the threshold. 
+Instead, we carry out joint parameter estimation using the exact likelihood~\cite{Janquart:2023osz}. All crosses are below the threshold value, suggesting that the posterior distributions obtained using the exact and relative binning frameworks are statistically indistinguishable. For compactness, we use the cross marker for all 8 pairs and all parameters since our aim here is to verify if the JS divergence is below the threshold. 
 
 Now let us look at joint parameter estimation results for the GW191103--GW191105 pair. 
 In this analysis, GW191103 is treated as image 1, and GW191105 as image 2. 
-The left plot of Figure~\ref{lensed_pair} shows a truncated corner plot of the common parameters between the two images, while the right one presents the posterior distribution of the relative lensing parameters connecting the lensing parameters of images 1 and 2.
-To quantify the accuracy of our results, we follow the same reweighting steps mentioned towards the end of Section~\ref{reweight} in order to calculate the JS divergence between the relative binning samples and the regular samples for each parameter. 
+The left plot of Figure~\ref{fig:lensed_pair} shows a truncated corner plot of the common parameters between the two images, while the right one presents the corner plot of the relative lensing parameters connecting the lensing parameters of images 1 and 2.
+To quantify the accuracy of our results, we follow the same reweighting steps mentioned towards the end of Section~\ref{reweight} in order to calculate the JS divergence between the relative binning samples and the exact samples for each parameter. 
 The JS divergences are marked with hexagon marker in Figure~\ref{fig:master-jsd}, which are all below the threshold. 
 
-Finally, we report that the log of coherence ratio~\cite{Janquart:2023osz, Lo:2021nae, Janquart:2021qov} obtained for GW191103--GW191105 is 4.506. 
-This is in favor of the lensing hypothesis and comparable to the one reported by the lensing follow-up searches~\cite{Janquart:2023mvf}. 
+Finally, we report that the log of coherence ratio -- a statistic to quantify the overlap between the posterior distribution of two images -- obtained for GW191103--GW191105 is 4.5~\cite{Janquart:2023osz, Lo:2021nae, Janquart:2021qov}. This is in favor of the lensing hypothesis and comparable to the one reported by the lensing follow-up searches~\cite{Janquart:2023mvf}. 
 
 \section{Comparison of speed-up and accuracy}
 
@@ -459,18 +453,18 @@ This is in favor of the lensing hypothesis and comparable to the one reported by
 \end{figure}
 
 The speed-up achieved by the relative binning method can be broadly attributed to two factors. 
-First, every proposal waveform is generated on fewer frequency nodes -- provided by the RBGrid -- compared to the regular method, reducing the time required to generate the waveforms during sampling. 
+First, every proposal waveform is generated on fewer frequency nodes -- provided by the RBGrid -- compared to the exact method, reducing the time required to generate the waveforms during sampling. 
 Second, as the summary data are pre-computed, the summation in Eqs.~\eqref{eqn:dh}-~\eqref{eqn:hh} needs to be computed at fewer frequency points, reducing the number of operations.
 The first point is the more significant contributor to the overall speed-up.
 With this, the total speed-up for relative binning mainly depends on how coarse the RBGrid is compared to the corresponding uniform grid. The reduction in frequency nodes depends on the signal characteristics such as the duration, SNR, fiducial parameters, and also the total error chosen to generate the RBGrid.
 
 
 Here we use the various parameter estimation runs done in previous sections to asses the speed-up obtained when using relative binning compared to traditional methods.
-Fig.~\ref{fig:speed} shows the speed-up achieved by the relative binning method over the regular method as a function of the total mass of the systems. The colorbar shows the ratio of the length of the uniform frequency grid to the length of the corresponding RBGrid. We denote the ratio by $\Delta$.  
-The circles indicate the ratio of total sampling time taken by the regular method compared to the relative binning method. 
+Fig.~\ref{fig:speed} shows the speed-up achieved by the relative binning method over the exact method as a function of the total mass of the systems. The colorbar shows the ratio of the length of the uniform frequency grid to the length of the corresponding RBGrid. We denote the ratio by $\Delta$.  
+The circles indicate the ratio of total sampling time taken by the exact method compared to the relative binning method. 
 The rest of the markers show the ratio of the average single likelihood evaluation time taken between the two methods calculated over a set of $10^4$ points. The latter is an approximation but makes it possible to 
-assess the speed-up factor given by relative binning without having to do the regular parameter estimation runs. Still, for our various tests, 
-the number of likelihood evaluations done for the relative binning and regular methods is in the same ballpark, so that this is a reasonable approximation to make.
+assess the speed-up factor given by relative binning without having to do the exact parameter estimation runs. Still, for our various tests, 
+the number of likelihood evaluations done for the relative binning and exact methods is in the same ballpark, so that this is a reasonable approximation to make.
 
  
 
@@ -491,7 +485,7 @@ In addition, the median of the SNR for the set of P-P injections is $59.44$  whi
 times larger compared to the loudest GW event observed to date \cite{LIGOScientific:GWTC3DR}. 
 Since a large value of SNR increases the size of the coarse grid, the factor of speed-up reported by the P-P injections is on the conservative side.  
 
-Joint parameter estimation reports a similar speed-up as individual parameter estimation. Here we note that the regular joint parameter estimation framework used 
+Joint parameter estimation reports a similar speed-up as individual parameter estimation. Here we note that the exact joint parameter estimation framework used 
 in this work also rescales the first waveform to obtain the second one, by-passing the complete waveform generation step. 
 However, this is not the case in all lensing analysis methods, and when joint parameter estimation methods generate the two waveforms independently, 
 we expect a larger speed-up factor for relative binning.
