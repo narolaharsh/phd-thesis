@@ -4,7 +4,7 @@ Bayesian inference discussed in chapter~\ref{ch:gwpe} is the key to achieving a 
     \item A set of simulated BBH signals covering full parameter space to establish validity. 
     \item Two LIGO-Virgo events with significant contribution from higher order modes: GW190412~\cite{LIGOScientific:2020stg} and GW190814~\cite{LIGOScientific:2020zkf}.
     \item A set of simulated GW signals for the 3G-detectors; isolated as well as overlapping.
-    \item The event pair GW191103-GW191105 as well as a set of simulated pairs, to investigate strong lensing hypothesis
+    \item The event pair GW191103--GW191105 as well as a set of simulated pairs, to investigate strong lensing hypothesis
 \end{enumerate}
 
 \section{Mode-by-mode relative binning}
@@ -15,14 +15,7 @@ From chapter~\ref{ch:gwpe}, let us recall the (log) likelihood function
 \end{equation}
 where $\vec{h}(\vec{\theta})$ represents the GW waveform as a function of the source parameters $\vec{\theta}$ and $\left<\,.\,|\,.\,\right>$ 
 denotes the noise-weighted inner product. Expanding the inner product in Eq.~\eqref{eqn:indi-likelihood}, we get
-\iffalse
-\begin{equation}
-(\vec{a}|\vec{b}) = \frac{4}{T}\Re\sum_f \frac{a(f)b^*(f)}{S_n(f)}.
-\end{equation}
-Here, $f$, $S_n(f)$, and $T$ respectively denote the frequency, one-sided noise power spectral density 
-(PSD), and duration, while $\Re$ denotes the real part; the sum over frequencies will be discussed in detail below. 
-Expanding $\left<\vec{d}-\vec{h}(\vec{\theta})|\vec{d}-\vec{h}(\vec{\theta}))$ in Eq.~\eqref{eqn:indi-likelihood}, we get
-\fi
+
 \begin{equation}
 \label{eqn:logL}
 \ln \mathcal{L}(\vec{\theta}) = \left<\vec{d}|\vec{h}\right> - \frac{1}{2}\left<\vec{h}|\vec{h}\right> - \frac{1}{2}\left<\vec{d}|\vec{d}\right>.
@@ -474,10 +467,6 @@ this effect is partially visible in Figure~\ref{fig:speed}. However, the 3G inje
 P-P injections for the LIGO-Virgo interferometers (blue cross markers). A higher SNR will increase the size of the coarse grid and decrease the speed of the relative binning method. 
 In addition, the median of the SNR for the set of P-P injections is $59.44$  which is $\simeq 2.2$ times larger compared to the loudest GW event observed to date \cite{LIGOScientific:GWTC3DR}. Since a large value of SNR increases the size of the coarse grid, the factor of speed-up reported by the P-P injections is on the conservative side.  
 
-%For one of the P-P injections, with a total mass of $\simeq 95 M_{\odot}$, the speed-up achieved 
-%by the relative binning method is below 1 (see Figure~\ref{fig:speed}). 
-%This can be explained by the large network SNR ($\simeq 100$) of this particular event. 
-
 Joint parameter estimation reports a similar speed-up as individual parameter estimation. Here we note that the exact joint parameter estimation framework used 
 in this work also rescales the first waveform to obtain the second one, by-passing the complete waveform generation step. 
 However, this is not the case in all lensing analysis methods, and when joint parameter estimation methods generate the two waveforms independently, 
@@ -489,8 +478,3 @@ In this chapter, we have presented a relative binning based framework to perform
 The performance of our method depends on the choice of the fiducial waveform. In this work, we have assumed that the fiducial waveform is either (a) the same as the injected waveform for simulations, or (b) the maximum likelihood waveform for real events. However, the method can be seeded in a more realistic way by using the best-fitting template reported by the templated-based searches or maximum likelihood estimator routines can be used to determine the fiducial waveforms' parameters. We plan to work on the choice of the fiducial waveform and understanding how it can impact the performance of our method in the future. This is an important step if one wants to use relative binning techniques on real data, where we do not know parameters in advance.
 
 While the relative binning method is shown to work well in the joint parameter estimation of the overlapping signals, it is crucial to determine when such a joint parameter estimation is required, i.e., if the signals are sufficiently apart, they can be analysed separately which may help reudce the cost of the analysis. This question was addressed in the in-depth analysis performed by Baka et al [in preparation]. The codebase presented in this chapter served as a building block for it. 
-
-\begin{itemize}
-    \item Maximum likelihood parameters
-    \item 3G-ready method work needed
-    \item comprehensive analysis of all kinds of signals
