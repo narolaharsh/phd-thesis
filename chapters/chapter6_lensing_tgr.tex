@@ -6,7 +6,7 @@ General relativity predicts that gravitational waves are non-dispersive (all fre
 \text{Amplitude} \propto \frac{1}{\text{Distance to the source}}. 
 \end{equation}
 
-However, the constraints obtaind on modified propagation theories using GW170817 remain relatively poor as will become clear later. When discussing modified propagation theories, we specifically refer to the ones that predict a different distance-amplitude relation than GR. In this chapter, we demonstrate how the detection of a strongly lensed GW signals can significantly improve upon beyond general relativistic theories that allow for modified propagation of GWs. This chapter contains results from our recent work on this topic~\cite{Narola:2023viz}.
+However, the constraints obtaind on modified propagation theories using GW170817 remain relatively poor as will become clear later. When discussing modified propagation theories, we specifically refer to the ones that predict a different distance-amplitude relation than GR. In this chapter, we demonstrate how the detection of a strongly lensed GW signal can significantly improve upon beyond general relativistic theories that allow for modified propagation of GWs. This chapter contains results from our recent work on this topic~\cite{Narola:2023viz}.
 
 
 \section{Gravitational lensing and distance measurements}
@@ -46,18 +46,107 @@ in modified propagation theories, the imprint of the deviation tends to accumula
 Other methods have been proposed that exploit the population properties of BBH coalescences observed with GWs 
 \cite{Ezquiaga:2021ayr,Leyde:2022orh,MaganaHernandez:2021zyc}; since BBHs can be detected out to larger 
 distances, this enables considerably improved bounds over the ones from GW170817. 
- Due to magnification, GWs from \emph{lensed} BBH events can potentially be seen out to redshifts 
- $z \sim 6$~\cite{Wierda:2021upe}, so more stringent constraints can be expected also from this methodology. 
-This paper aims to quantify the gain from GW lensing for the different anomalous propagation scenarios considered.
+Due to magnification, GWs from \emph{lensed} BBH events can potentially be seen out to redshifts 
+$z \sim 6$~\cite{Wierda:2021upe}, this feature leads to furhter improvements in our measurements. 
+%This paper aims to quantify the gain from GW lensing for the different anomalous propagation scenarios considered.
 
-\subsubsection{Modified propagation theories}
+\section{Modified propagation theories}
+\label{sec:mpt}
+
+As explained above, our tests of modified theories of gravity will be based on a comparison between
+the reconstructed $\DGW$ and the luminosity distance $\DEM$ obtained by electromagnetic 
+means.\footnote{Here we will focus exclusively on anomalous propagation affecting the amplitude of GWs, but 
+for models that lead to dispersion, the effect on the GW \emph{phasing} of BBH signals has been used to place  
+very stringent constraints 
+\cite{LIGOScientific:2016aoc,LIGOScientific:2016lio,LIGOScientific:2017bnn,LIGOScientific:2019fpa,LIGOScientific:2020tif,LIGOScientific:2021sio}.  
+In addition, the difference between the times of arrival of GW170817 and the associated gamma ray burst has 
+enabled strong constraints on differences between the speed of gravitational waves and the speed of light 
+\cite{LIGOScientific:2017zic}.} 
+In the specific modified gravity models we consider -- large extra dimensions, $\Xi$-paramaterization, and varying Planck mass -- there is a non-trivial relationship between these 
+two quantities, which will depend on the parameter(s) related to the deviation from GR and on the cosmological
+parameters. Let us briefly recall what these relationships look like for our three models.
 
 
 
-\section{Simulation set up}
+
+\subsubsection{Large extra spatial dimensions}
+In theories of gravity with large extra dimensions, there is the possibility of some energy of the GWs
+leaking into them \cite{Dvali:2000hr, Calcagni:2019kzo, LIGOScientific:2018dkp}, while
+EM radiation is confined to the usual three spatial dimensions. This would make the detected signal 
+appear weaker, leading to larger measured values for $\DGW$ than would otherwise be the case. For definiteness, we
+will work with the following simple phenomenological ansatz for the relation between $\DGW$ and $\DEM$, 
+based on conservation of integrated flux \cite{Deffayet:2007kf}:
+\begin{equation}
+	\label{eqn:D-model}
+	\DGW = (\DEM(z_s, H_0))^{\frac{D-2}{2}},
+\end{equation}
+where $D$ is the number of spacetime dimensions and $z_s$ is the source redshift.
+We will allow $D$ be a real number, with the GR value $D = 4$ as a fiducial value.  
+An illustration of the effect of extra dimensions on a GW waveform is given in the top 
+panel of Fig.~\ref{fig:wf-effects}.
 
 
-\section{Results and conclusions}
+\subsubsection{$\Xi-$parameterization}
+Another parameterization 
+was proposed in~\cite{Belgacem:2018lbp}, where the link between $\DGW$ and $\DEM$ is expressed as
+\begin{equation}
+	\label{eqn:xi-model}
+	\DGW = \DEM(z_s, H_0)\left[\Xi_0+\frac{1-\Xi_0}{(1+z_s)^n}\right]\,.
+\end{equation}
+The free parameters of the model are $(\Xi_0, n)$. This parameterization is phenomenological in 
+nature, but as shown in \cite{LISACosmologyWorkingGroup:2019mwx} it can be related to a large class of 
+modified gravity theories, 
+including Horndeski~\cite{Horndeski:1974wa} theories, 
+Degenerate Higher Order Scalar-Tensor theories (DHOST)~\cite{Langlois:2018dxi}, 
+and theories with nonlocally modified gravity~\cite{Maggiore:2013mea, Maggiore:2014sia,Belgacem:2017cqo}. 
+When $z \ll 1$, $\DGW \simeq \DEM$. 
+Therefore, similar to the extra dimension theories, we expect to observe a departure from 
+GR only at large distances ($z \gtrsim 1$). For GR, 
+$\Xi_0 = 1$ and $n$ is degenerate. 
+In Fig.~\ref{fig:wf-effects}, middle panel, one can see an illustration of 
+the effect of this modified propagation theory on the observed GW signal.
+
+\subsubsection{Time-varying Planck mass}
+A time-varying Planck mass is another possible cause for 
+modified GW propagation. Following~\cite{Lagos:2019kds}, 
+the relation between $\DGW$ and $\DEM$ can be expressed as
+\begin{equation}
+	\label{eqn:cm-model}
+	\DGW(z) = \DEM(z_s, H_0) \times \\
+	\exp{\left(\frac{c_M}{2\Omega_{\Lambda}}\ln{\frac{1+z_s}{(\Omega_{m}(1+z_s)^3 + \Omega_{\Lambda})^{1/3}}}\right)} \,,
+\end{equation}
+where $c_M$ is a constant that relates the rate of change of the Planck mass with the
+fractional dark energy density in the Universe; for details, see \cite{Lagos:2019kds} and 
+references therein. For GR, $c_M = 0$. The bottom panel of Fig.~\ref{fig:wf-effects} illustrates the change in 
+a GW signal in the non-GR case.
+
+\begin{table}
+    \centering
+	\begin{tabular}{ c | c | c }
+		\hline\hline
+		Theory                 & Parameter & Priors                 \\
+		\hline
+		Large extra dimension        & $D$         & Uniform(3, 5)          \\
+		\hline
+		$\Xi$-parameterization & $\Xi_0$   & Log Uniform(0.01, 100) \\
+		                       & $n$       & Uniform(0, 10)         \\
+		\hline
+		Running Planck mass    & $c_M$     & Uniform(-150, 150)     \\
+		\hline
+		
+	\end{tabular}
+	\caption{Deviation parameter(s) for each theory and the corresponding prior probability
+	distributions used in our analyses.}
+	\label{tab:priors}
+\end{table}
+
+
+
+
+\section{Method}
+
+
+\section{Results}
 
 \begin{figure}
     \centering
