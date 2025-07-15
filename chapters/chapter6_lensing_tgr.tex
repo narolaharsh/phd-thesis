@@ -1,7 +1,68 @@
+
+This chapter contains results from our recent work on constraining modified propagation theories using gravitational lensing of GWs ~\cite{Narola:2023viz}.
+
+\section{Gravitational lensing and distance measurements}
+First, I briefly recap the discussion on the gravitational lensing of gravitational waves. 
+
+
+\subsubsection{Electromagnetic distance}
+%A strongly lensed GW source will have an improved sky localization compared to a non-lensed source, as we can observe the former multiple times with different detector orientations~\cite{Janquart:2021qov, Lo:2021nae, %Hannuksela2020LocalizingLensing}. Especially with four detectable images, we may be able to localize the source within $\mathcal O(1) $ square degrees~\cite{Hannuksela:2020xor, Wempe:2022zlk}. %Janquart2021AEvents
+%Various lensing rate estimates shows that such a scenarios where strong lensing produces four images (a quadruplet) of GW signal is fairly likely. More conceretely, about $30\%$ of the strong lensing scenarios are %expected to produce quadruplets
+
+When a GW source is lensed, we can expect that the electromagnetic (EM) radiation coming from its host 
+galaxy is also lensed, as is widely assumed in cosmography 
+studies~\cite{Chen:2017rfc, LIGOScientific:2018gmd, Gray:2019ksv, LIGOScientific:2019zcs, DES:2019ccw}. 
+A joint GW+EM analysis can help locate the source's host galaxy once its location is narrowed down to a 
+few square degrees using only GW data.
+In this step, one reconstructs all the lenses in the region provided by the GW data to find which lens 
+could best produce a GW quadruplet with 
+properties similar to the ones observed; the galaxy that is undergoing lensing by this particular lens is then likely to be the host galaxy of the GW event.
+This methodology was first proposed in~\cite{Hannuksela:2020xor, Wempe:2022zlk}. For the scenarios where strong lensing produces four images (a quadruplet), we can narrow down the host of the GWs source to one or a few galaxies. Various lensing rate estimates show that $\approx 30\%$ of all strong lensing scenarios will produces a quadruplet, making this a fairly likely scenario~\cite{Li:2018prc, Wierda:2021upe}.
+
+Once the host galaxy is known, a dedicated spectroscopic or photometric follow-up can lead us to the redshift of the source.
+By combining the source's redshift with a cosmological model, we can estimate the source's luminosity distance in a way 
+that is unaffected by the anomalous GW propagation~\cite{Hogg:1999ad}. Let us refer to this distance as the electromagnetic distance $\DEM$ to the source. 
+
+\subsubsection{Gravitational wave distance}
+Besides the electromagnetic distance ($\DEM$), we can have another independent measurement of the source's luminosity distance from the GW data as explained in chapter~\ref{ch:gwpe}. Let us refer to this distance as the gravitational wave distance $\DGW$ to the source. The $\DGW$ distance measurement could be affected by the anomalous propagation of gravitational waves while $\DEM$ may not. Therefore, by by comparing the two distances the anomaly in the gravitational wave propagation can be discovered or bounded.
+%This meas by comparing the two distances the anomaly can be discovered or bounded.
+
+Studying modified propagation theories in the context of strongly lensed and localized GW events, especially from 
+binary black hole (BBH) coalescences, is attractive, 
+because such events can be detected at a higher redshift compared to binary neutron star (BNS) events. 
+In the past, modified propagation theories have been tested using 
+GW170817 \cite{Mastrogiovanni:2020mvm, Lagos:2019kds, LIGOScientific:2018dkp, Pardo:2018ipy}, 
+a signal from a BNS inspiral with an identifiable EM counterpart 
+\cite{LIGOScientific:2017vwq, LIGOScientific:2017ync}. However, by cosmological standards, the GW170817 signal 
+travelled only a small distance before it reached the detectors, and 
+in modified propagation theories, the imprint of the deviation tends to accumulate with distance. 
+Other methods have been proposed that exploit the population properties of BBH coalescences observed with GWs 
+\cite{Ezquiaga:2021ayr,Leyde:2022orh,MaganaHernandez:2021zyc}; since BBHs can be detected out to larger 
+distances, this enables considerably improved bounds over the ones from GW170817. 
+ Due to magnification, GWs from \emph{lensed} BBH events can potentially be seen out to redshifts 
+ $z \sim 6$~\cite{Wierda:2021upe}, so that more stringent constraints can be expected also from this methodology. 
+The aim of this paper is to quantify the gain from GW lensing for 
+the different anomalous propagation scenarios considered.
+
+\subsubsection{Modified propagation theories}
+
+
+
+\section{Simulation set up}
+
+
+\section{Results and conclusions}
+
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{../figures/tgr_wf_effects.pdf}
-    \caption{Waveform effects}
+    \caption{The effect on the time domain GW signal in each of the modified propagation models. For each model, the GR waveform is shown in black colour and deviation from it by different amounts is shown in different colours. 
+    In these examples, the GW source is assumed to be at $\sim 5$ Gpc and the masses of source are similar to GW150914~\cite{LIGOScientific:2016aoc}. For the running 
+    Planck mass model, the deviation is absolute since one has $c_M = 0$ in GR.  
+    For large extra dimensions and $\Xi$-parameterization, we consider percentage deviation in the 
+    parameters $D$ and $\Xi_0$, taking the fiducial values to be $D = 4$ and $\Xi = 1$, respectively. 
+    For the $\Xi$-parameterization, we arbitrarily choose $n = 1$ here, though in our subsequent analyses
+    it will be a free parameter.}
     \label{fig:wf-effects}
 \end{figure}
 
