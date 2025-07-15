@@ -1,6 +1,6 @@
 
 
-General relativity predicts that gravitational waves are non-dispersive (all frequency components travel at the same speed), travel at the speed of light, their amplitude is inversely proportional to the distance to the source. The non-dispersive nature has been a part of a suite of testing GR analyses carried out by LVK~\cite{LIGOScientific:2016aoc,LIGOScientific:2016lio,LIGOScientific:2017bnn,LIGOScientific:2019fpa,LIGOScientific:2020tif,LIGOScientific:2021sio}. The multimessenger detection of GW170817 helped place stringent constraints on the difference between the speed of GWs and the speed of light. Specifically, it was measured that the difference between the speed of GWs and light is between $-3\times10^{-15}$ and $6\times10^{-16}$ times the speed of light~\cite{LIGOScientific:2017zic}. The identification of the EM counterpart of GW170817 also helped constrain any modifications to the distance-amplitude relation. The relation in GR is:
+General relativity predicts that gravitational waves are non-dispersive (all frequency components travel at the same speed), travel at the speed of light, their amplitude is inversely proportional to the distance to the source. The non-dispersive nature has been a part of a suite of testing GR analyses carried out by LVK~\cite{LIGOScientific:2021sio}. The multimessenger detection of GW170817 helped place stringent constraints on the difference between the speed of GWs and the speed of light. Specifically, it was measured that the difference between the speed of GWs and light is between $-3\times10^{-15}$ and $6\times10^{-16}$ times the speed of light~\cite{LIGOScientific:2017zic}. The identification of the EM counterpart of GW170817 also helped constrain any modifications to the distance-amplitude relation. The relation in GR is:
 
 \begin{equation}
 \text{Amplitude} \propto \frac{1}{\text{Distance to the source}}. 
@@ -74,7 +74,7 @@ Another parameterization
 was proposed in~\cite{Belgacem:2018lbp}, where the link between $\DGW$ and $\DEM$ is expressed as
 \begin{equation}
 	\label{eqn:xi-model}
-	\DGW = \DEM(z_s, H_0)\left[\Xi_0+\frac{1-\Xi_0}{(1+z_s)^n}\right]\,.
+	\DGW = \DEM(z_s, H_0)\left[\Xi_0+\frac{1-\Xi_0}{(1+z_s)^n}\right].
 \end{equation}
 The free parameters of the model are $(\Xi_0, n)$. This parameterization is phenomenological in 
 nature, but as shown in \cite{LISACosmologyWorkingGroup:2019mwx} it can be related to a large class of 
@@ -95,8 +95,7 @@ modified GW propagation. Following~\cite{Lagos:2019kds},
 the relation between $\DGW$ and $\DEM$ can be expressed as
 \begin{equation}
 	\label{eqn:cm-model}
-	\DGW(z) = \DEM(z_s, H_0) \times \\
-	\exp{\left(\frac{c_M}{2\Omega_{\Lambda}}\ln{\frac{1+z_s}{(\Omega_{m}(1+z_s)^3 + \Omega_{\Lambda})^{1/3}}}\right)} \,,
+	\DGW(z) = \DEM(z_s, H_0) \times \exp{\left(\frac{c_M}{2\Omega_{\Lambda}}\ln{\frac{1+z_s}{(\Omega_{m}(1+z_s)^3 + \Omega_{\Lambda})^{1/3}}}\right)} ,
 \end{equation}
 where $c_M$ is a constant that relates the rate of change of the Planck mass with the
 fractional dark energy density in the Universe; for details, see \cite{Lagos:2019kds} and 
@@ -122,7 +121,7 @@ references therein. For GR, $c_M = 0$. The right plot of the Figure~\ref{fig:wf-
 	\label{tab:priors}
 \end{table}
 
-\section{Strongly lensed signals: A probe complementary to the BNS signals}
+\section{Strongly lensed signals: A probe complementary to the binary neutron star signals}
 
 \begin{figure}[h]
     \centering
@@ -132,8 +131,7 @@ references therein. For GR, $c_M = 0$. The right plot of the Figure~\ref{fig:wf-
     \label{fig:qual-res}
 \end{figure}
 
-Studying modified propagation theories in the context of strongly lensed and localized GW events, especially from 
-binary black hole (BBH) coalescences, is attractive, because such events can help probe higher redshift regimes compared to binary neutron star (BNS) events. 
+Studying modified propagation theories in the context of strongly lensed and localized BBH signals is attractive because such events can help probe higher redshift regimes compared to BNS signals. 
 In the past, modified propagation theories have been tested using 
 GW170817 \cite{Mastrogiovanni:2020mvm, Lagos:2019kds, LIGOScientific:2018dkp, Pardo:2018ipy}, 
 a signal from a BNS inspiral with an identifiable EM counterpart 
@@ -157,120 +155,159 @@ where we use $\betaMGR$ to denote the model parameters in all generality, the no
 Using Bayes' theorem, we can write 
 \begin{equation}
 \label{eq:pe1}
-p(\betaMGR, H_0 | \vec{d}_\mathrm{GW},  \vec{d}_{\mathrm{EM}}) = \frac{p(\betaMGR, H_0)\, p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0)}{Z},
+p(\betaMGR, H_0 | \vec{d}_\mathrm{GW},  \vec{d}_{\mathrm{EM}}) = \frac{\pi(\betaMGR, H_0) ~ p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0)}{Z},
 \end{equation}
-where $p(\betaMGR, H_0)$ is the prior probability distribution on $\betaMGR$ and $H_0$; the term $p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0)$ represents the 
+where $\pi(\betaMGR, H_0)$ is the prior probability distribution on $\betaMGR$ and $H_0$; the term $p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0)$ represents the 
 likelihood function; and $Z$ the evidence, whose value follows from the requirement that 
 the posterior probability distribution be normalized. 
 The prior distributions for $\betaMGR$ are specified in Table~\ref{tab:priors}. 
 We have chosen uninformative priors on each of the $\betaMGR$ parameters in order to not favour any specific value. 
 
-For $H_0$, we could in principle choose a relatively narrow prior range based on the Planck \cite{Planck:2006aa}, SHoES \cite{Riess:2021jrx}, or other existing measurements \cite{Wong:2019kwg}. 
-Instead, we make a more conservative choice. Specifically, we use a measurement of $H_0$ that is obtained from the differences in time of arrival of the GW images together with lens reconstruction through electromagnetic means. We use the measurement of $H_0$ obtaind in such a way as the prior of our analysis. For details we refer to the work by Hannuksela \textit{et al}~\cite{Hannuksela:2020xor}; here we confine ourselves 
+\subsubsection{Prior choice $H_0$}
+For $H_0$, we could in principle choose a relatively narrow prior range based on the Planck \cite{Planck:2006aa}, SHoES~\cite{Riess:2021jrx}, or other existing measurements~\cite{H0LiCOW:2019pvv}. 
+Instead, we make a more conservative choice. Specifically, we use a measurement of $H_0$ that is obtained from the differences in time of arrival of the GW images together with lens reconstruction through electromagnetic means. We use the measurement of $H_0$ obtaind in such a way as the prior for our analysis. This prior is relatively wider than any of the previous measurements therefore we argue that our measurements on $\betaMGR$ are on the conservative side. 
+
+For details on obtaining $H_0$ from arrival time of lensed images, we refer to the work by Hannuksela \textit{et al}~\cite{Hannuksela:2020xor}; here we confine ourselves 
 to recalling the so-called time delay distance $D_{\Delta t}$, which is related to $H_0$ through
 
 \begin{equation}
 \label{eqn:time-delay-dist}
-D_{\Delta t}(z_l, z_s, H_0) = \frac{\int_0^{z_s} dz'/E(z')}{\int_{z_l}^{z_s} dz'/E(z')}\DEM(z_s, H_0) \, .
+D_{\Delta t}(z_l, z_s, H_0) = \frac{\int_0^{z_s} dz'/E(z')}{\int_{z_l}^{z_s} dz'/E(z')}\DEM(z_s, H_0) .
 \end{equation} 
 Here $z_l$ and $z_s$ are respectively the lens and the source redshift, and 
 $E(z) \equiv \sqrt{\Omega_m (1+z)^3 + \Omega_\Lambda}$. If $D_{\Delta t}$ 
 is measured, we can estimate $\DEM$ since we assume that $z_l$ and $z_s$ are known from 
-the EM follow-up observations. Using the $\DEM$ measurement, $H_0$ can be estimated through
+the EM follow-up observations. In this work, for definiteness we assume a flat FLRW universe, in which case one has
+
+\begin{equation}
+	\label{eqn:dl-em}
+	\DEM =\frac{(1+z_s)}{H_0}\int_0^{z_s} \frac{dz'}{E(z')} ,
+\end{equation}
+
+Using the $\DEM$ measurement, $H_0$ can be estimated through
 Eq.~\eqref{eqn:dl-em}. $D_{\Delta t}$ can be measured by performing lens reconstruction; 
 however, owing to the computational complexity and cost, we skip the lens construction step. 
 We assume that the observed value of $D_{\Delta t}$ follows a Gaussian distribution with a 10\% standard deviation. 
 To allow for an offset in the observation, we pick the mean of this distribution from another Gaussian distribution with a 10\% standard deviation which is 
 centered at the true value. The 10\% error assumed in the measurement of $D_{\Delta t}$ 
-is motivated by the results of~\cite{Hannuksela:2020xor}. We translate the measurement of $D_{\Delta t}$ into the measurement of $\DEM$ using Eq.~\ref{eqn:time-delay-dist}. 
+is motivated by the results of~\cite{Hannuksela:2020xor}. We translate the measurement of $D_{\Delta t}$ into the measurement of $\DEM$ using Eq.~\eqref{eqn:time-delay-dist}. 
 Using the value of $\DEM$ together with  
 Eq.~\eqref{eqn:dl-em}, we construct the prior for $H_0$. 
 
 
-
+\subsubsection{Computing the joint likelihood}
 To calculate the likelihood $p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0)$,  
 we first express it as
-\begin{eqnarray}
+\begin{equation}
 \label{eq:likeli}
-&&p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0) \nonumber\\
-&&= \int d\vec{\theta}\, dz_s\, p(\vec{d}_{\mathrm{GW}} | \vec{\theta})\, p(\vec{d}_{\mathrm{EM}} | z_s) \nonumber\\ 
-&& \;\;\;\;\;\;\;\;\; \times \, p(\vec{\theta} | z_s, \betaMGR, H_0) \, p(z_s| \betaMGR, H_0) \,,
-\end{eqnarray}
-where $\vec{\theta}$ denotes the GW source parameters, $p(\vec{d}_{\mathrm{GW}} | \vec{\theta})$ 
-and  $p(\vec{d}_{\mathrm{EM}} | z_s)$ are the likelihoods of 
-the GW and EM data respectively, and $z_s$ is the source redshift. 
-$p(\vec{\theta} | z_s, \betaMGR, H_0)$ and $p(z_s | \betaMGR, H_0)$ 
-are the priors on the GW source parameters and redshift. 
+p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0) = \int d\vec{\theta}~dz_s~p(\vec{d}_{\mathrm{GW}} | \vec{\theta}) ~ p(\vec{d}_{\mathrm{EM}} | z_s) ~ p(\vec{\theta} | z_s, \betaMGR, H_0) ~ p(z_s| \betaMGR, H_0),
+\end{equation}
+where $\vec{\theta}$ denotes the GW source parameters, $p(\vec{d}_{\mathrm{GW}} | \vec{\theta})$ and  $p(\vec{d}_{\mathrm{EM}} | z_s)$ are the likelihoods of the GW and EM data respectively, and $z_s$ is the source redshift. The term $\pi(\vec{\theta} | z_s, \betaMGR, H_0)$ and $\pi(z_s | \betaMGR, H_0)$ are the priors on the GW source parameters and the redshift. 
 
 Since we assume that the host galaxy has been localized, the true source redshift $z_s$ is known. Recent studies have shown that the spectroscopic redshift of the source can be measured to a sub-percent accuracy \cite{Zhou:2021fmt}. Therefore, we neglect the error on the measurement of $z_s$ so 
 the term $p(\vec{d}_{\mathrm{EM}} | z_s)$ becomes a Dirac delta function centered on $z_s$, 
 reducing Eq.~\eqref{eq:likeli} to 
-\begin{eqnarray}
-&& p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0) \nonumber\\
-&&= \int d\vec{\theta}\, p(\vec{d}_{\mathrm{GW}} | \vec{\theta}) p(\vec{\theta} | z_s, \betaMGR, H_0) \, 
-p(z_s| \betaMGR, H_0) \, . \nonumber\\
-&&
-\end{eqnarray}
+\begin{equation}
+p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0) = \int d\vec{\theta} ~ p(\vec{d}_{\mathrm{GW}} | \vec{\theta}) ~ p(\vec{\theta} | z_s, \betaMGR, H_0)~ p(z_s| \betaMGR, H_0) .
+\end{equation}
 
-To estimate the GW likelihood $p(\vec{d}_{\mathrm{GW}}|\vec{\theta})$, we perform Bayesian parameter 
-inference using nested sampling~\cite{Skilling:2006gxv} for the first image.  
-Subsequently we use \textsc{Golum}~\cite{Janquart:2021qov, Janquart:2023osz} 
-to speed up Bayesian parameter inference for the other images. \textsc{Golum} 
-can rapidly analyse lensed images by using the posterior samples of the first image as prior 
-for the subsequent images, as the source parameters for each of the four images 
-are expected to be the same, apart from  
-relative magnifications, rigid phase offsets, and differences in time of arrival. 
+To estimate the GW likelihood $p(\vec{d}_{\mathrm{GW}}|\vec{\theta})$, we have to perform joint parameter estimation on strongly lensed signals as described in chapter~\ref{ch:relative_binning}. 
+In principle, we could use the relative binning framework to do the analysis. However, it was developed after this analysis concluded. For the purpose of this work, we use the \textsc{Golum} which was specifically developed to rapidly analyse lensed images~\cite{Janquart:2021qov}. Golum method uses a subset of posterior samples of the first image as prior for the subsequent images. One can also integrate the relative binning framework into \textsc{Golum} to gain additional speed-up.
 %We repeat this step for each quadruplet in our catalogue. 
 
-Once we have the GW likelihood, we perform the integration over the $\vec{\theta}$ for all parameters except the 
-luminosity distance $\DGW$, yielding
-\begin{eqnarray}
+Once GW likelihood is estimated, we perform the integration over all parameters represented by $\vec{\theta}$ except the 
+luminosity distance $\DGW$ to obtain
+\begin{align}
 \label{eqn:step-likeli}
-&&p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0) \nonumber\\ 
-&& = \int dD_L^{\mathrm{ GW}} \, p(\vec{d}_{\mathrm{GW}} | D_L^{\mathrm{GW}}) \,
- p(D_L^{\mathrm{GW}} | z_s, \betaMGR, H_0) \nonumber\\ 
-&& \;\;\;\;\;\;\;\;\; \times \, p(z_s| \betaMGR, H_0) \,.
-\end{eqnarray}
-
+p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0) = \int dD_L^{\mathrm{ GW}}~p(\vec{d}_{\mathrm{GW}} | D_L^{\mathrm{GW}})~ p(D_L^{\mathrm{GW}} | z_s, \betaMGR, H_0) ~ p(z_s| \betaMGR, H_0).
+\end{align}
 
 The prior $p(\DGW | z_s, \betaMGR, H_0)$ reduces to a Dirac delta function as we exactly  
-know $\DGW$ given the values of $z_s$, $\betaMGR$, $H_0$ and the modified gravity model (Eqs.~\eqref{eqn:D-model}, \eqref{eqn:xi-model} and \eqref{eqn:cm-model}). 
-Therefore, integrating with respect to $\DGW$ leads to
+know $\DGW$ given the values of $z_s$, $\betaMGR$, $H_0$ and the modified gravity model (Eqs.~\eqref{eqn:D-model}, \eqref{eqn:xi-model} and \eqref{eqn:cm-model}). Therefore, integrating with respect to $\DGW$ leads to
 \begin{equation}
 	\label{eq:redu-likeli}
-	p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0)  = p( \vec{d}_{\mathrm{GW}} | \DGW) p(z_s|\betaMGR, H_0).
+	p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0)  = p( \vec{d}_{\mathrm{GW}} | \DGW)~p(z_s|\betaMGR, H_0).
 \end{equation}
-Substituting Eq.~\eqref{eq:redu-likeli} into Eq.~\eqref{eq:pe1}, we can obtain the posterior distributions for $\betaMGR$ and $H_0$. 
+Substituting Eq.~\eqref{eq:redu-likeli} into Eq.~\eqref{eq:pe1}, we can obtain the posterior distributions for $\betaMGR$ and $H_0$. This completes the estimation of the joint likelihood. 
+\iffalse
 The above derivation is performed for one of the images of the quadruplet. 
 To combine the information from multiple images and obtain the joint posterior on $\betaMGR$, 
 we need to express the distance likelihood $p( \vec{d}_{\mathrm{GW}} | \DGW)$ in 
 Eq.~(\ref{eq:redu-likeli}) as a joint likelihood:
 \begin{equation}
 \label{eq:joint-distance-likelihood}
-p(\vec{d}_{\mathrm{GW}} | \DGW ) = \prod_{i=0}^{3}\, p(\vec{d}_{\mathrm{GW}, i} | \DGW),
+p(\vec{d}_{\mathrm{GW}} | \DGW ) = \prod_{i=0}^{3} p(\vec{d}_{\mathrm{GW}, i} | \DGW),
 \end{equation}
 where $\vec{d}_{\mathrm{GW}, i}$ refers to the GW data from image $i$. 
+\fi
 
-In what follows, we assume binary black hole coalescences with component mass distributions drawn from the \textsc{PowerLaw+Peak} in~\cite{KAGRA:2021duu}.
-Our GW waveform model is IMRPhenomXPHM~\cite{Pratten:2020ceb}, with black hole spin magnitudes distributed uniformly 
-between $0$ and $1$, and spin directions uniformly on the sphere.
-The distribution of the redshifts of the BBH and the galaxy lenses (modelled as singular power law isothermal ellipsoids with external shear) is obtained from~\cite{Wierda:2021upe}.
-The fiducial values of $\betaMGR$ are equal to their GR values. The fiducial value of the Hubble constant is 
-$H_0 = 67.4$ km $\text{s}^{-1}$ $\text{Mpc}^{-1}$, and $\Omega_m = 0.315$. 
-The lensed GWs were analyzed using \textsc{Golum}~\cite{Janquart:2021qov, Janquart:2023osz} and \textsc{Dynesty}~\cite{Speagle2019Dynesty:Evidences} to produce the $\DGW$ posteriors along with other source parameters. 
-Our detector network consists of two LIGO~\cite{LIGOScientific:2014pky}, the Virgo~\cite{VIRGO:2014yos}, the KAGRA~\cite{KAGRA:2020tym}, and the LIGO-India~\cite{Unnikrishnan:2013qwa} detectors where the detection threshold on the network SNR is 8.  
-Results obtained using lensed events will be compared with what can be obtained from the GW observation of 
-the BNS merger GW170817 together with its host galaxy identification~\cite{LIGOScientific:2017adf}.
-For GW170817, we use the $\DGW$ posterior sample from the corresponding data release~\cite{LIGOScientific:GWTC1DR}. 
-For this event we cannot construct the prior on $H_0$ for GW170817 using the method which we used for lensed events; 
-therefore we use Planck 2018~\cite{Planck:2018vyg} results when analyzing it. 
+While simulating the lensed GW signals, we assume binary black hole coalescences with component mass distributions drawn from the \textsc{PowerLaw+Peak} in~\cite{KAGRA:2021duu}. Our GW waveform model is IMRPhenomXPHM~\cite{Pratten:2020ceb}, with black hole spin magnitudes distributed uniformly between $0$ and $1$, and spin directions uniformly on the sphere. The distribution of the redshifts of the BBH and the galaxy lenses (modelled as singular power law isothermal ellipsoids with external shear) is obtained from~\cite{Wierda:2021upe}. The fiducial values of $\betaMGR$ are equal to their GR values. The fiducial value of the Hubble constant is $H_0 = 67.4$ km $\text{s}^{-1}$ $\text{Mpc}^{-1}$, and $\Omega_m = 0.315$. For the purpose of the simulation, we consider a detector network that consists of two LIGO~\cite{LIGOScientific:2014pky}, the Virgo~\cite{VIRGO:2014yos}, the KAGRA~\cite{KAGRA:2020tym}, and the LIGO-India~\cite{Unnikrishnan:2013qwa} detectors where the detection threshold on the network SNR is 8. Measurements of the deviation parameters made using the lensed GW signals will be compared to the ones made using the BNS merger GW170817 together with its host galaxy identification~\cite{LIGOScientific:2017adf}. For GW170817, we use the $\DGW$ posterior sample from the corresponding data release~\cite{LIGOScientific:GWTC1DR}. For this event, we cannot construct the prior on $H_0$ for GW170817 using the method which we used for lensed events; therefore we use Planck 2018~\cite{Planck:2018vyg} results when analyzing it. 
 
 
-\section{Results}
+
+
+\section{Results and conclusions}
+
 
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{../figures/presentation_t_perc_deviation_parameter_column.pdf}
-    \caption{Parameter estimation results}
-    \label{fig:lensing-pe-results}
+    \caption{Measurements of the deviation parameters for each of the three model considered. Each cross represents measurement (y-axis) of the deviation parameter obtained by a lensed quadruplet. The x-axis shows the corresponding redshift of the source and colorbar shows the quadrature sum of the SNR of the four images. }
+    \label{fig:comb-ngr-params}
 \end{figure}
+
+Figure~\ref{fig:comb-ngr-params} shows the measurements of deviation parameters using strongly lensed GWs. We analyse a total of 55 GW signals for the analysis. Note that we do not 
+expect to see this many quadruply lensed events until the third-generation detector era; nor do we combine information from multiple 
+simulated lensed events. Our aim here is to explore the diversity of scenarios one might encounter for single quadruply lensed GW.
+Each cross in Figure~\ref{fig:comb-ngr-params} corresponds to a simulated strongly lensed GW event with quadruple images, at a given 
+source redshift (horizontal axis). The true values of deviation parameters are set equal to their GR values. The vertical axis indicates the 90\% confidence intervals for relative deviations in $D$ (top) 
+and $\Xi_0$ (center), and for the absolute deviation in $c_M$ (bottom), as the latter parameter is zero in GR. Since in the $\Xi$-parameterization, the parameter $n$ is unconstrained when $\Xi_0$ equals its fiducial value of 1, we do not show results for it here, though it was treated as a free parameter in our measurements. Finally, the color coding shows the combined SNR from the four images, i.e.~the quadrature sum of the SNRs of the individual images. Also included are results from GW170817.
+
+The results are in qualitative agreement with plots presented in Figure~\ref{fig:qual-res}. 
+In particular, for $\Xi_0$ and $c_M$ the advantage of being able to access higher redshifts is 
+clearly evident, with bounds improving over those of GW170817 by factors of 
+up to $\mathcal{O}(10)$ and $\mathcal{O}(100)$, respectively. By contrast, the bounds on $D$ improve by up to a factor 
+of $\sim 5$. The differences in improvement can be explained by  
+the qualitative predictions of Figure~\ref{fig:qual-res} where 
+$\Delta$ follows a steep gradient for $\Xi_0$ (center) and $c_M$ (bottom) but a shallow one for $D$ (top). 
+
+We note that for the strongly lensed events in our catalog, the combined SNR from the four images tends to be higher than that of GW170817, which can also improve the measurement accuracy on $\DGW$ and $\betaMGR$.  
+Indeed, the measurement of the parameters is done using combined information from the different images, increasing the effective SNR used to infer the parameters values. 
+However, in Figure~\ref{fig:comb-ngr-params} shows that lensed events with SNR similar to GW170817 (which was $\simeq 32.4$ \cite{LIGOScientific:2017vwq}) 
+can measure the deviation parameters more accurately compared to the latter as the lensed events are placed at high redshifts. 
+Therefore, an increment in the distance made accessible by strong lensing is indeed the dominating factor 
+in the improvement of measurement accuracies. We also note that we did not directly perform lens reconstruction, but instead assumed Gaussian probability 
+distributions for image magnification measurements used in the reconstruction of $\DGW$, 
+as well as for reconstructed electromagnetic luminosity distances, with widths informed by 
+current astrophysical expectations \cite{Hannuksela:2020xor,Wempe:2022zlk}. The latter aspect is something we aim to treat 
+in more depth in a future study. Similarly, the relation between $\DGW$ and $\DEM$ involves cosmological parameters; 
+in this work we only let $H_0$ be a free parameter, but the effect of uncertainties in the other parameters is also 
+worth investigating. On the other hand, in this study we used as a prior on $H_0$ the posterior density distribution obtained 
+from time delay measurements and lens reconstruction, which is typically considerably wider 
+than the ranges for $H_0$ obtained from either Planck or SHoES \cite{Hannuksela:2020xor}. Because of the degeneracy between $H_0$ and the deviation parameters, bounds on the latter are to a large
+extent set by the prior range of $H_0$ \cite{Lagos:2019kds}, which pushes our constraints on alternative theories towards the conservative side. We find that when analyzing the lensed events with a prior from Planck 2018 we obtain bounds that are a factor of $\sim 2$ tighter~\cite{Planck:2018vyg}. 
+	
+Let us also make a comparison with existing bounds from actual measurements. For the $\Xi$-parameterization, bounds we obtain from our simulated lensed events are consistent with the results of 
+Finke \textit{et al.}~\cite{Finke:2021znb}. In Mastrogiovanni \textit{et al.}~\cite{Mastrogiovanni:2020mvm}, bounds were obtained for the three models considered here, 
+by combining information from GW170817 and its EM counterpart with information from the BBH
+signal GW190521, in the latter case assuming that a particular EM flare observed by the Zwicky 
+Transient Factory was associated with the 
+BBH merger~\cite{ZTF-BBH}. Since GW190521 originated at a redshift of $\simeq 0.8$ \cite{LIGOScientific:2020iuh}, 
+adding this event brings the bounds on deviation parameters closer to what we find for lensed events; 
+for example, they report $\delta\Xi_0/\Xi_0 \lesssim 3 - 10$, to be compared 
+with the bounds in Figure~\ref{fig:comb-ngr-params}.\footnote{However, it should be noted that the association
+of GW190521 with the EM flare of \cite{ZTF-BBH} is by no means conclusive; see e.g.~\cite{Ashton:2020kyr}.} 
+When specific alternative theories of gravity are assumed, studies based on the Cosmic Microwave Background
+and large structure formation can lead to bounds on $c_M$ that are similar to the ones for lensed events; 
+see e.g.~\cite{Noller:2018wyv} and the discussion in \cite{Lagos:2019kds}. Finally, methods have been developed 
+that exploit the observed population properties of binary black hole coalescences using gravitational
+wave data only, in terms of e.g.~redshift and mass distributions 
+\cite{Ezquiaga:2021ayr,Leyde:2022orh,MaganaHernandez:2021zyc}. Depending on the assumptions made, these  
+can be competitive with bounds on anomalous GW propagation that we project for lensed GW events with 
+host galaxy identification.
+
+In summary, the previous gravitational wave-based measurements on anomalous propagation models have relied on GW170817 with its EM counterpart. Until third-generation detectors
+such as Einstein Telescope and Cosmic Explorer operational, gravitational waves from binary neutron star mergers will only be seen to a relatively small redshifts, and the definitive identification of transient electromagnetic counterparts may remain elusive. What we have demonstrated here is that a single fortuitous discovery of a quadruply lensed signal in conjunction with electromagnetic observations of lensed galaxies may give access to the high-redshift regime, again enabling significantly stronger constraints on models of anomalous gravitational wave propagation.
+
+
+
