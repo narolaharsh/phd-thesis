@@ -1,16 +1,23 @@
-General relativity predicts that gravitational waves are non-dispersive (all frequency components travel at the same speed), travel at the speed of light, their amplitude is inversely proportional to the distance to the source. The non-dispersive nature has been a part of a suite of testing GR analyses carried out by LVK~\cite{LIGOScientific:2021sio}. The multimessenger detection of GW170817 helped place stringent constraints on the difference between the speed of GWs and the speed of light. Specifically, it was measured that the difference between the speed of GWs and light is between $-3\times10^{-15}$ and $6\times10^{-16}$ times the speed of light~\cite{LIGOScientific:2017zic}. The identification of the EM counterpart of GW170817 also helped constrain any modifications to the distance-amplitude relation. The relation in GR is:
+General relativity predicts
+\begin{itemize}
+    
+    \item Gravitational waves are non-dispersive, i.e., all frequency components travel at the same speed.
+    \item They travel at the speed of light.
+    \item Their amplitude is inversely proportional to the distance to the source. 
 
+\end{itemize}
+
+The non-dispersive nature has been a part of a suite of testing GR analyses carried out by the LVK collaboration~\cite{LIGOScientific:2021sio}. The multimessenger detection of GW170817 helped place stringent constraints on the difference between the speed of GWs and the speed of light. Specifically, it was measured that the difference between the speed of GWs and light is between $-3\times10^{-15}$ and $6\times10^{-16}$ times the speed of light~\cite{LIGOScientific:2017zic}. Modifications to the distance-amplitude relation were investigated with the help of GW170817 and its electromagnetic counterpart~\cite{LIGOScientific:2018dkp}. According to GR the relation is
 \begin{equation}
-\text{Amplitude} \propto \frac{1}{\text{Distance to the source}}. 
+\text{Amplitude} \propto \frac{1}{\text{Distance to the source}}.
 \end{equation}
 
-However, the constraints obtaind on modified propagation theories using GW170817 remain relatively poor as will become clear later. When discussing modified propagation theories, we specifically refer to the ones that predict a different distance-amplitude relation than GR. In this chapter, we demonstrate how the detection of a strongly lensed GW signal can significantly improve upon beyond general relativistic theories that allow for modified propagation of GWs. This chapter contains results from our recent work on this topic~\cite{Narola:2023viz}.
-
+However, these constraints remain relatively poor, as will become clear later. When discussing modified propagation theories, we specifically refer to the ones that predict a different distance-amplitude relation than GR. In this chapter, we demonstrate how the detection of a strongly lensed GW signal can significantly improve upon the bounds on the beyond GR theories which allow for a modified GW propagation. This chapter contains results from our recent work on this topic~\cite{Narola:2023viz}.
 
 \section{Gravitational lensing and distance measurements}
-First, I briefly recap the discussion on the gravitational lensing of gravitational waves from chapter \ref{ch:relative_binning}. When GWs encounter a massive object in their path of propagation, they may deviate from their original path. This phenomenon is known as gravitational lensing of gravitational waves. The effect of the lensing on the GW signal can vary depending on the relative configurations of the lens (the massive object), the GW source, and their length scales. 
+First, I briefly recap the discussion on the gravitational lensing of gravitational waves from chapter \ref{ch:relative_binning}. When GWs encounter a massive object in their path of propagation, they may deviate from their original path. This phenomenon is known as gravitational lensing of gravitational waves. The precise effect of the lensing on the GWs depends on the relative configurations of the lens mass, the GW source, and their length scales. 
 
-Specifically, when the length scale of the lens is much larger then the wavelength of the GW siganls, we are in the so-called geometric optics regime. Such scenario can produce multiple copies of the GW signals (known as images) which may be observable by the GW detectors as the repeated copies of the same GW signal. This phenomenon is referred to as the strong lensing of a GW signal. 
+Specifically, when the length scale of the lens is much larger than the wavelength of the GW signals, we are in the so-called geometric optics regime. Such a scenario could produce multiple copies of the GW signal (known as images), and each copy may be observable by the detectors as repeated GW signals from the same source. This phenomenon is referred to as the strong lensing of a gravitational wave signal. As we can observe the same source multiple times, we can combine the information from multiple images to improve our measurements of the source parameters, especially, we can significantly improve our measurements of sky-localisation. 
 
 \subsubsection{Electromagnetic distance}
 
@@ -20,16 +27,15 @@ studies~\cite{Chen:2017rfc, LIGOScientific:2018gmd, Gray:2019ksv, LIGOScientific
 A joint GW+EM analysis can help locate the source's host galaxy once its location is narrowed down to a 
 few square degrees using only GW data.
 In this step, one reconstructs all the lenses in the region provided by the GW data to find which lens 
-could best produce a GW quadruplet with 
+could best produce a images with 
 properties similar to the ones observed; the galaxy that is undergoing lensing by this particular lens is then likely to be the host galaxy of the GW event.
 This methodology was first proposed in~\cite{Hannuksela:2020xor, Wempe:2022zlk}. For the scenarios where strong lensing produces four images (a quadruplet), we can narrow down the host of the GWs source to one or a few galaxies. Various lensing rate estimates show that $\approx 30\%$ of all strong lensing scenarios will produce a quadruplet, making this a fairly likely scenario~\cite{Li:2018prc, Wierda:2021upe}.
 
-Once the host galaxy is known, a dedicated spectroscopic or photometric follow-up can lead us to the redshift of the source.
-By combining the source's redshift with a cosmological model, we can estimate the source's luminosity distance in a way 
-that is unaffected by the anomalous GW propagation~\cite{Hogg:1999ad}. Let us refer to this distance as the electromagnetic distance $\DEM$ to the source. 
+Once the host galaxy is known, a dedicated spectroscopic or photometric follow-up can yield a precise estimate of the redshift of the source.
+By combining the source's redshift with a cosmological model, we can estimate the source's luminosity distance~\cite{Hogg:1999ad}. Let us refer to this distance as the electromagnetic distance $\DEM$ to the source. 
 
 \subsubsection{Gravitational wave distance}
-Besides the electromagnetic distance ($\DEM$), we can have another independent measurement of the source's luminosity distance from the GW data as explained in chapter~\ref{ch:gwpe}. Let us refer to this distance as the gravitational wave distance $\DGW$ to the source. The $\DGW$ distance measurement could be affected by the anomalous propagation of gravitational waves while $\DEM$ may not. Therefore, by comparing the two distances, $\DGW$ and $\DEM$, the anomaly in the gravitational wave propagation can be discovered or bounded.
+Besides the electromagnetic distance ($\DEM$), we can have another independent measurement of the source's luminosity distance from the GW data as explained in chapter~\ref{ch:gwpe}. Let us refer to this distance as the gravitational wave distance $\DGW$ to the source. The $\DGW$ distance measurement may carry an imprint of the anomalous propagation of gravitational GWs while $\DEM$ may not. Therefore, by comparing the two distances, $\DGW$ and $\DEM$, the anomaly in the gravitational wave propagation can be discovered or bounded.
 
 \section{Modified propagation theories}
 \label{sec:mpt}
