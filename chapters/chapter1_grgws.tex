@@ -16,9 +16,13 @@ While Newton's theory of gravity attempts to quantify the gravitational force ex
     \label{eq:field_eq}
  G_{\mu\nu} = 8\pi T_{\mu\nu}
 \end{equation}
-where the Einstein tensor $G_{\mu\nu}$ encodes the information about the curvature. The density and flow of matter and energy are encoded in the stress-energy tensor~$T_{\mu\nu}$. We use geometric units, therefore the speed of light and universal gravitational constant in Eq.~\eqref{eq:field_eq} are set to unity. 
+where the Einstein tensor $G_{\mu\nu}$ encodes the information about the curvature. The density and flow of matter and energy are encoded in the stress-energy tensor~$T_{\mu\nu}$. We use geometrised units, therefore the speed of light and universal gravitational constant in Eq.~\eqref{eq:field_eq} are set to unity. Einstein's field equations form a set of coupled partial differential equations for the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the equations for a given distribution of mass and energy density. Intuitively, the metric tensor introduces the notion of distance and angles on a surface with arbitrary curvature. 
 
-Einstein's field equations form a set of coupled partial differential equations for the metric tensor $g_{\mu\nu}$, an unknown obtained by solving the field equation for a given distribution of mass and energy density. Intuitively, the metric tensor introduces the notion of distance and angles on a surface with arbitrary curvature. The $g_{\mu\nu}$ is encoded in the field equation in the following way. 
+An infinitesimal line element $ds$ can be given by $ ds^2 = g_{\mu\nu} dx^{\mu} dx^{\nu} $. In the absence of any mass and energy density (in vacuum), indeed, it can be shown that the space is flat. The metric tensor and the infinitesimal line element for the flat space are
+\begin{align}
+ g_{\mu\nu} &\equiv \eta_{\mu\nu} = \mathrm{diag}(-1, 1, 1, 1), \\ ds^2 &= \eta_{\mu\nu} dx^{\mu} dx^{\nu}  = - dt^2 + dx^2 + dy^2 + dz^2.
+\end{align}
+The metric tensor for the flat space is also known as the Minkowski metric. There are other possible solutions to the field equations in vacuum, which will become clear later. Let us now turn to how the $g_{\mu\nu}$ is encoded in the field equations. 
 
 \subsubsection{The Christoffel symbols, Riemann tensor, and Ricci tensor}
 Let us first revisit the Christoffel symbols $\Gamma^{\rho}_{\nu\mu}$. They are defined as:
@@ -156,7 +160,7 @@ Moving on from the discussion on the vacuum solutions, we now consider a scenari
     \label{eq:non_vacuum}
     \square \bar{h}_{\mu \nu} = -16\pi T_{\mu\nu}.
 \end{equation}
-\subsubsection{Quadruple radiation}
+\subsubsection{Quadrupole radiation}
 Here, we can draw an analogy from the calculation of electromagnetic radiation from arbitrary charge distribution at a distance. This calculation is usually done using multipole expansion. Each term in the series obtained from multipole expansion approximates the spatial distribution of the source and represents the contribution to far-field radiation in decreasing order. The first term (also known as the monopole term) in the expansion is simply the total charge. It does not contribute to electromagnetic radiation due to the law of conservation of electric charge. Therefore, the dominant contribution to electromagnetic radiation is due to the second term, also known as the dipole term.  
 
 Similarly, before attempting to solve Eq.~\eqref{eq:non_vacuum}, we can argue that the gravitational radiation does not have a contribution from the monopole term due to the law of conservation of mass. Unlike electromagnetic radiation, the lowest-order contribution to gravitational radiation is due to the quadrupole term. The mass dipole term $(\approx \Sigma_i m_i\vec{x}_i)$ can be made zero by moving to the centre of the mass frame of the system. The same is not applicable in the case of electromagnetic radiation since charges (unlike mass) can be negative. 
@@ -241,7 +245,7 @@ All three GW detectors, LIGO-Livingston, LIGO-Hanford, and LIGO-Virgo were onlin
     \caption{A simple layout of the triangular design of Einstein Telescope. It consists of 3 V-shaped interferometers with an opening angle of 60 degrees, forming an equilateral triangle with an arm-length of 10 km. The object notations are the same as those shown in the L-shaped interferometer, namely, M denotes the mirrors, B denotes the beam splitters, LS denotes the laser sources, and P denotes the photodiodes.}
     \label{fig:triangle}
 \end{figure}
-The two LIGO detectors~\cite{LIGOScientific:2014pky}, the Virgo detector~\cite{VIRGO:2014yos}, the KAGRA detector~\cite{Aso:2013eba}, and the upcoming LIGO detector in India~\cite{Saleem:2021iwi} are collectively referred to as the current generation or second generation (2G) detectors. While the current generation GW detectors have opened a new window onto the Universe, the proposed third-generation (3G) detectors are expected to usher in an era of precision science. These include the Cosmic Explorer~\cite{Reitze:2019iox} and the Einstein Telescope (ET)~\cite{Punturo:2010zz, ET:2019dnz}. Design and site-selection studies to maximize the scientific potential of 3G detectors are currently underway. 
+The two LIGO detectors~\cite{LIGOScientific:2014pky}, the Virgo detector~\cite{VIRGO:2014yos}, the KAGRA detector~\cite{Aso:2013eba}, and the upcoming detector in India~\cite{Saleem:2021iwi} are collectively referred to as the current generation or second generation (2G) detectors. While the current generation GW detectors have opened a new window onto the Universe, the proposed third-generation (3G) detectors are expected to usher in an era of precision science. These include the Cosmic Explorer~\cite{Reitze:2019iox} and the Einstein Telescope (ET)~\cite{Punturo:2010zz, ET:2019dnz}. Design and site-selection studies to maximize the scientific potential of 3G detectors are currently underway. 
 
 In particular, Figure~\ref{fig:triangle} shows a simple layout of the proposed triangular design of the Einstein Telescope. The Einstein Telescope is a network of three V-shaped interferometers with an opening angle of 60 degrees, forming an equilateral triangle. The proposed arm-length is 10 km and the infrastructure is expected to be 250 to 300 meters below the ground. At the time of writing of this thesis, the proposed sites for the ET include the Euregio Meuse-Rhine (EMR) located near the border of the Netherlands, Belgium, and Germany, the Sardinia island located in the south-west of Italy, and the Lusatia region in Saxony. Alternate proposals for the configuration of ET include two distant L-shaped detectors (Figure~\ref{fig:det_l}) with 15-kilometre arm-length located in Sardinia and EMR region each~\cite{Branchesi:2023mws}. 
 
