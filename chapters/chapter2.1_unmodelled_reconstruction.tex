@@ -29,7 +29,8 @@ A case where the theoretical model is expensive to simulate can be made for GW s
 \fi
 
 \section{Transdimensional Sampling Algorithms}
-When performing unmodelled reconstruction, the dimensionality of the parameter space of $\vec{\theta}$ is unknown, in contrast to the modelled reconstruction explained in chapter~\ref{ch:gwpe}. While the Bayesian framework, GW likelihood, and Bayesian approximation remain robust, the Nested sampling algorithm from the previous chapter is not suitable for the problem at hand. Here, we review a transdimensional algorithm that is routinely used to explore a variable dimensional parameter space. Let us define a few standard quantities which formulate the building blocks of the algorithm. 
+When performing unmodelled reconstruction, the dimensionality of the parameter space of $\vec{\theta}$ is unknown, in contrast to the modelled reconstruction explained in chapter~\ref{ch:gwpe}. While the Bayesian framework, GW likelihood, and Bayesian approximation remain robust, the Nested sampling algorithm from the previous chapter is not suitable for the problem at hand. Here, I briefly explain a framwork that is routinely used to explore a variable dimensional parameter space~\cite{Cornish:2014kda}. 
+
 \subsection{Morlet-Gabor wavelets}
 \begin{figure}
     \centering
@@ -37,14 +38,14 @@ When performing unmodelled reconstruction, the dimensionality of the parameter s
     \caption{Morlet-Gabour wavelet in time (left) and frequency (right) domain}
     \label{fig:mg_wav}
 \end{figure}
-When performing unmodelled reconstruction, we use Morlet-Gabor wavelets as base functions. It can be expressed in the time domain as
+When performing unmodelled reconstruction, we use Morlet-Gabor wavelets as base functions. It can be expressed in the time domain as:
 \begin{equation}
     \label{eq:wavelet}
  \vec{\psi}(t; A, Q, t_0, f_0, \phi_0) = A~e^{-\frac{(t-t_0)^2}{2\tau^2}}~\sin{\left(2{\pi}f_0(t-t_0) + \phi_0\right)},
 \end{equation}
 where $t$ denotes time, $A$ denotes amplitude, $\tau = Q/(2{\pi}f_0)$ denotes the quality factor that controls the spread of the wavelet, $\phi_0$ denotes initial phase, $t_0$ and $f_0$ respectively correspond to time and frequency at the peak of the amplitude. In Figure~\ref{fig:mg_wav}, we show a time (left) and frequency (right) domain representation of a wavelet with parameters $Q = 20$, $t_0=1$ second, and $f_0 = 40$ Hz. 
 
-Morlet-Gabor wavelets are suitable for the problem at hand because glitches $(\vec{g})$ we want to reconstruct can be expressed as a linear combination of $N$ wavelets [BayesWave first paper],
+Morlet-Gabor wavelets are suitable for the problem at hand because glitches $(\vec{g})$ we want to reconstruct can be expressed as a linear combination of $N$ wavelets~\cite{Cornish:2014kda},
 \begin{equation}
  \vec{g}(t; \vec{\theta}) = \sum_{k = 0}^{N} \vec{\psi}_k(t; \vec{\theta}_k),
 \end{equation}
