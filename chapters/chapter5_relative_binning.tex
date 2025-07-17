@@ -193,21 +193,23 @@ where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensiona
 where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Each term in the factorised likelihood expression of Eq.~\eqref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
 
 \subsection{To perform strong lensing searches}
-For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ to account for two images. However, since the two images are copies of the same GW signal, we expect that the source parameters are identical between the two, except for the merger time, luminosity distance, and Morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as;
+For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1$ and $\vec{h}_2$ to account for two images, but it is not simply $\vec{h}_1+\vec{h}_2$. The two images are copies of the same GW signal; we expect that the source parameters are identical between the two, except for the merger time, luminosity distance, and Morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as;
 
 \begin{equation}
 \label{eqn:wf-mapping}
 \vec{h}_2(\vec{\theta}, \vec{\theta}_{L}) = \sqrt{\mu_{12}}\vec{h}_1(\vec{\theta})e^{2i\pi f \Delta t_{12} - i\Delta n_{12}\pi},
 \end{equation}
-where the set $\{\vec{\theta}, \vec{\theta}_L\}$ now represent a 18 dimensional parameter space. The factorisation of the likelihood expression is slightly different from the case of overlapping signals since we need to incorporate two data streams. Let us denote them by $\vec{d}_1$ and $\vec{d}_2$ for each image. The likelihood function then is,
-
+where the set $\{\vec{\theta}, \vec{\theta}_L\}$ now represent a 18 dimensional parameter space. The factorisation of the likelihood expression is slightly different from the case of overlapping signals since we need to incorporate two data segments, $\vec{d}_1$ and $\vec{d}_2$, one for each image. The full likelihood expression becomes~\cite{Lo:2021nae}; 
+\begin{equation}
+ p(\vec{d}_1, \vec{d}_2 | \vec{\theta}, \vec{\theta}_L) = p(\vec{d}_1 | \vec{\theta}) ~ p(\vec{d}_2 | \vec{\theta}, \vec{\theta}_L),
+\end{equation}
+which holds since to data segments are disjoint and $\vec{d}_1$ do not depend on the relative lensing parameters $\vec{\theta}_L$. We can factorise it into
 \begin{align}
  \ln \mathcal{L}(\vec{\theta}, \vec{\theta}_L) &= \left<\vec{d}_1|\vec{h}_1\right> - \frac{1}{2}\left<\vec{h}_1|\vec{h}_1\right> + \left<\vec{d}_2|\vec{h}_2\right> - \frac{1}{2}\left<\vec{h}_2|\vec{h}_2\right>, \nonumber \\
     \label{eq:lesing_small_likelihood}
     & = \ln \mathcal{L}_{d_1h_1} - \frac{1}{2} \ln \mathcal{L}_{h_1h_1} + \ln \mathcal{L}_{d_2h_2} - \frac{1}{2} \ln \mathcal{L}_{h_2h_2} \,.
 \end{align}
-
-Note that the $\vec{d}$ is now replaced by $\vec{d}_1$ and $\vec{d}_2$ at relevant places. Next, we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{eqn:wf-mapping}. We use the RBGrid to generate the summary data and then, using the summary data, we can approximate the likelihood. 
+By construction, the overlaps between $\vec{h}_1$ and $\vec{h}_2$ do not appear here, unlike the overlapping signals analysis. Next, we construct the RBGrid only for image 1. Compute image 2 waveform using the Eq.~\eqref{eqn:wf-mapping}. We use the RBGrid to generate the summary data, and then, using the summary data, we can approximate the likelihood. 
 
 Now, we have all the ingredients to perform parameter estimation on the isolated signals, overlapping signals, and strongly lensed signals. 
     
