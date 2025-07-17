@@ -102,7 +102,7 @@ Hence, the expectation value of the log-likelihood with respect to the posterior
 \fi
 
 \subsection{GW specific treatment for jumping between dimensions}
-A general treatment of switching dimensions was proposed in 1995 by Peter Green~\cite{Green:1995mxx}. The method was initially proposed to determine which distribution fits the data best among various competing distributions. Additionally, two competing distributions do not need to have the same number of model parameters and the algorithm can jump back and forth between different dimensions. Therefore, it is commonly known as the reversible jump Markov chain Monte Carlo (RJMCMC) method. Since its inception, this sampling method has been applied to various use cases in gravitational wave data analysis. However, at the time of writing the thesis, I did not find the recipe in the context of reconstruction using wavelets. Therefore, here I focus on the special case instead of a general one. Jumping between the dimensions in this case means,
+A general treatment of switching dimensions was proposed in 1995 by Peter Green~\cite{Green:1995mxx}. The method was initially proposed to determine which distribution fits the data best among various competing distributions. Additionally, two competing distributions do not need to have the same number of model parameters and the algorithm can jump back and forth between different dimensions. Therefore, it is commonly known as the reversible jump Markov chain Monte Carlo (RJMCMC) method. Since its inception, this sampling method has been applied to various use cases in gravitational wave data analysis. Here, I discuss its application in the context of reconstructing any excess of power, i.e., the excess of power can be due to GW signals or glitches. Jumping between the dimensions in this case means,
 \begin{itemize}
     \item \textit{Birth move} -- addition of new wavelet
     \item \textit{Death move} -- removal of an existing wavelet
@@ -189,7 +189,7 @@ Unmodelled reconstruction of generic excess power also has important use cases. 
 \begin{enumerate}
     \item In contrast to Nested sampling, the aim here is to obtain the posterior probability distribution. Additional computations are required to obtain the evidence. 
     \item The rate of convergence in the case of RJMCMC depends on the choice of auxiliary distribution and bijective functions. A universal choice that works for all use cases in GWs is difficult to determine. It has more number of tuning parameters compared to the fixed dimension reconstruction done by Nested sampling. 
-    \item The termination criteria are not well defined.
+    \item The termination criteria are not well defined. \asam{This is more for caution; if you used this algorithm later though, somebody is bound to ask then how did you terminate?}
     \item The lack of orthogonality of Morlet-Gabor wavelets may also reduce the rate of convergence.
 \end{enumerate}
 
