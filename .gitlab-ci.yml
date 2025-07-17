@@ -23,7 +23,7 @@ publish:
   before_script:
           - echo $CI_COMMIT_SHA | cut -b1-8 > gitID.txt
   script:
-    - make
+    - make -B
   after_script:
     - rm gitID.txt
   cache:
