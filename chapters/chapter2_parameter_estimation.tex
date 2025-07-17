@@ -53,6 +53,7 @@ While the Bayesian framework described above is conceptually easy, it is a compu
 \end{equation}
 where $\vec{h}$ denotes the GW signal model computed as a function of the source parameters $\vec{\theta}$~\cite{Pratten:2020ceb,Ramos-Buades:2023ehm}. The brackets $\left<.|.\right>$ denote the noise weighted inner product 
 \begin{equation}
+    \label{eq:nwe}
  <\vec{a}|\vec{b}> = \frac{4}{T}~\sum_{f}~\frac{\tilde{a}(f)~\tilde{b}^{*}(f)}{S_{n}(f)},
 \end{equation}
 where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The term $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD). The expression for the log likelihood in Eq.~\eqref{eq:likelihood} is for one detector. For a network of detectors, it turns into a sum of log likelihood for each detector in the network. 
