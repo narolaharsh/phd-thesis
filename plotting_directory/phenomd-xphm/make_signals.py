@@ -146,4 +146,4 @@ ax.text(x = 10, y = -1.6, s = 'Merger-\nringdown', color='black')
 
 
 fig.savefig('phenomd_xphm.pdf')
-#fig.savefig('../../figures/phenomd_xphm.pdf')
+fig.savefig('../../figures/phenomd_xphm.pdf')
