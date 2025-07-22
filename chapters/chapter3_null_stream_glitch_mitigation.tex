@@ -178,8 +178,8 @@ The null stream provides us with an extra piece of information in the form of Eq
     &
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
         \item Quality of measurements is identical to the scenario when glitches are not introduced.
-        \item Does not require any prior knowledge of the signal model.
-        \item $\mathcal{O}(1)$ hour per analysis. Enables an inexpensive, accurate, and easily scalable framework \texttt{nijntje}. A ready-to-use tool to analyse long, loud, and overlapping signals using \ETT.
+        \item Does not require any prior knowledge of the signal model. \textcolor{white}{Skip this line. Skip this line. Skip this line.}
+        \item $\mathcal{O}(1)$ hour per analysis. Enables an inexpensive, accurate, and easily scalable framework \texttt{nijntje}. A ready-to-use tool to analyse the long, loud, and overlapping signals using \ETT.
         \item Individual interferometer SNRs do not matter. Blind spots do not play a role.
     \end{enumerate}
     \\
@@ -189,7 +189,7 @@ The null stream provides us with an extra piece of information in the form of Eq
     \label{tab:nijntje_conclusion}
 \end{table}
 
-We plan to extend this work by including various kinds of signals and glitches in our analysis. We also plan to investigate the possibility of occurrence and mitigation of coincident glitches, i.e., glitches that appear in all interferometers of a network at the same time. We also plan to investigate the impact of Newtonian noise -- the models of which remain largely uncertain at the time of writing of this thesis. In addition, the null stream can be constructed when all three interferometers are online. We leave it to future work to include the duty cycle in our analyses. Note that, in the absence of a null stream, one can revert to performing joint signal and glitch mitigation for the triangular configuration. Indeed, the duty cycle will affedt ET-2L as well. In the absence of one interferometer from a network of 2L, the GW measurements are expected to worsen.
+We plan to extend this work by including various kinds of signals and glitches in our analysis. Integration of a deep learning based noise mitigation tool into \texttt{nijntje} framework is already underway (see Dooney \textit{et al}~\cite{Dooney:2025bfh} for details). This feature will enable \texttt{nijntje} framework to run on GPUs, leading to a real-time glitch mitigation ($\mathcal{O}(1)$ second per glitch) and overall a sustainable approach for computation. We also plan to investigate the possibility of occurrence and mitigation of coincident glitches, i.e., glitches that appear in all interferometers of a network at the same time. We also plan to investigate the impact of Newtonian noise -- the models of which remain largely uncertain at the time of writing of this thesis. In addition, the null stream can be constructed when all three interferometers are online. We leave it to future work to include the duty cycle in our analyses. Note that, in the absence of a null stream, one can revert to performing joint signal and glitch mitigation for the triangular configuration. Indeed, the duty cycle will affect ET-2L as well. In the absence of one interferometer from a network of 2L, the GW measurements are expected to worsen.
 
 The problem posed by glitches to the current and next-generation GW detectors is a pressing one. It could hinder our transition to the precision science era. The comparison presented in this chapter shows a clear edge that the null stream inherent in the triangular configuration has to offer over the alternate configuration. 
 
