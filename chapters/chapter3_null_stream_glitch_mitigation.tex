@@ -7,7 +7,7 @@
     \label{fig:qscan_null}
 \end{figure}
 \fi
-While the third-generation detectors are anticipated to push the accuracy and precision of our measurements to unprecedented levels, they will also be subject to new kinds of challenges compared to the current generation detectors. Here, I specifically compare the problem posed by glitches to the LIGO-Virgo interferometers and third-generation interferometers. 
+While the third-generation detectors are anticipated to push the accuracy and precision of our measurements to unprecedented levels, they will also be subject to new kinds of challenges compared to the current generation detectors. Here, I specifically compare the impact of glitches on GW signals detected by LIGO-Virgo interferometers and by 3G interferometers.
 \begin{table}[h!]
     \centering
     \renewcommand{\arraystretch}{1.2}
@@ -20,7 +20,7 @@ While the third-generation detectors are anticipated to push the accuracy and pr
         \item A GW signal is in-band for $\mathcal{O}(1)$ second to $\mathcal{O}(1)$ minute. Therefore, nearly every segment of data contains only noise. 
         \item Glitch rate of $\mathcal{O}(1)$ per minute across three observation runs. 
         \item \textit{Almost} all glitches occur in isolation due to a smaller in-band duration and smaller detection rate of GW signals. 
-        \item Almost all glitches can be vetoed without incurring a significant loss of GW signals. 
+        \item Almost all glitches can be vetoed (excluded from the analyses) without incurring a significant loss of GW signals. 
     \end{enumerate}
     &
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
@@ -33,7 +33,7 @@ While the third-generation detectors are anticipated to push the accuracy and pr
     \\
     \bottomrule
     \end{tabular}
-    \caption{Problem posed by glitches in LIGO-Virgo interferometers versus third-generation interferometers.}
+    \caption{Impact of glitches on the LIGO-Virgo signals in comparison to the anticipated 3G signals.}
     \label{tab:glitch_diff}
 \end{table}
 
@@ -43,7 +43,7 @@ While glitch mitigation is an active area of research for current generation det
 
 
 \section{The null stream}
-By definition, the null stream is a linear combination of strain data from a network of GW detectors such that the signal (if present in the strain) cancels out. For the triangular configuration of the Einstein Telescope (\ETT), the null stream can be constructed by summing the strain data from three interferometers. Let us denote the data from $i^{\mathrm{th}}$ interferometer by $\vec{d}_i$,
+By definition, the null stream is a linear combination of strain data from a network of GW detectors such that the signal (if present in the strain) cancels out. For the triangular configuration of the Einstein Telescope (\ETT), the null stream can be constructed by summing the strain data from three detectors. Let us denote the data from $i^{\mathrm{th}}$ detector by $\vec{d}_i$,
 \begin{equation}
  \vec{d}_i = F_{+, i} \vec{h}_+ + F_{\times, i} \vec{h}_{\times},
 \end{equation}
@@ -57,7 +57,7 @@ where the prefactor of $1/\sqrt{3}$ ensures that the noise’s power spectral de
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{../figures/null_stream_antenna_pattern.pdf}
-    \caption{Illustration of how the null stream of \ETT~comes about. Projection of plus (left) and cross (right) antenna pattern functions along the right ascension (RA) coordinate. Blue, red, and green lines show the antenna pattern functions of ET$_1$, ET$_2$, and ET$_3$, respectively. The black line, which is equal to zero for all values of RA, is obtained by summing the three. For simplicity, I only shown the projection along RA. The sum of the three is zero at all sky locations. This feature gives rise to an inherent null stream in the triangular configuration of ET.}
+    \caption[banana]{Illustration of how the null stream of \ETT~comes about. Projection of plus (left) and cross (right) antenna pattern functions along the right ascension (RA) coordinate. Blue, red, and green lines show the antenna pattern functions of ET$_1$, ET$_2$, and ET$_3$, respectively. The black line, which is equal to zero for all values of RA, is obtained by summing the three. For simplicity, I only shown the projection along RA. The sum of the three is zero at all sky locations. This feature gives rise to an inherent null stream in the triangular configuration of ET.}
     \label{fig:sum_patterns}
 \end{figure}
 
@@ -66,12 +66,11 @@ The null stream is a geometric feature of the triangle configuration of ET. It c
     \label{eq:sum_pattern}
     \sum_{i=1}^3 F_{+, i} = 0 ~ ~ \mathrm{and} ~ ~ \sum_{i=1}^3 F_{\times, i} = 0.
 \end{equation}
-We note that individual antenna pattern functions do vary over the whole sky (see Figure~\ref{fig:antenna_pattern} in chapter~\ref{ch:grgw}). And, indeed, the equalities presented in Eq.~\eqref{eq:sum_pattern} hold for the whole sky. As an illustration, we show the projection of antenna pattern functions along the right ascension (RA) coordinate in Figure~\ref{fig:sum_patterns}.
-
+We note that individual antenna pattern functions do vary over the whole sky (see Figure~\ref{fig:antenna_pattern} in chapter~\ref{ch:gws}). But the equalities presented in Eq.~\eqref{eq:sum_pattern} hold for the whole sky. As an illustration, we show the projection of antenna pattern functions along the right ascension (RA) coordinate in Figure~\ref{fig:sum_patterns}.
 
 \section{\texttt{nijntje}: null-stream inspired noise transient elimination framework}
 \label{sec:framework}
-The null stream of the triangular ET enables a novel framework to remove signal-overlapping glitches. For brevity, we refer to it as \texttt{nijntje} -- null-stream inspired noise transient elimination -- framework. Figure~\ref{fig:nijntje_chart} shows the workflow of the \texttt{nijntje} framework. In the remaining of this section, we explain the setup of our simulations and the operations within the \texttt{nijntje} framework.
+The null stream of the triangular ET enables a novel framework to remove signal-overlapping glitches. For brevity, we refer to it as \texttt{nijntje} -- null-stream inspired noise transient elimination -- framework. Figure~\ref{fig:nijntje_chart} shows the workflow of the \texttt{nijntje} framework. In this section, we explain the setup of our simulations and the operations within the \texttt{nijntje} framework.
 \begin{figure}
     \centering
     \includegraphics[width=16cm]{../figures/assemble_nijntje.pdf}
@@ -79,19 +78,20 @@ The null stream of the triangular ET enables a novel framework to remove signal-
     \label{fig:nijntje_chart}
 \end{figure}
 \subsubsection{Setup of the simulation}
-We consider a typical scenario where a glitch overlaps with a GW signal. While the glitches exhibit a range of morphology, here we choose a morphology that is ubiquitous in the data, i.e. the blips. For the sake of the example, we assume that the only interferometer encounters the glitch. The rest of the two interferometers of the triangle contain a GW signal in Gaussian noise. The GW source is placed at a redshift of 2, where the merger rate distribution of BBH peaks, making it a typical source. The source frame masses of the two black holes are $38\,M_\odot$ and $33\,M_\odot$. We use the IMRPhenomD waveform model for our analysis. These configuration choices results in a GW signal with a network signal-to-noise ratio (SNR) of 83 divided equally among three interferometers. The starting frequency of our analysis is 20 Hz, the sampling frequency is 2048 Hz, and we use ET-D PSD to simulate Gaussian noise~\cite{Hild:2010id}. Each arm of the triangle is 10km long. We inject a blip glitch in the ET$_1$ interferometer that overlaps with the GW signal. We ensure that the SNR of the glitch is similar to the SNR of the GW signal in ET$_1$, i.e. $83/\sqrt{3} \sim 47$. Thanks to recent developments in machine learning based methods, it is now possible to simulate glitches.  
-For example, the \texttt{gengli} codebase can generate blip glitches akin to the ones observed during the second observing run of Advanced LIGO and Virgo~\cite{Lopez:2022lkd, Lopez:2022dho}. An illustration of this setup is shown in the top panel of Figure~\ref{fig:nijntje_chart}. The glitch is only in ET$_1$ interferometer, the rest of the two interferometers contain the GW signals in Gaussian noise.
+We consider a typical scenario where a glitch overlaps with a GW signal. While the glitches exhibit a range of morphologies, here we choose a morphology that is ubiquitous in the data, i.e. the blips~\cite{Cabero:2019orq}. For the sake of the example, we assume that the only interferometer encounters the glitch. The rest of the two interferometers of the triangle contain a GW signal in Gaussian noise. The GW source is placed at a redshift of 2, where the merger rate distribution of BBH peaks, making it a typical source. The source frame masses of the two black holes are $38\,M_\odot$ and $33\,M_\odot$. We use the IMRPhenomD waveform model for our analysis. These configuration choices results in a GW signal with a network signal-to-noise ratio (SNR) of 83 divided equally among three interferometers. The starting frequency of our analysis is 20 Hz, the sampling frequency is 2048 Hz, and we use ET-D power spectral density (PSD) to simulate Gaussian noise. The ET-D PSD is currently the best prediction for what the noise PSD of ET may look like~\cite{Hild:2010id}. Each arm of the triangle is 10km long. We inject a blip glitch in the ET$_1$ interferometer that overlaps with the GW signal. We ensure that the SNR of the glitch is similar to the SNR of the GW signal in ET$_1$, i.e. $83/\sqrt{3} \sim 47$. Thanks to recent developments in machine learning based methods, it is now possible to simulate glitches.  
+For example, the \texttt{gengli} codebase can generate blip glitches akin to the ones observed during the second observing run of Advanced LIGO and Virgo~\cite{Lopez:2022lkd, Lopez:2022dho}. An illustration of this setup is shown in the top panel of Figure~\ref{fig:nijntje_chart}. In our setup, the glitch is only in ET$_1$ interferometer, the rest of the two interferometers contain the GW signals in Gaussian noise.
 
 \subsubsection{Executing the steps of \texttt{nijntje} framwork}
 Following the steps outlined in Figure~\ref{fig:nijntje_chart}, we formulate the null stream in step 1. By construction, the null stream does not contain any signal. It only contains the glitch and the sum of Gaussian noise from three interferometers. To subtract the glitch, we first want to obtain the corresponding time series. We do this using the unmodelled reconstruction method described in chapter \ref{ch:bayeswave}. Indeed, we do not need to be concerned about the possible leakage from the GW signal while performing the glitch reconstruction using the null stream. 
 
-In step 2, we reconstruct the glitch from the null stream. Specifically, we obtain the time series corresponding to the median parameters of the posterior samples. In step 3, we subtract it from the ET$_1$ interferometer data, making sure that it is scaled by a factor of $\sqrt{3}$ and the glitch onsets are aligned. This completes our step 3, and we finally \textit{cleaned} the glitch from ET$_1$. Next, to verify that our glitch mitigation is accurate, i.e., we have not removed part of the signal or we have not left behind a part of the glitch, we perform modelled reconstruction (also known as parameter estimation) on the GW signal, as described in chapter~\ref{ch:gwpe}. 
+In step 2, we reconstruct the glitch from the null stream. Specifically, we obtain the time series corresponding to the median parameters of the posterior samples. In step 3, we subtract it from the ET$_1$ interferometer data, making sure that it is scaled by a factor of $\sqrt{3}$ and the glitch onsets are aligned. This completes our step 3, and we finally \textit{cleaned} the glitch from ET$_1$. 
 
+Next, to verify that our glitch mitigation is accurate, i.e., we have not removed part of the signal or we have not left behind a part of the glitch, we perform modelled reconstruction (also known as parameter estimation) on the GW signal, as described in chapter~\ref{ch:gwpe}. We can compare the parameter measurements obtained by analysing the cleaned data with the one obtained from the data when we do not introduce any glitch. The latter serves as the benchmark for our comparison. Indeed, the parameter estimation step can be used to test the quality of glitch mitigation only in a simulated setting. In reality, we do not have a benchmark for comparison. 
 
 \section{Glitch mitigation in the absence of \texttt{nijntje} framework}
-The framework \texttt{ninjtje} is unique to the triangular geometry of the ET (\ETT). To compare \ETT~with an alternate configuration, we consider a network of two, distant L-shaped interferometers (referred to as ET-2L) located in Sardinia and the EMR region. In the absence of the \texttt{nijntje} framework, we perform a joint reconstruction of the GW signal and the glitch using the data from both interferometers. The joint modelling is prone to leakage, i.e, part of the glitch could be mismodelled as a signal and vice versa. Therefore, as introduced in Chatziioannou \textit{et al.}~\cite{Chatziioannou:2021ezd}, instead of modelling the GW signal itself with sine-Gaussian wavelets, a realistic signal model is employed with the expectation of reducing the mismodelling.
+The framework \texttt{nijntje} is unique to the triangular geometry of the ET (\ETT). To compare \ETT~with an alternate configuration, we consider a network of two, distant L-shaped interferometers (referred to as ET-2L) located in Sardinia and the EMR region. In the absence of the \texttt{nijntje} framework, we perform a joint reconstruction of the GW signal and the glitch using the data from both interferometers. The joint modelling is prone to leakage, i.e, part of the glitch could be mismodelled as part of the signal and vice versa. Therefore, as introduced in Chatziioannou \textit{et al.}~\cite{Chatziioannou:2021ezd}, instead of modelling the GW signal itself with sine-Gaussian wavelets, a realistic signal model is employed with the expectation of reducing the mismodelling.
 
-The setup of the simulation for the ET-2L network remains similar to the one described in section~\ref{sec:framework}. The GW signal parameters and the glitch morphology are the same as \ETT, leading to a GW network SNR of 124, with the Sardinia and EMR interferometers contributing SNRs of 90 and 85, respectively. The arm length of each interferometer is 15km, and the power spectral density (ET-D) is scaled accordingly, resulting in a higher GW signal SNR compared to \ETT. The glitch is introduced in the Sardinia interferometer, whose SNR matches the glitch SNR in ${\rm ET}_1$. For this setup, we perform a glitch mitigation using the BayesWave codebase -- a routinely used tool to perform joint modelling of the GW signal and glitch coherently across the detector network~\cite{Cornish:2014kda, Cornish:2020dwh, Chatziioannou:2021ezd, Hourihane:2022doe}. To reiterate, the GW signal here is modelled using the signal model, i.e. the IMRPhenomD model, and the glitch is modelled using wavelets. 
+The setup of the simulation for the ET-2L network remains similar to the one described in section~\ref{sec:framework}. The GW signal parameters and the glitch morphology are the same as \ETT, leading to a GW network SNR of 124, with the Sardinia and EMR interferometers contributing SNRs of 90 and 85, respectively. The arm length of each interferometer is 15 km, and the power spectral density (ET-D) is scaled accordingly, resulting in a higher GW signal SNR compared to \ETT. The glitch is introduced in the Sardinia interferometer, whose SNR matches the glitch SNR in ${\rm ET}_1$. For this setup, we perform a glitch mitigation using the BayesWave codebase -- a routinely used tool to perform joint modelling of the GW signal and glitch coherently across the detector network~\cite{Cornish:2014kda, Cornish:2020dwh, Chatziioannou:2021ezd, Hourihane:2022doe}. To reiterate, the GW signal here is modelled using the signal model, i.e. the IMRPhenomD model, and the glitch is modelled using wavelets. 
 
 One can model both the signal and the glitch using wavelets. This approach does not require prior knowledge of the GW signal model and, therefore, may seem ideal. However, this approach increases the amount of mismodelling and is hence not preferred~\cite{Chatziioannou:2021ezd}. 
 
@@ -105,7 +105,7 @@ One can model both the signal and the glitch using wavelets. This approach does 
 
 \section{Results of source parameter measurement: Triangle and 2L comparison}
 
-For each configuration, \ETT~and 2L, we consider 9 different scenarios. All settings are kept identical across these scenarios except the time interval between the GW merger and glitch onset. For \ETT, we perform glitch mitigation using \texttt{nijntje} to obtain the cleaned data. For ET-2L, in the absence of \texttt{nijntje} framework, we perform glitch mitigation by doing joint signal plus glitch modelling. After the glitch is removed, we perform the parameter estimation to quantify the accuracy of glitch mitigation. If the glitch mitigation is precise, the measurement should be similar to a scenario where a glitch is not introduced to the data. 
+For each configuration, \ETT~and 2L, we consider 9 different scenarios. All settings are kept identical across these scenarios except the time interval between the GW merger and glitch onset. For \ETT, we perform glitch mitigation using \texttt{nijntje} to obtain the cleaned data. For ET-2L, in absence of the \texttt{nijntje} framework, we perform glitch mitigation by doing joint signal plus glitch modelling. After the glitch is removed, we perform parameter estimation to quantify the accuracy of glitch mitigation. If the glitch mitigation is precise, the measurement should be similar to a scenario where a glitch is not introduced to the data. 
 
 Before we present the parameter estimation results, we showcase the results of glitch mitigation, i.e., how close the reconstructed glitch is to the true glitch. This serves as a precursor to the parameter estimation results since accurate glitch mitigation leads to accurate parameter measurement of GW. A visualisation of the glitch reconstruction is presented in Figure~\ref{fig:glitch_overlap}. The ET triangle configuration, due to the null stream, achieves a more accurate glitch reconstruction by avoiding mismodeling from the GW signal. In contrast, for the ET-2L configuration, inevitably, some additional features from the signal are incurred. 
 
@@ -173,11 +173,11 @@ The null stream provides us with an extra piece of information in the form of Eq
         \item Biases expected in the measurements. \textcolor{white}{Skip this line.}
         \item The signal model needs to be known \textit{a priori}. Biases expected to worsen if the signal model is not known or incorrect.
         \item $\mathcal{O}(10)$ hours per analysis. Difficult to scale to meet the demands of 3G-era. Specifically, to analyse the long, loud, and overlapping signals of the 3G-era. \textcolor{white}{Skip this line as well. Skip}
-        \item Biases worsen when two interferometers have unequal SNRs, i.e, the signal is in the blind spot of one L but bright spont of another.
+        \item Biases worsen when two interferometers have unequal SNRs, i.e, the signal is in the blind spot of one L but bright spot of another.
     \end{enumerate}
     &
     \begin{enumerate}[leftmargin=*, label=\arabic*.]
-        \item Quality of measurements is identical to the scenario when glitches are not introduced.
+        \item Quality of measurements is nearly identical to the scenario when glitches are not introduced.
         \item Does not require any prior knowledge of the signal model. \textcolor{white}{Skip this line. Skip this line. Skip this line.}
         \item $\mathcal{O}(1)$ hour per analysis. Enables an inexpensive, accurate, and easily scalable framework \texttt{nijntje}. A ready-to-use tool to analyse the long, loud, and overlapping signals using \ETT.
         \item Individual interferometer SNRs do not matter. Blind spots do not play a role.
@@ -189,7 +189,7 @@ The null stream provides us with an extra piece of information in the form of Eq
     \label{tab:nijntje_conclusion}
 \end{table}
 
-We plan to extend this work by including various kinds of signals and glitches in our analysis. Inspired by the seminal work of Dooney \textit{et al.}~\cite{Dooney:2025bfh}, integration of a deep learning based noise mitigation tool into \texttt{nijntje} framework is already underway. This feature will enable \texttt{nijntje} framework to run on GPUs, leading to a real-time glitch mitigation ($\mathcal{O}(1)$ second per glitch) and overall a sustainable approach for computation. 
+We plan to extend this work by including various kinds of signals and glitches in our analysis. Inspired by the seminal work of Dooney \textit{et al.}~\cite{Dooney:2025bfh}, the integration of a deep learning based noise mitigation tool into the \texttt{nijntje} framework is already underway. This feature will enable \texttt{nijntje} framework to run on GPUs, leading to a real-time glitch mitigation ($\mathcal{O}(1)$ second per glitch) and overall a sustainable approach for computation. 
 
 We also plan to investigate the possibility of occurrence and mitigation of coincident glitches, i.e., glitches that appear in all interferometers of a network at the same time. We also plan to investigate the impact of Newtonian noise -- the models of which remain largely uncertain at the time of writing of this thesis. In addition, the null stream can be constructed when all three interferometers are online. We leave it to future work to include the duty cycle in our analyses. Note that, in the absence of a null stream, one can revert to performing joint signal and glitch mitigation for the triangular configuration. Indeed, the duty cycle will affect ET-2L as well. In the events when one of the two Ls is offline, the performance of glitch mitigation and GW parameter estimation is expected to worsen.
 
