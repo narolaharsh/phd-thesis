@@ -151,9 +151,7 @@ namely luminosity distance and sky location, are inconsistent with the benchmark
 
 \subsubsection{Glitch onset away from the GW merger}
 
-Finally, we turn to the scenarios when the glitch does not coincide with the merger. Figure~\ref{fig:trend} shows that the characteristics of extrinsic parameter recovery remain consistent 
-across different $\Delta t$ values. A negative (positive) value of $\Delta t$ implies that the glitch 
-onset falls before (after) the GW merger. For all time intervals considered, the~\ETT~configuration 
+Finally, we turn to the scenarios when the glitch does not coincide with the merger. Figure~\ref{fig:trend} shows that the characteristics of extrinsic parameter recovery remain consistent across different $\Delta t$ values. A negative (positive) value of $\Delta t$ implies that the glitch onset falls before (after) the GW merger. We show the measurements of distance ($D_{\mathrm{L}}$) and sky localisation $(\Omega)$. The sky localisation contours are constructed from the right ascension and declination measurements. For all time intervals considered, the~\ETT~configuration 
 yields measurements where the true distance and sky location lie within $3\sigma$ and closely 
 align with the no-glitch benchmark. In contrast, with the ET-2L configuration, the resulting measurements 
 are wider or generally exclude the true values, except when the glitch onset is 100 ms before or 20 ms after the merger. We infer that at those values of $\Delta t$, the glitch is far enough from the GW signal to cause any biases. 
@@ -202,7 +200,6 @@ Searches for strong lensing of GW signals look for overlaps between the paramete
 Searches for anomalous dispersion of gravitational waves due to violations of general relativity also require accurate distance measurements~\cite{LIGOScientific:2021sio}. Biases caused in the distance measurements due to glitches could be harmful here as well. Another science cases that require accurate distance measurements is the search for anomalous propagation of gravitational waves, discussed in more detail in chapter~\ref{ch:mod_prop}.
 
 We note that in studies where information from multiple GW sources is combined, it will often be a relatively limited set of loudest signals that drive the combined result (tests of general relativity being a clear example \cite{LIGOScientific:2021sio}). If measurements on even a small fraction of these events are corrupted, it could adversely affect inference on the population as a whole. 
-
 
 \subsubsection{Future work}
 We plan to extend this work by including various kinds of signals and glitches in our analysis. Inspired by the seminal work of Dooney \textit{et al.}~\cite{Dooney:2025bfh}, the integration of a deep learning based noise mitigation tool into the \texttt{nijntje} framework is already underway. This feature will enable \texttt{nijntje} framework to run on GPUs, leading to a real-time glitch mitigation ($\mathcal{O}(1)$ second per glitch) and overall a sustainable approach for computation. 
