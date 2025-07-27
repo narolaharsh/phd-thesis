@@ -5,10 +5,10 @@ When reconstructing GW signals to measure source parameters, we typically rely o
 \begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{../figures/gw170817scan.png}
-    \caption{A loud glitch overlapping with the binary neutron star signal, GW170817, in the LIGO-Livingston interferometer. Dashed white arrows are added to help the reader trace the signal.}
+    \caption{Time-frequency spectrogram of a loud glitch overlapping with the binary neutron star signal, GW170817, in the LIGO-Livingston interferometer. Dashed white arrows are added to help the reader trace the signal.}
     \label{fig:bns_scan}
 \end{figure}
-A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is assumed to be Gaussian and stationary, the occurrence of a glitch violates this assumption. As most of our physics inferences hinge on the assumption that background noise is Gaussian-stationary, a violation of it could corrupt the inferences. Depending on the time of occurrence, glitches can be problematic in two ways,
+A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is often assumed to be Gaussian and stationary (see Eq.~\eqref{eq:likelihood}), the occurrence of a glitch violates this assumption. As most of our physics inferences hinge on the assumption that background noise is Gaussian-stationary, a violation of it could corrupt the inferences. Depending on the time of occurrence, glitches can be problematic in two ways,
 \begin{itemize}
 
 \item \textit{Glitches overlapping with a GW signal.} Glitches occurring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from the merger of two neutron stars (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
@@ -35,17 +35,17 @@ When performing unmodelled reconstruction, the dimensionality of the parameter s
 \begin{figure}
     \centering
     \includegraphics[width=12cm]{../figures/morlet_gabour.pdf}
-    \caption{Morlet-Gabour wavelet in time (left) and frequency (right) domain}
+    \caption{Morlet-Gabor wavelet in time (left) and frequency (right) domain}
     \label{fig:mg_wav}
 \end{figure}
-When performing unmodelled reconstruction, we use Morlet-Gabor wavelets as base functions. It can be expressed in the time domain as:
+When performing unmodelled reconstruction, we use Morlet-Gabor wavelets as base functions. They can be expressed in the time domain as:
 \begin{equation}
     \label{eq:wavelet}
  \vec{\psi}(t; A, Q, t_0, f_0, \phi_0) = A~e^{-\frac{(t-t_0)^2}{2\tau^2}}~\sin{\left(2{\pi}f_0(t-t_0) + \phi_0\right)},
 \end{equation}
 where $t$ denotes time, $A$ denotes amplitude, $\tau = Q/(2{\pi}f_0)$ denotes the quality factor that controls the spread of the wavelet, $\phi_0$ denotes initial phase, $t_0$ and $f_0$ respectively correspond to time and frequency at the peak of the amplitude. In Figure~\ref{fig:mg_wav}, we show a time (left) and frequency (right) domain representation of a wavelet with parameters $Q = 20$, $t_0=1$ second, and $f_0 = 40$ Hz. 
 
-Morlet-Gabor wavelets are suitable for the problem at hand because glitches $(\vec{g})$ we want to reconstruct can be expressed as a linear combination of $N$ wavelets~\cite{Cornish:2014kda},
+Morlet-Gabor wavelets are suitable for the problem at hand because glitches $(\vec{g})$ we want to reconstruct can be approximated by a linear combination of $N$ wavelets~\cite{Cornish:2014kda},
 \begin{equation}
  \vec{g}(t; \vec{\theta}) = \sum_{k = 0}^{N} \vec{\psi}_k(t; \vec{\theta}_k),
 \end{equation}
@@ -57,7 +57,7 @@ Besides ${\vec{\theta}}$, here $N$ itself is an unknown parameter therefore the 
 Markov chain Monte Carlo (MCMC) is a subclass of Monte Carlo methods, a class of computational methods that rely on repeated random sampling. Markov chain in particular refers to an iterative process where the probability of accepting a proposal at $t^{\mathrm{th}}$ iteration depends only on the point from the previous iteration. If we denote the probability by $p_t$, 
 
 \begin{equation}
-p_t(\vec{\theta}') = \int \mathrm{d}\vec{\theta}_{t-1}~T(\vec{\theta}', \vec{\theta}_{t-1})~\vec{\theta}_{t-1}
+p_t(\vec{\theta}') = \int \mathrm{d}\vec{\theta}_{t-1}~T(\vec{\theta}', \vec{\theta}_{t-1})~\vec{\theta}_{t-1},
 \end{equation}
 where $\vec{\theta}'$ is the proposed point, $\vec{\theta}_{t-1}$ is the point from previous iteration, and $T$ is the transition probability. 
 
@@ -111,18 +111,17 @@ A general treatment of switching dimensions was proposed in 1995 by Peter Green~
 \end{itemize}
 The stationary move is trivial and the same as the Metropolis-Hastings algorithm. The birth and death moves are typically the most complicated ones. 
 
-Before explaining the steps required to perform birth and death moves let us define a few standard quantities. Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. Let us say that state $\vec{\theta}$ has $N$ wavelets and $\vec{\theta'}$ has $N'$ wavelets. Since each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}) so $\vec{\theta}$ has $5\times N$ dimensions and $\vec{\theta'}$ has $5\times N'$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$. Now we can rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
+Before explaining the steps required to perform birth and death moves let us define a few standard quantities. Let us denote the current state by $\vec{\theta}$ and a proposal state by $\vec{\theta'}$. Let us say that state $\vec{\theta}$ has $N$ wavelets and $\vec{\theta'}$ has $N'$ wavelets. Since each wavelet needs 5 model parameters (Eq~\eqref{eq:wavelet}), the vector $\vec{\theta}$ has $5\times N$ dimensions and the vector $\vec{\theta'}$ has $5\times N'$ dimensions. We denote the dimensions of $\vec{\theta}~(\vec{\theta'})$ by $D~(D')$. Now we can rewrite the acceptance ratio $\alpha$ from Eq~\eqref{eq:mh_algo} as,
 \begin{align}
-    \alpha = \mathrm{min}~\left \{1,~\frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{Q(\vec{\theta}, D | \vec{\theta}', D')}{Q(\vec{\theta}', D' | \vec{\theta}, D)} \right \},
+    \alpha = \mathrm{min}~\left \{1,~\frac{p(\vec{\theta}', D'| \vec{d})}{p(\vec{\theta}, D | \vec{d})} \frac{Q(\vec{\theta}, D | \vec{\theta}', D')}{Q(\vec{\theta}', D' | \vec{\theta}, D)} \right \}.
             %&= \frac{p(\{A'_1, A'_2\} | \vec{d})}{p(\{A_1\} | \vec{d})}~\frac{Q(\{A_1, d\} | \{A'_1, A'_2, d'\})}{Q(\{A'_1, A'_2, d'\} | \{A_1, d\})}
 \end{align}
 
 \subsubsection{From Lower to Higher dimension}
-Let's say we want to jump from a one-wavelet state $\vec{\theta}$ to a two-wavelet state $(\vec{\theta'})$. So $\vec{\theta} (\vec{\theta'})$ will have five (ten) dimensions. Since the current state has fewer dimensions than the proposed state, we need two additional quantities to account for the missing dimensions. 
-
+Let's say we want to jump from a one-wavelet state $\vec{\theta}$ to a two-wavelet state $(\vec{\theta'})$. So $\vec{\theta} (\vec{\theta'})$ will have five (ten) dimensions. Since the current state has fewer dimensions than the proposed state, we need two additional quantities to account for the missing dimensions:
 \begin{itemize}
-    \item An auxiliary probability distribution $(\vec{p}_{\mathrm{aux}})$
-    \item A bijective and continuously differentiable function i.e. a diffeomorphism $(h)$
+    \item An auxiliary probability distribution $(\vec{p}_{\mathrm{aux}})$;
+    \item A bijective and continuously differentiable function i.e. a diffeomorphism $(h)$;
 \end{itemize}
 
 The user may choose any auxiliary probability distribution from which it is easy to sample as long as the dimensions match
@@ -131,12 +130,11 @@ The user may choose any auxiliary probability distribution from which it is easy
 \end{equation}
 Let ${\vec{p}_{\mathrm{aux}}}$ be a five-dimensional uniform distribution and let the bijective function be an exponential so the logarithmic function will be its inverse. 
 
-For simplicity of the notation, we write down only the wavelet amplitude parameters (see Eq.~\eqref{eq:wavelet}) of the current state ($A_1$) and the proposed state $(A'_1, A'_2)$. Let $w$ be a sample from $\vec{p}_{\mathrm{aux}}$
-
+For simplicity of the notation, we write down only the wavelet amplitude parameters (see Eq.~\eqref{eq:wavelet}) of the current state ($A_1$) and the proposed state $(A'_1, A'_2)$. Let $w$ be a sample from $\vec{p}_{\mathrm{aux}}$;
 \begin{equation}
  (A_1, w) \xrightarrow[]{f} (A_1, e^{w}) \coloneq (A'_1, A'_2).  
 \end{equation}
-We chose an $f$ mapping $A_1$ to $A'_1$ and $w$ to $e^w$. Now, the dimension of the current state matches the dimensions of the proposed state. Another remaining factor is the determinant of the Jacobian,
+We choose an $f$ mapping $A_1$ to $A'_1$ and $w$ to $e^w$. Now, the dimension of the current state matches the dimensions of the proposed state. Another remaining factor is the determinant of the Jacobian,
 
 \begin{equation}
     \label{eq:jacob}
@@ -148,28 +146,27 @@ We chose an $f$ mapping $A_1$ to $A'_1$ and $w$ to $e^w$. Now, the dimension of 
         \end{array}
  \right| = e^{w},
 \end{equation}
-which accounts for the change of variables. The acceptance ratio can now be written as
-
+which accounts for the change of variables. The acceptance ratio can now be written as,
 
 \begin{equation}
-    \alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'} | \vec{d})}{p(\vec{\theta} | \vec{d})} \frac{\vec{p}_{\mathrm{aux}}(w)~p(D' | D)}{p(D | D')} \left| \frac{\partial (A'_1, A'_2)}{\partial (A_1, w)} \right| \right \}
+    \alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'} | \vec{d})}{p(\vec{\theta} | \vec{d})} \frac{\vec{p}_{\mathrm{aux}}(w)~p(D' | D)}{p(D | D')} \left| \frac{\partial (A'_1, A'_2)}{\partial (A_1, w)} \right| \right \}.
 \end{equation}
 If we assume that all states are equally likely i.e. $p(D | D') = p(D' | D)$, and substitute the value of the determinant from Eq.\eqref{eq:jacob},
 
 \begin{equation}
-\alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'}  | \vec{d})}{p(\vec{\theta} | \vec{d})}~\vec{p}_{\mathrm{aux}}(w)~e^{w}  \right \}
+\alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta'}  | \vec{d})}{p(\vec{\theta} | \vec{d})}~\vec{p}_{\mathrm{aux}}(w)~e^{w}  \right \}.
 \end{equation}
 
 \subsubsection{From higher to lower dimension}
-When going from high dimensions to low dimensions, it is incorrect to simply do
+When going from high dimensions to low dimensions, it is incorrect to simply do;
 \begin{equation}
- \mathrm{Incorrect:} ~~ ~ ~ ~ ~ (A'_1, A'_2) \rightarrow (A_1)
+ \mathrm{Incorrect:} ~~ ~ ~ ~ ~ (A'_1, A'_2) \rightarrow (A_1).
 \end{equation}
-One needs to define the inverse of $f$. The inverse will be a logarithmic function since we chose $f$ to be the exponential function. Let us denote the inverse by $f'$, then when going from higher dimension to lower dimensions, 
+We need to define the inverse of $f$. The inverse will be a logarithmic function since we chose $f$ to be the exponential function. Let us denote the inverse by $f'$, then when going from higher dimension to lower dimensions, 
 \begin{equation}
- (A'_1, w') \xrightarrow[]{f'} (A_1, \ln{w'})
+ (A'_1, w') \xrightarrow[]{f'} (A_1, \ln{w'}),
 \end{equation}
-where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\mathrm{aux}}$ and it may or may not be the same as the previous auxiliary distribution $\vec{p}_{\mathrm{aux}}$. The Jacobian in this case  will turn out to be
+where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\mathrm{aux}}$ and it may or may not be the same as the previous auxiliary distribution $\vec{p}_{\mathrm{aux}}$. The Jacobian and acceptance ratio in this case  will turn out to be;
 
 \begin{equation}
  \left| \frac{\partial (A_1, A_2)}{\partial (A'_1, w')} \right| =  \left| 
