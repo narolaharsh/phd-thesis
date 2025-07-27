@@ -1,4 +1,4 @@
-Gravitational wave signals emitted by the merger of two compact objects are routinely detected by the current generation of GW detectors. Such a GW signal can typically be modelled using 15 parameters. Eight of them are considered intrinsic parameters; two for the masses and six for the three-dimensional spins of the two objects. The rest of them, e.g. sky location and distance, are considered extrinsic parameters. If one of the compact objects is a neutron star, an additional intrinsic parameter is added to model its tidal deformability. Measurement of these parameters is a key step which enables various physics-related insights from the data, e.g. testing the prediction of general relativity, constraining the neutron star equation of state. In this chapter, I illustrate how the parameters of merging binary black holes and/or neutron stars are measured from a GW signal. 
+Gravitational wave signals emitted by the merger of two compact objects are routinely detected by the current generation of GW detectors. Such a GW signal can typically be modelled using 15 parameters. Eight of them are considered intrinsic parameters; two for the masses and six for the three-dimensional spins of the two objects. The rest of them, e.g. sky location and distance, are considered extrinsic parameters. If one of the compact objects is a neutron star, an additional intrinsic parameter is added to model its tidal deformability. Measurement of these parameters is a key step which enables various physics-related insights from the data, e.g. testing the prediction of general relativity, constraining the neutron star equation of state. Following the well-established method of Bayesian parameter inference~\cite{Veitch:2014wba, Romero-Shaw:2020owr}, I illustrate how the parameters of merging binary black holes and/or neutron stars are measured from a GW signal. 
 
 \section{What counts as a measurement?}
 \begin{figure}
@@ -25,7 +25,7 @@ We formalize the problem of converting the prior probability distribution to the
     \label{eq:bayes}
  p(\vec{\theta} | \vec{d}) = \frac{\pi(\vec{\theta})~p(\vec{d} | \vec{\theta})}{p(\vec{d})},
 \end{equation}
-where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}$ which is typically assumed to be uniform. The term $p(\vec{d} | \vec{\theta})$ is the likelihood of observing data given the parameters $\vec{\theta}$. The term $p(\vec{d})$ can be treated as the normalization term for the time being. This term is typically known as the evidence if we use Bayes's theorem to test competing hypotheses. Figure~\ref{fig:prior_post} shows an illustration of the prior probability distribution (blue) and the posterior probability distribution (red) of the parameter $(D_{\mathrm{L}})$ where the latter is obtained by updating the prior weights by the weight of likelihood (green) for the corresponding value.
+where $\pi(\vec{\theta})$ is the prior probability distribution of $\vec{\theta}$ which is typically assumed to be uniform. The factor $p(\vec{d} | \vec{\theta})$ is the likelihood of observing data given the parameters $\vec{\theta}$. The factor $p(\vec{d})$ can be treated as the normalization factor for the time being. This factor is typically known as the evidence if we use Bayes's theorem to test competing hypotheses. Figure~\ref{fig:prior_post} shows an illustration of the prior probability distribution (blue) and the posterior probability distribution (red) of the parameter $(D_{\mathrm{L}})$ where the latter is obtained by updating the prior weights by the weight of likelihood (green) for the corresponding value.
 
 \subsection{Gravitational wave likelihood}
 While the Bayesian framework described above is conceptually easy, it is a computationally challenging task to do parameter estimation due to the dimensionality of the space of $\vec{\theta}$ (typically 15 to 17), length of the $\vec{d}$, and complexity of simulating of GW signal models. Before diving into how we tackle these issues, let us define a few standard quantities used during the computation, starting with the likelihood function $p(\vec{d} | \vec{\theta})$ itself;
@@ -33,7 +33,7 @@ While the Bayesian framework described above is conceptually easy, it is a compu
 \begin{figure}
     \centering
     \includegraphics[width=8cm]{../figures/white_noise_distribution.pdf}
-    \caption{To test the Gaussian-stationary nature, we compare the distribution of whitened data (blue) with the normal distribution (red). We used 16 seconds of the data segment from LIGO-Livingstone interferometer and the PSD is generated using 2048 seconds of data near the segment.}
+    \caption{To test the Gaussian-stationary nature, we compare the distribution of 16-seconds of whitened data segment of LIGO-Livingston (blue histogram) with the normal distribution (red outline). The PSD is generated using 2048 seconds of data near the segment.}
     \label{fig:white_data}
 
 \end{figure}
@@ -56,10 +56,10 @@ where $\vec{h}$ denotes the GW signal as a function of the source parameters $\v
     \label{eq:nwe}
  <\vec{a}|\vec{b}> = \frac{4}{T}~\sum_{f}~\frac{\tilde{a}(f)~\tilde{b}^{*}(f)}{S_{n}(f)},
 \end{equation}
-where $T$ is the duration of segment $\vec{d}$ we want to analyze, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The term $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD). The expression for the log likelihood in Eq.~\eqref{eq:likelihood} is for one detector. For a network of detectors, it turns into a sum of log likelihood for each detector in the network. 
+where $T$ is the duration of segment $\vec{d}$ we want to analyse, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The factor $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD). The sum is over the evenly distributed discrete frequencies. The lower frequency cutoff for LIGO-Virgo is typically 20 Hz, and the upper frequency cutoff is typically 1024 Hz. The expression for the log likelihood in Eq.~\eqref{eq:likelihood} is for one detector. For a network of detectors, it turns into a sum of log likelihoods over the detectors in the network. 
 
 \subsection{Gaussian noise approximation}
-The expression of the likelihood function is inspired by the so-called Whittle likelihood which is typically used to analyze Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationary at all times, for the short stretches of data that we analyze, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. The likelihood expression in Eq. \eqref{eq:likelihood} is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and variance equal to $S_n(f)$ for each frequency. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal, the first direct detection of a GW signal from the merger of two black holes. 
+The expression of the likelihood function is inspired by the so-called Whittle likelihood which is typically used to analyse Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationary at all times, for the short stretches of data that we analyse, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. The likelihood expression in Eq. \eqref{eq:likelihood} is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and variance equal to $S_n(f)$ for each frequency. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal, the first direct detection of a GW signal from the merger of two black holes. We also note that the detectors routinely encounter noise artefacts which make the noise distribution non-Gaussian and/or non-stationary, as will become clear in the next chapter.
 
 \section{Waveforms}
 
@@ -77,7 +77,7 @@ In the case of binary black holes (BBHs), we typically need 15 parameters descri
 
 
 \section{Nested sampling}
-When performing parameter estimation, we need to explore the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^{15}$ to $10^{17}$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling algorithms to efficiently explore a large parameter space. Here, I explain Nested sampling, an algorithm routinely used for parameter estimation and also the one used to obtain the majority of the results in the later chapters of this thesis. 
+When performing parameter estimation, we need to explore the likelihood function on large parameter space. For example, if we choose only 10 points along each dimension of the parameter space, we need to perform about $10^{15}$ to $10^{17}$ likelihood evaluation where each evaluation takes $\mathcal{O}(10)$ milliseconds. Indeed, 10 points may be too sparse to cover each dimension. Therefore, we rely on various sampling algorithms to efficiently explore a large parameter space. Here, I explain nested sampling, an algorithm routinely used for parameter estimation and also the one used to obtain the majority of the results in the later chapters of this thesis. 
 
 %\subsection{Nested sampling}
 \begin{figure}
@@ -86,22 +86,22 @@ When performing parameter estimation, we need to explore the likelihood function
     \caption{\textit{Left}: Constant likelihood surfaces for a two dimensional parameter space $\vec{\theta} = \{\theta_1, \theta_2\}$, illustrating the nested contours. \textit{Right}: Evolution of the prior mass ($X$) enclosed by the constant likelihood surfaces shown in the left plot.}
     \label{fig:nests}
 \end{figure}
-The nested sampling algorithm was introduced in 2004 by John Skilling~\cite{Skilling:2006gxv} and it was first applied to analyze GW signals by Veitch and Vecchio~\cite{Veitch:2009hd}. The name derives from the fact that the progression of the algorithm relies on \textit{nested} contours of likelihood (Figure~\ref{fig:nests} (left)) and not the individual likelihood values. The algorithm aims to compute the evidence~$Z$, 
+The nested sampling algorithm was introduced in 2004 by John Skilling~\cite{Skilling:2006gxv} and it was first applied to analyse GW signals by Veitch and Vecchio~\cite{Veitch:2009hd}. The name derives from the fact that the progression of the algorithm relies on \textit{nested} contours of likelihood (Figure~\ref{fig:nests} (left)) and not the individual likelihood values. The algorithm aims to compute the evidence~$Z$, 
 \begin{equation}
 \label{eq:evidence}
  Z = \int~\mathrm{d}\vec{\theta}~\pi(\vec{\theta})~p(\vec{d} | \vec{\theta})
 \end{equation}
 %    %&= \int~\mathrm{d}\vec{\theta}~p(\vec{d}| \vec{\theta})~\pi(\vec{\theta})
-where the integrand on the right-hand side is simply the product of the likelihood and the prior defined in Eq. \eqref{eq:bayes}, i.e., $Z$ is the normalization constant from that equation.
-The posterior distribution on the model parameters, $p(\vec{\theta} | \vec{d})$, is obtained as a byproduct. In this sense, Nested sampling is an algorithm to perform multidimensional integral.  
+where the integrand on the right-hand side is simply the product of the likelihood and the prior defined in Eq. \eqref{eq:bayes}, i.e., $Z$ is the normalization constant from $p(d)$ that equation.
+The posterior distribution on the model parameters, $p(\vec{\theta} | \vec{d})$, is obtained as a byproduct. In this sense, nested sampling is an algorithm to perform multidimensional integral.  
 
-Typically, one can divide the parameter space of $\Delta\vec{\theta}$ into smaller cubes such that the integrand nearly remains constant over the cube and then sum over the whole space to obtain $Z$. However, this approach quickly becomes intractable. Here, we instead divide the space into contours created by constant likelihood surfaces (Figure~\ref{fig:nests}). For simplicity let us denote the likelihood term $p(\vec{d} | \vec{\theta})$ by $\mathcal{L}(\vec{\theta})$. %The left plots illustrates three surfaces of constant likelihoods, $\mathcal{L}_1 < \mathcal{L}_2 < \mathcal{L}_3$. 
+Typically, one can divide the parameter space of $\Delta\vec{\theta}$ into smaller cubes such that the integrand nearly remains constant over the cube and then sum over the whole space to obtain $Z$. However, this approach quickly becomes intractable. Here, we instead divide the space into contours created by constant likelihood surfaces (Figure~\ref{fig:nests}). For simplicity let us denote the likelihood factor $p(\vec{d} | \vec{\theta})$ by $\mathcal{L}(\vec{\theta})$. %The left plots illustrates three surfaces of constant likelihoods, $\mathcal{L}_1 < \mathcal{L}_2 < \mathcal{L}_3$. 
 Let us define $X(\lambda)$ as,
 \begin{equation}
     \label{eq:prior_mass}
 X(\lambda) = \int_{\mathcal{L}(\vec{\theta}) > \lambda}~\pi(\vec{\theta})~\mathrm{d}\vec{\theta},
 \end{equation}
-which is the prior mass obtained by integrating $\pi(\vec{\theta})$ over the region of parameter space where $\mathcal{L}(\vec{\theta}) > \lambda$. Since the prior is a normalized probability distribution, its integration over the entire space spanned by $\vec{\theta}$ is 1, therefore the maximum value of $X$ is also 1. As $\lambda$ increases, $X$ tends to zero as the volume over which prior needs to be integrated grows smaller (Figure~\ref{fig:nests}) and smaller. Using Eq. \eqref{eq:prior_mass}, we can convert the multidimensional integral of Eq. \eqref{eq:evidence} into one dimensional integration, 
+which is the prior mass obtained by integrating $\pi(\vec{\theta})$ over the region of parameter space where $\mathcal{L}(\vec{\theta}) > \lambda$. Since the prior is a normalized probability distribution, its integration over the entire space spanned by $\vec{\theta}$ is 1, therefore the maximum value of $X$ is also 1. As $\lambda$ increases, $X$ tends to zero as the volume over which prior needs to be integrated grows smaller and smaller~(Figure~\ref{fig:nests}). Using Eq. \eqref{eq:prior_mass}, we can convert the multidimensional integral of Eq. \eqref{eq:evidence} into one dimensional integration, 
 \begin{equation}
     \label{eq:oned}
  Z = \int_0^{1} \mathrm{d} X~\hat{\mathcal{L}}(X),
@@ -120,7 +120,7 @@ Once we calculate $Z$, the posterior probability of point $\vec{\theta}_k$ can b
 \end{equation}
 as mentioned near the beginning of this sub-section. 
 
-Although we have defined prior mass X, we have so far not specified how it is calculated once the sampling starts. The quantity X is non-increasing in nature and its value ranges from 1 to 0. Treating it as a random variable, its probability distribution can be approximated with the uniform distribution,  
+Although we have defined prior mass X, we have so far not specified how it is calculated once the sampling starts. The quantity $X$ is non-increasing in nature and its value ranges from 1 to 0. Treating it as a random variable, its probability distribution can be approximated with the uniform distribution,  
 \begin{equation}X \sim U(0, 1)\end{equation} and the corresponding cumulative distribution function is,
 \begin{equation}
  F(X) = \int_{0}^{X} \mathrm{d} X' = X.
@@ -141,7 +141,7 @@ We have assumed that $X$ and $\chi$ range from 0 and 1. However, as the algorith
 \begin{equation}
  t \sim B(K, 1).
 \end{equation}
-We provide the pseudocode of how the nested sampling progresses in Algorithm block~\ref{alg:nes_sam}. The pseudocode is generalized for K number of live points. For a typical parameter estimation run, one uses $\mathcal{O}(10^3)$ live points. 
+We provide the pseudocode of how the nested sampling progresses in Algorithm block~\ref{alg:nes_sam}. The pseudocode is generalized for $K$ number of live points. For a typical parameter estimation run, one uses $\mathcal{O}(10^3)$ live points. 
 \RestyleAlgo{ruled}
 \begin{algorithm}
     \SetKwComment{Comment}{//~}{}
@@ -152,7 +152,7 @@ We provide the pseudocode of how the nested sampling progresses in Algorithm blo
     \Input{Likelihood function $\mathcal{L}(\vec{\theta})$, prior distribution $\pi(\vec{\theta})$, and number of live points $K$}
     \Output{Evidence estimate $Z$ and posterior samples $p(\vec{\theta} | \vec{d})$}
 
-    \Comment{Initialize the algorithm}
+    \Comment{Initialise the algorithm}
  Choose $K$ live points $\{\vec{\theta}_1, \vec{\theta}_2, ..., \vec{\theta}_K\}$ from the prior $\pi(\vec{\theta})$, compute likelihoods $\{\mathcal{L}_k = \mathcal{L}(\vec{\theta}_k)\}$, set initial prior volume $X_0 = 1$, iteration $i = 0$, and $Z = 0$\;
     \Comment{Starting main loop}
     \While{termination criterion not met}
@@ -166,24 +166,24 @@ We provide the pseudocode of how the nested sampling progresses in Algorithm blo
  Increase Z by adding $\Delta Z =  \frac{1}{2}\left(\mathcal{L}_i + \mathcal{L}_{i-1}\right) \left(X_i - X_{i-1}\right)$\;
  Evaluate termination criterion\;
         \eIf{criterion not met}
- {Sample a new point from the prior such that its likelihood is higher than the point that was just discarded. Add it to the set of live points so that the number of live points is equal to K again\;
+ {Sample a new point from the prior such that its likelihood is higher than the point that was just discarded. Add it to the set of live points so that the number of live points is equal to $K$ again\;
         $i = i+1$\;}{{criterion met}}
         
  }
 \end{algorithm}
 \subsubsection{Terminating criterion}
-Since the aim of the Nested sampling algorithm is to accumulate the evidence Z in small increments of $\Delta Z$, it may be terminated when the increment is smaller than a user-specified number $\epsilon$,
+Since the aim of the nested sampling algorithm is to accumulate the evidence $Z$ in small increments of $\Delta Z$, it may be terminated when the increment is smaller than a user-specified number $\epsilon$,
 \begin{equation}
  \ln{\left(Z_i + X_i \mathcal{L}_{\mathrm{max}}\right)} - \ln{(Z_i)} < \epsilon,
 \end{equation}
 where $\mathcal{L}_{\mathrm{max}}$ is the maximum value of likelihood encountered during sampling. 
 
 \subsection{Limitations of modelled reconstruction}
-While Nested sampling has become the preferred choice of sampling algorithm for parameter estimation of GW signals~\cite{Speagle:2019ivv, Ashton:2018jfp}, it certainly still has some aspects that can be improved upon. 
+While the nested sampling has become the preferred choice of sampling algorithm for parameter estimation of GW signals~\cite{Speagle:2019ivv, Ashton:2018jfp}, it certainly still has some aspects that can be improved upon;
 \begin{enumerate}
-    \item Sampling over a variable parameter space, i.e., when the dimension of the model itself is an unknown parameter, is not straightforward. 
+    \item Sampling over a variable-dimensional parameter space, i.e., when the dimension of the model itself is an unknown parameter, is not straightforward. 
     \item The stopping criteria of the algorithm are somewhat arbitrary. 
     \item The algorithm scales poorly as the dimensions of the model increase.
-    \item Hard to achieve independent samples.
+    %\item Hard to achieve independent samples.
 \end{enumerate}
 
