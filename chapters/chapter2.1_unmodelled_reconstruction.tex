@@ -182,13 +182,12 @@ where $w'$ is either chosen from another auxiliary distribution $\vec{p'}_{\math
     \alpha = \mathrm{min} \left \{1,~\frac{p(\vec{\theta}  | \vec{d})}{p(\vec{\theta'} | \vec{d})}~\vec{p}_{\mathrm{aux}}(w')~\frac{1}{w'}  \right \}
 \end{equation}
 
-\section{Limitations of unmodelled reconstruction}
-Unmodelled reconstruction of generic excess power also has important use cases. These include reconstruction of instrumental glitches, noise power spectral density, and reconstruction of signals which are costly to simulate such as GWs from the core-collapse of supernova and the post-merger phase of a BNS signal~\cite{Cornish:2014kda, Cornish:2020dwh}. This approach also has a few limitations that can be improved upon,
+\section{Limitations and use-cases of the unmodelled reconstruction}
+Although the unmodelled reconstruction discussed in this chapter has some important use cases, it has a few limitations. 
 \begin{enumerate}
     \item In contrast to Nested sampling, the aim here is to obtain the posterior probability distribution. Additional computations are required to obtain the evidence. 
-    \item The rate of convergence in the case of RJMCMC depends on the choice of auxiliary distribution and bijective functions. A universal choice that works for all use cases in GWs is difficult to determine. It has more number of tuning parameters compared to the fixed dimension reconstruction done by Nested sampling. 
-    \item The termination criteria are not well defined. \asam{This is more for caution; if you used this algorithm later though, somebody is bound to ask then how did you terminate?}
-    \item The lack of orthogonality of Morlet-Gabor wavelets may also reduce the rate of convergence.
+    \item The rate of convergence in the case of RJMCMC depends on the choice of auxiliary distribution and bijective functions. A universal choice that works for all use cases in GWs is difficult to determine. It has a larger number of tuning parameters compared to the fixed dimension reconstruction done by Nested sampling. 
+    \item The termination criteria are not well defined.
+    \item The lack of orthogonality of Morlet-Gabor wavelets may also reduce the rate of convergence. 
 \end{enumerate}
-
-
+Despite the limitation, it remains the state-of-the-art approach to reconstruct instrumental glitches, noise power spectral density, and reconstruction of signals which are costly to simulate, such as GWs from the core-collapse of supernova and the post-merger phase of a BNS signal. Specifically, the methodology for unmodelled reconstruction described in this chapter makes the core of the BayesWave codebase~\cite{Cornish:2014kda, Cornish:2020dwh}. We will discuss more about this in the next chapter. 
