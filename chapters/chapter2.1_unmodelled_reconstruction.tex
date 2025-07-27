@@ -5,20 +5,20 @@ When reconstructing GW signals to measure source parameters, we typically rely o
 \begin{figure}[h]
     \centering
     \includegraphics[width=12cm]{../figures/gw170817scan.png}
-    \caption{Time-frequency spectrogram of a loud glitch overlapping with the binary neutron star signal, GW170817, in the LIGO-Livingston interferometer. Dashed white arrows are added to help the reader trace the signal.}
+    \caption[The binary neutron star signal GW170817 and the glitch overlapping with it]{Time-frequency spectrogram of a loud glitch overlapping with the binary neutron star signal, GW170817, in the LIGO-Livingston interferometer. Dashed white arrows are added to help the reader trace the signal.}
     \label{fig:bns_scan}
 \end{figure}
-A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}. While the background noise in the GW detectors is often assumed to be Gaussian and stationary (see Eq.~\eqref{eq:likelihood}), the occurrence of a glitch violates this assumption. As most of our physics inferences hinge on the assumption that background noise is Gaussian-stationary, a violation of it could corrupt the inferences. Depending on the time of occurrence, glitches can be problematic in two ways,
+A case where theoretical models do not exist can be made for instrumental noise transients or \textit{glitches}~\cite{LIGOScientific:2017tza, LIGO:2021ppb, Virgo:2022fxr, LIGO:2024kkz}. While the background noise in the GW detectors is often assumed to be Gaussian and stationary (see Eq.~\eqref{eq:likelihood}), the occurrence of a glitch violates this assumption. As most of our physics inferences hinge on the assumption that background noise is Gaussian-stationary, a violation of it could corrupt the inferences. Depending on the time of occurrence, glitches can be problematic in two ways,
 \begin{itemize}
 
 \item \textit{Glitches overlapping with a GW signal.} Glitches occurring near a GW signal could corrupt the measurements of its source parameters. Therefore, it becomes necessary to carefully subtract the glitch without contaminating the signal, \textit{before} we measure the source parameters. The first detection of a GW signal from the merger of two neutron stars (GW170817) is an example of this kind (Figure~\ref{fig:bns_scan}).
 \begin{figure}
     \centering
     \includegraphics[width=12cm]{../figures/thesis-plot_highmass_blip_qscan.png}
-    \caption{\textit{Left:} A GW signal emitted by a BBH merger with a total mass of $176 M_{\odot}$. \textit{Right:} An isolated blip glitch.}
+    \caption[A binary black hole signal and blip glitch side-by-side]{\textit{Left:} A GW signal emitted by a BBH merger with a total mass of $176 M_{\odot}$. \textit{Right:} An isolated blip glitch.}
     \label{fig:bbh_blip}
 \end{figure} 
-\item \textit{Glitches in isolation.} Glitches not overlapping with a GW signal increase the false alarm rate of GW detections since some glitches look similar to a signal. For example, Figure~\ref{fig:bbh_blip} shows the time-frequency evolution of a GW signal from high-mass BBH mergers (left) and the time-frequency evolution of an isolated blip glitch (right). It becomes important to identify and veto glitchy data from the analysis to reduce false alarms.
+\item \textit{Glitches in isolation.} Glitches not overlapping with a GW signal increase the false alarm rate of GW detections since some glitches look similar to a signal. For example, Figure~\ref{fig:bbh_blip} shows the time-frequency evolution of a GW signal from high-mass BBH mergers (left) and the time-frequency evolution of an isolated blip glitch (right). It becomes important to identify and veto glitchy data from the analyses to reduce false alarms~\cite{Usman:2015kfa, Sachdev:2019vvd}.
 \end{itemize} 
 
 
