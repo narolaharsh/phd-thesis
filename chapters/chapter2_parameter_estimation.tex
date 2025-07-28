@@ -56,7 +56,13 @@ where $\vec{h}$ denotes the GW signal as a function of the source parameters $\v
     \label{eq:nwe}
  <\vec{a}|\vec{b}> = \frac{4}{T}~\sum_{f}~\frac{\tilde{a}(f)~\tilde{b}^{*}(f)}{S_{n}(f)},
 \end{equation}
-where $T$ is the duration of segment $\vec{d}$ we want to analyse, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The factor $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD). The sum is over the evenly distributed discrete frequencies. The lower frequency cutoff for LIGO-Virgo is typically 20 Hz, and the upper frequency cutoff is typically 1024 Hz. The expression for the log likelihood in Eq.~\eqref{eq:likelihood} is for one detector. For a network of detectors, it turns into a sum of log likelihoods over the detectors in the network. 
+where $T$ is the duration of segment $\vec{d}$ we want to analyse, $\tilde{b}^{*}$ denotes the complex conjugate of the Fourier transform of time domain vector $\vec{b}$, and $f$ is the frequency. The factor $S_n(f)$ is the variance of the noise at frequency $f$, also known as the power spectral density (PSD). The sum is over the evenly distributed discrete frequencies. The lower frequency cutoff for LIGO-Virgo is typically 20 Hz, and the upper frequency cutoff is typically 1024 Hz. The expression for the log likelihood in Eq.~\eqref{eq:likelihood} is for one detector. For a network of detectors, it turns into a sum of log likelihoods over the detectors in the network. We define two more quantities which are used in the latter chapters, the matched filter signal-to-noise ratio (SNR) and the optimal SNR:
+\begin{equation}
+    \label{eq:mfsnr}
+\rho^2_{\mathrm{mf}} = \frac{4}{T} \sum_{f}\frac{\tilde{d}(f)\tilde{h^{*}}(f)}{S_n(f)}~~~~\mathrm{and}~~~~
+\rho^2_{\mathrm{o}} = \frac{4}{T} \sum_{f}\frac{\tilde{h}(f)\tilde{h^{*}}(f)}{S_n(f)},
+\end{equation}
+which are respectively the first and the second term in the Eq.~\eqref{eq:likelihood}.
 
 \subsection{Gaussian noise approximation}
 The expression of the likelihood function is inspired by the so-called Whittle likelihood which is typically used to analyse Gaussian and stationary time series. While the data $\vec{d}$ cannot be expected to be Gaussian and stationary at all times, for the short stretches of data that we analyse, it can be approximated with a Gaussian distribution with zero mean and known variance, making the Whittle likelihood a suitable choice. The likelihood expression in Eq. \eqref{eq:likelihood} is simply the product (or sum when operated with natural logarithm on both sides) of Gaussian distributions with zero mean and variance equal to $S_n(f)$ for each frequency. We show a qualitative test of the Gaussian and stationary nature of the data in Figure~\ref{fig:white_data}. The distribution of the whitned data $\frac{\tilde{d}}{\sqrt{S_n}}$ tends to follow the normal distribution. The data segment used to make this plot lies near the GW150914 signal, the first direct detection of a GW signal from the merger of two black holes. We also note that the detectors routinely encounter noise artefacts which make the noise distribution non-Gaussian and/or non-stationary, as will become clear in the next chapter.
@@ -116,7 +122,7 @@ We can approximate the integral in Eq.~\eqref{eq:oned} with the Riemann sum to o
 \end{equation}
 Once we calculate $Z$, the posterior probability of point $\vec{\theta}_k$ can be computed by
 \begin{equation}
- p(\vec{\theta}_k | \vec{d}) = \frac{\pi(\theta) \mathcal{L}(\theta)}{Z} = \frac{w_k}{\sum_{k=0}^{N} w_k},
+ p(\vec{\theta}_k | \vec{d}) = \frac{\pi(\vec{\theta}_k) \mathcal{L}(\vec{\theta}_k)}{Z} = \frac{w_k}{\sum_{k=0}^{N} w_k},
 \end{equation}
 as mentioned near the beginning of this sub-section. 
 
@@ -186,4 +192,4 @@ While the nested sampling has become the preferred choice of sampling algorithm 
     \item The algorithm scales poorly as the dimensions of the model increase.
     %\item Hard to achieve independent samples.
 \end{enumerate}
-
+Despite the limitations, it remains the widely used algorithm for the parameter estimation of GW signals. We use the same to obtaind our results in the latter chapters. 
