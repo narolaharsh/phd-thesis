@@ -61,12 +61,12 @@ where the prefactor of $1/\sqrt{3}$ ensures that the noise’s power spectral de
     \label{fig:sum_patterns}
 \end{figure}
 
-The null stream is a geometric feature of the triangle configuration of ET. It comes about from the fact that the sum of antenna pattern functions is individually zero \asam{Somewhere maybe the expressions for F+ and Fx; or you could put it in chapter 1 just after Eqn (1.33) and refer to it here as well.}, i.e.,
+The null stream is a geometric feature of the triangle configuration of ET. It comes about from the fact that the sum of antenna pattern functions is individually zero,
 \begin{equation}
     \label{eq:sum_pattern}
     \sum_{i=1}^3 F_{+, i} = 0 ~ ~ \mathrm{and} ~ ~ \sum_{i=1}^3 F_{\times, i} = 0.
 \end{equation}
-We note that individual antenna pattern functions do vary over the whole sky (see Figure~\ref{fig:antenna_pattern} in chapter~\ref{ch:gws}). But the equalities presented in Eq.~\eqref{eq:sum_pattern} hold for the whole sky. As an illustration, we show the projection of antenna pattern functions along the right ascension (RA) coordinate in Figure~\ref{fig:sum_patterns}.
+We note that individual antenna pattern functions do vary over the whole sky (see Eq.~\eqref{eq:v-pattern}). But the equalities presented in Eq.~\eqref{eq:sum_pattern} hold for the whole sky. As an illustration, we show the projection of antenna pattern functions along the right ascension (RA) coordinate in Figure~\ref{fig:sum_patterns}.
 
 \section{\texttt{nijntje}: null-stream inspired noise transient elimination framework}
 \label{sec:framework}
@@ -99,15 +99,21 @@ One can model both the signal and the glitch using wavelets. This approach does 
     \centering
     \includegraphics[width=.4\textwidth]{../figures/thesis_et2l_delta_glitch_overlap_glitch_master.pdf}\hspace{.5cm}
     \includegraphics[width=.4\textwidth]{../figures/thesis_newsnr_mismatch_comparison.pdf}
-    \caption{Green (red) indicates the glitch reconstructed using \ETT~null stream (ET-2L) for the $\Delta t = 0$ case. Grey shows the strain, and black shows the simulated glitch. The null stream helps avoid glitch mismodeling, resulting in much closer agreement with the simulated glitch.}
+    \caption{\textit{Left:} Green (red) indicates the glitch reconstructed using \ETT~null stream (ET-2L) for the $\Delta t = 0$ case. Grey shows the strain, and black shows the simulated glitch. The null stream helps avoid glitch mismodeling, resulting in much closer agreement with the simulated glitch. \textit{Right:} Quantifying the \textit{mismatch} between the reconstructed glitch and the true glitch for various time separations between the glitch onset and GW merger. The triangular configuration leads to consistently lower mismatches (green dots) compared to the ET-2L configuration (red dots).}
     \label{fig:glitch_overlap}
 \end{figure}
 
 \section{Results of source parameter measurement: Triangle and 2L comparison}
 
-For each configuration, \ETT~and 2L, we consider 9 different scenarios. All settings are kept identical across these scenarios except the time interval between the GW merger and glitch onset. For \ETT, we perform glitch mitigation using \texttt{nijntje} to obtain the cleaned data. For ET-2L, in absence of the \texttt{nijntje} framework, we perform glitch mitigation by doing joint signal plus glitch modelling. After the glitch is removed, we perform parameter estimation to quantify the accuracy of glitch mitigation. If the glitch mitigation is precise, the measurement should be similar to a scenario where a glitch is not introduced to the data. 
+For each configuration, \ETT~and 2L, we consider nine different scenarios. All settings are kept identical across these scenarios except the time interval between the GW merger and glitch onset. For \ETT, we perform glitch mitigation using \texttt{nijntje} to obtain the cleaned data. For ET-2L, in the absence of the \texttt{nijntje} framework, we perform glitch mitigation by doing joint signal plus glitch modelling. After the glitch is removed, we perform parameter estimation to quantify the accuracy of glitch mitigation. If the glitch mitigation is precise, the measurement should be similar to a scenario where a glitch is not introduced to the data. 
 
-Before we present the parameter estimation results, we showcase the results of glitch mitigation, i.e., how close the reconstructed glitch is to the true glitch. This serves as a precursor to the parameter estimation results since accurate glitch mitigation leads to accurate parameter measurement of GW. A visualisation of the glitch reconstruction is presented in Figure~\ref{fig:glitch_overlap}. The ET triangle configuration, due to the null stream, achieves a more accurate glitch reconstruction by avoiding mismodeling from the GW signal. In contrast, for the ET-2L configuration, inevitably, some additional features from the signal are incurred. 
+Before we present the parameter estimation results, we showcase the results of glitch mitigation, i.e., how close the reconstructed glitch is to the true glitch. This serves as a precursor to the parameter estimation results since accurate glitch mitigation leads to accurate parameter measurement of GW. A visualisation of the glitch reconstruction is presented in Figure~\ref{fig:glitch_overlap}. Specifically, the left plot of Figure~\ref{fig:glitch_overlap} shows the results of glitch reconstruction when the GW merger coincides with the glitch onset. We find that the ET triangle configuration, due to the null stream, achieves a more accurate glitch reconstruction by avoiding mismodeling from the GW signal. In contrast, for the ET-2L configuration, inevitably, some additional features from the signal are incurred. 
+
+To quantify how close the reconstructed glitch is to the truth, we calculate the mismatch,
+\begin{equation}
+ \mathcal{M} \equiv 1 - \frac{\left<h_1 | h_2 \right>}{\left<h_1 | h_1 \right>\left<h_2 | h_2 \right>}
+\end{equation}
+between the reconstructed glitch and the true glitch. The inner products $\left<.|.\right>$ are defined in chapter 2. We find that glitch reconstruction without the null stream consistently leads to higher mismatches (see right plot of Figure~\ref{fig:glitch_overlap}). A large mismatch may imply erroneous glitch mitigation, leading to erroneous GW parameter estimation.
 
 \begin{figure}[h]
     \centering
