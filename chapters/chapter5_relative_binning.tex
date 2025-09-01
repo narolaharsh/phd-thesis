@@ -163,22 +163,21 @@ Setting $N_0$ equal to the length of the uniform grid would eliminate the need f
 algorithm as a whole. 
 \begin{figure}[h]
     \centering
-    \includegraphics[width=0.75\textwidth]{../figures/vis_overlap_signals.pdf} 
-    \hspace*{.5cm}\includegraphics[width=0.75\textwidth]{../figures/lensing_overlap_signals.pdf}
-    \caption{\textit{Top:} Two gravitational wave signals (blue and green) overlapping with each other and their sum (dashed black line). \textit{Bottom:} An example of a gravitational wave signal that is strongly lensed, producing two images. The fiducial time separation between the two signals is marked by $\Delta t_{12}$, and relative (de-)magnification is marked by $\mu_{12}$.}
-    \label{fig:lensing-overlaps}
+    \includegraphics[width=0.75\textwidth]{.././figures/thesis_whitebg_graphics_overlapping_signals.pdf} 
+    %\hspace*{.5cm}\includegraphics[width=0.75\textwidth]{../figures/lensing_overlap_signals.pdf}
+    \caption{An illustration of two gravitational wave signals (blue and orange) arriving at the Earth at nearly the same time. At the Earth based GW detector, we can only measure the sum of the two (black line).}
+    \label{fig:schem_overlaps}
 \end{figure}
 
-
 \section{Extension of the relative binning method}
-A fast parameter estimation method has a wide range of applications. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend our method to perform parameter estimation on two overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two signals. Figure~\ref{fig:lensing-overlaps} gives an illustration of overlapping signals (top) and strongly lensed signals (bottom). 
+A fast parameter estimation method has a wide range of applications. Here, we focus on two of them, overlapping signals analysis and strong lensing searches. Specifically, we extend the relative binning method to perform parameter estimation on overlapping signals and to perform strong lensing searches. The two applications are similar in the sense that they both require a framework that can perform \textit{joint} parameter estimation on two signals. 
 
-Overlapping signals refer to a phenomenon where the arrival times of two (or more) GW signals are close to each other. If the two signals are close to each other, we may need to analyse them jointly, i.e., we may need to perform a \textit{joint} parameter estimation on two signals. In contrast, the phenomenon associated with strong lensing is slightly more complex. When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lensing, the GW signal is split into multiple time-separated copies (referred to as images) which may be observed at the detectors. The imprint of strong lensing on a GW signal can be characterised with three parameters: a relative magnification ratio ($\mu_{12}$), a time delay ($\Delta t_{12}$), and a relative phase shift ($n_{12}$). Strong lensing does not affect the frequency evolution of the source. Therefore, we can search for strong lensing by quantifying a degree of coherence between the measured parameters of any two GW signals, i.e., by performing \textit{joint} parameter estimation on the two images. 
-
-\subsection{To perform parameter estimation on the overlapping signals}
+\subsection{Extension to perform parameter estimation on the overlapping signals}
 \iffalse
 The LIGO-Virgo interferometers have not yet observed any overlapping signals, and it is unlikely that we will do so at current sensitivities. Therefore, the state-of-the-art parameter estimation pipelines are designed to analyse a single, isolated signal. However, in the 3G era, due to the increased detection rate and increased duration of GW signals, we may often encounter overlapping GW signals. Therefore, it is crucial to develop parameter estimation methods to analyse overlapping signals. 
 \fi
+
+Overlapping signals refer to a phenomenon where the arrival times of two (or more) GW signals are close to each other. Figure~\ref{fig:schem_overlaps} shows an illustration of two overlapping GW signals. While such scenarios are less likely for the LIGO-Virgo interferometers, they may occur frequently for 3G detectors. Due to their increased baseline sensitivity, the 3G detectors are expected to detect $\approx 1$ signal per minute, with longer in-band duration of the signals. These two factors, increased detection rate and increased in-band duration, may cause GW signals to overlap with each other. Current rate estimates suggest that we may see up to 20,000 cases per year where two GW signals are overlapping within $\approx 1$ second of each other~\cite{Samajdar:2021egv}. If the two signals are close to each other, we may need to analyse them jointly to measure their source parameters, i.e., we may need to perform \textit{joint} parameter estimation on them. Indeed, the joint parameter estimation on two signals can be computationally more expensive compared to analysing a single signal since the dimension of the space is doubled. Here, we demonstrate how relative binning can be used to speed up joint parameter estimation. 
 
 We account for two signals in the signal model by replacing $\vec{h}$ by $\vec{h}_1 + \vec{h}_2$ in the expression of the likelihood (see Eq.~\eqref{eqn:indi-likelihood}). This leads to;
 \begin{equation}
@@ -192,8 +191,19 @@ where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensiona
 \end{align}
 where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Each term in the factorised likelihood expression of Eq.~\eqref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
 
-\subsection{To perform strong lensing searches}
-For strong lensing searches, we again need to replace $\vec{h}$ by $\vec{h}_1$ and $\vec{h}_2$ to account for two images, but it is not simply $\vec{h}_1+\vec{h}_2$. The two images are copies of the same GW signal; we expect that the source parameters are identical between the two, except for the merger time, apparent luminosity distance, and Morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as
+\subsection{Extension to perform strong lensing searches}
+
+\begin{figure}[h]
+     \centering
+     \includegraphics[width=0.75\textwidth]{.././figures/schem_lensing_graphics.pdf} 
+     %\hspace*{.5cm}\includegraphics[width=0.75\textwidth]{../figures/lensing_overlap_signals.pdf}
+     \caption{An illustration of a gravitational wave signal that is strongly lensed by a heavy object in its path and producing two images. Each image may be (de-)magnified and arrive at the Earth at different times. The fiducial time separation between the two images is marked by $\Delta t_{12}$, and relative (de-)magnification is marked by $\mu_{12}$. The precise values of them depend on the relative configuration of the GW source and the lens.}
+     \label{fig:schem_lensing}
+ \end{figure}
+
+When gravitational waves encounter a massive object in their path, they may undergo gravitational lensing, i.e., suffer a deflection from their original path. In the case of strong lensing, the GW signal is split into multiple time-separated copies (referred to as images), which may be observed at the detectors. Figure~\ref{fig:schem_lensing} gives an illustration of a GW signal being strongly lensed by a massive object and producing two images. Each image produced by strong lensing may be (de-)magnified, may suffer a constant phase shift (also known as the Morse phase~\cite{Ezquiaga:2020gdt}), and may arrive at Earth at different times. Strong lensing does not affect the frequency evolution of the source. Therefore, we can perform strong lensing searches by quantifying how similar any two signals are, i.e., by jointly analysing two signals to measure the coherence between their source parameters. 
+
+Similar to the joint parameters estimation of the overlapping signals, we need to account for two images, $\vec{h}_1$ and $\vec{h}_2$. However, we do not simply replace $\vec{h}$ by $\vec{h}_1+\vec{h}_2$. The two images are copies of the same GW signal; we expect that the source parameters are identical between the two, except for the arrival time at Earth, apparent luminosity distance, and Morse phase. Therefore, we only need to introduce three additional parameters. We denote them by $\vec{\theta}_L\equiv \{\Delta t_{12}, \mu_{12}, \Delta n_{12}\}$. The signal model corresponding to the second image $\vec{h}_2$ can be expressed in terms of the $\vec{h}_1$ and $\vec{\theta}_L$ as
 \begin{equation}
 \label{eqn:wf-mapping}
 \vec{h}_2(\vec{\theta}, \vec{\theta}_{L}) = \sqrt{\mu_{12}}\vec{h}_1(\vec{\theta})e^{2i\pi f \Delta t_{12} - i\Delta n_{12}\pi},
@@ -431,7 +441,7 @@ Finally, we report that the log of coherence ratio -- a statistic to quantify th
 \begin{figure}
     \centering
     \includegraphics[width=.5\textwidth]{../figures/thesis_speed_up_summary.pdf}
-    \caption{The speed-up achieved by relative binning framework in relation to the total mass. The colourbar shows the reduction in the frequency points on which one needs to generate the waveform. The plot contains the comparison of run time for all events analysed using relative binning framwork in this chapter. The cross markers represent the P-P plot injections, the plus markers represent the 3G-injections, the hexagon markers represent the lensing analyses. The remaining markers are for LIGO-Virgo events. The median value of the factor of speed-up is $\sim 10$ for total masses below $50 M_{\odot}$. Overall, the relative binning framework achieves a large speed-up for low total mass signals, which are typically more expensive to analyse.}
+    \caption{The speed-up achieved by the relative binning framework in relation to the total mass. The colourbar shows the reduction in the frequency points on which one needs to generate the waveform. The plot contains the comparison of run time for all events analysed using the relative binning framework in this chapter. The cross markers represent the P-P plot injections, the plus markers represent the 3G-injections, and the hexagon markers represent the lensing analyses. The remaining markers are for LIGO-Virgo events. The median value of the factor of speed-up is $\sim 10$ for total masses below $50 M_{\odot}$. The low total mass signals typically have more cycles in-band, so they are more expensive to analyse with standard methods. Hence, the speed-up obtained by the relative binning method is precisely in the region where it is highly desirable.}
     \label{fig:speed}
 \end{figure}
 
@@ -448,15 +458,12 @@ assess the speed-up factor given by relative binning without having to do the ex
 the number of likelihood evaluations done for the relative binning and exact methods is in the same ballpark, so that this is a reasonable approximation to make.
 
 We observe that the relative binning runs are up to a factor of $\sim 34$ faster for the LIGO-Virgo interferometers and up to a factor of $\sim 47$ faster for the 3G interferometers. 
-The speed-up decreases as the total mass of the system increases. 
-This is as expected since the grid can be made the coarsest for the inspiral part of the signal, which is less prominent for higher mass systems. 
-However, within a given total mass regime, some fluctuations in the speed-up can happen due to other signal characteristics.   
-The 3G detectors have a lower starting frequency, meaning they can observe a given signal for a longer period compared to the LIGO-Virgo interferometers. 
-Therefore, one might expect the relative binning framework to show a larger speed-up in the 3G scenario compared to similar total systems as seen in LIGO-Virgo, and 
-this effect is partially visible in Figure~\ref{fig:speed}. %However, the 3G injections considered for the analysis have a considerably higher SNR than the corresponding P-P injections for the LIGO-Virgo interferometers. 
+The speed-up increases as the total mass of the system decreases. This is a highly desirable feature of the relative binning method since the low mass systems are typically more computationally expensive. The cost can be attributed to the large number of inspiral cycles in-band. Relative binning helps place a coarse frequency grid for such signals, which speeds up the analysis. Thus, the speed up achieved by relative binning is precisely in the region of the parameter space where it is needed, i.e., the low total mass region. 
 
-A higher SNR will increase the size of the coarse grid and decrease the speed of the relative binning method. 
-In addition, the median of the SNR for the set of P-P injections is $59.44$, which is $\simeq 2.2$ times larger compared to the loudest GW event observed to date \cite{LIGOScientific:GWTC3DR}. Since a large value of SNR increases the size of the coarse grid, the factor of speed-up reported by the P-P injections is on the conservative side.  
+Additionally, the 3G detectors have a lower starting frequency, meaning they can observe a longer inspiral of the GW compared to the LIGO-Virgo interferometers. Consequently, we find that the relative binning framework provides a larger speed-up in the 3G scenario compared to similar systems as seen in LIGO-Virgo. This trend is also visible in Figure~\ref{fig:speed}. %However, the 3G injections considered for the analysis have a considerably higher SNR than the corresponding P-P injections for the LIGO-Virgo interferometers. 
+
+%A higher SNR will increase the size of the coarse grid and decrease the speed of the relative binning method. 
+%In addition, the median of the SNR for the set of P-P injections is $59.44$, which is $\simeq 2.2$ times larger compared to the loudest GW event observed to date \cite{LIGOScientific:GWTC3DR}. Since a large value of SNR increases the size of the coarse grid, the factor of speed-up reported by the P-P injections is on the conservative side.  
 
 Joint parameter estimation reports a similar speed-up as individual parameter estimation. Here, we note that the lensing joint parameter estimation framework used in this work generates the first waveform and the subsequent images are obtained by scaling the first one. The scaling helps bypass the additional waveform generation steps, which saves computational cost. However, this is not the case in all strong lensing search methods, i.e., when the method is designed to generate all waveforms independently. In comparison to such methods, we expect a larger speed-up factor for relative binning framework.
 
