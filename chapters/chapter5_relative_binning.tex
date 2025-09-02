@@ -56,7 +56,7 @@ The approximation made in Eq.~\eqref{eqn:ratio} performs better for the waveform
     \centering
     \includegraphics[width=.4\textwidth]{../figures/phenom_d_xphm_full_waveform_ratio.pdf}\hspace{.5cm}
     \includegraphics[width=.4\textwidth]{../figures/hL_C_ratio.pdf}
-    \caption{\textit{Left}: Ratio of the real part of the proposal to the fiducial waveform for the plus polarisation as a function of frequency. The waveform model corresponding to the brown curve contains only the dominant mode and the aligned spins description of the system. Whereas, the one corresponding to the black curve presents a more complete description, including contributions from higher-order modes and allowing for precessing spins (referred to as IMRPhenomXPHM). The ratio for the latter fluctuates more due to the increased complexity of the model. \textit{Right}: Decomposition of IMRPhenomXPHM waveform into component modes (top right) and precession coefficients (bottom right). Each mode is marked with a different colour. The decomposition makes the ratios smoother, allowing for an efficient implementation of the relative binning method.}
+    \caption[Ratios of the proposal and fiducial waveform polarisations]{\textit{Left}: Ratio of the real part of the proposal to the fiducial waveform for the plus polarisation as a function of frequency. The waveform model corresponding to the brown curve contains only the dominant mode and the aligned spins description of the system. Whereas, the one corresponding to the black curve presents a more complete description, including contributions from higher-order modes and allowing for precessing spins (referred to as IMRPhenomXPHM). The ratio for the latter fluctuates more due to the increased complexity of the model. \textit{Right}: Decomposition of IMRPhenomXPHM waveform into component modes (top right) and precession coefficients (bottom right). Each mode is marked with a different colour. The decomposition makes the ratios smoother, allowing for an efficient implementation of the relative binning method.}
     \label{fig:dxp-ratio}
 \end{figure}
 
@@ -165,7 +165,7 @@ algorithm as a whole.
     \centering
     \includegraphics[width=0.75\textwidth]{.././figures/thesis_whitebg_graphics_overlapping_signals.pdf} 
     %\hspace*{.5cm}\includegraphics[width=0.75\textwidth]{../figures/lensing_overlap_signals.pdf}
-    \caption{An illustration of two gravitational wave signals (blue and orange) arriving at the Earth at nearly the same time. At the Earth based GW detector, we can only measure the sum of the two (black line).}
+    \caption[A schema of two gravitational wave signals overlapping]{An illustration of two gravitational wave signals (blue and orange) arriving at the Earth at nearly the same time. At the Earth based GW detector, we can only measure the sum of the two (black line).}
     \label{fig:schem_overlaps}
 \end{figure}
 
@@ -197,7 +197,7 @@ where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the
      \centering
      \includegraphics[width=0.75\textwidth]{.././figures/schem_lensing_graphics.pdf} 
      %\hspace*{.5cm}\includegraphics[width=0.75\textwidth]{../figures/lensing_overlap_signals.pdf}
-     \caption{An illustration of a gravitational wave signal that is strongly lensed by a heavy object in its path and producing two images. Each image may be (de-)magnified and arrive at the Earth at different times. The fiducial time separation between the two images is marked by $\Delta t_{12}$, and relative (de-)magnification is marked by $\mu_{12}$. The precise values of them depend on the relative configuration of the GW source and the lens.}
+     \caption[A gravitational wave signal being strongly lensed and producing two images]{An illustration of a gravitational wave signal that is strongly lensed by a heavy object in its path and producing two images. Each image may be (de-)magnified and arrive at the Earth at different times. The fiducial time separation between the two images is marked by $\Delta t_{12}$, and relative (de-)magnification is marked by $\mu_{12}$. The precise values of them depend on the relative configuration of the GW source and the lens.}
      \label{fig:schem_lensing}
  \end{figure}
 
@@ -305,7 +305,7 @@ we conclude that our method is robust.
 \begin{figure}[h]
     \centering
     \includegraphics[width=.75\textwidth]{../figures/pp_3.0_partial_no_railing.pdf}
-    \caption{Percentile-percentile showcasing the robustness of the relative binning method on simulated BBH signals. Each line traces the diagonal, indicating that the parameter corresponding to it is recovered with expected accuracy. The numbers in the brackets of the legend show the p-values of the KS tests. The combined p-value of all parameters is 0.6625, consistent with the hypothesis that individual p-values were derived from a uniform distribution as expected. The shaded regions show 1$\sigma$, 2$\sigma$, and 3$\sigma$ confidence intervals in decreasing order of opacity.}
+    \caption[Percentile-percentile plot to test the robustness of the parameter estimation method]{Percentile-percentile showcasing the robustness of the relative binning method on simulated BBH signals. Each line traces the diagonal, indicating that the parameter corresponding to it is recovered with expected accuracy. The numbers in the brackets of the legend show the p-values of the KS tests. The combined p-value of all parameters is 0.6625, consistent with the hypothesis that individual p-values were derived from a uniform distribution as expected. The shaded regions show 1$\sigma$, 2$\sigma$, and 3$\sigma$ confidence intervals in decreasing order of opacity.}
     \label{fig:pp-plot}
 \end{figure}
 
@@ -315,7 +315,7 @@ we conclude that our method is robust.
     \centering
     \includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190412_gwtc.pdf}
     %\includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190814_corr_branch_gwtc.pdf}
-    \caption{The parameter measurements obtained using the relative binning framework (blue curves) are consistent with the ones reproduced from the public data release of the LVK collaboration (grey) for GW190412.}
+    \caption[Parameter estimation results for the signal GW190412]{The parameter measurements obtained using the relative binning framework (blue curves) are consistent with the ones reproduced from the public data release of the LVK collaboration (grey) for GW190412.}
     \label{fig:gw190412}
 \end{figure}
 
@@ -328,7 +328,7 @@ The remaining two events were chosen because they were part of a candidate event
 \begin{figure}[h]
     \centering
     \includegraphics[width=.75\textwidth]{../figures/overlap_production_gw190814_corr_branch_gwtc.pdf}
-    \caption{The parameter measurements obtained using the relative binning framework (blue curves) are consistent with the ones reproduced from the public data release of the LVK collaboration (grey curves) for GW190814.}
+    \caption[Parameter estimation results for the signal GW190814]{The parameter measurements obtained using the relative binning framework (blue curves) are consistent with the ones reproduced from the public data release of the LVK collaboration (grey curves) for GW190814.}
     \label{fig:gw190814}
 \end{figure}
 
@@ -340,7 +340,7 @@ Figures~\ref{fig:gw190412} and \ref{fig:gw190814} show a qualitative agreement b
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{../figures/real_threeg_lensed_jsd.pdf}
-    \caption{JS divergence values to quantify if the measurements made using the relative binning method are in agreement with the ones made using exact computation. The black line marks the JS divergence below which the two measurements are indistinguishable. The plot contains the JS divergence values for all parameters for all signals, simulated as well as real, analysed in this chapter. For compactness, we use the same marker for the set of 3G signals (circles) and for the set of lensed signals (crosses). We use different coloured markers for LIGO-Virgo events. All JS divergence values remain below the threshold, indicating that measurements obtained using the relative binning method are reliable.}
+    \caption[Jensen-Shannon divergence values for the entire set]{JS divergence values to quantify if the measurements made using the relative binning method are in agreement with the ones made using exact computation. The black line marks the JS divergence below which the two measurements are indistinguishable. The plot contains the JS divergence values for all parameters for all signals, simulated as well as real, analysed in this chapter. For compactness, we use the same marker for the set of 3G signals (circles) and for the set of lensed signals (crosses). We use different coloured markers for LIGO-Virgo events. All JS divergence values remain below the threshold, indicating that measurements obtained using the relative binning method are reliable.}
     \label{fig:master-jsd}
 \end{figure}
 
@@ -381,14 +381,14 @@ GW200112\_155838 & 78.10 & 1103.53 \\
         \hline
 
     \end{tabular}
-    \caption{Table of events analysed in the context of 3G detectors. The second column shows the maximum likelihood values of the total mass obtained from the public data release of LVK. The third column shows the respective network SNRs if they were observed by a network of 3G detectors. The events were detected by LIGO-Virgo interferometers during their third observation runs, and the naming convention follows the pattern GWYYMMDD\_HHMMSS. }
+    \caption[Table of simulated events analysed using relative binning method]{Table of events analysed in the context of 3G detectors. The second column shows the maximum likelihood values of the total mass obtained from the public data release of LVK. The third column shows the respective network SNRs if they were observed by a network of 3G detectors. The events were detected by LIGO-Virgo interferometers during their third observation runs, and the naming convention follows the pattern GWYYMMDD\_HHMMSS. }
     \label{tab:gwtc-3-table}
 \end{table}
 
 \begin{figure}[t]
     \centering
     \includegraphics[width=.75\textwidth]{../figures/prod_third_gen.pdf}
-    \caption{A representative corner plot showing the results of parameter estimation on GW200220\_061928 using relative binning. The event was observed by LIGO-Virgo interferometers in the third observation run. Here, we analyse a simulated equivalent of it as if it were observed by a network of 3G detectors. The black lines show the true values of the parameters. The blue contours correspond to $1\sigma$, $2\sigma$, and $3\sigma$ confidence, in order of decreasing opacity, indicating that all parameters are recovered with expected accuracy.}
+    \caption[Simulated signal in the Einstein Telescope]{A representative corner plot showing the results of parameter estimation on GW200220\_061928 using relative binning. The event was observed by LIGO-Virgo interferometers in the third observation run. Here, we analyse a simulated equivalent of it as if it were observed by a network of 3G detectors. The black lines show the true values of the parameters. The blue contours correspond to $1\sigma$, $2\sigma$, and $3\sigma$ confidence, in order of decreasing opacity, indicating that all parameters are recovered with expected accuracy.}
     \label{fig:third-gen}
 \end{figure}
 
@@ -408,7 +408,7 @@ This process is repeated for each of the six events and the results are shown in
     \centering
     \includegraphics[width=.68\textwidth]{../figures/overlapping_signals_A.pdf}\vspace{.25cm}
     \includegraphics[width=.68\textwidth]{../figures/overlapping_signals_B.pdf}
-    \caption{Comparison of parameter estimation results when two signals are in isolation and when two signals are overlapping. Measurements in isolation establish the benchmark for accuracy. The agreement between the overlapping signal analysis and isolated signals analysis indicates that the relative binning framework to perform joint parameter estimation can be extended to a wider parameter space.}
+    \caption[Joint parameter estimation on two overlapping gravitational wave signals]{Comparison of parameter estimation results when two signals are in isolation and when two signals are overlapping. Measurements in isolation establish the benchmark for accuracy. The agreement between the overlapping signal analysis and isolated signals analysis indicates that the relative binning framework to perform joint parameter estimation can be extended to a wider parameter space.}
     \label{fig:overlapping-signal}
 \end{figure}
 We collectively present the results for overlapping signals analysis in Figure~\ref{fig:overlapping-signal}. Let us refer to the two signals by signal A and signal B. The red (green) lines in the top (bottom) plot show how accurately we can recover signal A (signal B) when they are in isolation. This establishes the benchmark for the accuracy. The blue line in both plots shows the results of joint parameter estimation using relative binning framework, i.e., how well the parameters of the two signals are recovered when they are overlapping. The agreement of the blue curves with the green and red curves suggests that our relative binning framework can be reliably extended to perform joint parameter estimation when two (or more) GW signals are overlapping. 
@@ -419,7 +419,7 @@ We collectively present the results for overlapping signals analysis in Figure~\
     \centering
     \includegraphics[width=0.53\textwidth]{../figures/thesis_pair_191103_191105.pdf} \hspace{.5cm}
     \includegraphics[width=0.41\textwidth]{../figures/lens_pair_191103_191105.pdf}
-    \caption{Analysing the pair, GW191103 (red) and GW191105 (green), under strong lensing hypothesis (blue) using the relative binning method. The left plot shows the measurements of the common parameter between the two events, when analysed individually and when analysed under strong lensing hypothesis. The right plot shows the measurements of the lensing parameters (only available when analysed under strong lensing hypothesis). The event pair was of great interest for strong lensing searches due to significant overlaps in the posterior distributions of individual events, though the analyses turned out to be inconclusive.}
+    \caption[Analysis of the strong lensing candidate GW191103--GW191105]{Analysing the pair, GW191103 (red) and GW191105 (green), under strong lensing hypothesis (blue) using the relative binning method. The left plot shows the measurements of the common parameter between the two events, when analysed individually and when analysed under strong lensing hypothesis. The right plot shows the measurements of the lensing parameters (only available when analysed under strong lensing hypothesis). The event pair was of great interest for strong lensing searches due to significant overlaps in the posterior distributions of individual events, though the analyses turned out to be inconclusive.}
     \label{fig:lensed_pair}
 \end{figure}
 
@@ -445,7 +445,7 @@ Finally, we report that the log of coherence ratio -- a statistic to quantify th
 \begin{figure}
     \centering
     \includegraphics[width=.5\textwidth]{../figures/thesis_speed_up_summary.pdf}
-    \caption{The speed-up achieved by the relative binning framework in relation to the total mass. The colourbar shows the reduction in the frequency points on which one needs to generate the waveform. The plot contains the comparison of run time for all events analysed using the relative binning framework in this chapter. The cross markers represent the P-P plot injections, the plus markers represent the 3G-injections, and the hexagon markers represent the lensing analyses. The remaining markers are for LIGO-Virgo events. The median value of the factor of speed-up is $\sim 10$ for total masses below $50 M_{\odot}$. The low total mass signals typically have more cycles in-band, so they are more expensive to analyse with standard methods. Hence, the speed-up obtained by the relative binning method is precisely in the region where it is highly desirable.}
+    \caption[Speed-up achieved by relative binning approximation]{The speed-up achieved by the relative binning framework in relation to the total mass. The colourbar shows the reduction in the frequency points on which one needs to generate the waveform. The plot contains the comparison of run time for all events analysed using the relative binning framework in this chapter. The cross markers represent the P-P plot injections, the plus markers represent the 3G-injections, and the hexagon markers represent the lensing analyses. The remaining markers are for LIGO-Virgo events. The median value of the factor of speed-up is $\sim 10$ for total masses below $50 M_{\odot}$. The low total mass signals typically have more cycles in-band, so they are more expensive to analyse with standard methods. Hence, the speed-up obtained by the relative binning method is precisely in the region where it is highly desirable.}
     \label{fig:speed}
 \end{figure}
 

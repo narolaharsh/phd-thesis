@@ -57,7 +57,7 @@ where the prefactor of $1/\sqrt{3}$ ensures that the noise’s power spectral de
 \begin{figure}
     \centering
     \includegraphics[width=\textwidth]{../figures/null_stream_antenna_pattern.pdf}
-    \caption{Illustration of how the null stream of \ETT~comes about. Projection of plus (left) and cross (right) antenna pattern functions along the right ascension (RA) coordinate. Blue, red, and green lines show the antenna pattern functions of ET$_1$, ET$_2$, and ET$_3$, respectively. The black line, which is equal to zero for all values of RA, is obtained by summing the three. For simplicity, I only shown the projection along RA. The sum of the three is zero at all sky locations. This feature gives rise to an inherent null stream in the triangular configuration of ET.}
+    \caption[The formation of an inherent null stream in the Einstein Telescope]{Illustration of how the null stream of \ETT~comes about. Projection of plus (left) and cross (right) antenna pattern functions along the right ascension (RA) coordinate. Blue, red, and green lines show the antenna pattern functions of ET$_1$, ET$_2$, and ET$_3$, respectively. The black line, which is equal to zero for all values of RA, is obtained by summing the three. For simplicity, I only shown the projection along RA. The sum of the three is zero at all sky locations. This feature gives rise to an inherent null stream in the triangular configuration of ET.}
     \label{fig:sum_patterns}
 \end{figure}
 
@@ -74,7 +74,7 @@ The null stream of the triangular ET enables a novel framework to remove signal-
 \begin{figure}
     \centering
     \includegraphics[width=16cm]{../figures/assemble_nijntje.pdf}
-    \caption{The blue box outlines the workflow of \texttt{nijntje} framework. \textit{Step 1}: Construct the null stream by summing the strain data from three interferometers. \textit{Step 2}: Using the null stream data and an RJMCMC method, perform an unmodelled reconstruction of the glitch time series. \textit{Step 3}: Subtract the glitch time series from $\mathrm{ET}_1$ data to obtain the \textit{cleaned} data. \textit{Step 4} (Optional): Perform parameter estimation of the GW signal using the cleaned data from $\mathrm{ET}_1$, and the existing data from $\mathrm{ET}_2$ and $\mathrm{ET}_3$ to verify the accuracy of glitch mitigation.}
+    \caption[The workflow of the \texttt{nijntje} framework]{The blue box outlines the workflow of \texttt{nijntje} framework. \textit{Step 1}: Construct the null stream by summing the strain data from three interferometers. \textit{Step 2}: Using the null stream data and an RJMCMC method, perform an unmodelled reconstruction of the glitch time series. \textit{Step 3}: Subtract the glitch time series from $\mathrm{ET}_1$ data to obtain the \textit{cleaned} data. \textit{Step 4} (Optional): Perform parameter estimation of the GW signal using the cleaned data from $\mathrm{ET}_1$, and the existing data from $\mathrm{ET}_2$ and $\mathrm{ET}_3$ to verify the accuracy of glitch mitigation.}
     \label{fig:nijntje_chart}
 \end{figure}
 \subsubsection{Setup of the simulation}
@@ -99,7 +99,7 @@ One can model both the signal and the glitch using wavelets. This approach does 
     \centering
     \includegraphics[width=.4\textwidth]{../figures/thesis_et2l_delta_glitch_overlap_glitch_master.pdf}\hspace{.5cm}
     \includegraphics[width=.4\textwidth]{../figures/thesis_newsnr_mismatch_comparison.pdf}
-    \caption{\textit{Left:} Green (red) indicates the glitch reconstructed using \ETT~null stream (ET-2L) for the $\Delta t = 0$ case. Grey shows the strain, and black shows the simulated glitch. The null stream helps avoid glitch mismodeling, resulting in much closer agreement with the simulated glitch. \textit{Right:} Quantifying the \textit{mismatch} between the reconstructed glitch and the true glitch for various time separations between the glitch onset and GW merger. The triangular configuration leads to consistently lower mismatches (green dots) compared to the ET-2L configuration (red dots).}
+    \caption[Reconstructed glitch timeseries and its mismatch with the true glitch timeseries]{\textit{Left:} Green (red) indicates the glitch reconstructed using \ETT~null stream (ET-2L) for the $\Delta t = 0$ case. Grey shows the strain, and black shows the simulated glitch. The null stream helps avoid glitch mismodeling, resulting in much closer agreement with the simulated glitch. \textit{Right:} Quantifying the \textit{mismatch} between the reconstructed glitch and the true glitch for various time separations between the glitch onset and GW merger. The triangular configuration leads to consistently lower mismatches (green dots) compared to the ET-2L configuration (red dots).}
     \label{fig:glitch_overlap}
 \end{figure}
 
@@ -118,7 +118,7 @@ between the reconstructed glitch and the true glitch. The inner products $\left<
 \begin{figure}[h]
     \centering
     \includegraphics[width=\textwidth]{../figures/newsnr_fig_4.pdf}
-    \caption{Measurement of detector-frame total mass $M_{\rm total}$, luminosity distance $D_{\rm L}$, 
+    \caption[Measurements of the distance, sky location, and total mass]{Measurement of detector-frame total mass $M_{\rm total}$, luminosity distance $D_{\rm L}$, 
  and sky localisation. Green (red) colour represents posterior distributions when the glitch is 
  removed using the \ETT~null stream (ET-2L). Blue colour shows the measurements when no glitch is 
  introduced, serving as a benchmark for comparison, and dashed black lines indicate the true values. 
@@ -148,7 +148,7 @@ namely luminosity distance and sky location, are inconsistent with the benchmark
 \begin{figure}[h]
     \centering
     \includegraphics[width=.45\textwidth]{../figures/newsnr_rank_10_single_block_percentile_parameters_short.pdf}
-    \caption{A comparison of the credible level of the true parameter value relative to the posterior 
+    \caption[Parameter recovery for different time separation between the glitch and the gravitational wave signal]{A comparison of the credible level of the true parameter value relative to the posterior 
  distributions for various time intervals $\Delta t$ between glitch onset and GW merger. 
  Credible levels are in standard deviation units $\sigma$, following a standard normal distribution. The parameters considered are luminosity distance $D_{\rm L}$ and sky location $\Omega$. Green (red) markers denote credible levels for the \ETT~null stream (ET-2L) based measurements, and the blue lines provide credible levels in the absence of a 
  glitch as a benchmark (dotted for $\Omega$, dashed for $D_{\rm L}$). For the null stream-based approach, the credible levels closely align with the benchmark, indicating accurate measurements. The posteriors for ET-2L lead to wider credible levels and generally exclude the true value, except for the edge cases where the glitch is sufficiently distant in time from the GW merger.}
