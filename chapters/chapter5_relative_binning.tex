@@ -220,8 +220,25 @@ which holds since two data segments are disjoint and $\vec{d}_1$ do not depend o
 \end{align}
 The overlaps between $\vec{h}_1$ and $\vec{h}_2$ do not appear here, unlike the overlapping signals analysis. Next, we construct the RBGrid only for image 1 and use the same grid to generate image 2 waveform (see Eq.~\eqref{eqn:wf-mapping}). We use the RBGrid to generate the summary data, and then, using the summary data, we can approximate the likelihood. 
 
-Now, we have all the ingredients to perform parameter estimation on the isolated signals, overlapping signals, and strongly lensed signals. 
-    
+Now, we have all the ingredients to perform parameter estimation on the isolated signals, overlapping signals, and strongly lensed signals using the relative binning method. Our aim here is to demonstrate that the relative binning approximation significantly decreases the computation cost without compromising on the accuracy. Before we perform the analysis and present the results let us discuss the quantities used to compare the accuracy of the exact method with the relative binning method.
+
+\subsubsection{Checking the efficiency}
+\label{reweight}
+\textit{Reweighing the relative binning posterior samples:} Ideally, we want to compare the posterior samples obtained using exact likelihood and the relative binning likelihood. However, there may be cases when the exact computation too expensive to carry out and we can only peform the analysis with relative binning likelihood. For such cases, we reweight the posterior samples produced using relative binning to produce the samples which may be obtained with the exact likelihood computations. This step helps test the method's efficiency. Let us denote the likelihood evaluated for the posterior samples produced by the relative binning method by $\mathcal{L}^{\text{RB}}(\vec{\theta})$, where $\vec{\theta}$ stands for the posterior samples; and the probability for $\vec{\theta}$ according to the relative binning 
+samples by $p^{\text{RB}}(\vec{\theta})$. To perform the reweighting, for each posterior sample $\vec{\theta}$, we compute the likelihood according to the exact method, which we denote by $\mathcal{L}^{\text{X}}(\vec{\theta})$. Using $\mathcal{L}^{\text{RB}}(\vec{\theta})$, $\mathcal{L}^{\text{X}}(\vec{\theta})$, 
+we reweigh $p^{\text{RB}}(\vec{\theta})$ to obtain the probability for $\vec{\theta}$ according to the exact method:
+\begin{equation}
+p^{\text{X}}(\vec{\theta})  = \frac{\mathcal{L}^{\text{X}}(\vec{\theta})}{\mathcal{L}^{\text{RB}}(\vec{\theta})}p^{\text{RB}}(\vec{\theta})\,.
+\end{equation}
+
+\textit{Jensen-Shannon divergence:} Once we have the posterior samples from the exact method (either by performing exact analysis or by reweighting), we quantify the similarities between the two using the Jensen-Shannon (JS) divergence~\cite{JSD:61115}. The JS divergence yields a finite value between 0nat and 1nat. A value closer to 0nat correspond to greater similarity between two distributions. If we denote the two distributions we want compare by $p$ and $q$, then the JS divergence is given by
+\begin{equation}
+     \mathrm{JS}(p||q) = \frac{1}{2}\left(D(p||m) + D(q||m)\right),
+\end{equation}
+where $D$ is the Kullback-Leibler divergence~\cite{Kullback:1951zyt} and $m$ is the pointwise mean of $p$ and $q$. The JS divergence is symmetric in $p$ and $q$.
+
+\textit{Kolmogorov–Smirnov test:} Alternatively, we also use the Kolmogorov–Smirnov (KS) test to perform sanity checks~\cite{2020SciPy-NMeth}. This test is useful to determine if the parameter estimation on a large set of simulated GW signals is not biased in any particular direction. If the parameter estimation on a large set of simulated signal is not biased, the percentile at which the true value is found should follow a uniform distribution over the population. In this regard, the KS test helps determine if the distribution of percentiles follows a uniform distribution. The KS test returns a $p$-value which can be used to reject the null hypothesis, i.e., the percentiles follow a uniform distribution. We use the standard routines from \texttt{SciPy} codebase to calculate the JS divergence and KS statistic.  
+
 
 \section{Validation of the method by performing parameter estimation}
 Next, we demonstrate the speed and accuracy with which our method can perform parameter inference. We analyse a large set of GW signals consisting of simulated signals, signals detected by LIGO-Virgo, lensed signals, and overlapping signals. 
@@ -278,7 +295,7 @@ We adjust the luminosity distance in such a way that each event has a network SN
 The network consists of the two LIGO and the Virgo interferometers at their design sensitivity~\cite{KAGRA:2013rdx}. 
 We perform parameter estimation on each event and show the collective results in Figure~\ref{fig:pp-plot}, representing a P-P plot for our relative binning framework. Ideally, each coloured 
 line should trace the diagonal; however, some fluctuations are expected due to a finite number of signals being analysed and the presence of noise. 
-We perform a Kolmogorov–Smirnov (KS) test as a measure of the consistency between each coloured line and the diagonal line~\cite{2020SciPy-NMeth}. We quote the p-value of this test for each parameter in the bracket. Additionally, we also test if the distribution of all p-values quoted in the brackets follows a uniform distribution. The combined p-value for this test is 0.6625, which is expected.
+We perform a KS test as a measure of the consistency between each coloured line and the diagonal line. We quote the p-value of this test for each parameter in the bracket. Additionally, we also test if the distribution of all p-values quoted in the brackets follows a uniform distribution. The combined p-value for this test is 0.6625, which is expected.
 To further quantify this consistency, we can define a binomial random variable $X$ as the number of times the injected value is recovered within 
 a confidence interval corresponding to a value on the horizontal axis. 
 For this binomial distribution, the shape parameter $N$ equals 70 and $p$ equals the confidence corresponding to the x-axis.  
@@ -327,7 +344,7 @@ Figures~\ref{fig:gw190412} and \ref{fig:gw190814} show a qualitative agreement b
     \label{fig:master-jsd}
 \end{figure}
 
-To quantify the mismatch between the posterior samples obtained using the relative binning method and the ones obtained with the exact method, we use the Jensen-Shannon (JS) divergence~\cite{2020SciPy-NMeth}. 
+To quantify the mismatch between the posterior samples obtained using the relative binning method and the ones obtained with the exact method, we use the JS divergence. 
 We do not perform an exact parameter estimation run due to the computational cost. Instead, we reweigh the posterior samples obtained using the relative binning 
 method to obtain the posterior samples for the exact method as discussed in the next paragraph.
 We repeat this step for all four events, GW190412, GW190814, GW191103, and GW191105, and plot the JS divergence between the relative 
@@ -337,19 +354,6 @@ we compute the JS statistic for 2000 pairs of sets of $10^5$ samples taken from 
 We then use the 99th percentile of the obtained values as the heuristic threshold for indistinguishability. The JS divergence for each parameter remains well below the threshold, 
 indicating that the posterior distributions produced by the relative binning method and the exact method are statistically indistinguishable. As an additional validation test, we use the posterior samples obtained through the relative binning method on the GW190412, GW190814, GW191103, and GW191105 events to compute the exact likelihoods (i.e. Eq.~\eqref{eqn:short-l}). The standard deviation of the absolute difference between the exact and the relative binning likelihoods turns out to be $\leq 0.1$, which indicates that the error incurred by the relative binning likelihood is sufficiently small to not impact the posterior distribution~\cite{Leslie:2021ssu}. 
 
-\subsubsection{Checking the efficiency: Reweighing the relative binning posterior samples}
-\label{reweight}
-We reweigh the posterior samples obtained using relative binning to produce the samples which may be obtained with the exact likelihood computations. This step helps test the method's efficiency. 
-Let us denote the likelihood evaluated for the posterior samples produced by the relative binning 
-method by $\mathcal{L}^{\text{RB}}(\vec{\theta})$, where $\vec{\theta}$ stands for the 
-posterior samples; and the probability for $\vec{\theta}$ according to the relative binning 
-samples by $p^{\text{RB}}(\vec{\theta})$. To perform the reweighting, for each posterior sample $\vec{\theta}$, we compute the likelihood according to the exact method, which we denote by $\mathcal{L}^{\text{X}}(\vec{\theta})$. 
-Using $\mathcal{L}^{\text{RB}}(\vec{\theta})$, $\mathcal{L}^{\text{X}}(\vec{\theta})$, 
-we reweigh $p^{\text{RB}}(\vec{\theta})$ to obtain the probability 
-for $\vec{\theta}$ according to the exact method:
-\begin{equation}
-p^{\text{X}}(\vec{\theta})  = \frac{\mathcal{L}^{\text{X}}(\vec{\theta})}{\mathcal{L}^{\text{RB}}(\vec{\theta})}p^{\text{RB}}(\vec{\theta})\,.
-\end{equation}
 
 \subsection{On the parameter estimation of 3G-era events}
 
