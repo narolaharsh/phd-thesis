@@ -29,7 +29,7 @@ Specifically, when the length scale of the lens is much larger than the waveleng
 
 \subsubsection{Electromagnetic distance}
 
-When a GW source is lensed, we can expect that the electromagnetic (EM) radiation coming from its host galaxy is also lensed, as is widely assumed in cosmography studies~\cite{Chen:2017rfc, LIGOScientific:2018gmd, Gray:2019ksv, LIGOScientific:2019zcs, DES:2019ccw}. A joint GW+EM analysis can help locate the source's host galaxy once its location is narrowed down to a few square degrees using only GW data. In this step, one reconstructs all the lenses in the region provided by the GW data to find which lens could best produce an image with properties similar to the ones observed; the galaxy that is undergoing lensing by this particular lens is then likely to be the host galaxy of the GW event. This methodology was first proposed in~\cite{Hannuksela:2020xor, Wempe:2022zlk}. For the scenarios where strong lensing produces four images (a quadruplet), we can narrow down the host of the GW source to one or a few galaxies. Various lensing rate estimates show that $\sim 30\%$ of all strong lensing scenarios will produce a quadruplet, making this a fairly likely scenario~\cite{Li:2018prc, Wierda:2021upe}.
+When a GW source is lensed, we can expect that the electromagnetic (EM) radiation coming from its host galaxy is also lensed, as is widely assumed in cosmography studies~\cite{Chen:2017rfc, LIGOScientific:2018gmd, Gray:2019ksv, LIGOScientific:2019zcs, DES:2019ccw}. A joint GW+EM analysis can help locate the source's host galaxy once its location is narrowed down to a few square degrees using only GW data. In this step, one reconstructs all the lenses in the region provided by the GW data to find which lens could best produce an image with properties similar to the ones observed; the galaxy that is undergoing lensing by this particular lens is then likely to be the host galaxy of the GW event. This methodology was first proposed in~\cite{Hannuksela:2020xor, Wempe:2022zlk}. For the scenarios where strong lensing produces four images (a quadruplet), we can narrow down the host of the GW source to one or a few galaxies. Various lensing rate estimates find that we may observe $\approx 1$ strongly lensed event per year with a network of the LIGOs, Virgo, and KAGRA detector operting with 100\% duty cycle~\cite{Li:2018prc, Wierda:2021upe, Oguri:2018muv}. The rates can be subject to uncertainties introduced by the merger-rates, detection thresholds, and detector duty cycles. The rate estimates also find that $\sim 30\%$ of all strong lensing scenarios will produce a quadruplet, making this a fairly likely scenario.
 
 Once the host galaxy is known, a dedicated spectroscopic or photometric follow-up can yield a precise estimate of the redshift of the source. By combining the source's redshift with a cosmological model, we can estimate the source's luminosity distance~\cite{Hogg:1999ad}. Let us refer to this distance as the electromagnetic distance $\DEM$ to the source. 
 
@@ -51,7 +51,7 @@ When discussing modified propagation theories, we refer to those theories that p
 In theories of gravity with large extra dimensions, there is the possibility of some energy of the GWs leaking into them \cite{Dvali:2000hr, Calcagni:2019kzo, LIGOScientific:2018dkp}, while EM radiation is confined to the usual three spatial dimensions. This would make the detected signal appear weaker, leading to larger measured values for $\DGW$ than would otherwise be the case. For definiteness, we will work with the following simple phenomenological ansatz for the relation between $\DGW$ and $\DEM$, based on conservation of integrated flux \cite{Deffayet:2007kf}:
 \begin{equation}
     \label{eqn:D-model}
- \DGW = (\DEM(z_s, H_0))^{\frac{D-2}{2}},
+ \DGW = (\frac{\DEM(z_s, H_0)}{Mpc})^{\frac{D-2}{2}},
 \end{equation}
 where $D$ is the number of spacetime dimensions and $z_s$ is the source redshift. We will allow $D$ to be a real number, with the GR value $D = 4$ as a fiducial value. An illustration of the effect of extra dimensions on a GW signal is given in the left plot of Figure~\ref{fig:wf-effects}.
 
@@ -86,7 +86,7 @@ where $c_M$ is a constant that relates the rate of change of the Planck mass to 
         \hline
         
     \end{tabular}
-    \caption{Deviation parameter(s) for each theory and the corresponding prior probability distributions used in our analyses. The ranges of the prior are chosen following the previous studies on modified propagation \cite{Mastrogiovanni:2020mvm, Lagos:2019kds, Pardo:2018ipy}.}
+    \caption{Deviation parameter(s) for each theory and the corresponding prior probability distributions used in our analyses. The ranges of the prior are centered around the general relativistic value of the parameter and are chosen following the previous studies on modified propagation \cite{Mastrogiovanni:2020mvm, Lagos:2019kds, Pardo:2018ipy}.}
     \label{tab:priors}
 \end{table}
 
@@ -101,7 +101,7 @@ where $c_M$ is a constant that relates the rate of change of the Planck mass to 
 \end{figure}
 
 Studying modified propagation theories in the context of strongly lensed and localised BBH signals is attractive because such events can help probe higher redshift regimes compared to BNS signals. In the past, modified propagation theories have been tested using GW signals from a binary neutron star merger (GW170817) with an identifiable EM counterpart~\cite{Mastrogiovanni:2020mvm, Lagos:2019kds, LIGOScientific:2018dkp, Pardo:2018ipy}. However, by cosmological standards, the GW170817 signal travelled only a small distance before it reached the detectors, carrying only a negligible imprint from any deviation from GR that may be present. Therefore, the constraints obtained from the neutron star merger remain poor. In the context of modified propagation theories, the imprint of the deviation tends to accumulate with the distance travelled by the signals. %Other methods have been proposed that exploit the population properties of BBH coalescences observed with GWs \cite{Ezquiaga:2021ayr, Leyde:2022orh, MaganaHernandez:2021zyc}; since BBHs can be detected out to larger distances, this enables considerably improved bounds over the ones from GW170817. 
-Due to magnification, GWs from \emph{lensed} BBH events can potentially be seen out to redshifts $z \sim 6$~\cite{Wierda:2021upe}; this feature leads to further increases in the imprints of any anomaly in the propagation, consequently improving our bounds on the anomaly. Therefore, the ability of a strongly lensed GW signal to probe the high-redshift regime makes it an invaluable probe to test modified propagation theories. 
+Due to magnification, GWs from \emph{lensed} BBH events can potentially be seen out to redshifts $z \sim 6$~\cite{Wierda:2021upe}; this feature leads to further increases in the imprints of any anomaly in the propagation, consequently improving our bounds on the anomaly. Therefore, the ability of a strongly lensed GW signal to probe the high-redshift regime makes it an invaluable probe to test modified propagation theories. We also note that modified propagation theories which predict a dephasing of GW signals compared to GR are routienly performed using BBH signal, however these are not the type of theories we are considering. We restrict our selves to the that predict a modified distance-amplitude relationship. 
 
 
 \section{Measurements of model parameters}
@@ -127,14 +127,14 @@ D_{\Delta t}(z_l, z_s, H_0) = \frac{\int_0^{z_s} dz'/E(z')}{\int_{z_l}^{z_s} dz'
 where $z_l$ and $z_s$ are respectively the lens and the source redshift, and 
 $E(z) \equiv \sqrt{\Omega_m (1+z)^3 + \Omega_\Lambda}$. If $D_{\Delta t}$ 
 is measured, we can estimate $\DEM$ since we assume that $z_l$ and $z_s$ are known from 
-the EM follow-up observations. In this work, for definiteness, we assume a flat FLRW universe, in which case one has
+the EM follow-up observations. In this work, for definiteness, we assume a flat Friedmann-Lemaître-Robertson-Walker universe, in which case one has
 \begin{equation}
     \label{eqn:dl-em}
  \DEM =\frac{(1+z_s)}{H_0}\int_0^{z_s} \frac{dz'}{E(z')}.
 \end{equation}
 
-Using the $\DEM$ measurement, $H_0$ can be estimated through Eq.~\eqref{eqn:dl-em}. $D_{\Delta t}$ can be measured by performing lens reconstruction; However, owing to the computational complexity and cost, we skip the lens construction step. We assume that the observed value of $D_{\Delta t}$ follows a Gaussian distribution with a 10\% standard deviation. 
-To allow for an offset in the observation, we pick the mean of this distribution from another Gaussian distribution with a 10\% standard deviation, which is centred at the true value~\cite{Hannuksela:2020xor}. We translate the measurement of $D_{\Delta t}$ into the measurement of $\DEM$ using Eq.~\eqref{eqn:time-delay-dist}. Using the value of $\DEM$ together with  
+Using the $\DEM$ measurement, $H_0$ can be estimated through Eq.~\eqref{eqn:dl-em}. $D_{\Delta t}$ can be measured by performing lens reconstruction; However, owing to the computational complexity and cost, we skip the lens construction step. We assume that the observed value of $D_{\Delta t}$ follows a Gaussian distribution with a 10\% standard deviation~\cite{Hannuksela:2020xor}. 
+To allow for an offset in the observation, we pick the mean of this distribution from another Gaussian distribution with a 10\% standard deviation, which is centred at the true value. We translate the measurement of $D_{\Delta t}$ into the measurement of $\DEM$ using Eq.~\eqref{eqn:time-delay-dist}. Using the value of $\DEM$ together with  
 Eq.~\eqref{eqn:dl-em}, we construct the prior for $H_0$. 
 
 \subsubsection{Computing the joint likelihood}
@@ -150,7 +150,7 @@ Since we assume that the host galaxy has been localised, the true source redshif
 p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0) = \int d\vec{\theta} ~ p(\vec{d}_{\mathrm{GW}} | \vec{\theta}) ~ p(\vec{\theta} | z_s, \betaMGR, H_0)~ p(z_s| \betaMGR, H_0) .
 \end{equation}
 
-To estimate the GW likelihood $p(\vec{d}_{\mathrm{GW}}|\vec{\theta})$, we have to perform joint parameter estimation on strongly lensed signals as described in chapter~\ref{ch:relative_binning}. In principle, we could use the relative binning framework to do the analysis. However, it was developed after this analysis concluded. For the purpose of this work, we use the method which was specifically developed to rapidly analyse lensed images, called Golum~\cite{Janquart:2021qov}. Golum method uses a subset of posterior samples of the first image as prior for the subsequent image analyses. One can also integrate the relative binning framework into \textsc{Golum} to gain additional speed-up.
+To estimate the GW likelihood $p(\vec{d}_{\mathrm{GW}}|\vec{\theta})$, we have to perform joint parameter estimation on strongly lensed signals as described in chapter~\ref{ch:relative_binning}. In principle, we could use the relative binning framework to do the analysis. However, it was developed after this analysis concluded. For the purpose of this work, we use the method which was specifically developed to rapidly analyse lensed images, called \textsc{GOLUM}~\cite{Janquart:2021qov}. \textsc{GOLUM} method uses a subset of posterior samples of the first image as prior for the subsequent image analyses. One can also integrate the relative binning framework into \textsc{GOLUM} to gain additional speed-up.
 %We repeat this step for each quadruplet in our catalogue. 
 
 Once the GW likelihood is estimated, we perform the integration over all parameters represented by $\vec{\theta}$ except the luminosity distance $\DGW$ to obtain
