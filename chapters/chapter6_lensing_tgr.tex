@@ -125,7 +125,7 @@ For $H_0$, we could in principle choose a relatively narrow prior range based on
 D_{\Delta t}(z_l, z_s, H_0) = \frac{\int_0^{z_s} dz'/E(z')}{\int_{z_l}^{z_s} dz'/E(z')}\DEM(z_s, H_0),
 \end{equation} 
 where $z_l$ and $z_s$ are respectively the lens and the source redshift, and 
-$E(z) \equiv \sqrt{\Omega_m (1+z)^3 + \Omega_\Lambda}$. If $D_{\Delta t}$ 
+$E(z) \equiv \sqrt{\Omega_m (1+z)^3 + \Omega_\Lambda}$. Here, $\Omega_m$ is the matter density parameter and $\Omega_\Lambda$ is the dark energy density parameter. If $D_{\Delta t}$ 
 is measured, we can estimate $\DEM$ since we assume that $z_l$ and $z_s$ are known from 
 the EM follow-up observations. In this work, for definiteness, we assume a flat Friedmann-Lemaître-Robertson-Walker universe, in which case one has
 \begin{equation}
@@ -133,9 +133,7 @@ the EM follow-up observations. In this work, for definiteness, we assume a flat 
  \DEM =\frac{(1+z_s)}{H_0}\int_0^{z_s} \frac{dz'}{E(z')}.
 \end{equation}
 
-Using the $\DEM$ measurement, $H_0$ can be estimated through Eq.~\eqref{eqn:dl-em}. $D_{\Delta t}$ can be measured by performing lens reconstruction; However, owing to the computational complexity and cost, we skip the lens construction step. We assume that the observed value of $D_{\Delta t}$ follows a Gaussian distribution with a 10\% standard deviation~\cite{Hannuksela:2020xor}. 
-To allow for an offset in the observation, we pick the mean of this distribution from another Gaussian distribution with a 10\% standard deviation, which is centred at the true value. We translate the measurement of $D_{\Delta t}$ into the measurement of $\DEM$ using Eq.~\eqref{eqn:time-delay-dist}. Using the value of $\DEM$ together with  
-Eq.~\eqref{eqn:dl-em}, we construct the prior for $H_0$. 
+Using the $\DEM$ measurement, $H_0$ can be estimated through Eq.~\eqref{eqn:dl-em}. $D_{\Delta t}$ can be measured by performing lens reconstruction; However, owing to the computational complexity and cost, we skip the lens reconstruction step. We assume that the observed value of $D_{\Delta t}$ follows a Gaussian distribution with a 10\% standard deviation~\cite{Hannuksela:2020xor}. To allow for an offset in the observation, we pick the mean of this distribution from another Gaussian distribution with a 10\% standard deviation, which is centred at the true value. We translate the measurement of $D_{\Delta t}$ into the measurement of $\DEM$ using Eq.~\eqref{eqn:time-delay-dist}. Using the value of $\DEM$ together with Eq.~\eqref{eqn:dl-em}, we construct the prior for $H_0$. Throughout the analysis, we keep the other cosmological parameters, $\Omega_m$ and $\Omega_{\Lambda}$, fixed assuming that they are known to a few per cent accuracy~\cite{Lagos:2019kds}. 
 
 \subsubsection{Computing the joint likelihood}
 To calculate the likelihood $p(\vec{d}_{\mathrm{GW}}, \vec{d}_{\mathrm{EM}} | \betaMGR, H_0)$, we first express it as
@@ -178,7 +176,7 @@ where $\vec{d}_{\mathrm{GW}, i}$ refers to the GW data from image $i$.
 \fi
 
 While simulating the lensed BBH signals, we sample the component masses from the \textsc{PowerLaw+Peak} distribution presented in~\cite{KAGRA:2021duu}. We use the IMRPhenomXPHM waveform model~\cite{Pratten:2020ceb}, with black hole spin magnitudes distributed uniformly between $0$ and $1$, and spin directions uniformly on the sphere. The distribution of the redshifts of the galaxy lenses, modelled as singular power law isothermal ellipsoids with external shear, follows the SDSS galaxy catalogue~\cite{Collett:2015roa}. The fiducial values of $\betaMGR$ are equal to their GR values. The fiducial value of the Hubble constant is $H_0 = 67.4$ km $\text{s}^{-1}$ $\text{Mpc}^{-1}$, and $\Omega_m = 0.315$. For the purpose of the simulation, we consider a network that consists of two LIGOs, Virgo, KAGRA, and the LIGO-India detectors, where the detection threshold on the network SNR is 8. Measurements of the deviation parameters made using the lensed GW signals will be compared to those made using the BNS merger GW170817, together with its host galaxy identification. For GW170817, we use the $\DGW$ posterior sample from the corresponding data release~\cite{LIGOScientific:GWTC1DR}. For this event, we cannot construct the prior on $H_0$ for GW170817 using the method which we used for lensed events; therefore, we use Planck 2018 results when analysing it~\cite{Planck:2018vyg}. 
-
+% https://arxiv.org/pdf/1901.03321 ... few percent
 
 \section{Results and conclusions}
 
