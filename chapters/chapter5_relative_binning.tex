@@ -9,6 +9,8 @@ Bayesian inference discussed in chapter~\ref{ch:gwpe} is the key to achieving a 
  
  
 \section{Mode-by-mode relative binning}
+When performing the Bayesian parameter inference on a GW signal, we need to simulate a large number ($\approx 10^6~\mathrm{to}~10^7$) of waveforms. This is the most expensive part of the process. Each waveform is generated on a uniform frequency grid whose minimum and maximum frequencies depend on the bandwidth (typically 20 Hz to 2048 Hz) of the GW detectors. The resolution of the frequency grid is set to $1/T$, where $T$ is the duration of the signal. Generating a large number of waveforms on a uniform grid increases the computational cost. The relative binning method seeks to address this issue by using a sparse grid to generate the waveform. 
+
 From chapter~\ref{ch:gwpe}, let us recall the (log) likelihood function,
 \begin{equation}
 \label{eqn:indi-likelihood}
