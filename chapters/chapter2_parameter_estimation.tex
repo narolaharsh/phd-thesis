@@ -126,30 +126,8 @@ Once we calculate $Z$, the posterior probability of point $\vec{\theta}_k$ can b
 \begin{equation}
  p(\vec{\theta}_k | \vec{d}) = \frac{\pi(\vec{\theta}_k) \mathcal{L}(\vec{\theta}_k)}{Z} = \frac{w_k}{\sum_{k=0}^{N} w_k},
 \end{equation}
-as mentioned near the beginning of this sub-section. 
-
-Although we have defined prior mass X, we have so far not specified how it is calculated once the sampling starts. The quantity $X$ is non-increasing in nature and its value ranges from 1 to 0. Treating it as a random variable, its probability distribution can be approximated with the uniform distribution,  
-\begin{equation}X \sim U(0, 1)\end{equation} and the corresponding cumulative distribution function is,
-\begin{equation}
- F(X) = \int_{0}^{X} \mathrm{d} X' = X.
-\end{equation}
-The probability that a random variable $\chi$ is greater than the prior masses from the full set of prior masses $\{X_i\}$ is
-\begin{equation}
-P(\chi > \{X_i\}) = \Pi_{i=0}^{N} F(X_i = \chi) = \chi^K,
-\end{equation}
-where we assume that the samples are independent of each other. The probability density $p(\chi)$ is then given by 
-\begin{equation}
- p(\chi) = \frac{d}{d\chi} P(\chi > \{X_i\}) = K \chi^{K-1}.
-\end{equation}
-The above equality suggests that random variable $\chi$ indeed follows the Beta distribution with
-\begin{equation}
-\chi \sim B(K, 1).
-\end{equation}
-We have assumed that $X$ and $\chi$ range from 0 and 1. However, as the algorithm progresses, the prior mass $X$ and, in turn, $\chi$ shrinks. Let's say they have an upper bounded of $X^{*}$, then we can define a shrinkage ratio $t\equiv \chi / X^{*}$ where
-\begin{equation}
- t \sim B(K, 1).
-\end{equation}
-We provide the pseudocode of how the nested sampling progresses in Algorithm block~\ref{alg:nes_sam}. The pseudocode is generalized for $K$ number of live points. For a typical parameter estimation run, one uses $\mathcal{O}(10^3)$ live points. 
+as mentioned near the beginning of this sub-section.
+ 
 \RestyleAlgo{ruled}
 \begin{algorithm}
     \SetKwComment{Comment}{//~}{}
@@ -179,6 +157,30 @@ We provide the pseudocode of how the nested sampling progresses in Algorithm blo
         
  }
 \end{algorithm}
+
+Although we have defined prior mass X, we have so far not specified how it is calculated once the sampling starts. The quantity $X$ is non-increasing in nature and its value ranges from 1 to 0. Treating it as a random variable, its probability distribution can be approximated with the uniform distribution,  
+\begin{equation}X \sim U(0, 1)\end{equation} and the corresponding cumulative distribution function is,
+\begin{equation}
+ F(X) = \int_{0}^{X} \mathrm{d} X' = X.
+\end{equation}
+The probability that a random variable $\chi$ is greater than the prior masses from the full set of prior masses $\{X_i\}$ is
+\begin{equation}
+P(\chi > \{X_i\}) = \Pi_{i=0}^{N} F(X_i = \chi) = \chi^K,
+\end{equation}
+where we assume that the samples are independent of each other. The probability density $p(\chi)$ is then given by 
+\begin{equation}
+ p(\chi) = \frac{d}{d\chi} P(\chi > \{X_i\}) = K \chi^{K-1}.
+\end{equation}
+The above equality suggests that random variable $\chi$ indeed follows the Beta distribution with
+\begin{equation}
+\chi \sim B(K, 1).
+\end{equation}
+We have assumed that $X$ and $\chi$ range from 0 and 1. However, as the algorithm progresses, the prior mass $X$ and, in turn, $\chi$ shrinks. Let's say they have an upper bounded of $X^{*}$, then we can define a shrinkage ratio $t\equiv \chi / X^{*}$ where
+\begin{equation}
+ t \sim B(K, 1).
+\end{equation}
+We provide the pseudocode of how the nested sampling progresses in Algorithm block~\ref{alg:nes_sam}. The pseudocode is generalized for $K$ number of live points. For a typical parameter estimation run, one uses $\mathcal{O}(10^3)$ live points. 
+
 \subsubsection{Terminating criterion}
 Since the aim of the nested sampling algorithm is to accumulate the evidence $Z$ in small increments of $\Delta Z$, it may be terminated when the increment is smaller than a user-specified number $\epsilon$,
 \begin{equation}
