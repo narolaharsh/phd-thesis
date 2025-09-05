@@ -194,6 +194,7 @@ where the set $\{\vec{\theta}_1, \vec{\theta}_2\}$ now represent a 30 dimensiona
 where we have ignored the overlaps between $\vec{h}_1$ and $\vec{h}_2$ under the assumption that the two signals are sufficiently different, resulting in negligible overlaps. Each term in the factorised likelihood expression of Eq.~\eqref{eq:two-likelihood} can be calculated using the relative binning approximation. To construct the RBGrid, we repeat the bin selection algorithm from section~\ref{sec:bin-selection} two times; once for each signal. 
 
 \subsection{Extension to perform strong lensing searches}
+\label{sec:lensing-searches}
 
 \begin{figure}[h]
      \centering
@@ -357,7 +358,7 @@ We then use the 99th percentile of the obtained values as the heuristic threshol
 indicating that the posterior distributions produced by the relative binning method and the exact method are statistically indistinguishable. As an additional validation test, we use the posterior samples obtained through the relative binning method on the GW190412, GW190814, GW191103, and GW191105 events to compute the exact likelihoods (i.e. Eq.~\eqref{eqn:short-l}). The standard deviation of the absolute difference between the exact and the relative binning likelihoods turns out to be $\leq 0.1$, which indicates that the error incurred by the relative binning likelihood is sufficiently small to not impact the posterior distribution~\cite{Leslie:2021ssu}. 
 
 
-\subsection{On the parameter estimation of 3G-era events}
+\subsection{Validation on the parameter estimation of 3G-era events}
 
 To further test our method, we analyse a subset of LIGO-Virgo events as they would appear in 3G interferometers. We also analyse an example of overlapping signals.  
 
@@ -415,7 +416,7 @@ This process is repeated for each of the six events and the results are shown in
 \end{figure}
 We collectively present the results for overlapping signals analysis in Figure~\ref{fig:overlapping-signal}. Let us refer to the two signals as signal A and signal B. The red (green) lines in the top (bottom) plot show how accurately we can recover signal A (signal B) when they are in isolation. This establishes the benchmark for accuracy. The black lines in the plot show the injected value of the parameters. For this example, we chose two signals with chirp mass of around 22 $M_{\odot}$ and 47 $M_{\odot}$. The injected value of the remaining parameters can be gauged from the black lines. The blue lines in both plots show the results of joint parameter estimation using the relative binning framework, i.e., how well the parameters of the two signals are recovered when they are overlapping. The agreement of the blue curves with the green and red curves suggests that our relative binning framework can be reliably extended to perform joint parameter estimation when two (or more) GW signals are overlapping. 
 
-\subsection{On strongly lensed events}
+\subsection{Validation on the strongly lensed events}
 
 \begin{figure}
     \centering
@@ -440,7 +441,11 @@ The left plot of Figure~\ref{fig:lensed_pair} shows a truncated corner plot of t
 To quantify the accuracy of our results, we follow the same reweighting steps mentioned towards the end of Section~\ref{reweight} to calculate the JS divergence between the relative binning samples and the exact samples for each parameter. 
 The JS divergences are marked with a hexagon marker in Figure~\ref{fig:master-jsd}, which remain all below the threshold. 
 
-Finally, we report that the log of coherence ratio -- a statistic to quantify the overlap between the posterior distribution of two images -- obtained for GW191103--GW191105 is 4.5~\cite{Janquart:2023osz, Lo:2021nae, Janquart:2021qov}. This is in favour of the lensing hypothesis and comparable to the one reported by the lensing follow-up searches~\cite{Janquart:2023mvf}. 
+Besides the JS divergence, we could also test the overlap between the joint posterior distribution of GW91103--GW191105 obtained using different method. Specifically, the one obtained using the relative binning method and the exact method. The overlap is quantified using the coherence ratio which is defined as~~\cite{Lo:2021nae, Janquart:2021qov}
+\begin{equation}
+     \mathcal{C}^{\mathrm{Lensed}}_{\mathrm{Unlensed}} = \frac{p(\vec{d}_1, \vec{d}_2 | \vec{\theta}, \vec{\theta}_L)}{p(\vec{d}_1 | \vec{\theta}_1) p(\vec{d}_2 | \vec{\theta}_2)},
+\end{equation}
+which simply the ratio of evidence (Eq.~\ref{eq:evidence}) when the data from two images ($\vec{d}_1, \vec{d}_2$) are jointly analysed under lensed hypothesis to evidence when each event is analysed separately under the unlensed hypothesis. Finally, we report that the (log) of coherence ratio -- a statistic to quantify the overlap between the posterior distribution of two images defined in section~\ref{sec:lensing-searches}-- obtained for GW191103--GW191105 is 4.5~\cite{Janquart:2023osz, Lo:2021nae, Janquart:2021qov}. This is in favour of the lensing hypothesis and comparable to the one reported by the lensing follow-up searches~\cite{Janquart:2023mvf}. 
 
 \section{Comparison of speed-up and accuracy}
 
