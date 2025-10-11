@@ -111,7 +111,7 @@ Before we present the parameter estimation results, we showcase the results of g
 
 To quantify how close the reconstructed glitch is to the truth, we calculate the mismatch,
 \begin{equation}
- \mathcal{M} \equiv 1 - \frac{\left<h_1 | h_2 \right>}{\left<h_1 | h_1 \right>\left<h_2 | h_2 \right>}
+ \mathcal{M} \equiv 1 - \frac{\left<h_1 | h_2 \right>}{\sqrt{\left<h_1 | h_1 \right>\left<h_2 | h_2 \right>}}
 \end{equation}
 between the reconstructed glitch and the true glitch. The inner products $\left<.|.\right>$ are defined in chapter 2. We find that glitch reconstruction without the null stream consistently leads to higher mismatches (see right plot of Figure~\ref{fig:glitch_overlap}). A large mismatch may imply erroneous glitch mitigation, leading to erroneous GW parameter estimation.
 
