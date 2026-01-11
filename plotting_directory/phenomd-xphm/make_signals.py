@@ -126,8 +126,8 @@ xphm_strain = ifos[0].whitened_time_domain_strain
 fig, ax = plt.subplots(1, 1, figsize = (8.5, 2.5))
 trigger_time = injection_parameters['geocent_time'] - 10e-3
 
-ax.plot(1e3*(ifos[0].time_array-trigger_time), phenomd_strain, color = 'royalblue', lw = 2, alpha = 1, label = 'IMRPhenomD', zorder = 100)
-ax.plot(5 + 1e3*(ifos[0].time_array-trigger_time), xphm_strain, color = 'salmon', lw = 2, label = 'IMRPhenomXPHM', alpha = 0.7, zorder = 100)
+ax.plot(1e3*(ifos[0].time_array-trigger_time), phenomd_strain, color = 'mediumslateblue', lw = 2, alpha = 1, label = 'IMRPhenomD', zorder = 100)
+ax.plot(5 + 1e3*(ifos[0].time_array-trigger_time), xphm_strain, color = 'coral', lw = 2, label = 'IMRPhenomXPHM', alpha = 1., zorder = 100)
 
 times = 1e3*(ifos[0].time_array-trigger_time)
 ax.fill_between(x = [-300, -55], y1 = -2, y2 = 2, color = 'grey', alpha = 0.2, zorder = 0)

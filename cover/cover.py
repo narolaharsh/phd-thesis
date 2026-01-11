@@ -210,7 +210,7 @@ signal_locations = np.random.beta(0.2, 0.2, size=(2, N))
 signal_rotations = np.random.uniform(-90, 90, N)
 for ii in range(N):
     add_image(ax, "./signal.png", x=signal_locations[0, ii], y=signal_locations[1, ii],
-              width=0.4, height=0.02, rotation=signal_rotations[ii])
+              width=0.4, height=0.03, rotation=signal_rotations[ii])
     
 
 # Add glitch waveform images
@@ -220,8 +220,7 @@ for ii in range(N):
     rand_int = np.random.randint(1, 6)  # Random integer from 1 to 5
     glitch_name = f"./glitch_{rand_int}.png"
     add_image(ax, glitch_name, x=glitch_locations[0, ii], y=glitch_locations[1, ii],
-              width=0.4, height=0.1, rotation=glitch_rotations[ii])
-
+              width=0.4, height=0.1, rotation=glitch_rotations[ii], alpha = 0.5)
 
 
 # Add gaussian images
@@ -230,6 +229,11 @@ gaussian_rotations = np.random.uniform(-45, 45, N)
 for ii in range(N):
     add_image(ax, "./gaussian.png", x=gaussian_locations[0, ii], y=gaussian_locations[1, ii],
               width=0.2, height=0.05, rotation=gaussian_rotations[ii])
+
+
+
+fig.savefig('pycover.pdf', facecolor=fig.get_facecolor())
+
 
 # ===== Cover back FIGURE WITH UNIFORM DISTRIBUTION =====
 
@@ -255,7 +259,7 @@ back_signal_locations = np.random.uniform(0, 1, size=(2, N))
 back_signal_rotations = np.random.uniform(-90, 90, N)
 for ii in range(N):
     add_image(backax, "./signal.png", x=back_signal_locations[0, ii], y=back_signal_locations[1, ii],
-              width=0.4, height=0.02, rotation=back_signal_rotations[ii])
+              width=0.4, height=0.03, rotation=back_signal_rotations[ii])
 
 # Add glitch waveform images with uniform distribution
 back_glitch_locations = np.random.uniform(0, 1, size=(2, N))
@@ -264,7 +268,7 @@ for ii in range(N):
     rand_int = np.random.randint(1, 6)
     glitch_name = f"./glitch_{rand_int}.png"
     add_image(backax, glitch_name, x=back_glitch_locations[0, ii], y=back_glitch_locations[1, ii],
-              width=0.4, height=0.1, rotation=back_glitch_rotations[ii])
+              width=0.4, height=0.1, rotation=back_glitch_rotations[ii], alpha = 0.5)
 
 # Add gaussian images with uniform distribution
 back_gaussian_locations = np.random.uniform(0, 1, size=(2, N))
@@ -274,5 +278,4 @@ for ii in range(N):
               width=0.2, height=0.05, rotation=back_gaussian_rotations[ii])
 
 # Save both figures
-fig.savefig('pycover.pdf', facecolor=fig.get_facecolor())
 backfig.savefig('pycover_back.pdf', facecolor=backfig.get_facecolor())
