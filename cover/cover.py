@@ -153,7 +153,6 @@ fig, ax = plt.subplots(1, 1, figsize = (width_inch, length_inch))
 backfig, backax = plt.subplots(1, 1, figsize = (width_inch, length_inch))
 
 # Dark blue background (RGB normalized to 0-1)
-dark_blue = (30/255, 58/255, 95/255)
 fig.patch.set_facecolor('black')
 ax.set_facecolor('black')
 
@@ -174,7 +173,7 @@ title_text = ax.text(0.5, 0.7, title, fontsize=34, color='white', ha='center', v
                      weight='bold', transform=ax.transAxes, zorder = 20)
 title_text.set_path_effects([path_effects.withStroke(linewidth=20, foreground='black', alpha=0.9)])
 
-subtitle_text = ax.text(0.5, 0.55, subtitle, fontsize=15, color='white', ha='center', va='center',
+subtitle_text = ax.text(0.53, 0.55, subtitle, fontsize=15, color='white', ha='center', va='center',
                         transform=ax.transAxes, zorder = 20)
 subtitle_text.set_path_effects([path_effects.withStroke(linewidth=10, foreground='black', alpha=0.9)])
 
@@ -229,8 +228,6 @@ gaussian_rotations = np.random.uniform(-45, 45, N)
 for ii in range(N):
     add_image(ax, "./gaussian.png", x=gaussian_locations[0, ii], y=gaussian_locations[1, ii],
               width=0.2, height=0.05, rotation=gaussian_rotations[ii])
-
-
 
 fig.savefig('pycover.pdf', facecolor=fig.get_facecolor())
 
