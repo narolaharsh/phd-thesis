@@ -7,7 +7,9 @@ from PIL import Image
 
 plt.style.use(['science'])
 
-def add_equilateral_triangle(ax, x, y, size, aspect_ratio, rotation=0, color='white', linewidth=2):
+
+np.random.seed(22)
+def add_equilateral_triangle(ax, x, y, size, aspect_ratio, rotation=0, color='lightgreen', linewidth=2):
     """
     Add an equilateral triangle to the plot.
 
@@ -58,7 +60,7 @@ def add_equilateral_triangle(ax, x, y, size, aspect_ratio, rotation=0, color='wh
     ax.plot(vertices[:, 0], vertices[:, 1], color=color, linewidth=linewidth,
             transform=ax.transAxes, alpha = 0.2, zorder = 0)
 
-def add_v_shape(ax, x, y, size, aspect_ratio, rotation=0, color='white', linewidth=2):
+def add_v_shape(ax, x, y, size, aspect_ratio, rotation=0, color='lightgreen', linewidth=2):
     """
     Add a V-shape with 90-degree angle to the plot.
 
@@ -161,8 +163,8 @@ backfig.patch.set_facecolor('black')
 backax.set_facecolor('black')
 backax.axis('off')
 
-title = 'Precision science\nwith Einstein Telescope'
-subtitle = "Cleaning glitches and acclerating parameter inference\nfor the third generation of gravitational wave detectors"
+title = 'Precision science with\nEinstein Telescope'
+subtitle = "Cleaning glitches and accelerating parameter inference\nfor the third generation of gravitational wave detectors"
 author = "Harsh Narola"
 
 # Remove axes
@@ -171,15 +173,16 @@ ax.axis('off')
 # Add text elements in white with highlighting effect
 title_text = ax.text(0.5, 0.7, title, fontsize=34, color='white', ha='center', va='center',
                      weight='bold', transform=ax.transAxes, zorder = 20)
-title_text.set_path_effects([path_effects.withStroke(linewidth=20, foreground='black', alpha=0.9)])
+title_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
+
 
 subtitle_text = ax.text(0.53, 0.55, subtitle, fontsize=15, color='white', ha='center', va='center',
                         transform=ax.transAxes, zorder = 20)
-subtitle_text.set_path_effects([path_effects.withStroke(linewidth=10, foreground='black', alpha=0.9)])
+subtitle_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
 
 author_text = ax.text(0.5, 0.3, author, fontsize=24, color='white', ha='center', va='center',
                       transform=ax.transAxes, zorder = 20)
-author_text.set_path_effects([path_effects.withStroke(linewidth=10, foreground='black', alpha=0.9)])
+author_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
 
 # Calculate aspect ratio
 aspect_ratio = width_mm / length_mm
@@ -235,7 +238,7 @@ fig.savefig('pycover.pdf', facecolor=fig.get_facecolor())
 # ===== Cover back FIGURE WITH UNIFORM DISTRIBUTION =====
 
 # Add triangles with uniform distribution (no text)
-N = 40
+N = 20
 back_triangle_locations = np.random.uniform(0, 1, size=(2, N))
 back_triangle_rotations = np.random.uniform(0, 360, N)
 for ii in range(N):
@@ -244,6 +247,7 @@ for ii in range(N):
                             rotation=back_triangle_rotations[ii])
 
 # Add V-shapes with uniform distribution
+N = 10
 back_v_locations = np.random.uniform(0, 1, size=(2, N))
 back_v_rotations = np.random.uniform(0, 360, N)
 for ii in range(N):
@@ -252,6 +256,7 @@ for ii in range(N):
                 rotation=back_v_rotations[ii])
 
 # Add signal waveform images with uniform distribution
+N = 15
 back_signal_locations = np.random.uniform(0, 1, size=(2, N))
 back_signal_rotations = np.random.uniform(-90, 90, N)
 for ii in range(N):
