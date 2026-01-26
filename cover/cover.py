@@ -285,5 +285,5 @@ for xx in tqdm(range(num_copies)):
                 width=0.2, height=0.05, rotation=back_gaussian_rotations[ii])
 
     # Save both figures
-    backfig.savefig(f'./cover_copies/thesis_back_copies_{xx}.pdf', facecolor=backfig.get_facecolor())
+    backfig.savefig(f'./cover_copies/thesis_back_cover_{xx}.pdf', facecolor=backfig.get_facecolor())
     plt.close(backfig)
