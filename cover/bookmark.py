@@ -4,6 +4,7 @@ import scienceplots
 import matplotlib.patheffects as path_effects
 from matplotlib import transforms
 from PIL import Image
+from tqdm import tqdm
 
 plt.style.use(['science'])
 
@@ -151,85 +152,87 @@ width_mm = 63.5#170
 width_inch = width_mm / 25.4
 length_inch = length_mm / 25.4
 
-fig, ax = plt.subplots(1, 1, figsize = (width_inch, length_inch))
-backfig, backax = plt.subplots(1, 1, figsize = (width_inch, length_inch))
-
-# Dark blue background (RGB normalized to 0-1)
-fig.patch.set_facecolor('black')
-ax.set_facecolor('black')
-
-# Setup background figure
-backfig.patch.set_facecolor('black')
-backax.set_facecolor('black')
-backax.axis('off')
 
 invite = "Invitation \n to \n attend \n my thesis \n defense "
 title = "\n Precision \n science \n with \n Einstein \n Telescope"
 author = "Harsh Narola"
-address = "12th February, 2026 \n 16.15 University Hall \n Domplein 29 \n 3512 JE, Utrecht"
+address = "12th February, 2026 \n At 16:15 University Hall \n Domplein 29 \n 3512 JE Utrecht"
 
-# Remove axes
-ax.axis('off')
+num_copies = 40
+
+for xx in tqdm(range(num_copies)):
+    fig, ax = plt.subplots(1, 1, figsize = (width_inch, length_inch))
+
+
+    # Dark blue background (RGB normalized to 0-1)
+    fig.patch.set_facecolor('black')
+    ax.set_facecolor('black')
+
+    # Remove axes
+    ax.axis('off')
 
 # Add text elements in white with highlighting effect
-title_text = ax.text(0.5, 0.8, title, fontsize=28, color='white', ha='center', va='center',
-                     weight='bold', transform=ax.transAxes, zorder = 20)
-title_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
+    title_text = ax.text(0.5, 0.85, title, fontsize=28, color='white', ha='center', va='center',
+                        weight='bold', transform=ax.transAxes, zorder = 20)
+    title_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
 
-author_text = ax.text(0.5, 0.3, author, fontsize=17, color='white', ha='center', va='center',
-                      transform=ax.transAxes, zorder = 20)
-author_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
+    author_text = ax.text(0.5, 0.3, author, fontsize=17, color='white', ha='center', va='center',
+                        transform=ax.transAxes, zorder = 20)
+    author_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
 
-address_text = ax.text(0.5, 0.1, address, fontsize=17, color='white', ha='center', va='center',
-                      transform=ax.transAxes, zorder = 20)
-address_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
+    address_text = ax.text(0.52, 0.1, address, fontsize=12, color='white', ha='center', va='center',
+                        transform=ax.transAxes, zorder = 20)
+    address_text.set_path_effects([path_effects.withStroke(linewidth=2.5, foreground='black', alpha=0.9)])
 
-# Calculate aspect ratio
-aspect_ratio = width_mm / length_mm
+    # Calculate aspect ratio
+    aspect_ratio = width_mm / length_mm
 
-# Configuration for background shapes
-N = 100
-shape_size = 0.05
+    # Configuration for background shapes
+    N = 100
+    shape_size = 0.05
 
-# Add triangles with beta distribution (concentrated at edges)
-triangle_locations = np.random.beta(0.2, 0.2, size=(2, N))
-triangle_rotations = np.random.uniform(0, 360, N)
-for ii in range(N):
-    add_equilateral_triangle(ax, triangle_locations[0, ii], triangle_locations[1, ii],
-                            size=shape_size, aspect_ratio=aspect_ratio,
-                            rotation=triangle_rotations[ii])
+    # Add triangles with beta distribution (concentrated at edges)
+    triangle_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    triangle_rotations = np.random.uniform(0, 360, N)
+    for ii in range(N):
+        add_equilateral_triangle(ax, triangle_locations[0, ii], triangle_locations[1, ii],
+                                size=shape_size, aspect_ratio=aspect_ratio,
+                                rotation=triangle_rotations[ii])
 
-# Add V-shapes with beta distribution
-v_locations = np.random.beta(0.2, 0.2, size=(2, N))
-v_rotations = np.random.uniform(0, 360, N)
-for ii in range(N):
-    add_v_shape(ax, v_locations[0, ii], v_locations[1, ii],
-                size=shape_size, aspect_ratio=aspect_ratio,
-                rotation=v_rotations[ii])
+    # Add V-shapes with beta distribution
+    v_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    v_rotations = np.random.uniform(0, 360, N)
+    for ii in range(N):
+        add_v_shape(ax, v_locations[0, ii], v_locations[1, ii],
+                    size=shape_size, aspect_ratio=aspect_ratio,
+                    rotation=v_rotations[ii])
 
-# Add signal waveform images
-signal_locations = np.random.beta(0.2, 0.2, size=(2, N))
-signal_rotations = np.random.uniform(-90, 90, N)
-for ii in range(N):
-    add_image(ax, "./signal.png", x=signal_locations[0, ii], y=signal_locations[1, ii],
-              width=0.8, height=0.03, rotation=signal_rotations[ii], zorder = 20)
-    
+    # Add signal waveform images
+    signal_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    signal_rotations = np.random.uniform(-90, 90, N)
+    for ii in range(N):
+        add_image(ax, "./signal.png", x=signal_locations[0, ii], y=signal_locations[1, ii],
+                width=0.8, height=0.03, rotation=signal_rotations[ii], zorder = 20)
+        
 
-# Add glitch waveform images
-glitch_locations = np.random.beta(0.2, 0.2, size=(2, N))
-glitch_rotations = np.random.uniform(0, 360, N)
-for ii in range(N):
-    rand_int = np.random.randint(1, 6)  # Random integer from 1 to 5
-    glitch_name = f"./glitch_{rand_int}.png"
-    add_image(ax, glitch_name, x=glitch_locations[0, ii], y=glitch_locations[1, ii],
-              width=0.8, height=0.1, rotation=glitch_rotations[ii], alpha = 0.5, zorder=20)
+    # Add glitch waveform images
+    glitch_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    glitch_rotations = np.random.uniform(0, 360, N)
+    for ii in range(N):
+        rand_int = np.random.randint(1, 6)  # Random integer from 1 to 5
+        glitch_name = f"./glitch_{rand_int}.png"
+        add_image(ax, glitch_name, x=glitch_locations[0, ii], y=glitch_locations[1, ii],
+                width=0.8, height=0.1, rotation=glitch_rotations[ii], alpha = 0.5, zorder=20)
 
 
-# Add gaussian images
-gaussian_locations = np.random.beta(0.2, 0.2, size=(2, N))
-gaussian_rotations = np.random.uniform(-45, 45, N)
-for ii in range(N):
-    add_image(ax, "./gaussian.png", x=gaussian_locations[0, ii], y=gaussian_locations[1, ii],
-              width=0.2, height=0.05, rotation=gaussian_rotations[ii])
+    # Add gaussian images
+    gaussian_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    gaussian_rotations = np.random.uniform(-45, 45, N)
+    for ii in range(N):
+        add_image(ax, "./gaussian.png", x=gaussian_locations[0, ii], y=gaussian_locations[1, ii],
+                width=0.2, height=0.05, rotation=gaussian_rotations[ii])
 
-fig.savefig('bookmark.pdf', facecolor=fig.get_facecolor())
+    fig.savefig(f'./bookmarks/bookmark_number_{xx}.pdf', facecolor=fig.get_facecolor())
+    plt.close(fig)
+
+
