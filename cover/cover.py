@@ -232,7 +232,7 @@ for ii in range(N):
     add_image(ax, "./gaussian.png", x=gaussian_locations[0, ii], y=gaussian_locations[1, ii],
               width=0.2, height=0.05, rotation=gaussian_rotations[ii])
 
-fig.savefig('pycover.pdf', facecolor=fig.get_facecolor())
+fig.savefig('thesis_front_cover.pdf', facecolor=fig.get_facecolor())
 
 
 # ===== Cover back FIGURE WITH UNIFORM DISTRIBUTION =====
@@ -280,4 +280,4 @@ for ii in range(N):
               width=0.2, height=0.05, rotation=back_gaussian_rotations[ii])
 
 # Save both figures
-backfig.savefig('pycover_back.pdf', facecolor=backfig.get_facecolor())
+backfig.savefig('thesis_cover_back.pdf', facecolor=backfig.get_facecolor())
