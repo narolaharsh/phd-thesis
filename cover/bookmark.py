@@ -166,7 +166,7 @@ backax.axis('off')
 invite = "Invitation \n to \n attend \n my thesis \n defense "
 title = "\n Precision \n science \n with \n Einstein \n Telescope"
 author = "Harsh Narola"
-address = "12th February, 2026 \n University Hall \n Domplein 29 \n 3512 JE, Utrecht"
+address = "12th February, 2026 \n 16.15 University Hall \n Domplein 29 \n 3512 JE, Utrecht"
 
 # Remove axes
 ax.axis('off')
