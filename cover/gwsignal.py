@@ -107,5 +107,5 @@ ax.set_xlim(1e3*-.30, 1e3*(1 * .01))
 ax.axis('off')
 
 fig.savefig('signal.pdf', facecolor='none', transparent=True)
-fig.savefig('signal.png', facecolor='none', transparent=True, dpi = 250)
+fig.savefig('signal.png', facecolor='none', transparent=True, dpi = 750)
 

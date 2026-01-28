@@ -59,7 +59,7 @@ def add_equilateral_triangle(ax, x, y, size, aspect_ratio, rotation=0, color='li
     vertices[:, 1] += y
 
     ax.plot(vertices[:, 0], vertices[:, 1], color=color, linewidth=linewidth,
-            transform=ax.transAxes, alpha = 0.2, zorder = 0)
+            transform=ax.transAxes, alpha = 0.1, zorder = 0)
 
 def add_v_shape(ax, x, y, size, aspect_ratio, rotation=0, color='lightgreen', linewidth=2):
     """
@@ -106,7 +106,7 @@ def add_v_shape(ax, x, y, size, aspect_ratio, rotation=0, color='lightgreen', li
     vertices[:, 1] += y
 
     ax.plot(vertices[:, 0], vertices[:, 1], color=color, linewidth=linewidth,
-            transform=ax.transAxes, alpha = 0.2, zorder = 0)
+            transform=ax.transAxes, alpha = 0.1, zorder = 0)
 
 def add_image(ax, image_path, x, y, width, height, rotation=0, zorder=10, alpha=1.0):
     """
@@ -145,8 +145,8 @@ def add_image(ax, image_path, x, y, width, height, rotation=0, zorder=10, alpha=
         trans_data = transforms.Affine2D().rotate_deg_around(x, y, rotation) + ax.transAxes
         im.set_transform(trans_data)
 
-length_mm = 240
-width_mm = 63.5#170
+length_mm = 234
+width_mm = 64#170
 
 # Convert mm to inches (1 inch = 25.4 mm)
 width_inch = width_mm / 25.4
@@ -158,10 +158,12 @@ title = "\n Precision \n science \n with \n Einstein \n Telescope"
 author = "Harsh Narola"
 address = "12th February, 2026 \n At 16:15 University Hall \n Domplein 29 \n 3512 JE Utrecht"
 
-num_copies = 40
+num_copies = 1
 
 for xx in tqdm(range(num_copies)):
     fig, ax = plt.subplots(1, 1, figsize = (width_inch, length_inch))
+    fig.subplots_adjust(top=1, bottom=0, left=0, right=1)
+
 
 
     # Dark blue background (RGB normalized to 0-1)
@@ -188,11 +190,12 @@ for xx in tqdm(range(num_copies)):
     aspect_ratio = width_mm / length_mm
 
     # Configuration for background shapes
-    N = 100
+    N = 50
     shape_size = 0.05
 
     # Add triangles with beta distribution (concentrated at edges)
-    triangle_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    triangle_locations = np.random.beta(0.3, 0.3, size=(2, N))
+    print(triangle_locations)
     triangle_rotations = np.random.uniform(0, 360, N)
     for ii in range(N):
         add_equilateral_triangle(ax, triangle_locations[0, ii], triangle_locations[1, ii],
@@ -200,7 +203,7 @@ for xx in tqdm(range(num_copies)):
                                 rotation=triangle_rotations[ii])
 
     # Add V-shapes with beta distribution
-    v_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    v_locations = np.random.beta(0.3, 0.3, size=(2, N))
     v_rotations = np.random.uniform(0, 360, N)
     for ii in range(N):
         add_v_shape(ax, v_locations[0, ii], v_locations[1, ii],
@@ -208,7 +211,7 @@ for xx in tqdm(range(num_copies)):
                     rotation=v_rotations[ii])
 
     # Add signal waveform images
-    signal_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    signal_locations = np.random.beta(0.3, 0.3, size=(2, N))
     signal_rotations = np.random.uniform(-90, 90, N)
     for ii in range(N):
         add_image(ax, "./signal.png", x=signal_locations[0, ii], y=signal_locations[1, ii],
@@ -216,7 +219,7 @@ for xx in tqdm(range(num_copies)):
         
 
     # Add glitch waveform images
-    glitch_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    glitch_locations = np.random.beta(0.3, 0.3, size=(2, N))
     glitch_rotations = np.random.uniform(0, 360, N)
     for ii in range(N):
         rand_int = np.random.randint(1, 6)  # Random integer from 1 to 5
@@ -226,13 +229,13 @@ for xx in tqdm(range(num_copies)):
 
 
     # Add gaussian images
-    gaussian_locations = np.random.beta(0.2, 0.2, size=(2, N))
+    gaussian_locations = np.random.beta(0.3, 0.3, size=(2, N))
     gaussian_rotations = np.random.uniform(-45, 45, N)
     for ii in range(N):
         add_image(ax, "./gaussian.png", x=gaussian_locations[0, ii], y=gaussian_locations[1, ii],
-                width=0.2, height=0.05, rotation=gaussian_rotations[ii])
+                width=0.8, height=0.1, rotation=gaussian_rotations[ii])
 
-    fig.savefig(f'./bookmarks/bookmark_number_{xx}.pdf', facecolor=fig.get_facecolor())
+    fig.savefig(f'./bookmarks/new_bookmark_number_{xx}.pdf', facecolor=fig.get_facecolor(), bbox_inches = 'tight', pad_inches = 0)
     plt.close(fig)
 
 

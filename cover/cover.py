@@ -144,8 +144,9 @@ def add_image(ax, image_path, x, y, width, height, rotation=0, zorder=10, alpha=
         trans_data = transforms.Affine2D().rotate_deg_around(x, y, rotation) + ax.transAxes
         im.set_transform(trans_data)
 
-length_mm = 240
-width_mm = 170
+length_mm = 244
+spine = 6.01
+width_mm = (172 * 2) + spine
 
 # Convert mm to inches (1 inch = 25.4 mm)
 width_inch = width_mm / 25.4
@@ -157,7 +158,7 @@ title = 'Precision science with\nEinstein Telescope'
 subtitle = "Cleaning glitches and accelerating parameter inference\nfor the third generation of gravitational wave detectors"
 author = "Harsh Narola"
 from tqdm import tqdm
-num_copies = 40
+num_copies = 1
 for xx in tqdm(range(num_copies)):
     fig, ax = plt.subplots(1, 1, figsize = (width_inch, length_inch))
 
@@ -185,7 +186,7 @@ for xx in tqdm(range(num_copies)):
     # Calculate aspect ratio
 
     # Configuration for background shapes
-    N = 100
+    N = 80
     shape_size = 0.05
 
     # Add triangles with beta distribution (concentrated at edges)

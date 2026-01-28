@@ -25,11 +25,11 @@ y = gaussian(x, 0, 1)
 fig, ax = plt.subplots(1, 1)
 ax.plot(x, y, color = 'lightgreen')
 ax.axis("off")
-fig.savefig('gaussian.png', transparent=True, dpi=500)
+fig.savefig('gaussian.png', transparent=True, dpi=750)
 
 
 
-exit()
+
 
 
 
@@ -47,6 +47,6 @@ for i in range(5):
     ax.plot(np.arange(0, len(glitch), 1)/sampling_frequency, glitch, color='salmon')
     ax.axis("off")
 
-    fig.savefig(f"glitch_{i+1}.png", transparent=True, dpi=500)
+    fig.savefig(f"glitch_{i+1}.png", transparent=True, dpi=750)
     plt.close(fig)
 
