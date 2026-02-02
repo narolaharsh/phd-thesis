@@ -1,3 +1,7 @@
+permissions:
+  contents: write
+  pages: write
+
 # Build thesis on push, upload artifact, and publish the PDF to gh-pages for a stable URL
 name: Build and publish thesis
 
@@ -22,7 +26,7 @@ jobs:
           set -ex
           sudo apt-get update
           DEBIAN_FRONTEND=noninteractive sudo apt-get install -y texlive-full biber
-          
+
       - name: Build with Makefile
         run: |
           make
