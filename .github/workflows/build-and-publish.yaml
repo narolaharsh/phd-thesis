@@ -1,0 +1,55 @@
+# Build thesis on push, upload artifact, and publish the PDF to gh-pages for a stable URL
+name: Build and publish thesis
+
+on:
+  push:
+    branches: [ main ]        # change "main" if your default branch has a different name
+    paths:
+      - '**/*.tex'
+      - '**/*.bib'
+      - 'Makefile'
+      - '.github/workflows/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install TeX packages
+        run: |
+          sudo apt-get update
+          # If your build requires many extra packages, consider texlive-full (very large).
+          sudo apt-get install -y --no-install-recommends \
+            latexmk texlive-latex-recommended texlive-latex-extra \
+            texlive-fonts-recommended texlive-binaries biber
+
+      - name: Build with Makefile
+        run: |
+          make
+
+      - name: Upload PDF artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: thesis_pdf
+          path: thesis_main.pdf
+
+      - name: Upload git ID (optional)
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: git_id
+          path: gitID.txt
+
+      - name: Prepare publish directory
+        run: |
+          mkdir -p public
+          cp thesis_main.pdf public/
+
+      - name: Publish to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
+          publish_branch: gh-pages
